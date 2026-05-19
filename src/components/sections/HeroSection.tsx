@@ -17,10 +17,10 @@ const slides = [
     tagline: 'Your gateway to East Africa',
   },
   {
-    // Nairobi — city skyline at night
-    media: 'https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=1920&q=80',
+    // Nairobi — clear city skyline
+    media: 'https://images.unsplash.com/photo-1547471080-7fc2caa6f571?w=1920&q=80',
     type: 'image' as const,
-    fallback: 'https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=1920&q=80',
+    fallback: 'https://images.unsplash.com/photo-1547471080-7fc2caa6f571?w=1920&q=80',
     destination: 'Nairobi',
     subtitle: 'Kenya · Corporate Travel',
     tagline: 'The heartbeat of East Africa',
