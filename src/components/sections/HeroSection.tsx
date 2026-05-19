@@ -17,13 +17,13 @@ const slides = [
     tagline: 'Your gateway to East Africa',
   },
   {
-    // Cityscape / urban travel
-    media: 'https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4',
-    type: 'video' as const,
-    fallback: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1920&q=80',
+    // Nairobi — city skyline at night
+    media: 'https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=1920&q=80',
+    type: 'image' as const,
+    fallback: 'https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=1920&q=80',
     destination: 'Nairobi',
     subtitle: 'Kenya · Corporate Travel',
-    tagline: 'Where business meets adventure',
+    tagline: 'The heartbeat of East Africa',
   },
   {
     // Ocean / coastal city
@@ -55,6 +55,21 @@ export function HeroSection() {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const sectionRef = useRef<HTMLElement>(null)
 
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
+
+  // Video playback control
+  useEffect(() => {
+    videoRefs.current.forEach((video, i) => {
+      if (!video) return
+      if (i === currentSlide) {
+        video.play().catch(() => {})
+      } else {
+        // Pause inactive videos to save CPU/GPU
+        video.pause()
+      }
+    })
+  }, [currentSlide])
+
   // Crossfade transition between slides
   const goToSlide = useCallback((index: number) => {
     if (isTransitioning || index === currentSlide) return
@@ -66,6 +81,10 @@ export function HeroSection() {
     const toText = textRefs.current[index]
 
     if (!from || !to || !fromText || !toText) return
+
+    // Pre-play the incoming video so there's no stutter when it fades in
+    const incomingVideo = videoRefs.current[index]
+    if (incomingVideo) incomingVideo.play().catch(() => {})
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -80,6 +99,7 @@ export function HeroSection() {
       y: -40,
       duration: 0.5,
       ease: 'power2.in',
+      force3D: true,
     })
     // Bring new slide visible with scale zoom
     .set(to, { opacity: 0, scale: 1.15, zIndex: 2 })
@@ -88,6 +108,7 @@ export function HeroSection() {
       scale: 1,
       duration: 1.6,
       ease: 'power3.inOut',
+      force3D: true,
     }, '-=0.2')
     // Simultaneously fade old slide
     .to(from, {
@@ -95,11 +116,12 @@ export function HeroSection() {
       scale: 0.98,
       duration: 1.2,
       ease: 'power2.inOut',
+      force3D: true,
     }, '<')
     // Fade in new text
     .fromTo(toText, 
       { opacity: 0, y: 50 },
-      { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
+      { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', force3D: true },
       '-=0.6'
     )
     // Reset old slide underneath
@@ -137,7 +159,7 @@ export function HeroSection() {
     const firstText = textRefs.current[0]
     if (!first || !firstText) return
 
-    const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
+    const tl = gsap.timeline({ defaults: { ease: 'power4.out', force3D: true } })
     tl.fromTo(first, { scale: 1.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 2.2 })
       .fromTo(firstText, { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 1.0 }, '-=1.3')
       .fromTo('.hero-nav-arrows', { opacity: 0 }, { opacity: 1, duration: 0.6 }, '-=0.5')
@@ -152,30 +174,39 @@ export function HeroSection() {
         <div
           key={i}
           ref={el => { slidesRef.current[i] = el }}
-          className="absolute inset-0"
+          className="absolute inset-0 will-change-transform"
           style={{ opacity: i === 0 ? 1 : 0, zIndex: i === 0 ? 1 : 0 }}
         >
           {slide.type === 'video' ? (
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload={i < 2 ? 'auto' : 'none'}
-              poster={slide.fallback}
-              className="absolute inset-0 w-full h-full object-cover"
-            >
-              <source src={slide.media} type="video/mp4" />
-            </video>
+            <>
+              <video
+                ref={el => { videoRefs.current[i] = el }}
+                muted
+                loop
+                playsInline
+                preload={i < 2 ? 'auto' : 'none'}
+                poster={slide.fallback}
+                className="absolute inset-0 w-full h-full object-cover"
+                onError={(e) => {
+                  (e.target as HTMLVideoElement).style.display = 'none'
+                }}
+              >
+                <source src={slide.media} type="video/mp4" />
+              </video>
+              {/* Fallback image underneath video */}
+              <div
+                className="absolute inset-0 bg-cover bg-center -z-10"
+                style={{ backgroundImage: `url('${slide.fallback}')` }}
+              />
+            </>
           ) : (
             <div
               className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: `url('${slide.media}')` }}
             />
           )}
-          {/* Cinematic overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-night/60 via-night/40 to-night/75" />
-          <div className="absolute inset-0 bg-gradient-to-r from-night/30 via-transparent to-night/30" />
+          {/* Cinematic overlay - Reduced to zero opacity in the center for clear videos */}
+          <div className="absolute inset-0 bg-gradient-to-b from-night/30 via-transparent to-night/50 pointer-events-none" />
         </div>
       ))}
 
@@ -188,13 +219,13 @@ export function HeroSection() {
           style={{ opacity: i === 0 ? 1 : 0, pointerEvents: i === currentSlide ? 'auto' : 'none' }}
         >
           <div className="mx-auto max-w-5xl px-5 text-center">
-            <p className="eyebrow !text-white/50 justify-center before:!bg-white/30 mb-5 text-[11px]">
+            <p className="eyebrow !text-white/80 justify-center before:!bg-white/60 mb-5 text-[11px] drop-shadow-md">
               {slide.subtitle}
             </p>
-            <h1 className="font-display text-6xl sm:text-8xl md:text-[110px] font-semibold text-white leading-[0.9] tracking-tight mb-4">
+            <h1 className="font-display text-6xl sm:text-8xl md:text-[110px] font-semibold text-white leading-[0.9] tracking-tight mb-4 drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
               {slide.destination}
             </h1>
-            <p className="mx-auto max-w-[500px] text-lg md:text-xl text-white/60 leading-relaxed mb-10 font-light">
+            <p className="mx-auto max-w-[500px] text-lg md:text-xl text-white/90 leading-relaxed mb-10 font-medium drop-shadow-lg">
               {slide.tagline}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
