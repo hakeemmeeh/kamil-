@@ -6,7 +6,9 @@ import { CorporateTravelSection } from '@/components/sections/CorporateTravelSec
 import { AirportExperience } from '@/components/sections/AirportExperience'
 import { DestinationsPreview } from '@/components/sections/DestinationsPreview'
 import { WhyKamil } from '@/components/sections/WhyKamil'
+import { FeaturedTours } from '@/components/sections/FeaturedTours'
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection'
+import { NewsletterSection } from '@/components/sections/NewsletterSection'
 import { CinematicCTA } from '@/components/sections/CinematicCTA'
 import { ContactPreview } from '@/components/sections/ContactPreview'
 
@@ -21,7 +23,9 @@ export default function HomePage() {
       <AirportExperience />
       <DestinationsPreview />
       <WhyKamil />
+      <FeaturedTours />
       <TestimonialsSection />
+      <NewsletterSection />
       <CinematicCTA />
       <ContactPreview />
     </>

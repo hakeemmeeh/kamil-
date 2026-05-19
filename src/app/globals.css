@@ -141,6 +141,60 @@ h1, h2, h3, .font-display {
   animation: pulse-gold 2.5s ease-in-out infinite;
 }
 
+/* === Scroll reveal (CSS — no GSAP per element) === */
+.reveal-fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-fade-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-text-word {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-text.is-visible .reveal-text-word {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-image-left {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-image-right {
+  clip-path: inset(0 0 0 100%);
+  transition: clip-path 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-image-up {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-image-down {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-image-left.is-visible,
+.reveal-image-right.is-visible,
+.reveal-image-up.is-visible,
+.reveal-image-down.is-visible {
+  clip-path: inset(0 0 0 0);
+}
+
 /* === Reduced Motion === */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -150,6 +204,17 @@ h1, h2, h3, .font-display {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .reveal-fade-up,
+  .reveal-text-word,
+  .reveal-image-left,
+  .reveal-image-right,
+  .reveal-image-up,
+  .reveal-image-down {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: inset(0 0 0 0) !important;
   }
 }
 

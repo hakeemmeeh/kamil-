@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { site } from '@/lib/content'
 import { FadeUp } from '@/components/ui/FadeUp'
 import { SectionHeader } from '@/components/ui/SectionHeader'
-import { ContactForm } from '@/components/ui/ContactForm'
+import { ContactFormWrapper } from '@/components/ui/ContactFormWrapper'
 import { Mail, Phone, Smartphone, MapPin } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -14,7 +14,7 @@ const contacts = [
   { icon: Mail, label: 'Email', value: site.email, href: `mailto:${site.email}` },
   { icon: Phone, label: 'Telephone', value: site.phone, href: 'tel:0202220011' },
   { icon: Smartphone, label: 'Mobile', value: site.mobile, href: 'tel:0752800800' },
-  { icon: MapPin, label: 'Address', value: site.address, href: undefined },
+  { icon: MapPin, label: 'Address', value: site.address, href: site.mapLink },
 ]
 
 export default function ContactPage() {
@@ -56,8 +56,14 @@ export default function ContactPage() {
               </div>
 
               <FadeUp delay={0.4}>
-                <div className="mt-8 rounded-2xl bg-sand border border-border p-6 text-center">
-                  <p className="text-sm text-ink-muted italic">[CLIENT TO PROVIDE: correct map location]</p>
+                <div className="mt-8 overflow-hidden rounded-2xl border border-border">
+                  <iframe
+                    title="Kamil Travel office location"
+                    src={site.mapEmbedUrl}
+                    className="h-64 w-full border-0"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
                 </div>
               </FadeUp>
             </div>
@@ -67,7 +73,7 @@ export default function ContactPage() {
               <FadeUp><SectionHeader eyebrow="Send Inquiry" title="Start a conversation" align="left" /></FadeUp>
               <FadeUp delay={0.1}>
                 <div className="rounded-3xl bg-surface border border-border p-8 shadow-premium">
-                  <ContactForm />
+                  <ContactFormWrapper />
                 </div>
               </FadeUp>
             </div>

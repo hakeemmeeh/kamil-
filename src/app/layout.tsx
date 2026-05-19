@@ -38,10 +38,21 @@ export const metadata: Metadata = {
   },
 }
 
+const themeScript = `
+(function () {
+  try {
+    var theme = localStorage.getItem('kamil-theme');
+    if (theme === 'dark') document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
+  } catch (e) {}
+})();
+`
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${manrope.variable}`}>
+    <html lang="en" className={`${cormorant.variable} ${manrope.variable}`} suppressHydrationWarning>
       <body className="font-body antialiased">
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <SmoothScroll>
           <Navbar />
           <main>{children}</main>

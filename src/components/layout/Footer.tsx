@@ -1,31 +1,56 @@
 import Link from 'next/link'
-import { site, nav, services } from '@/lib/content'
-import { Plane, Mail, Phone, Smartphone, MapPin, ArrowUpRight } from 'lucide-react'
+import { site, nav, social, footerDestinationLinks, newsletter } from '@/lib/content'
+import { NewsletterForm } from '@/components/ui/NewsletterForm'
+import { Plane, Mail, Phone, Smartphone, MapPin, ArrowUpRight, Share2 } from 'lucide-react'
+
+function SocialIcon({ href, label, children }: { href: string; label: string; children: React.ReactNode }) {
+  if (!href) return null
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition-all hover:border-gold hover:bg-gold/10"
+    >
+      {children}
+    </a>
+  )
+}
 
 export function Footer() {
   const quickLinks = nav.slice(0, 5)
   const moreLinks = nav.slice(5)
-  const serviceLinks = services.slice(0, 7)
+  const hasSocial = Object.values(social).some(Boolean)
 
   return (
     <footer className="bg-night text-white/70" role="contentinfo">
-      {/* Main Footer */}
       <div className="mx-auto max-w-7xl px-5 py-20">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
-          {/* Brand */}
-          <div className="lg:col-span-1">
-            <Link href="/" className="mb-6 flex items-center gap-2.5">
+        <div className="mb-16 rounded-3xl border border-white/10 bg-white/5 p-8 md:p-10">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-center">
+            <div>
+              <h4 className="mb-2 font-display text-2xl font-semibold text-white">{newsletter.title}</h4>
+              <p className="text-sm leading-relaxed text-white/50">{newsletter.subtitle}</p>
+            </div>
+            <NewsletterForm variant="footer" />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-5">
+          <div className="lg:col-span-2">
+            <Link href="/" className="mb-4 flex items-center gap-2.5">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold">
                 <Plane className="h-5 w-5 text-night" />
               </div>
-              <span className="text-lg font-bold font-display text-white tracking-tight">
-                {site.name}
-              </span>
+              <div>
+                <span className="block text-lg font-bold font-display text-white tracking-tight">{site.name}</span>
+                <span className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">{site.tagline}</span>
+              </div>
             </Link>
-            <p className="text-sm leading-relaxed text-white/50 mb-6">
+            <p className="mb-6 text-sm leading-relaxed text-white/50">
               Premium travel management, airport support, and regional journey planning for Kenya, Somalia, and beyond.
             </p>
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3">
               <a
                 href={`mailto:${site.email}`}
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition-all hover:border-gold hover:bg-gold/10"
@@ -40,31 +65,27 @@ export function Footer() {
               >
                 <Phone className="h-4 w-4" />
               </a>
+              <SocialIcon href={social.facebook} label="Facebook">
+                <Share2 className="h-4 w-4" />
+              </SocialIcon>
+              <SocialIcon href={social.instagram} label="Instagram">
+                <Share2 className="h-4 w-4" />
+              </SocialIcon>
+              <SocialIcon href={social.linkedin} label="LinkedIn">
+                <Share2 className="h-4 w-4" />
+              </SocialIcon>
             </div>
+            {!hasSocial && (
+              <p className="mt-3 text-xs text-white/30">Social profile links — add URLs in content.ts when confirmed.</p>
+            )}
           </div>
 
-          {/* Quick Links */}
           <div>
-            <h4 className="mb-5 text-xs font-extrabold uppercase tracking-[0.16em] text-gold">
-              Quick Links
-            </h4>
+            <h4 className="mb-5 text-xs font-extrabold uppercase tracking-[0.16em] text-gold">Quick Links</h4>
             <ul className="space-y-3">
-              {quickLinks.map((link) => (
+              {[...quickLinks, ...moreLinks].map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm transition-colors hover:text-gold"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-              {moreLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm transition-colors hover:text-gold"
-                  >
+                  <Link href={link.href} className="text-sm transition-colors hover:text-gold">
                     {link.label}
                   </Link>
                 </li>
@@ -72,30 +93,21 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Services */}
           <div>
-            <h4 className="mb-5 text-xs font-extrabold uppercase tracking-[0.16em] text-gold">
-              Services
-            </h4>
+            <h4 className="mb-5 text-xs font-extrabold uppercase tracking-[0.16em] text-gold">Destinations</h4>
             <ul className="space-y-3">
-              {serviceLinks.map((service) => (
-                <li key={service.slug}>
-                  <Link
-                    href="/services"
-                    className="text-sm transition-colors hover:text-gold"
-                  >
-                    {service.title}
+              {footerDestinationLinks.map((link) => (
+                <li key={link.label}>
+                  <Link href={link.href} className="text-sm transition-colors hover:text-gold">
+                    {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
-            <h4 className="mb-5 text-xs font-extrabold uppercase tracking-[0.16em] text-gold">
-              Contact
-            </h4>
+            <h4 className="mb-5 text-xs font-extrabold uppercase tracking-[0.16em] text-gold">Contact</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
@@ -113,10 +125,11 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
-                <span className="text-sm text-white/40 italic">{site.address}</span>
+                <a href={site.mapLink} target="_blank" rel="noopener noreferrer" className="text-sm hover:text-gold transition-colors">
+                  {site.address}
+                </a>
               </li>
             </ul>
-
             <Link
               href="/contact"
               className="mt-6 inline-flex items-center gap-2 rounded-full bg-gold/10 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.1em] text-gold transition-all hover:bg-gold hover:text-night"
@@ -128,18 +141,20 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Bottom Bar */}
       <div className="border-t border-white/5">
-        <div className="mx-auto max-w-7xl px-5 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-5 py-6 md:flex-row">
           <p className="text-xs text-white/30">
             &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <Link href="/about" className="text-xs text-white/30 hover:text-gold transition-colors">
+            <Link href="/about" className="text-xs text-white/30 transition-colors hover:text-gold">
               Privacy Policy
             </Link>
-            <Link href="/about" className="text-xs text-white/30 hover:text-gold transition-colors">
+            <Link href="/about" className="text-xs text-white/30 transition-colors hover:text-gold">
               Terms of Service
+            </Link>
+            <Link href="/car-rental-airport-transfers#become-a-guide" className="text-xs text-white/30 transition-colors hover:text-gold">
+              Become Our Guide
             </Link>
           </div>
         </div>

@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import { FadeUp } from '@/components/ui/FadeUp'
 import { SectionHeader } from '@/components/ui/SectionHeader'
-import { ContactForm } from '@/components/ui/ContactForm'
+import { becomeAGuide } from '@/lib/content'
+import { ContactFormWrapper } from '@/components/ui/ContactFormWrapper'
+import { Button } from '@/components/ui/Button'
 import { Car, PlaneLanding, PlaneTakeoff, Users, Briefcase } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -48,12 +50,29 @@ export default function CarRentalPage() {
         </div>
       </section>
 
+      <section id="become-a-guide" className="section-padding bg-sand">
+        <div className="mx-auto max-w-4xl px-5 text-center">
+          <FadeUp>
+            <SectionHeader
+              eyebrow="Partners"
+              title={becomeAGuide.title}
+              description={becomeAGuide.desc}
+            />
+          </FadeUp>
+          <FadeUp delay={0.15}>
+            <Button href="/contact?inquiry=Guide+Application&message=I+would+like+to+apply+as+a+guide+or+transport+partner." variant="primary" size="lg">
+              {becomeAGuide.cta}
+            </Button>
+          </FadeUp>
+        </div>
+      </section>
+
       <section className="section-padding bg-surface">
         <div className="mx-auto max-w-2xl px-5">
           <FadeUp><SectionHeader eyebrow="Inquiry" title="Request a Transfer or Car Hire" /></FadeUp>
           <FadeUp delay={0.1}>
             <div className="rounded-3xl bg-sand-light border border-border p-8">
-              <ContactForm />
+              <ContactFormWrapper />
             </div>
           </FadeUp>
         </div>

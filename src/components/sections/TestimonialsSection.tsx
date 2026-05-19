@@ -8,29 +8,61 @@ import { Quote, ChevronLeft, ChevronRight } from 'lucide-react'
 
 export function TestimonialsSection() {
   const [current, setCurrent] = useState(0)
+  const t = testimonials[current]
+
+  const goPrev = () => setCurrent((c) => (c === 0 ? testimonials.length - 1 : c - 1))
+  const goNext = () => setCurrent((c) => (c === testimonials.length - 1 ? 0 : c + 1))
 
   return (
     <section className="section-padding bg-night" id="testimonials">
       <div className="mx-auto max-w-4xl px-5 text-center">
         <FadeUp>
-          <SectionHeader eyebrow="Testimonials" title="Travel experiences clients remember." dark />
+          <SectionHeader
+            eyebrow="Testimonials"
+            title="What our clients say"
+            description="Trusted by travelers across Somalia, Kenya, and the region."
+            dark
+          />
         </FadeUp>
 
         <FadeUp delay={0.2}>
           <div className="relative">
-            <Quote className="mx-auto h-10 w-10 text-gold/30 mb-8" />
-            <blockquote className="font-display text-2xl md:text-3xl font-medium text-white/80 leading-relaxed mb-8 italic">
-              &ldquo;{testimonials[current].quote}&rdquo;
+            <Quote className="mx-auto mb-6 h-10 w-10 text-gold/30" />
+            <p className="mb-2 text-sm font-bold uppercase tracking-wider text-gold">{t.title}</p>
+            <blockquote className="mb-8 font-display text-2xl font-medium italic leading-relaxed text-white/80 md:text-3xl">
+              &ldquo;{t.quote}&rdquo;
             </blockquote>
-            <div className="mb-2 text-sm font-bold text-gold">{testimonials[current].name}</div>
-            <div className="text-xs text-white/40">{testimonials[current].route}</div>
+            <div className="mb-1 text-sm font-bold text-white">{t.name}</div>
+            <div className="text-xs text-white/40">{t.route}</div>
 
             <div className="mt-10 flex items-center justify-center gap-4">
-              <button onClick={() => setCurrent(Math.max(0, current - 1))} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white/60 hover:border-gold hover:text-gold transition-all" aria-label="Previous">
+              <button
+                type="button"
+                onClick={goPrev}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white/60 transition-all hover:border-gold hover:text-gold"
+                aria-label="Previous testimonial"
+              >
                 <ChevronLeft className="h-5 w-5" />
               </button>
-              <span className="text-xs text-white/40">{current + 1} / {testimonials.length}</span>
-              <button onClick={() => setCurrent(Math.min(testimonials.length - 1, current + 1))} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white/60 hover:border-gold hover:text-gold transition-all" aria-label="Next">
+              <div className="flex gap-2">
+                {testimonials.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setCurrent(i)}
+                    className={`h-2 rounded-full transition-all ${
+                      i === current ? 'w-6 bg-gold' : 'w-2 bg-white/30 hover:bg-white/50'
+                    }`}
+                    aria-label={`Go to testimonial ${i + 1}`}
+                  />
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={goNext}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white/60 transition-all hover:border-gold hover:text-gold"
+                aria-label="Next testimonial"
+              >
                 <ChevronRight className="h-5 w-5" />
               </button>
             </div>

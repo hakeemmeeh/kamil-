@@ -7,9 +7,20 @@ export const site = {
   email: 'info@kamiltravel.com',
   phone: '020 2220011 | 020 2220022',
   mobile: '0752 800 800 | 0752 800 801',
-  address: '[CLIENT TO PROVIDE: correct Kamil Travel office location — current Ecobank Towers listing is incorrect]',
-  oldAddressWarning: 'Do not use Eco Bank Towers / Muindi Mbingu Street unless client confirms a corrected address.',
+  address:
+    'Eco Bank Towers, 4th Floor, Muindi Mbingu Street, P.O. Box 24378, 00100, Nairobi, Kenya',
+  mapEmbedUrl:
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.817!2d36.8219!3d-1.2864!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMTcnMTEuMCJTIDM2wrA0OScxOC44IkU!5e0!3m2!1sen!2ske!4v1',
+  mapLink: 'https://maps.google.com/?q=Eco+Bank+Towers+Muindi+Mbingu+Street+Nairobi',
 }
+
+/** Add URLs when confirmed — icons only render when a link is set */
+export const social = {
+  facebook: '',
+  instagram: '',
+  linkedin: '',
+  x: '',
+} as const
 
 export const brandPositioning = {
   eyebrow: 'Corporate Travel · Regional Travel · Airport Services',
@@ -134,7 +145,7 @@ export const destinations = [
     title: 'Hargeisa',
     country: 'Somalia',
     desc: 'One of the local airport locations where Kamil Travel has representatives.',
-    image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800&q=80',
     status: 'confirmed-context',
   },
   {
@@ -189,20 +200,151 @@ export const destinations = [
 
 export const testimonials = [
   {
-    title: 'Great Trip',
+    title: 'Great Trip!',
     quote:
-      '[CLIENT TO VERIFY: existing testimonial from current website before publishing]',
-    name: '[CLIENT TO VERIFY]',
-    route: '[CLIENT TO VERIFY]',
+      'This trip was easily the trip of a lifetime for our family of four, and it will be quite some time before we stop talking about it!',
+    name: 'Xassan Abdi',
+    route: 'Travelled to Mogadishu',
   },
   {
     title: 'Memorable Experience',
     quote:
-      '[CLIENT TO VERIFY: existing testimonial from current website before publishing]',
-    name: '[CLIENT TO VERIFY]',
-    route: '[CLIENT TO VERIFY]',
+      'Few things command more respect than hard work, integrity, dedication and the ability to follow through. These are among the many qualities we experienced with Kamil Travel.',
+    name: 'Abdulghani Ibrahim',
+    route: 'Travelled to Hargeisa',
+  },
+  {
+    title: 'Simply Awesome',
+    quote:
+      'My wife, daughter and myself cannot say enough about how wonderful a trip we had, how great this travel company — in particular our travel agent — made everything for us.',
+    name: 'Ann Kirui',
+    route: 'Travelled to Nairobi',
+  },
+  {
+    title: 'Best Cruise ever!',
+    quote:
+      "We're sorry that we can only give this travel agency 5 stars — we'd have preferred 10 stars or more! What an awesome trip!",
+    name: 'Samson',
+    route: 'Travelled to Somalia',
+  },
+  {
+    title: 'Just Awesome!',
+    quote:
+      "I've traveled A LOT in my life, but this was the best trip I've ever taken and it had everything to do with using this travel company and this agent.",
+    name: 'Ali Salim',
+    route: 'Travelled to Mogadishu',
   },
 ]
+
+export const tourCategories = [
+  'All',
+  'Somalia Domestic',
+  'Kenya & Regional',
+  'Corporate & Group',
+  'International',
+] as const
+
+export type TourCategory = (typeof tourCategories)[number]
+
+export const tours = [
+  {
+    slug: 'mogadishu-travel-package',
+    title: 'Mogadishu Travel Package',
+    destination: 'Mogadishu',
+    country: 'Somalia',
+    category: 'Somalia Domestic' as TourCategory,
+    duration: 'Flexible',
+    desc: 'End-to-end support for travel to Mogadishu — flights, meet & assist at the airport, transfers, and coordinated local movement.',
+    image: 'https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=800&q=80',
+    highlights: ['Meet & assist', 'Airport transfers', 'Group coordination'],
+    featured: true,
+  },
+  {
+    slug: 'hargeisa-regional-travel',
+    title: 'Hargeisa Regional Travel',
+    destination: 'Hargeisa',
+    country: 'Somalia',
+    category: 'Somalia Domestic' as TourCategory,
+    duration: 'Flexible',
+    desc: 'Flight booking and travel coordination for Hargeisa with representative support at the airport.',
+    image: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800&q=80',
+    highlights: ['Air ticketing', 'Local representative', 'Transfer support'],
+    featured: true,
+  },
+  {
+    slug: 'nairobi-corporate-travel',
+    title: 'Nairobi Corporate Travel',
+    destination: 'Nairobi',
+    country: 'Kenya',
+    category: 'Kenya & Regional' as TourCategory,
+    duration: 'Flexible',
+    desc: 'Corporate travel management for Nairobi — flights, insurance, transfers, and proactive itinerary support.',
+    image: 'https://images.unsplash.com/photo-1547471080-7fc2caa6f571?w=800&q=80',
+    highlights: ['Corporate itineraries', '24h support', 'Travel insurance'],
+    featured: true,
+  },
+  {
+    slug: 'somalia-multi-city',
+    title: 'Somalia Multi-City Route',
+    destination: 'Multiple cities',
+    country: 'Somalia',
+    category: 'Somalia Domestic' as TourCategory,
+    duration: 'Custom',
+    desc: 'Coordinated travel across Mogadishu, Hargeisa, Garowe, Bosaso, Galkayo, Kismayu, and Baidoa with airport representatives.',
+    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
+    highlights: ['6 airport network', 'Domestic connections', 'Group travel'],
+    featured: false,
+  },
+  {
+    slug: 'group-travel-somalia',
+    title: 'Group Travel within Somalia',
+    destination: 'Somalia',
+    country: 'Somalia',
+    category: 'Corporate & Group' as TourCategory,
+    duration: 'Custom',
+    desc: 'Specialized group travel arrangements within Somalia, coordinated from Kamil Travel\u2019s Mogadishu airport office.',
+    image: 'https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=800&q=80',
+    highlights: ['Group bookings', 'Mogadishu airport office', 'Meet & assist'],
+    featured: false,
+  },
+  {
+    slug: 'international-flight-package',
+    title: 'International Flight Package',
+    destination: 'Global',
+    country: 'International',
+    category: 'International' as TourCategory,
+    duration: 'Flexible',
+    desc: 'Outbound and inbound international ticketing with competitive fares through Kamil Travel\u2019s airline partnerships.',
+    image: 'https://images.unsplash.com/photo-1488085061387-422e29b40080?w=800&q=80',
+    highlights: ['Major airlines', 'Competitive fares', 'Full documentation'],
+    featured: false,
+  },
+]
+
+export function getTourBySlug(slug: string) {
+  return tours.find((t) => t.slug === slug)
+}
+
+export const footerDestinationLinks = [
+  { label: 'Mogadishu', href: '/destinations' },
+  { label: 'Hargeisa', href: '/destinations' },
+  { label: 'Garowe', href: '/destinations' },
+  { label: 'Bosaso', href: '/destinations' },
+  { label: 'All Destinations', href: '/destinations' },
+]
+
+export const becomeAGuide = {
+  title: 'Become Our Guide',
+  desc: 'Kamil Travel works with local guides and transport partners across Kenya and Somalia. Share your experience and availability — our team will review your application.',
+  cta: 'Apply as a Guide',
+}
+
+export const newsletter = {
+  title: 'Love Travel?',
+  subtitle:
+    'Get travel inspiration, regional updates, and exclusive offers delivered to your inbox. We respond to all genuine enquiries within 24 hours.',
+  disclaimer: 'We do not share your information with third parties.',
+}
 
 export const nav = [
   { label: 'Home', href: '/' },

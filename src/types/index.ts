@@ -22,6 +22,19 @@ export interface Testimonial {
   route: string
 }
 
+export interface Tour {
+  slug: string
+  title: string
+  destination: string
+  country: string
+  category: string
+  duration: string
+  desc: string
+  image: string
+  highlights: string[]
+  featured: boolean
+}
+
 export interface NavItem {
   label: string
   href: string
