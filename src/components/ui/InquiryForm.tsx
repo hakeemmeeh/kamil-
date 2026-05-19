@@ -38,7 +38,7 @@ export function InquiryForm() {
     )
   }
 
-  const inputClass = "w-full rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-4 focus:ring-gold/15"
+  const inputClass = "w-full rounded-xl border border-border bg-surface px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-4 focus:ring-gold/15"
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 items-end">

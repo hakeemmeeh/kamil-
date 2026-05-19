@@ -26,7 +26,7 @@ export function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-5xl px-5 text-center">
-        <p className="hero-eyebrow eyebrow !text-white/60 justify-center before:!bg-white/40 mb-6" style={{ opacity: 0 }}>
+        <p className="hero-eyebrow eyebrow !text-white/60 justify-center before:!bg-surface/40 mb-6" style={{ opacity: 0 }}>
           Corporate Travel · Somalia · Global Journeys
         </p>
 

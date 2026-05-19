@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { nav, site } from '@/lib/content'
 import { MobileMenu } from './MobileMenu'
 import { Plane } from 'lucide-react'
+import { DarkModeToggle } from '@/components/ui/DarkModeToggle'
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -48,7 +49,7 @@ export function Navbar() {
               aria-label={`${site.name} - Home`}
             >
               <div className={`flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${
-                scrolled ? 'bg-gold' : 'bg-white/20'
+                scrolled ? 'bg-gold' : 'bg-surface/20'
               }`}>
                 <Plane className={`h-5 w-5 transition-colors ${scrolled ? 'text-night' : 'text-white'}`} />
               </div>
@@ -80,7 +81,8 @@ export function Navbar() {
             </div>
 
             {/* Desktop CTA */}
-            <div className="hidden lg:flex items-center gap-3">
+            <div className="hidden lg:flex items-center gap-4">
+              <DarkModeToggle />
               <Link
                 href="/contact"
                 className={`text-[13px] font-semibold uppercase tracking-[0.08em] transition-colors hover:text-gold ${
@@ -107,20 +109,20 @@ export function Navbar() {
               <span
                 className={`block h-0.5 w-6 transition-all duration-300 ${
                   mobileOpen
-                    ? `rotate-45 translate-y-2 ${scrolled ? 'bg-ink' : 'bg-white'}`
-                    : scrolled ? 'bg-ink' : 'bg-white'
+                    ? `rotate-45 translate-y-2 ${scrolled ? 'bg-ink' : 'bg-surface'}`
+                    : scrolled ? 'bg-ink' : 'bg-surface'
                 }`}
               />
               <span
                 className={`block h-0.5 w-6 transition-all duration-300 ${
-                  mobileOpen ? 'opacity-0' : scrolled ? 'bg-ink' : 'bg-white'
+                  mobileOpen ? 'opacity-0' : scrolled ? 'bg-ink' : 'bg-surface'
                 }`}
               />
               <span
                 className={`block h-0.5 w-6 transition-all duration-300 ${
                   mobileOpen
-                    ? `-rotate-45 -translate-y-2 ${scrolled ? 'bg-ink' : 'bg-white'}`
-                    : scrolled ? 'bg-ink' : 'bg-white'
+                    ? `-rotate-45 -translate-y-2 ${scrolled ? 'bg-ink' : 'bg-surface'}`
+                    : scrolled ? 'bg-ink' : 'bg-surface'
                 }`}
               />
             </button>

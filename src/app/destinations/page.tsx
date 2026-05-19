@@ -16,7 +16,7 @@ export default function DestinationsPage() {
       <section className="relative pt-40 pb-20 bg-night overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1507812984078-917a274065be?w=1920&q=80')] bg-cover bg-center opacity-15" />
         <div className="relative z-10 mx-auto max-w-4xl px-5 text-center">
-          <p className="eyebrow !text-white/60 justify-center before:!bg-white/40">Where We Operate</p>
+          <p className="eyebrow !text-white/60 justify-center before:!bg-surface/40">Where We Operate</p>
           <h1 className="font-display text-5xl md:text-7xl font-semibold text-white leading-[0.95] tracking-tight mb-6">Destinations & Regional Travel</h1>
           <p className="text-lg text-white/60 max-w-2xl mx-auto">Explore our confirmed travel network across Somalia and the region.</p>
         </div>

@@ -19,7 +19,7 @@ export function WhyKamil() {
   const [openIndex, setOpenIndex] = useState(0)
 
   return (
-    <section className="section-padding bg-white" id="why-kamil">
+    <section className="section-padding bg-surface" id="why-kamil">
       <div className="mx-auto max-w-7xl px-5">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           <div>

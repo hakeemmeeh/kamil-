@@ -21,6 +21,8 @@
   --color-border: #E6DED2;
   --color-error: #DC2626;
   --color-success: #16A34A;
+  --color-white: #ffffff;
+  --color-surface: #ffffff;
   --font-display: var(--font-display);
   --font-body: var(--font-body);
   --shadow-premium: 0 30px 80px rgba(7, 17, 31, 0.16);
@@ -32,11 +34,27 @@
 /* === Base Styles === */
 body {
   font-family: var(--font-body), system-ui, sans-serif;
-  background: #FBF8F3;
-  color: #111827;
+  background: var(--color-sand-light);
+  color: var(--color-ink);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.dark body {
+  background: var(--color-night);
+  color: var(--color-sand-light);
+}
+
+.dark {
+  --color-sand-light: #07111F;
+  --color-sand: #0D1B2E;
+  --color-surface: #101C2D;
+  --color-ink: #FBF8F3;
+  --color-ink-soft: #E7D8C3;
+  --color-ink-muted: #A3A3A3;
+  --color-border: #1F2937;
 }
 
 h1, h2, h3, .font-display {

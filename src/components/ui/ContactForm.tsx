@@ -38,7 +38,7 @@ export function ContactForm() {
     )
   }
 
-  const inputClass = "w-full rounded-2xl border border-border bg-white px-4 py-3 outline-none transition focus:border-gold focus:ring-4 focus:ring-gold/15"
+  const inputClass = "w-full rounded-2xl border border-border bg-surface px-4 py-3 outline-none transition focus:border-gold focus:ring-4 focus:ring-gold/15"
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">

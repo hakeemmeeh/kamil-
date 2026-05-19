@@ -30,7 +30,7 @@ export function Button({
 
   const variants = {
     primary: 'bg-gold text-night hover:bg-gold-dark hover:shadow-glow',
-    secondary: 'bg-white text-ink border border-border hover:border-gold hover:text-gold',
+    secondary: 'bg-surface text-ink border border-border hover:border-gold hover:text-gold',
     outline: 'border-2 border-white/30 text-white hover:border-gold hover:text-gold',
     ghost: 'text-ocean hover:text-ocean-dark',
   }

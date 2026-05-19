@@ -22,7 +22,7 @@ export default function VisaAssistancePage() {
       <section className="relative pt-40 pb-20 bg-night overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=1920&q=80')] bg-cover bg-center opacity-15" />
         <div className="relative z-10 mx-auto max-w-4xl px-5 text-center">
-          <p className="eyebrow !text-white/60 justify-center before:!bg-white/40">Travel Support</p>
+          <p className="eyebrow !text-white/60 justify-center before:!bg-surface/40">Travel Support</p>
           <h1 className="font-display text-5xl md:text-7xl font-semibold text-white leading-[0.95] tracking-tight mb-6">Visa Assistance</h1>
           <p className="text-lg text-white/60 max-w-2xl mx-auto">Travel preparation support and guidance for visa-related travel needs.</p>
         </div>
@@ -47,7 +47,7 @@ export default function VisaAssistancePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {steps.map((step, i) => (
               <FadeUp key={step.title} delay={i * 0.08}>
-                <div className="rounded-2xl bg-white border border-border p-6 hover:border-gold/30 transition-all h-full">
+                <div className="rounded-2xl bg-surface border border-border p-6 hover:border-gold/30 transition-all h-full">
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold/10 text-gold mb-4">
                     <step.icon className="h-5 w-5" />
                   </div>

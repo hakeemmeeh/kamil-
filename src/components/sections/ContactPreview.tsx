@@ -17,11 +17,11 @@ export function ContactPreview() {
         </FadeUp>
         <FadeUp delay={0.2}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <a href={`mailto:${site.email}`} className="flex items-center gap-3 rounded-2xl bg-white px-6 py-4 border border-border hover:border-gold/30 hover:shadow-lg transition-all">
+            <a href={`mailto:${site.email}`} className="flex items-center gap-3 rounded-2xl bg-surface px-6 py-4 border border-border hover:border-gold/30 hover:shadow-lg transition-all">
               <Mail className="h-5 w-5 text-gold" />
               <span className="text-sm font-semibold text-ink">{site.email}</span>
             </a>
-            <a href="tel:0202220011" className="flex items-center gap-3 rounded-2xl bg-white px-6 py-4 border border-border hover:border-gold/30 hover:shadow-lg transition-all">
+            <a href="tel:0202220011" className="flex items-center gap-3 rounded-2xl bg-surface px-6 py-4 border border-border hover:border-gold/30 hover:shadow-lg transition-all">
               <Phone className="h-5 w-5 text-gold" />
               <span className="text-sm font-semibold text-ink">{site.phone}</span>
             </a>

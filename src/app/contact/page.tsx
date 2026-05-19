@@ -23,7 +23,7 @@ export default function ContactPage() {
       <section className="relative pt-40 pb-20 bg-night overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1529074963764-98f45c47344b?w=1920&q=80')] bg-cover bg-center opacity-15" />
         <div className="relative z-10 mx-auto max-w-4xl px-5 text-center">
-          <p className="eyebrow !text-white/60 justify-center before:!bg-white/40">Get in Touch</p>
+          <p className="eyebrow !text-white/60 justify-center before:!bg-surface/40">Get in Touch</p>
           <h1 className="font-display text-5xl md:text-7xl font-semibold text-white leading-[0.95] tracking-tight mb-6">Contact Kamil Travel</h1>
           <p className="text-lg text-white/60 max-w-2xl mx-auto">We are here to help with your travel needs.</p>
         </div>
@@ -38,7 +38,7 @@ export default function ContactPage() {
               <div className="space-y-4">
                 {contacts.map((c, i) => (
                   <FadeUp key={c.label} delay={i * 0.08}>
-                    <div className="flex items-start gap-4 rounded-2xl bg-white border border-border p-5 hover:border-gold/30 hover:shadow-lg transition-all">
+                    <div className="flex items-start gap-4 rounded-2xl bg-surface border border-border p-5 hover:border-gold/30 hover:shadow-lg transition-all">
                       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gold/10 text-gold">
                         <c.icon className="h-5 w-5" />
                       </div>
@@ -66,7 +66,7 @@ export default function ContactPage() {
             <div>
               <FadeUp><SectionHeader eyebrow="Send Inquiry" title="Start a conversation" align="left" /></FadeUp>
               <FadeUp delay={0.1}>
-                <div className="rounded-3xl bg-white border border-border p-8 shadow-premium">
+                <div className="rounded-3xl bg-surface border border-border p-8 shadow-premium">
                   <ContactForm />
                 </div>
               </FadeUp>

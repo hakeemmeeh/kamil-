@@ -32,11 +32,19 @@ export function BrandStatement() {
           </div>
 
           {/* Right: Images */}
-          <div className="grid grid-cols-2 gap-4">
-            <ImageReveal className="relative aspect-[3/4] rounded-3xl overflow-hidden" direction="left">
-              <Image src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=600&q=80" alt="Airport terminal" fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
-            </ImageReveal>
-            <ImageReveal className="relative aspect-[3/4] rounded-3xl overflow-hidden mt-8" direction="right">
+          <div className="grid grid-cols-2 gap-6 relative items-center">
+            {/* Editorial Framed Shape */}
+            <div className="relative aspect-[3/4] w-full pt-4 pl-4 h-[90%]">
+              {/* Gold Offset Frame */}
+              <div className="absolute top-0 left-0 w-full h-full border border-gold/60 rounded-t-full rounded-b-3xl z-0 pointer-events-none"></div>
+              {/* Image */}
+              <ImageReveal className="relative w-full h-full rounded-t-full rounded-b-3xl overflow-hidden shadow-2xl z-10" direction="left">
+                <Image src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=600&q=80" alt="Airport terminal" fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
+              </ImageReveal>
+            </div>
+
+            {/* Asymmetric Geometric Cut-out */}
+            <ImageReveal className="relative aspect-[3/4] overflow-hidden rounded-tl-[100px] rounded-br-[100px] rounded-tr-xl rounded-bl-xl shadow-premium mt-16" direction="right">
               <Image src="https://images.unsplash.com/photo-1488085061387-422e29b40080?w=600&q=80" alt="Travel experience" fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
             </ImageReveal>
           </div>

@@ -38,11 +38,14 @@ export const metadata: Metadata = {
   },
 }
 
+import { CustomCursor } from '@/components/ui/CustomCursor'
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${cormorant.variable} ${manrope.variable}`}>
       <body className="font-body antialiased">
         <SmoothScroll>
+          <CustomCursor />
           <Navbar />
           <main>{children}</main>
           <Footer />

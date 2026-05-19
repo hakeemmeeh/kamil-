@@ -11,20 +11,22 @@ interface ServiceCardProps {
   image: string
   slug: string
   featured?: boolean
+  className?: string
 }
 
-export function ServiceCard({ eyebrow, title, desc, image, featured = false }: ServiceCardProps) {
+export function ServiceCard({ eyebrow, title, desc, image, slug, featured = false, className = '' }: ServiceCardProps) {
   return (
     <Link
-      href="/services"
-      className={`group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-white transition-all duration-500 hover:-translate-y-2 hover:shadow-premium hover:border-gold/40 ${
-        featured ? 'md:col-span-2 md:flex-row' : ''
-      }`}
+      href={`/services#${slug}`}
+      id={slug}
+      className={`group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-surface transition-all duration-500 hover:-translate-y-2 hover:shadow-premium hover:border-gold/40 h-full w-full ${
+        featured ? 'md:flex-row' : ''
+      } ${className}`}
     >
       {/* Image */}
       <div
         className={`relative overflow-hidden ${
-          featured ? 'md:w-1/2 aspect-[4/3] md:aspect-auto' : 'aspect-[16/10]'
+          featured ? 'md:w-1/2 min-h-[200px] h-full' : 'h-1/2 min-h-[160px]'
         }`}
       >
         <Image

@@ -38,7 +38,7 @@ export function AirportExperience() {
             <div className="space-y-3">
               {cards.map((card, i) => (
                 <FadeUp key={card.title} delay={i * 0.08}>
-                  <div className="flex items-center gap-4 rounded-2xl bg-white p-4 border border-border transition-all hover:border-gold/30 hover:shadow-lg">
+                  <div className="flex items-center gap-4 rounded-2xl bg-surface p-4 border border-border transition-all hover:border-gold/30 hover:shadow-lg">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gold/10 text-gold">
                       <card.icon className="h-5 w-5" />
                     </div>

@@ -23,7 +23,7 @@ export default function CarRentalPage() {
       <section className="relative pt-40 pb-20 bg-night overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1920&q=80')] bg-cover bg-center opacity-15" />
         <div className="relative z-10 mx-auto max-w-4xl px-5 text-center">
-          <p className="eyebrow !text-white/60 justify-center before:!bg-white/40">Transport</p>
+          <p className="eyebrow !text-white/60 justify-center before:!bg-surface/40">Transport</p>
           <h1 className="font-display text-5xl md:text-7xl font-semibold text-white leading-[0.95] tracking-tight mb-6">Car Rental & Airport Transfers</h1>
           <p className="text-lg text-white/60 max-w-2xl mx-auto">Coordinated local movement and transfer support for travelers.</p>
         </div>
@@ -35,7 +35,7 @@ export default function CarRentalPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cards.map((card, i) => (
               <FadeUp key={card.title} delay={i * 0.08}>
-                <div className="rounded-2xl bg-white border border-border p-6 hover:border-gold/30 hover:shadow-lg transition-all h-full group">
+                <div className="rounded-2xl bg-surface border border-border p-6 hover:border-gold/30 hover:shadow-lg transition-all h-full group">
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold/10 text-gold mb-4 group-hover:bg-gold group-hover:text-night transition-colors">
                     <card.icon className="h-5 w-5" />
                   </div>
@@ -48,7 +48,7 @@ export default function CarRentalPage() {
         </div>
       </section>
 
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="mx-auto max-w-2xl px-5">
           <FadeUp><SectionHeader eyebrow="Inquiry" title="Request a Transfer or Car Hire" /></FadeUp>
           <FadeUp delay={0.1}>
