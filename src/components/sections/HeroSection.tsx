@@ -8,13 +8,13 @@ import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react'
 
 const slides = [
   {
-    // Airplane landing / airport runway
-    media: 'https://videos.pexels.com/video-files/2169880/2169880-uhd_2560_1440_30fps.mp4',
-    type: 'video' as const,
-    fallback: 'https://images.unsplash.com/photo-1556388158-158ea5ccacbd?w=1920&q=80',
+    // Mogadishu — beautiful coastline / lido beach
+    media: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=1920&q=80',
+    type: 'image' as const,
+    fallback: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=1920&q=80',
     destination: 'Mogadishu',
-    subtitle: 'Somalia · Airport Hub',
-    tagline: 'Your gateway to East Africa',
+    subtitle: 'Somalia · Coastal Hub',
+    tagline: 'Where the city meets the ocean',
   },
   {
     // Nairobi — clear city skyline
