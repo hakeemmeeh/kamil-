@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { FadeUp } from '@/components/ui/FadeUp'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { Briefcase, Users, Plane, HeadphonesIcon, Globe, Shield } from 'lucide-react'
@@ -24,9 +25,9 @@ export function CorporateTravelSection() {
               <SectionHeader eyebrow="Corporate Travel" title="Travel management designed for organizations." description="Kamil Travel supports corporate clients with professional booking, coordinated travel planning, airport support, and proactive assistance for complex travel requirements." align="left" dark />
             </FadeUp>
             <FadeUp delay={0.2}>
-              <a href="/corporate-travel" className="inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 text-[13px] font-extrabold uppercase tracking-[0.1em] text-night transition-all hover:bg-gold-dark hover:shadow-glow">
+              <Link href="/corporate-travel" className="inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 text-[13px] font-extrabold uppercase tracking-[0.1em] text-night transition-all hover:bg-gold-dark hover:shadow-glow">
                 Learn More
-              </a>
+              </Link>
             </FadeUp>
           </div>
 

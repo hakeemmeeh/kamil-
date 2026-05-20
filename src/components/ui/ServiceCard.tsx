@@ -16,9 +16,9 @@ interface ServiceCardProps {
 
 export function ServiceCard({ eyebrow, title, desc, image, slug, featured = false, className = '' }: ServiceCardProps) {
   return (
+    <div id={slug} className="scroll-mt-32 h-full">
     <Link
       href={`/services#${slug}`}
-      id={slug}
       className={`group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-surface transition-all duration-500 hover:-translate-y-2 hover:shadow-premium hover:border-gold/40 h-full w-full ${
         featured ? 'md:flex-row' : ''
       } ${className}`}
@@ -55,5 +55,6 @@ export function ServiceCard({ eyebrow, title, desc, image, slug, featured = fals
         </div>
       </div>
     </Link>
+    </div>
   )
 }

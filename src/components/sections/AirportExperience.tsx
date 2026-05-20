@@ -1,9 +1,10 @@
 'use client'
 
 import { FadeUp } from '@/components/ui/FadeUp'
+import { ImageReveal } from '@/components/ui/ImageReveal'
 import Image from 'next/image'
 import Link from 'next/link'
-import { PlaneTakeoff, PlaneLanding, Users, Crown, MapPin, ArrowUpRight } from 'lucide-react'
+import { Plane, PlaneTakeoff, PlaneLanding, Users, Crown, MapPin, ArrowUpRight } from 'lucide-react'
 
 const cards = [
   {
@@ -34,24 +35,42 @@ const cards = [
 ]
 
 const AIRPORT_IMAGE =
-  'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=900&q=80'
+  'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=900&q=80'
 
 export function AirportExperience() {
   return (
     <section className="section-padding bg-sand" id="airport-experience">
       <div className="mx-auto max-w-7xl px-5">
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl shadow-premium">
-            <Image
-              src={AIRPORT_IMAGE}
-              alt="Mogadishu airport support — meet and assist services"
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-night/40 via-transparent to-transparent" />
-            <div className="absolute bottom-5 left-5 rounded-full bg-white/90 px-4 py-2 text-xs font-bold uppercase tracking-wider text-night">
-              Mogadishu Airport
+          <div className="relative">
+            <ImageReveal
+              className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl shadow-premium"
+              direction="left"
+            >
+              <Image
+                src={AIRPORT_IMAGE}
+                alt="Mogadishu airport support — meet and assist services"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-night/40 via-transparent to-transparent" />
+              <div className="absolute bottom-5 left-5 rounded-full bg-white/90 px-4 py-2 text-xs font-bold uppercase tracking-wider text-night">
+                Mogadishu Airport
+              </div>
+            </ImageReveal>
+
+            <div
+              className="animate-float pointer-events-none absolute -right-3 -top-3 z-20 flex h-16 w-16 items-center justify-center rounded-2xl border border-gold/30 bg-gold shadow-glow sm:-right-5 sm:-top-5 sm:h-20 sm:w-20"
+              aria-hidden
+            >
+              <Plane className="h-8 w-8 text-night sm:h-10 sm:w-10" />
+            </div>
+            <div
+              className="animate-float-delayed pointer-events-none absolute -bottom-2 -left-2 z-20 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-night/80 backdrop-blur-sm sm:-bottom-4 sm:-left-4"
+              aria-hidden
+            >
+              <PlaneTakeoff className="h-5 w-5 text-gold" />
             </div>
           </div>
 
@@ -86,7 +105,7 @@ export function AirportExperience() {
 
             <FadeUp delay={0.45}>
               <Link
-                href="/corporate-travel"
+                href="/services#meet-assist"
                 className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-gold transition hover:gap-3"
               >
                 Explore airport services <ArrowUpRight className="h-4 w-4" />

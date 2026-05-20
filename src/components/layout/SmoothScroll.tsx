@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import Lenis from '@studio-freight/lenis'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 function shouldUseSmoothScroll() {
   if (typeof window === 'undefined') return false
@@ -21,6 +22,8 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       wheelMultiplier: 0.85,
     })
 
+    lenis.on('scroll', ScrollTrigger.update)
+
     let frameId = 0
     const raf = (time: number) => {
       lenis.raf(time)
@@ -28,9 +31,12 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     }
     frameId = requestAnimationFrame(raf)
 
+    ScrollTrigger.refresh()
+
     return () => {
       cancelAnimationFrame(frameId)
       lenis.destroy()
+      ScrollTrigger.refresh()
     }
   }, [])
 

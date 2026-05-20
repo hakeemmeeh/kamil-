@@ -27,8 +27,10 @@ export default function DestinationsPage() {
           <FadeUp><SectionHeader eyebrow="Somalia Network" title="Our Airport Support Network" description="Kamil Travel has representatives across key Somalia airports, with a branch office at Mogadishu airport." /></FadeUp>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {destinations.filter(d => d.status === 'confirmed-context').map((dest, i) => (
-              <FadeUp key={dest.slug} delay={i * 0.08}>
-                <DestinationCard {...dest} />
+              <FadeUp key={dest.slug} delay={i * 0.08} className="scroll-mt-32">
+                <div id={dest.slug}>
+                  <DestinationCard {...dest} />
+                </div>
               </FadeUp>
             ))}
           </div>

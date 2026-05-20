@@ -108,6 +108,21 @@ h1, h2, h3, .font-display {
 }
 
 /* === Premium Animations === */
+@keyframes hero-text-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-text-in {
+  animation: hero-text-in 0.5s ease-out both;
+}
+
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-8px); }
@@ -130,6 +145,10 @@ h1, h2, h3, .font-display {
 
 .animate-float {
   animation: float 5s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 5s ease-in-out 1.5s infinite;
 }
 
 .animate-shimmer {

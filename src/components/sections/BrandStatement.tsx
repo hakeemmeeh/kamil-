@@ -51,21 +51,19 @@ export function BrandStatement() {
           </div>
 
           <div className="grid grid-cols-2 items-center gap-5 sm:gap-6">
-            <div className="relative aspect-[3/4] w-full pt-3 pl-3 sm:pt-4 sm:pl-4">
-              <div className="pointer-events-none absolute left-0 top-0 z-0 h-full w-full rounded-t-full rounded-b-3xl border border-gold/60" />
+            <div className="relative pt-3 pl-3 sm:pt-4 sm:pl-4">
+              <div className="pointer-events-none absolute left-0 top-0 z-0 aspect-[3/4] w-full rounded-t-full rounded-b-3xl border border-gold/60" />
               <ImageReveal
-                className="relative z-10 h-full w-full rounded-t-full rounded-b-3xl shadow-2xl"
+                className="relative z-10 aspect-[3/4] w-full rounded-t-full rounded-b-3xl shadow-2xl"
                 direction="left"
               >
-                <div className="relative aspect-[3/4] w-full">
-                  <Image
-                    src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=700&q=80"
-                    alt="Kamil Travel — airport and travel services"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 45vw, 280px"
-                  />
-                </div>
+                <Image
+                  src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=700&q=80"
+                  alt="Kamil Travel — airport and travel services"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 45vw, 280px"
+                />
               </ImageReveal>
             </div>
 

@@ -326,10 +326,10 @@ export function getTourBySlug(slug: string) {
 }
 
 export const footerDestinationLinks = [
-  { label: 'Mogadishu', href: '/destinations' },
-  { label: 'Hargeisa', href: '/destinations' },
-  { label: 'Garowe', href: '/destinations' },
-  { label: 'Bosaso', href: '/destinations' },
+  { label: 'Mogadishu', href: '/destinations#mogadishu' },
+  { label: 'Hargeisa', href: '/destinations#hargeisa' },
+  { label: 'Garowe', href: '/destinations#garowe' },
+  { label: 'Bosaso', href: '/destinations#bosaso' },
   { label: 'All Destinations', href: '/destinations' },
 ]
 

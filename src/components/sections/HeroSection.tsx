@@ -4,7 +4,8 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/Button'
 import { MagneticButton } from '@/components/ui/MagneticButton'
-import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 const slides = [
   {
@@ -99,100 +100,154 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative flex h-screen min-h-[700px] items-center justify-center overflow-hidden"
+      className="relative overflow-hidden bg-sand-light pt-28 pb-14 md:pt-36 md:pb-20"
       id="hero"
     >
-      {slides.map((item, i) => (
-        <div
-          key={item.destination}
-          className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-            i === currentSlide ? 'opacity-100 z-[1]' : 'opacity-0 z-0'
-          }`}
-          aria-hidden={i !== currentSlide}
-        >
-          <Image
-            src={item.image}
-            alt={item.destination}
-            fill
-            priority={i === 0}
-            loading={i === 0 ? 'eager' : 'lazy'}
-            className="object-cover"
-            sizes="100vw"
-          />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-night/30 via-transparent to-night/50" />
-        </div>
-      ))}
+      <div className="pointer-events-none absolute -right-24 top-20 h-72 w-72 rounded-full bg-gold/10 blur-3xl" />
+      <div className="pointer-events-none absolute -left-16 bottom-0 h-56 w-56 rounded-full bg-ocean/5 blur-3xl" />
 
-      <div className="relative z-10 mx-auto max-w-5xl px-5 text-center">
-        <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-gold drop-shadow-md">
-          Beyond Words
-        </p>
-        <p className="eyebrow !text-white/80 justify-center before:!bg-white/60 mb-5 text-[11px] drop-shadow-md">
-          {slide.subtitle}
-        </p>
-        <h1 className="mb-4 font-display text-6xl font-semibold leading-[0.9] tracking-tight text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)] sm:text-8xl md:text-[110px]">
-          {slide.destination}
-        </h1>
-        <p className="mx-auto mb-10 max-w-[500px] text-lg font-medium leading-relaxed text-white/90 drop-shadow-lg md:text-xl">
-          {slide.tagline}
-        </p>
-        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <MagneticButton>
-            <Button href="/contact" variant="primary" size="lg">
-              Plan a Trip
-            </Button>
-          </MagneticButton>
-          <Button href="/services" variant="outline" size="lg">
-            Explore Services
-          </Button>
-        </div>
-      </div>
+      <div className="relative mx-auto max-w-7xl px-5">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          {/* Copy column */}
+          <div className="order-2 lg:order-1">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-gold">
+              Beyond Words
+            </p>
+            <p key={`subtitle-${currentSlide}`} className="eyebrow mb-5 hero-text-in">
+              {slide.subtitle}
+            </p>
+            <h1 className="mb-2 font-display text-5xl font-semibold leading-[0.92] tracking-tight text-ink sm:text-6xl md:text-7xl lg:text-[80px]">
+              Travel to{' '}
+              <span key={`dest-${currentSlide}`} className="hero-text-in block text-gold">
+                {slide.destination}
+              </span>
+            </h1>
+            <p
+              key={`tagline-${currentSlide}`}
+              className="hero-text-in mb-8 max-w-md text-lg leading-relaxed text-ink-muted md:text-xl"
+            >
+              {slide.tagline}
+            </p>
 
-      <div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-20">
-        <button
-          onClick={prevSlide}
-          disabled={isTransitioning}
-          className="pointer-events-auto absolute left-6 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-night/30 text-white/60 transition-colors duration-300 hover:border-white/50 hover:bg-white/10 hover:text-white disabled:opacity-50 md:left-10 md:h-14 md:w-14"
-          aria-label="Previous slide"
-        >
-          <ChevronLeft className="h-5 w-5" />
-        </button>
-        <button
-          onClick={nextSlide}
-          disabled={isTransitioning}
-          className="pointer-events-auto absolute right-6 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-night/30 text-white/60 transition-colors duration-300 hover:border-white/50 hover:bg-white/10 hover:text-white disabled:opacity-50 md:right-10 md:h-14 md:w-14"
-          aria-label="Next slide"
-        >
-          <ChevronRight className="h-5 w-5" />
-        </button>
-      </div>
+            <div className="mb-8 flex flex-wrap gap-2">
+              {slides.map((item, i) => (
+                <button
+                  key={item.destination}
+                  type="button"
+                  onClick={() => goToSlide(i)}
+                  disabled={isTransitioning}
+                  className={cn(
+                    'rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-[0.08em] transition-all duration-300',
+                    i === currentSlide
+                      ? 'border-gold bg-gold text-night shadow-glow'
+                      : 'border-border bg-surface text-ink-muted hover:border-gold/40 hover:text-ink'
+                  )}
+                  aria-label={`Show ${item.destination}`}
+                  aria-current={i === currentSlide ? 'true' : undefined}
+                >
+                  {item.destination}
+                </button>
+              ))}
+            </div>
 
-      <div className="absolute bottom-8 left-0 right-0 z-20 mx-auto flex max-w-7xl items-end justify-between px-5">
-        <div className="hidden items-center gap-2 text-xs font-medium text-white/40 md:flex">
-          <ChevronDown className="h-3.5 w-3.5 animate-bounce" />
-          Scroll to explore
-        </div>
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+              <MagneticButton>
+                <Button href="/contact" variant="primary" size="lg">
+                  Plan a Trip
+                </Button>
+              </MagneticButton>
+              <Button href="/services" variant="secondary" size="lg">
+                Explore Services
+              </Button>
+            </div>
 
-        <div className="mx-auto flex items-center gap-3 md:mx-0">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goToSlide(i)}
-              disabled={isTransitioning}
-              className={`rounded-full transition-all duration-500 ${
-                i === currentSlide ? 'h-2 w-8 bg-gold' : 'h-2 w-2 bg-white/30 hover:bg-white/60'
-              }`}
-              aria-label={`Go to slide ${i + 1}`}
-            />
-          ))}
-        </div>
+            <p className="mt-8 flex flex-wrap gap-x-4 gap-y-2 text-xs font-semibold uppercase tracking-[0.1em] text-ink-muted">
+              <span>✓ Kenya & Somalia</span>
+              <span>✓ Airport Support</span>
+              <span>✓ Corporate Travel</span>
+            </p>
+          </div>
 
-        <div className="hidden flex-col items-end font-display text-white/40 md:flex">
-          <span className="text-2xl font-semibold leading-none text-white/80">
-            {romanNumerals[currentSlide]}
-          </span>
-          <div className="my-1.5 h-px w-5 bg-white/20" />
-          <span className="text-xs tracking-wider">{romanNumerals[slides.length - 1]}</span>
+          {/* Image column */}
+          <div className="order-1 lg:order-2">
+            <div className="relative">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-4xl border border-border bg-night-card shadow-premium sm:aspect-[5/6]">
+                {slides.map((item, i) => (
+                  <div
+                    key={item.destination}
+                    className={cn(
+                      'absolute inset-0 transition-opacity duration-700 ease-in-out',
+                      i === currentSlide ? 'opacity-100 z-[1]' : 'opacity-0 z-0'
+                    )}
+                    aria-hidden={i !== currentSlide}
+                  >
+                    <Image
+                      src={item.image}
+                      alt={item.destination}
+                      fill
+                      priority={i === 0}
+                      loading={i === 0 ? 'eager' : 'lazy'}
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/50 via-transparent to-transparent" />
+                  </div>
+                ))}
+
+                <div className="absolute bottom-5 left-5 z-10 rounded-2xl border border-white/15 bg-night/70 px-4 py-3 backdrop-blur-sm">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/50">
+                    Featured Route
+                  </p>
+                  <p className="font-display text-xl font-semibold text-white">{slide.destination}</p>
+                </div>
+
+                <div className="absolute right-5 top-5 z-10 flex flex-col items-end font-display text-white/50">
+                  <span className="text-2xl font-semibold leading-none text-gold">
+                    {romanNumerals[currentSlide]}
+                  </span>
+                  <div className="my-1.5 h-px w-5 bg-white/20" />
+                  <span className="text-xs tracking-wider">{romanNumerals[slides.length - 1]}</span>
+                </div>
+
+                <div className="absolute inset-y-0 left-0 right-0 z-20 flex items-center justify-between px-4">
+                  <button
+                    type="button"
+                    onClick={prevSlide}
+                    disabled={isTransitioning}
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-night/40 text-white/80 backdrop-blur-sm transition-colors hover:border-gold hover:bg-night/60 hover:text-gold disabled:opacity-50"
+                    aria-label="Previous destination"
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={nextSlide}
+                    disabled={isTransitioning}
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-night/40 text-white/80 backdrop-blur-sm transition-colors hover:border-gold hover:bg-night/60 hover:text-gold disabled:opacity-50"
+                    aria-label="Next destination"
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+                </div>
+              </div>
+
+              <div className="mt-5 flex items-center justify-center gap-3 lg:justify-end">
+                {slides.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => goToSlide(i)}
+                    disabled={isTransitioning}
+                    className={cn(
+                      'rounded-full transition-all duration-500',
+                      i === currentSlide ? 'h-2 w-8 bg-gold' : 'h-2 w-2 bg-border hover:bg-gold/50'
+                    )}
+                    aria-label={`Go to slide ${i + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -23,6 +23,9 @@ export function Navbar() {
     setMobileOpen(false)
   }, [pathname])
 
+  const isHome = pathname === '/'
+  const lightHero = isHome && !scrolled
+
   return (
     <>
       <header
@@ -48,14 +51,22 @@ export function Navbar() {
               className="flex items-center gap-2.5 group"
               aria-label={`${site.name} - Home`}
             >
-              <div className={`flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${
-                scrolled ? 'bg-gold' : 'bg-surface/20'
-              }`}>
-                <Plane className={`h-5 w-5 transition-colors ${scrolled ? 'text-night' : 'text-white'}`} />
+              <div
+                className={`flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${
+                  scrolled || lightHero ? 'bg-gold' : 'bg-surface/20'
+                }`}
+              >
+                <Plane
+                  className={`h-5 w-5 transition-colors ${
+                    scrolled || lightHero ? 'text-night' : 'text-white'
+                  }`}
+                />
               </div>
-              <span className={`text-lg font-bold font-display tracking-tight transition-colors ${
-                scrolled ? 'text-ink' : 'text-white'
-              }`}>
+              <span
+                className={`text-lg font-bold font-display tracking-tight transition-colors ${
+                  scrolled || lightHero ? 'text-ink' : 'text-white'
+                }`}
+              >
                 {site.name}
               </span>
             </Link>
@@ -68,8 +79,10 @@ export function Navbar() {
                   href={item.href}
                   className={`relative px-3 py-2 text-[13px] font-semibold uppercase tracking-[0.08em] transition-colors hover:text-gold ${
                     pathname === item.href
-                      ? scrolled ? 'text-gold' : 'text-gold'
-                      : scrolled ? 'text-ink-muted' : 'text-white/80'
+                      ? 'text-gold'
+                      : scrolled || lightHero
+                        ? 'text-ink-muted'
+                        : 'text-white/80'
                   }`}
                 >
                   {item.label}
@@ -86,7 +99,7 @@ export function Navbar() {
               <Link
                 href="/contact"
                 className={`text-[13px] font-semibold uppercase tracking-[0.08em] transition-colors hover:text-gold ${
-                  scrolled ? 'text-ink-muted' : 'text-white/80'
+                  scrolled || lightHero ? 'text-ink-muted' : 'text-white/80'
                 }`}
               >
                 Contact
@@ -109,20 +122,24 @@ export function Navbar() {
               <span
                 className={`block h-0.5 w-6 transition-all duration-300 ${
                   mobileOpen
-                    ? `rotate-45 translate-y-2 ${scrolled ? 'bg-ink' : 'bg-surface'}`
-                    : scrolled ? 'bg-ink' : 'bg-surface'
+                    ? `rotate-45 translate-y-2 ${scrolled || lightHero ? 'bg-ink' : 'bg-surface'}`
+                    : scrolled || lightHero
+                      ? 'bg-ink'
+                      : 'bg-surface'
                 }`}
               />
               <span
                 className={`block h-0.5 w-6 transition-all duration-300 ${
-                  mobileOpen ? 'opacity-0' : scrolled ? 'bg-ink' : 'bg-surface'
+                  mobileOpen ? 'opacity-0' : scrolled || lightHero ? 'bg-ink' : 'bg-surface'
                 }`}
               />
               <span
                 className={`block h-0.5 w-6 transition-all duration-300 ${
                   mobileOpen
-                    ? `-rotate-45 -translate-y-2 ${scrolled ? 'bg-ink' : 'bg-surface'}`
-                    : scrolled ? 'bg-ink' : 'bg-surface'
+                    ? `-rotate-45 -translate-y-2 ${scrolled || lightHero ? 'bg-ink' : 'bg-surface'}`
+                    : scrolled || lightHero
+                      ? 'bg-ink'
+                      : 'bg-surface'
                 }`}
               />
             </button>

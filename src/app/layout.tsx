@@ -4,6 +4,7 @@ import './globals.css'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { SmoothScroll } from '@/components/layout/SmoothScroll'
+import { HashScroll } from '@/components/layout/HashScroll'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-body antialiased">
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <SmoothScroll>
+          <HashScroll />
           <Navbar />
           <main>{children}</main>
           <Footer />
