@@ -35,8 +35,8 @@ export default async function TourDetailPage({ params }: Props) {
     <>
       <section className="relative overflow-hidden bg-night pt-40 pb-16">
         <div className="absolute inset-0">
-          <Image src={tour.image} alt={tour.title} fill className="object-cover opacity-30" priority sizes="100vw" />
-          <div className="absolute inset-0 bg-gradient-to-t from-night via-night/80 to-night/60" />
+          <Image src={tour.image} alt={tour.title} fill className="object-cover" priority sizes="100vw" />
+          <div className="absolute inset-0 bg-gradient-to-t from-night/70 via-night/40 to-night/25" />
         </div>
         <div className="relative z-10 mx-auto max-w-4xl px-5">
           <p className="eyebrow !text-white/60 before:!bg-surface/40">{tour.category}</p>

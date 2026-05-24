@@ -10,9 +10,12 @@
   --color-ocean: #0E7490;
   --color-ocean-dark: #155E75;
   --color-ocean-light: #E6F7FA;
-  --color-gold: #C8A45D;
-  --color-gold-dark: #A7833F;
-  --color-gold-light: #F7EEDC;
+  --color-gold: #1B4B8C;
+  --color-gold-dark: #0F3260;
+  --color-gold-light: #EBF2FF;
+  --color-kanila-orange: #E87524;
+  --font-kanila-display: var(--font-kanila-display);
+  --font-kanila-script: var(--font-kanila-script);
   --color-sand: #F5F0E8;
   --color-sand-light: #FBF8F3;
   --color-sand-deep: #E7D8C3;
@@ -26,7 +29,7 @@
   --font-display: var(--font-display);
   --font-body: var(--font-body);
   --shadow-premium: 0 30px 80px rgba(7, 17, 31, 0.16);
-  --shadow-glow: 0 20px 60px rgba(200, 164, 93, 0.25);
+  --shadow-glow: 0 20px 60px rgba(27, 75, 140, 0.25);
   --radius-4xl: 2rem;
   --radius-5xl: 2.5rem;
 }
@@ -40,6 +43,23 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+html.lenis {
+  height: auto;
+}
+
+html.lenis,
+html.lenis body {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
 
 .dark body {
@@ -61,6 +81,45 @@ h1, h2, h3, .font-display {
   font-family: var(--font-display), Georgia, serif;
 }
 
+.font-kanila-display {
+  font-family: var(--font-kanila-display), var(--font-display), Georgia, serif;
+}
+
+.font-kanila-script {
+  font-family: var(--font-kanila-script), cursive;
+}
+
+.text-kanila-orange {
+  color: var(--color-kanila-orange);
+}
+
+/* Logo PNG has baked-in black — screen blend hides dark backdrop (use true transparent PNG when available) */
+.site-logo {
+  mix-blend-mode: screen;
+}
+
+/* Photos — full clarity, no faded image layers */
+.img-hd,
+.popular-bg,
+.hero-bg,
+.arch-card-image,
+.object-cover {
+  opacity: 1 !important;
+}
+
+.banner-photo {
+  opacity: 1;
+}
+
+.banner-photo-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(7, 17, 31, 0.55) 0%,
+    rgba(7, 17, 31, 0.4) 50%,
+    rgba(7, 17, 31, 0.6) 100%
+  );
+}
+
 /* === Eyebrow === */
 .eyebrow {
   display: inline-flex;
@@ -71,7 +130,7 @@ h1, h2, h3, .font-display {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: #C8A45D;
+  color: #1B4B8C;
   margin-bottom: 18px;
 }
 
@@ -80,12 +139,12 @@ h1, h2, h3, .font-display {
   display: block;
   width: 42px;
   height: 1px;
-  background: #C8A45D;
+  background: #1B4B8C;
 }
 
 /* === Selection === */
 ::selection {
-  background: rgba(200, 164, 93, 0.25);
+  background: rgba(27, 75, 140, 0.25);
   color: #07111F;
 }
 
@@ -104,7 +163,7 @@ h1, h2, h3, .font-display {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #C8A45D;
+  background: #1B4B8C;
 }
 
 /* === Premium Animations === */
@@ -134,8 +193,8 @@ h1, h2, h3, .font-display {
 }
 
 @keyframes pulse-gold {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(200, 164, 93, 0.4); }
-  50% { box-shadow: 0 0 0 12px rgba(200, 164, 93, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(27, 75, 140, 0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(27, 75, 140, 0); }
 }
 
 @keyframes draw-line {
@@ -172,6 +231,28 @@ h1, h2, h3, .font-display {
 .reveal-fade-up.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.reveal-slide-left {
+  opacity: 0;
+  transform: translateX(-64px);
+  transition:
+    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-slide-right {
+  opacity: 0;
+  transform: translateX(64px);
+  transition:
+    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-slide-left.is-visible,
+.reveal-slide-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .reveal-text-word {
@@ -226,6 +307,8 @@ h1, h2, h3, .font-display {
   }
 
   .reveal-fade-up,
+  .reveal-slide-left,
+  .reveal-slide-right,
   .reveal-text-word,
   .reveal-image-left,
   .reveal-image-right,
@@ -234,6 +317,19 @@ h1, h2, h3, .font-display {
     opacity: 1 !important;
     transform: none !important;
     clip-path: inset(0 0 0 0) !important;
+  }
+
+  .hero-copy,
+  .hero-cta,
+  .hero-arch-card,
+  .hero-booking-card,
+  .booking-card,
+  .hero-headline .line-reveal-inner,
+  .hero-headline .heading-line,
+  .hero-eyebrow {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
   }
 }
 
@@ -251,7 +347,7 @@ h1, h2, h3, .font-display {
 }
 
 .text-gradient-gold {
-  background: linear-gradient(135deg, #C8A45D 0%, #E8D5A3 50%, #C8A45D 100%);
+  background: linear-gradient(135deg, #1B4B8C 0%, #4A80C4 50%, #1B4B8C 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -272,7 +368,203 @@ h1, h2, h3, .font-display {
   clip-path: inset(0 100% 0 0);
 }
 
-/* === Route Line === */
+/* === Hero GSAP initial states (Home 3) === */
+.hero-sticky-bg .hero-bg {
+  opacity: 1;
+}
+
+.hero-copy,
+.hero-cta,
+.hero-arch-card,
+.hero-kicker,
+.hero-headline .line-reveal-inner,
+.hero-headline .heading-line {
+  opacity: 0;
+}
+
+.hero-headline .line-reveal-inner {
+  opacity: 0;
+}
+
+/* Fallback if GSAP fails to run — reveal hero content after a short delay */
+@keyframes hero-content-fallback {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-copy,
+.hero-cta,
+.hero-arch-card,
+.hero-kicker,
+.hero-headline .line-reveal-inner,
+.hero-headline .heading-line {
+  animation: hero-content-fallback 0.01s ease-out 2s forwards;
+}
+
+/* Kanila Home 3 hero */
+.kanila-hero .hero-headline {
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.kanila-hero .hero-kicker {
+  font-weight: 500;
+}
+
+/* Kanila Home 3 — side arch rail (fade left edge into hero photo) */
+.hero-arch-rail .hero-arch-carousel {
+  mask-image: linear-gradient(to right, transparent, black 10%, black 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 100%);
+}
+
+.hero-arch-viewport {
+  width: min(100%, 340px);
+  margin-left: auto;
+  margin-right: 0;
+}
+
+@media (min-width: 1024px) {
+  .hero-arch-rail .hero-arch-viewport {
+    width: min(100%, 400px);
+  }
+}
+
+.hero-arch-track .hero-arch-card {
+  transition:
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.arch-card-mask {
+  border-radius: 50% 50% 0 0 / 42% 42% 0 0;
+}
+
+.arch-card {
+  will-change: transform, opacity;
+}
+
+.hero-arch-card {
+  transform-origin: center bottom;
+}
+
+.hero-sticky-bg {
+  will-change: transform, opacity;
+}
+
+.hero-bg-carousel {
+  overflow: hidden;
+}
+
+@keyframes hero-ken-burns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.06);
+  }
+}
+
+.hero-bg-ken-burns {
+  animation: hero-ken-burns 5.5s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg-ken-burns {
+    animation: none;
+  }
+}
+
+.popular-sticky-bg {
+  will-change: transform, opacity;
+}
+
+.popular-sticky-bg .popular-bg {
+  opacity: 1;
+}
+
+/* Kanila Popular Destinations — sticky scenic section (Home 3 clone) */
+.kanila-popular-topo {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='800' viewBox='0 0 1200 800' fill='none'%3E%3Cg stroke='%23ffffff' stroke-width='0.6' opacity='0.12'%3E%3Cpath d='M0 400c200-80 400-40 600 0s400 40 600 0'/%3E%3Cpath d='M0 300c150-50 350-20 500 30s350 50 500 0'/%3E%3Cpath d='M0 500c180-60 380-30 580 10s380 30 580-10'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.35;
+}
+
+/* Kanila Popular Destinations — arch card + white footer (reference layout) */
+.kanila-popular-card__arch {
+  border-radius: 50% 50% 0 0 / 42% 42% 0 0;
+  box-shadow: 0 20px 50px rgba(7, 17, 31, 0.25);
+}
+
+.kanila-popular-card__footer {
+  margin-top: -2px;
+  box-shadow: 0 12px 40px rgba(7, 17, 31, 0.12);
+}
+
+.kanila-popular-card:hover .kanila-popular-card__arch {
+  box-shadow: 0 28px 60px rgba(7, 17, 31, 0.32);
+}
+
+.popular-copy,
+.popular-title,
+.popular-cards-stage {
+  will-change: transform, opacity;
+}
+
+.popular-title {
+  text-shadow: 0 4px 48px rgba(0, 0, 0, 0.35);
+}
+
+.popular-kicker {
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+}
+
+.arch-card-label {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.arch-card:hover .arch-card-label {
+  transform: translateY(-2px);
+}
+
+
+/* === Nav link underline reveal === */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #1B4B8C;
+  border-radius: 999px;
+  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1), left 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+  width: 60%;
+}
+
+/* === Footer link hover === */
+.footer-link {
+  display: inline-block;
+  transition: color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #1B4B8C;
+  transform: translateX(4px);
+}
+
+/* === Inquiry form focus glow === */
+.inquiry-input:focus {
+  box-shadow: 0 0 0 4px rgba(27, 75, 140, 0.12);
+}
+
 .route-line {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
@@ -280,4 +572,247 @@ h1, h2, h3, .font-display {
 
 .route-line.animate {
   animation: draw-line 2.5s ease-out forwards;
+}
+
+/* === Kanila — Travel by Region (Best Destinations) === */
+.region-blob,
+.region-blob-soft {
+  will-change: transform;
+}
+
+.region-premium-card {
+  will-change: transform, box-shadow;
+}
+
+/* === Kanila Home 3 — pinned background + scroll-over cover === */
+.kanila-sticky-cover {
+  position: relative;
+  isolation: isolate;
+}
+
+.kanila-sticky-cover__pin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100svh;
+  z-index: 0;
+}
+
+.kanila-sticky-cover__scroll {
+  position: relative;
+  z-index: 2;
+}
+
+.kanila-sticky-cover__runway {
+  pointer-events: none;
+  width: 100%;
+}
+
+.hero-cover-panel,
+.popular-cover-panel {
+  position: relative;
+}
+
+.overlap-panel {
+  margin-top: -18vh;
+  border-radius: 48px 48px 0 0;
+  box-shadow: 0 -30px 80px rgba(7, 17, 31, 0.12);
+}
+
+@media (max-width: 767px) {
+  .kanila-sticky-cover__pin {
+    position: relative;
+    height: 56svh;
+  }
+
+  .kanila-sticky-cover__runway {
+    height: 0 !important;
+    min-height: 0;
+  }
+
+  .overlap-panel {
+    margin-top: 0;
+    border-radius: 32px 32px 0 0;
+  }
+}
+
+/* === Kanila enhancement doc — sticky stack + overlap panels === */
+.sticky-stack-section {
+  position: relative;
+  min-height: 150vh;
+}
+
+.sticky-stack-image {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.sticky-stack-image img,
+.sticky-stack-image .sticky-stack-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sticky-stack-content {
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 767px) {
+  .sticky-stack-section {
+    min-height: auto;
+  }
+
+  .sticky-stack-image {
+    position: relative;
+    height: 56vh;
+    height: 56svh;
+  }
+}
+
+/* Booking / inquiry card inputs */
+.booking-input,
+.inquiry-input {
+  border: 1px solid var(--color-border);
+  background: #ffffff;
+  border-radius: 18px;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.booking-input:focus,
+.inquiry-input:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 4px rgba(27, 75, 140, 0.16);
+  outline: none;
+}
+
+.dark .booking-input,
+.dark .inquiry-input {
+  background: var(--color-surface);
+}
+
+/* Premium CTA */
+.btn-premium {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 999px;
+  background: var(--color-gold);
+  color: var(--color-white);
+  padding: 14px 28px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition:
+    transform 0.35s ease,
+    background 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.btn-premium:hover {
+  transform: translateY(-3px);
+  background: var(--color-gold-dark);
+  box-shadow: 0 18px 40px rgba(27, 75, 140, 0.28);
+}
+
+.btn-premium svg {
+  transition: transform 0.35s ease;
+}
+
+.btn-premium:hover svg {
+  transform: translateX(5px);
+}
+
+/* Premium destination / service cards */
+.card-premium {
+  position: relative;
+  overflow: hidden;
+  min-height: 420px;
+  border-radius: 32px;
+  box-shadow: 0 30px 80px rgba(7, 17, 31, 0.16);
+  transform: translateY(0);
+  transition:
+    transform 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+.card-premium img,
+.card-premium .card-premium-img {
+  transition: transform 0.8s ease;
+}
+
+.card-premium:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 40px 100px rgba(7, 17, 31, 0.22);
+}
+
+.card-premium:hover img,
+.card-premium:hover .card-premium-img {
+  transform: scale(1.08);
+}
+
+.card-premium .card-arrow {
+  transition: transform 0.35s ease;
+}
+
+.card-premium:hover .card-arrow {
+  transform: translateX(6px);
+}
+
+/* Somalia network abstract map bg */
+.somalia-network-bg {
+  background-image: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(27, 75, 140, 0.08), transparent),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'%3E%3Cg fill='none' stroke='%231B4B8C' stroke-width='0.5' opacity='0.2'%3E%3Cpath d='M100 250c80-120 200-80 280 20s120 180 220 100 180-140 120-220-200-60-280 100Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Hero scroll indicator */
+.hero-scroll-hint {
+  animation: hero-scroll-bounce 2.2s ease-in-out infinite;
+}
+
+@keyframes hero-scroll-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-scroll-hint {
+    animation: none;
+  }
+
+  .sticky-stack-section {
+    min-height: auto;
+  }
+
+  .sticky-stack-image {
+    position: relative;
+    height: auto;
+    min-height: 50vh;
+  }
+
+  .overlap-panel {
+    margin-top: 0;
+  }
 }

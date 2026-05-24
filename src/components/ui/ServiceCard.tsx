@@ -33,10 +33,10 @@ export function ServiceCard({ eyebrow, title, desc, image, slug, featured = fals
           src={image}
           alt={title}
           fill
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.08]"
           sizes={featured ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 100vw, 33vw'}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-night/30 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/20 via-transparent to-transparent" />
       </div>
 
       {/* Content */}

@@ -23,7 +23,8 @@ export default function CarRentalPage() {
   return (
     <>
       <section className="relative pt-40 pb-20 bg-night overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1920&q=80')] bg-cover bg-center opacity-15" />
+        <div className="banner-photo absolute inset-0 bg-[url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1920&q=90')] bg-cover bg-center" />
+        <div className="banner-photo-overlay absolute inset-0" aria-hidden />
         <div className="relative z-10 mx-auto max-w-4xl px-5 text-center">
           <p className="eyebrow !text-white/60 justify-center before:!bg-surface/40">Transport</p>
           <h1 className="font-display text-5xl md:text-7xl font-semibold text-white leading-[0.95] tracking-tight mb-6">Car Rental & Airport Transfers</h1>

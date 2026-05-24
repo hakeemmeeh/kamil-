@@ -21,9 +21,9 @@ const config: Config = {
           light: '#E6F7FA',
         },
         gold: {
-          DEFAULT: '#C8A45D',
-          dark: '#A7833F',
-          light: '#F7EEDC',
+          DEFAULT: '#1B4B8C',
+          dark: '#0F3260',
+          light: '#EBF2FF',
         },
         sand: {
           DEFAULT: '#F5F0E8',
@@ -44,7 +44,7 @@ const config: Config = {
       },
       boxShadow: {
         premium: '0 30px 80px rgba(7, 17, 31, 0.16)',
-        glow: '0 20px 60px rgba(200, 164, 93, 0.25)',
+        glow: '0 20px 60px rgba(27, 75, 140, 0.25)',
       },
       borderRadius: {
         '4xl': '2rem',

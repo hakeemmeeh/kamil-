@@ -75,8 +75,8 @@ export function NewsletterForm({ variant = 'default' }: NewsletterFormProps) {
         disabled={isSubmitting}
         className={
           isFooter
-            ? 'shrink-0 rounded-full bg-gold px-6 py-3 text-xs font-extrabold uppercase tracking-[0.1em] text-night transition hover:bg-gold-dark disabled:opacity-60'
-            : 'w-full rounded-full bg-gold px-7 py-3 text-sm font-extrabold uppercase tracking-[0.1em] text-night transition hover:bg-gold-dark disabled:opacity-60'
+            ? 'shrink-0 rounded-full bg-gold px-6 py-3 text-xs font-extrabold uppercase tracking-[0.1em] text-white transition hover:bg-gold-dark disabled:opacity-60'
+            : 'w-full rounded-full bg-gold px-7 py-3 text-sm font-extrabold uppercase tracking-[0.1em] text-white transition hover:bg-gold-dark disabled:opacity-60'
         }
       >
         {isSubmitting ? 'Subscribing...' : 'Subscribe'}

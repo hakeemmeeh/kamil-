@@ -4,6 +4,7 @@ import { services } from '@/lib/content'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { ServiceCard } from '@/components/ui/ServiceCard'
 import { FadeUp } from '@/components/ui/FadeUp'
+import { SlideIn } from '@/components/ui/SlideIn'
 
 export function SignatureServices() {
   return (
@@ -25,9 +26,14 @@ export function SignatureServices() {
             else if (i === 5) spanClass = 'md:col-span-1 md:row-span-1'
             
             return (
-              <FadeUp key={service.slug} delay={i * 0.1} className={spanClass}>
+              <SlideIn
+                key={service.slug}
+                direction={i % 2 === 0 ? 'left' : 'right'}
+                delay={i * 0.1}
+                className={spanClass}
+              >
                 <ServiceCard {...service} featured={i === 0 || i === 3} />
-              </FadeUp>
+              </SlideIn>
             )
           })}
         </div>

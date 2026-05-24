@@ -14,7 +14,11 @@ function applyTheme(dark: boolean) {
   }
 }
 
-export function DarkModeToggle() {
+interface DarkModeToggleProps {
+  overHero?: boolean
+}
+
+export function DarkModeToggle({ overHero = false }: DarkModeToggleProps) {
   const [isDark, setIsDark] = useState(false)
   const [mounted, setMounted] = useState(false)
 
@@ -35,7 +39,11 @@ export function DarkModeToggle() {
   return (
     <button
       onClick={toggleDark}
-      className="rounded-full border border-gold/30 p-2 text-gold transition-colors hover:bg-gold hover:text-night"
+      className={`rounded-full border p-2 transition-colors hover:bg-gold hover:text-night ${
+        overHero
+          ? 'border-white/25 text-white/80 hover:border-gold hover:text-night'
+          : 'border-gold/30 text-gold'
+      }`}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
     >
       {mounted && isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}

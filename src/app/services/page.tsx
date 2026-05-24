@@ -1,8 +1,7 @@
 import type { Metadata } from 'next'
-import { services } from '@/lib/content'
 import { FadeUp } from '@/components/ui/FadeUp'
 import { SectionHeader } from '@/components/ui/SectionHeader'
-import { ServiceCard } from '@/components/ui/ServiceCard'
+import { ServicesPageGrid } from '@/components/services/ServicesPageGrid'
 import { Button } from '@/components/ui/Button'
 
 export const metadata: Metadata = {
@@ -14,7 +13,8 @@ export default function ServicesPage() {
   return (
     <>
       <section className="relative pt-40 pb-20 bg-night overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1556388158-158ea5ccacbd?w=1920&q=80')] bg-cover bg-center opacity-15" />
+        <div className="banner-photo absolute inset-0 bg-[url('https://images.unsplash.com/photo-1556388158-158ea5ccacbd?w=1920&q=90')] bg-cover bg-center" />
+        <div className="banner-photo-overlay absolute inset-0" aria-hidden />
         <div className="relative z-10 mx-auto max-w-4xl px-5 text-center">
           <p className="eyebrow !text-white/60 justify-center before:!bg-surface/40">What We Offer</p>
           <h1 className="font-display text-5xl md:text-7xl font-semibold text-white leading-[0.95] tracking-tight mb-6">Travel Services</h1>
@@ -25,13 +25,7 @@ export default function ServicesPage() {
       <section className="section-padding bg-sand-light">
         <div className="mx-auto max-w-7xl px-5">
           <FadeUp><SectionHeader eyebrow="All Services" title="Everything you need for your journey" /></FadeUp>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service, i) => (
-              <FadeUp key={service.slug} delay={i * 0.06}>
-                <ServiceCard {...service} />
-              </FadeUp>
-            ))}
-          </div>
+          <ServicesPageGrid />
         </div>
       </section>
 

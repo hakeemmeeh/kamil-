@@ -113,7 +113,7 @@ export function ContactForm() {
       </div>
       <button
         disabled={isSubmitting}
-        className="w-full rounded-full bg-gold px-7 py-4 text-sm font-extrabold uppercase tracking-[0.12em] text-night transition hover:bg-gold-dark disabled:opacity-60"
+        className="w-full rounded-full bg-gold px-7 py-4 text-sm font-extrabold uppercase tracking-[0.12em] text-white transition hover:bg-gold-dark disabled:opacity-60"
       >
         {isSubmitting ? 'Sending...' : 'Send Inquiry'}
       </button>

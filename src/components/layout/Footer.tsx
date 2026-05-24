@@ -1,7 +1,8 @@
 import Link from 'next/link'
-import { site, nav, social, footerDestinationLinks, newsletter } from '@/lib/content'
+import Image from 'next/image'
+import { site, nav, social, footerDestinationLinks, footerGlobalCityLinks, newsletter } from '@/lib/content'
 import { NewsletterForm } from '@/components/ui/NewsletterForm'
-import { Plane, Mail, Phone, Smartphone, MapPin, ArrowUpRight, Share2 } from 'lucide-react'
+import { Mail, Phone, Smartphone, MapPin, ArrowUpRight, Share2 } from 'lucide-react'
 
 function SocialIcon({ href, label, children }: { href: string; label: string; children: React.ReactNode }) {
   if (!href) return null
@@ -11,7 +12,7 @@ function SocialIcon({ href, label, children }: { href: string; label: string; ch
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition-all hover:border-gold hover:bg-gold/10"
+      className="flex h-10 w-10 items-center justify-center rounded-full border border-border transition-all hover:border-gold hover:bg-gold/10 hover:text-gold"
     >
       {children}
     </a>
@@ -24,43 +25,45 @@ export function Footer() {
   const hasSocial = Object.values(social).some(Boolean)
 
   return (
-    <footer className="bg-night text-white/70" role="contentinfo">
+    <footer className="bg-sand-light text-ink-muted" role="contentinfo">
       <div className="mx-auto max-w-7xl px-5 py-20">
-        <div className="mb-16 rounded-3xl border border-white/10 bg-white/5 p-8 md:p-10">
+        <div className="mb-16 rounded-3xl border border-border bg-white p-8 md:p-10">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-center">
             <div>
-              <h4 className="mb-2 font-display text-2xl font-semibold text-white">{newsletter.title}</h4>
-              <p className="text-sm leading-relaxed text-white/50">{newsletter.subtitle}</p>
+              <h4 className="mb-2 font-display text-2xl font-semibold text-ink">{newsletter.title}</h4>
+              <p className="text-sm leading-relaxed text-ink-muted">{newsletter.subtitle}</p>
             </div>
             <NewsletterForm variant="footer" />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-6">
           <div className="lg:col-span-2">
-            <Link href="/" className="mb-4 flex items-center gap-2.5">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold">
-                <Plane className="h-5 w-5 text-night" />
-              </div>
-              <div>
-                <span className="block text-lg font-bold font-display text-white tracking-tight">{site.name}</span>
-                <span className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">{site.tagline}</span>
-              </div>
+            <Link href="/" className="mb-4 inline-flex">
+              <Image
+                src="/logo/kamil-logo.png"
+                alt={`${site.name} logo`}
+                width={200}
+                height={64}
+                className="site-logo h-12 w-auto max-w-[200px] object-contain md:h-14"
+              />
             </Link>
-            <p className="mb-6 text-sm leading-relaxed text-white/50">
-              Premium travel management, airport support, and regional journey planning for Kenya, Somalia, and beyond.
+            <p className="mb-1 text-xs font-semibold uppercase tracking-[0.14em] text-gold">{site.tagline}</p>
+            <p className="mb-6 text-sm leading-relaxed text-ink-muted">
+              Global travel management, airport support, and curated journeys — from Nairobi to
+              Oslo, New York, Sydney, and beyond. Beyond Words.
             </p>
             <div className="flex flex-wrap gap-3">
               <a
                 href={`mailto:${site.email}`}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition-all hover:border-gold hover:bg-gold/10"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-border transition-all hover:border-gold hover:bg-gold/10 hover:text-gold"
                 aria-label="Email us"
               >
                 <Mail className="h-4 w-4" />
               </a>
               <a
                 href="tel:0202220011"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition-all hover:border-gold hover:bg-gold/10"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-border transition-all hover:border-gold hover:bg-gold/10 hover:text-gold"
                 aria-label="Call us"
               >
                 <Phone className="h-4 w-4" />
@@ -76,7 +79,7 @@ export function Footer() {
               </SocialIcon>
             </div>
             {!hasSocial && (
-              <p className="mt-3 text-xs text-white/30">Social profile links — add URLs in content.ts when confirmed.</p>
+              <p className="mt-3 text-xs text-ink-muted/50">Social profile links — add URLs in content.ts when confirmed.</p>
             )}
           </div>
 
@@ -85,7 +88,7 @@ export function Footer() {
             <ul className="space-y-3">
               {[...quickLinks, ...moreLinks].map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm transition-colors hover:text-gold">
+                  <Link href={link.href} className="footer-link text-sm">
                     {link.label}
                   </Link>
                 </li>
@@ -98,7 +101,20 @@ export function Footer() {
             <ul className="space-y-3">
               {footerDestinationLinks.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-sm transition-colors hover:text-gold">
+                  <Link href={link.href} className="footer-link text-sm">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="mb-5 text-xs font-extrabold uppercase tracking-[0.16em] text-gold">Global Cities</h4>
+            <ul className="space-y-3">
+              {footerGlobalCityLinks.map((link) => (
+                <li key={link.label}>
+                  <Link href={link.href} className="footer-link text-sm">
                     {link.label}
                   </Link>
                 </li>
@@ -141,19 +157,19 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/5">
+      <div className="border-t border-border">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-5 py-6 md:flex-row">
-          <p className="text-xs text-white/30">
+          <p className="text-xs text-ink-muted">
             &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <Link href="/about" className="text-xs text-white/30 transition-colors hover:text-gold">
+            <Link href="/about" className="footer-link text-xs text-ink-muted">
               Privacy Policy
             </Link>
-            <Link href="/about" className="text-xs text-white/30 transition-colors hover:text-gold">
+            <Link href="/about" className="footer-link text-xs text-ink-muted">
               Terms of Service
             </Link>
-            <Link href="/car-rental-airport-transfers#become-a-guide" className="text-xs text-white/30 transition-colors hover:text-gold">
+            <Link href="/car-rental-airport-transfers#become-a-guide" className="footer-link text-xs text-ink-muted">
               Become Our Guide
             </Link>
           </div>

@@ -17,7 +17,8 @@ export default function AboutPage() {
     <>
       {/* Hero */}
       <section className="relative pt-40 pb-20 bg-night overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1920&q=80')] bg-cover bg-center opacity-20" />
+        <div className="banner-photo absolute inset-0 bg-[url('https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1920&q=90')] bg-cover bg-center" />
+        <div className="banner-photo-overlay absolute inset-0" aria-hidden />
         <div className="relative z-10 mx-auto max-w-4xl px-5 text-center">
           <p className="eyebrow !text-white/60 justify-center before:!bg-surface/40">About Us</p>
           <h1 className="font-display text-5xl md:text-7xl font-semibold text-white leading-[0.95] tracking-tight mb-6">About Kamil Travel</h1>

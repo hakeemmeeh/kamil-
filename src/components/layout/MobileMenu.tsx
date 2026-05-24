@@ -68,7 +68,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               <Link
                 href="/contact"
                 onClick={onClose}
-                className="block w-full rounded-full bg-gold py-4 text-center text-sm font-extrabold uppercase tracking-[0.12em] text-night transition-colors hover:bg-gold-dark"
+                className="block w-full rounded-full bg-gold py-4 text-center text-sm font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-gold-dark"
               >
                 Plan a Trip
               </Link>

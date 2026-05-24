@@ -18,7 +18,7 @@ export function TourCard({ slug, title, destination, country, duration, desc, im
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-night/50 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/30 via-transparent to-transparent" />
         <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center gap-2">
           <span className="rounded-full bg-white/90 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-night">
             {country}
@@ -52,7 +52,7 @@ export function TourCard({ slug, title, destination, country, duration, desc, im
         <div className="flex items-center gap-3 border-t border-border pt-4">
           <Link
             href={enquiryHref}
-            className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gold px-4 py-2.5 text-xs font-extrabold uppercase tracking-[0.08em] text-night transition hover:bg-gold-dark"
+            className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gold px-4 py-2.5 text-xs font-extrabold uppercase tracking-[0.08em] text-white transition hover:bg-gold-dark"
           >
             Enquire
           </Link>

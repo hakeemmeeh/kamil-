@@ -6,8 +6,8 @@ export default function SchemaOrg() {
     url: 'https://www.kamiltravel.com',
     email: 'info@kamiltravel.com',
     telephone: '020 2220011',
-    description: 'Premium travel management, airport support, and regional journey planning for Kenya, Somalia, and beyond.',
-    areaServed: ['Kenya', 'Somalia'],
+    description: 'Premium travel management, airport support, and global journey planning — Nairobi headquarters with worldwide destinations.',
+    areaServed: ['Kenya', 'Somalia', 'Europe', 'United States', 'Australia', 'Worldwide'],
     serviceType: ['Corporate Travel', 'Airport Transfers', 'Flight Booking', 'Travel Insurance', 'VIP Lounge', 'Travel Consultancy'],
   }
 

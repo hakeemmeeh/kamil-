@@ -16,16 +16,16 @@ const features = [
 
 export function CorporateTravelSection() {
   return (
-    <section className="section-padding bg-night" id="corporate-travel">
+    <section className="section-padding bg-sand-light" id="corporate-travel">
       <div className="mx-auto max-w-7xl px-5">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Left: Text */}
           <div className="lg:sticky lg:top-32 lg:self-start">
             <FadeUp>
-              <SectionHeader eyebrow="Corporate Travel" title="Travel management designed for organizations." description="Kamil Travel supports corporate clients with professional booking, coordinated travel planning, airport support, and proactive assistance for complex travel requirements." align="left" dark />
+              <SectionHeader eyebrow="Corporate Travel" title="Travel management designed for organizations." description="Kamil Travel supports corporate clients with professional booking, coordinated travel planning, airport support, and proactive assistance for complex travel requirements." align="left" />
             </FadeUp>
             <FadeUp delay={0.2}>
-              <Link href="/corporate-travel" className="inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 text-[13px] font-extrabold uppercase tracking-[0.1em] text-night transition-all hover:bg-gold-dark hover:shadow-glow">
+              <Link href="/corporate-travel" className="inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 text-[13px] font-extrabold uppercase tracking-[0.1em] text-white transition-all hover:bg-gold-dark hover:shadow-glow">
                 Learn More
               </Link>
             </FadeUp>
@@ -35,14 +35,14 @@ export function CorporateTravelSection() {
           <div className="space-y-4">
             {features.map((feature, i) => (
               <FadeUp key={feature.title} delay={i * 0.08}>
-                <div className="group rounded-2xl bg-night-card border border-white/5 p-6 transition-all hover:border-gold/30 hover:bg-night-light">
+                <div className="group rounded-2xl border border-border bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-premium">
                   <div className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gold/10 text-gold transition-colors group-hover:bg-gold group-hover:text-night">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gold/10 text-gold transition-colors group-hover:bg-gold group-hover:text-white">
                       <feature.icon className="h-5 w-5" />
                     </div>
                     <div>
-                      <h3 className="font-display text-lg font-semibold text-white mb-1">{feature.title}</h3>
-                      <p className="text-sm text-white/50 leading-relaxed">{feature.desc}</p>
+                      <h3 className="mb-1 font-display text-lg font-semibold text-ink">{feature.title}</h3>
+                      <p className="text-sm leading-relaxed text-ink-muted">{feature.desc}</p>
                     </div>
                   </div>
                 </div>

@@ -2,40 +2,99 @@
 
 import { useEffect } from 'react'
 import Lenis from '@studio-freight/lenis'
+import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-function shouldUseSmoothScroll() {
-  if (typeof window === 'undefined') return false
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false
-  if (window.matchMedia('(pointer: coarse)').matches) return false
-  if (window.matchMedia('(max-width: 1024px)').matches) return false
-  return true
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger)
+}
+
+declare global {
+  interface Window {
+    __lenis?: Lenis
+    __lenisReady?: boolean
+  }
+}
+
+function prefersReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    if (!shouldUseSmoothScroll()) return
+    if (prefersReducedMotion()) {
+      window.__lenisReady = true
+      window.dispatchEvent(new CustomEvent('lenis-ready'))
+      return
+    }
+
+    const isTouch = window.matchMedia('(pointer: coarse)').matches
 
     const lenis = new Lenis({
-      duration: 1.1,
+      duration: 1.35,
+      lerp: isTouch ? 0.09 : 0.075,
       smoothWheel: true,
-      wheelMultiplier: 0.85,
+      syncTouch: isTouch,
+      syncTouchLerp: 0.085,
+      wheelMultiplier: 0.92,
+      touchMultiplier: 1.05,
+      infinite: false,
     })
+
+    window.__lenis = lenis
 
     lenis.on('scroll', ScrollTrigger.update)
 
-    let frameId = 0
+    ScrollTrigger.scrollerProxy(document.documentElement, {
+      scrollTop(value) {
+        if (arguments.length && value !== undefined) {
+          lenis.scrollTo(value, { immediate: true })
+        }
+        return lenis.scroll
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        }
+      },
+      pinType: ScrollTrigger.isTouch ? 'transform' : 'fixed',
+    })
+
+    ScrollTrigger.defaults({ scroller: document.documentElement })
+
     const raf = (time: number) => {
       lenis.raf(time)
-      frameId = requestAnimationFrame(raf)
+      requestAnimationFrame(raf)
     }
-    frameId = requestAnimationFrame(raf)
+    requestAnimationFrame(raf)
 
-    ScrollTrigger.refresh()
+    const onRefresh = () => lenis.resize()
+    ScrollTrigger.addEventListener('refresh', onRefresh)
+
+    const refreshAll = () => {
+      lenis.resize()
+      ScrollTrigger.refresh()
+    }
+
+    refreshAll()
+    window.addEventListener('load', refreshAll)
+    window.addEventListener('resize', refreshAll)
+
+    window.__lenisReady = true
+    window.dispatchEvent(new CustomEvent('lenis-ready'))
 
     return () => {
-      cancelAnimationFrame(frameId)
+      window.removeEventListener('load', refreshAll)
+      window.removeEventListener('resize', refreshAll)
+      ScrollTrigger.removeEventListener('refresh', onRefresh)
+      ScrollTrigger.scrollerProxy(document.documentElement, {})
+      ScrollTrigger.clearScrollMemory()
       lenis.destroy()
+      delete window.__lenis
+      delete window.__lenisReady
       ScrollTrigger.refresh()
     }
   }, [])

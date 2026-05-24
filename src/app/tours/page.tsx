@@ -33,7 +33,11 @@ export default function ToursPage() {
   return (
     <>
       <section className="relative overflow-hidden bg-night pt-40 pb-20">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1920&q=80')] bg-cover bg-center opacity-15" />
+        <div
+          className="banner-photo absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1775309310157-2721accecb28?w=1920&q=90')" }}
+        />
+        <div className="banner-photo-overlay absolute inset-0" aria-hidden />
         <div className="relative z-10 mx-auto max-w-4xl px-5 text-center">
           <p className="eyebrow !text-white/60 justify-center before:!bg-surface/40">Explore</p>
           <h1 className="mb-6 font-display text-5xl font-semibold leading-[0.95] tracking-tight text-white md:text-7xl">

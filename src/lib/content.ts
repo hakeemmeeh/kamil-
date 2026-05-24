@@ -1,5 +1,7 @@
 // src/lib/content.ts
 
+import { cityImage } from './cityImages'
+
 export const site = {
   name: 'Kamil Travel',
   tagline: 'Beyond Words',
@@ -23,11 +25,60 @@ export const social = {
 } as const
 
 export const brandPositioning = {
-  eyebrow: 'Corporate Travel · Regional Travel · Airport Services',
-  headline: 'Premium Travel Management for Kenya, Somalia, and Beyond',
+  eyebrow: 'Global Travel · Corporate · Airport Services',
+  headline: 'Your World, Your Way — Premium Travel Management',
   subtext:
-    'Kamil Travel delivers cost-effective, customized, and comprehensive travel management services for corporate and regional travelers.',
+    'From Nairobi to Oslo, New York, Sydney, and beyond — Kamil Travel delivers customized booking, airport support, and end-to-end journey management worldwide.',
 }
+
+export const travelRegions = [
+  {
+    slug: 'africa',
+    name: 'Africa',
+    image: 'nairobi' as const,
+    desc: 'East Africa headquarters in Nairobi with deep regional expertise and Somalia airport support.',
+    places: [
+      { name: 'Nairobi', href: '/tours/nairobi-corporate-travel' },
+      { name: 'Mogadishu', href: '/destinations#mogadishu' },
+      { name: 'Hargeisa', href: '/destinations#hargeisa' },
+      { name: 'Garowe', href: '/destinations#garowe' },
+      { name: 'Bosaso', href: '/destinations#bosaso' },
+      { name: 'Galkayo', href: '/destinations#galkayo' },
+    ],
+  },
+  {
+    slug: 'europe',
+    name: 'Europe',
+    image: 'oslo' as const,
+    desc: 'City breaks, corporate routes, and curated holidays across the continent.',
+    places: [
+      { name: 'Oslo', href: '/tours/oslo-weekend' },
+      { name: 'London', href: '/tours/international-flight-package' },
+      { name: 'Moscow', href: '/tours/international-flight-package' },
+      { name: 'Belgrade', href: '/tours/international-flight-package' },
+    ],
+  },
+  {
+    slug: 'americas',
+    name: 'Americas',
+    image: 'newYork' as const,
+    desc: 'Big-city adventures and business travel across North and South America.',
+    places: [
+      { name: 'New York', href: '/tours/new-york-adventure' },
+      { name: 'Global routes', href: '/tours/international-flight-package' },
+    ],
+  },
+  {
+    slug: 'asia-pacific',
+    name: 'Asia-Pacific',
+    image: 'sydney' as const,
+    desc: 'Long-haul leisure and corporate travel to major hubs in Asia and Oceania.',
+    places: [
+      { name: 'Tokyo', href: '/tours/international-flight-package' },
+      { name: 'Sydney', href: '/tours/sydney-faraway' },
+    ],
+  },
+]
 
 export const about = {
   intro:
@@ -137,7 +188,7 @@ export const destinations = [
     title: 'Mogadishu',
     country: 'Somalia',
     desc: 'A key travel point supported by Kamil Travel\u2019s airport presence and meet & assist services.',
-    image: 'https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=800&q=80',
+    image: cityImage('mogadishu'),
     status: 'confirmed-context',
   },
   {
@@ -145,7 +196,7 @@ export const destinations = [
     title: 'Hargeisa',
     country: 'Somalia',
     desc: 'One of the local airport locations where Kamil Travel has representatives.',
-    image: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800&q=80',
+    image: cityImage('hargeisa'),
     status: 'confirmed-context',
   },
   {
@@ -153,7 +204,7 @@ export const destinations = [
     title: 'Garowe',
     country: 'Somalia',
     desc: 'Listed among the Somalia airport locations supported by Kamil Travel representatives.',
-    image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&q=80',
+    image: cityImage('garowe'),
     status: 'confirmed-context',
   },
   {
@@ -161,7 +212,7 @@ export const destinations = [
     title: 'Bosaso',
     country: 'Somalia',
     desc: 'A regional travel point included in Kamil Travel\u2019s Somalia airport support network.',
-    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
+    image: cityImage('bosaso'),
     status: 'confirmed-context',
   },
   {
@@ -169,7 +220,7 @@ export const destinations = [
     title: 'Galkayo',
     country: 'Somalia',
     desc: 'A Somalia airport location named in Kamil Travel\u2019s representative network.',
-    image: 'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=800&q=80',
+    image: cityImage('galkayo'),
     status: 'confirmed-context',
   },
   {
@@ -177,7 +228,7 @@ export const destinations = [
     title: 'Kismayu',
     country: 'Somalia',
     desc: 'A regional destination supported within Kamil Travel\u2019s Somalia travel context.',
-    image: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&q=80',
+    image: cityImage('kismayo'),
     status: 'confirmed-context',
   },
   {
@@ -185,16 +236,56 @@ export const destinations = [
     title: 'Baidoa',
     country: 'Somalia',
     desc: 'A local Somalia airport location listed among Kamil Travel\u2019s representative presence.',
-    image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&q=80',
+    image: cityImage('baidoa'),
     status: 'confirmed-context',
   },
   {
     slug: 'global-destinations',
     title: 'Global Destinations',
-    country: 'International',
-    desc: '[CLIENT TO PROVIDE: confirmed global destinations and packages]',
-    image: 'https://images.unsplash.com/photo-1488085061387-422e29b40080?w=800&q=80',
-    status: 'client-to-confirm',
+    country: 'Worldwide',
+    desc: 'International ticketing and travel management to cities across Europe, the Americas, Asia-Pacific, and beyond.',
+    image: cityImage('international'),
+    status: 'confirmed-context',
+  },
+  {
+    slug: 'oslo',
+    title: 'Oslo',
+    country: 'Norway',
+    desc: 'The Scandinavian experience — city, waterfront, and curated weekend escapes.',
+    image: cityImage('oslo'),
+    status: 'confirmed-context',
+  },
+  {
+    slug: 'new-york',
+    title: 'New York',
+    country: 'USA',
+    desc: 'Big-city adventure tours and corporate travel to the Empire State.',
+    image: cityImage('newYork'),
+    status: 'confirmed-context',
+  },
+  {
+    slug: 'sydney',
+    title: 'Sydney',
+    country: 'Australia',
+    desc: 'Faraway Sydney — harbour, opera house, and long-haul leisure travel.',
+    image: cityImage('sydney'),
+    status: 'confirmed-context',
+  },
+  {
+    slug: 'london',
+    title: 'London',
+    country: 'United Kingdom',
+    desc: 'One of the world\u2019s great travel hubs for business and leisure.',
+    image: cityImage('london'),
+    status: 'confirmed-context',
+  },
+  {
+    slug: 'tokyo',
+    title: 'Tokyo',
+    country: 'Japan',
+    desc: 'Asia-Pacific gateway for corporate and leisure itineraries.',
+    image: cityImage('tokyo'),
+    status: 'confirmed-context',
   },
 ]
 
@@ -248,6 +339,42 @@ export type TourCategory = (typeof tourCategories)[number]
 
 export const tours = [
   {
+    slug: 'oslo-weekend',
+    title: 'Weekend in Oslo',
+    destination: 'Oslo',
+    country: 'Norway',
+    category: 'International' as TourCategory,
+    duration: '3 Days',
+    desc: 'No trip to Norway would be complete without exploring the streets and waterfront — the Scandinavian experience, curated by Kamil Travel.',
+    image: cityImage('oslo'),
+    highlights: ['Weekend escape', 'Waterfront & city', 'First minute offers'],
+    featured: true,
+  },
+  {
+    slug: 'new-york-adventure',
+    title: 'Tour of New York',
+    destination: 'New York',
+    country: 'USA',
+    category: 'International' as TourCategory,
+    duration: '5 Days',
+    desc: 'Big city adventure across the Empire State — iconic sights, culture, and curated urban exploration beyond the five boroughs.',
+    image: cityImage('newYork'),
+    highlights: ['City adventure', 'Curated itinerary', 'Group & solo'],
+    featured: true,
+  },
+  {
+    slug: 'sydney-faraway',
+    title: 'Faraway Sydney',
+    destination: 'Sydney',
+    country: 'Australia',
+    category: 'International' as TourCategory,
+    duration: '10 Days',
+    desc: 'Home of the Opera House — one of the world\u2019s most beautiful cities, arranged as a long-haul leisure journey.',
+    image: cityImage('sydney'),
+    highlights: ['Long-haul leisure', 'Harbour & coast', 'Family holidays'],
+    featured: true,
+  },
+  {
     slug: 'mogadishu-travel-package',
     title: 'Mogadishu Travel Package',
     destination: 'Mogadishu',
@@ -255,7 +382,7 @@ export const tours = [
     category: 'Somalia Domestic' as TourCategory,
     duration: 'Flexible',
     desc: 'End-to-end support for travel to Mogadishu — flights, meet & assist at the airport, transfers, and coordinated local movement.',
-    image: 'https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=800&q=80',
+    image: cityImage('mogadishu'),
     highlights: ['Meet & assist', 'Airport transfers', 'Group coordination'],
     featured: true,
   },
@@ -267,9 +394,9 @@ export const tours = [
     category: 'Somalia Domestic' as TourCategory,
     duration: 'Flexible',
     desc: 'Flight booking and travel coordination for Hargeisa with representative support at the airport.',
-    image: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800&q=80',
+    image: cityImage('hargeisa'),
     highlights: ['Air ticketing', 'Local representative', 'Transfer support'],
-    featured: true,
+    featured: false,
   },
   {
     slug: 'nairobi-corporate-travel',
@@ -279,9 +406,9 @@ export const tours = [
     category: 'Kenya & Regional' as TourCategory,
     duration: 'Flexible',
     desc: 'Corporate travel management for Nairobi — flights, insurance, transfers, and proactive itinerary support.',
-    image: 'https://images.unsplash.com/photo-1547471080-7fc2caa6f571?w=800&q=80',
+    image: cityImage('nairobi'),
     highlights: ['Corporate itineraries', '24h support', 'Travel insurance'],
-    featured: true,
+    featured: false,
   },
   {
     slug: 'somalia-multi-city',
@@ -291,7 +418,7 @@ export const tours = [
     category: 'Somalia Domestic' as TourCategory,
     duration: 'Custom',
     desc: 'Coordinated travel across Mogadishu, Hargeisa, Garowe, Bosaso, Galkayo, Kismayu, and Baidoa with airport representatives.',
-    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
+    image: cityImage('somaliaNetwork'),
     highlights: ['6 airport network', 'Domestic connections', 'Group travel'],
     featured: false,
   },
@@ -303,7 +430,7 @@ export const tours = [
     category: 'Corporate & Group' as TourCategory,
     duration: 'Custom',
     desc: 'Specialized group travel arrangements within Somalia, coordinated from Kamil Travel\u2019s Mogadishu airport office.',
-    image: 'https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=800&q=80',
+    image: cityImage('mogadishuCoast'),
     highlights: ['Group bookings', 'Mogadishu airport office', 'Meet & assist'],
     featured: false,
   },
@@ -315,7 +442,7 @@ export const tours = [
     category: 'International' as TourCategory,
     duration: 'Flexible',
     desc: 'Outbound and inbound international ticketing with competitive fares through Kamil Travel\u2019s airline partnerships.',
-    image: 'https://images.unsplash.com/photo-1488085061387-422e29b40080?w=800&q=80',
+    image: cityImage('international'),
     highlights: ['Major airlines', 'Competitive fares', 'Full documentation'],
     featured: false,
   },
@@ -326,16 +453,25 @@ export function getTourBySlug(slug: string) {
 }
 
 export const footerDestinationLinks = [
+  { label: 'Africa', href: '/destinations#region-africa' },
   { label: 'Mogadishu', href: '/destinations#mogadishu' },
   { label: 'Hargeisa', href: '/destinations#hargeisa' },
-  { label: 'Garowe', href: '/destinations#garowe' },
-  { label: 'Bosaso', href: '/destinations#bosaso' },
+  { label: 'Oslo', href: '/tours/oslo-weekend' },
+  { label: 'New York', href: '/tours/new-york-adventure' },
+  { label: 'Sydney', href: '/tours/sydney-faraway' },
   { label: 'All Destinations', href: '/destinations' },
+]
+
+export const footerGlobalCityLinks = [
+  { label: 'London', href: '/tours/international-flight-package' },
+  { label: 'Tokyo', href: '/tours/international-flight-package' },
+  { label: 'Moscow', href: '/tours/international-flight-package' },
+  { label: 'Belgrade', href: '/tours/international-flight-package' },
 ]
 
 export const becomeAGuide = {
   title: 'Become Our Guide',
-  desc: 'Kamil Travel works with local guides and transport partners across Kenya and Somalia. Share your experience and availability — our team will review your application.',
+  desc: 'Kamil Travel works with local guides and transport partners worldwide. Share your experience and availability — our team will review your application.',
   cta: 'Apply as a Guide',
 }
 
@@ -345,6 +481,72 @@ export const newsletter = {
     'Get travel inspiration, regional updates, and exclusive offers delivered to your inbox. We respond to all genuine enquiries within 24 hours.',
   disclaimer: 'We do not share your information with third parties.',
 }
+
+export const processSteps = [
+  {
+    step: '01',
+    title: 'Share Your Brief',
+    desc: 'Tell us your route, dates, and travel requirements — corporate, group, or individual.',
+  },
+  {
+    step: '02',
+    title: 'We Plan & Book',
+    desc: 'Flights, transfers, documentation, and coordinated logistics worldwide — with regional depth in East Africa.',
+  },
+  {
+    step: '03',
+    title: 'Airport Meet & Assist',
+    desc: 'Meet & assist at Mogadishu and representative support across key Somalia airports, plus global coordination.',
+  },
+  {
+    step: '04',
+    title: 'Travel With Support',
+    desc: 'On-trip coordination, changes, and responsive assistance when plans shift.',
+  },
+  {
+    step: '05',
+    title: 'Return & Follow-Up',
+    desc: 'Departure support and post-travel follow-up for your next journey.',
+  },
+]
+
+export const travelStories = [
+  {
+    slug: 'oslo-scandinavian-weekend',
+    category: 'International',
+    title: 'Weekend in Oslo — the Scandinavian experience',
+    excerpt:
+      'City streets, waterfront walks, and curated short breaks — how Kamil Travel arranges European getaways.',
+    image: cityImage('oslo'),
+    href: '/tours/oslo-weekend',
+  },
+  {
+    slug: 'corporate-travel-global',
+    category: 'Corporate Travel',
+    title: 'Managing corporate travel from Nairobi to the world',
+    excerpt:
+      'Air ticketing, insurance, transfers, and 24-hour support for organizations with global travel needs.',
+    image: cityImage('nairobi'),
+    href: '/corporate-travel',
+  },
+  {
+    slug: 'mogadishu-airport-support',
+    category: 'Airport Experience',
+    title: 'Meet & assist at Mogadishu — what to expect on arrival',
+    excerpt:
+      'Regional airport presence and representative support across six Somalia locations — alongside worldwide booking.',
+    image: cityImage('mogadishu'),
+    href: '/car-rental-airport-transfers',
+  },
+]
+
+export const trustPartners = [
+  'Global Airline Partners',
+  'Nairobi Headquarters',
+  'Mogadishu Airport Office',
+  'Corporate & Leisure Clients',
+  '24-Hour Emergency Support',
+]
 
 export const nav = [
   { label: 'Home', href: '/' },

@@ -1,36 +1,42 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import { FadeUp } from '@/components/ui/FadeUp'
 import { ImageReveal } from '@/components/ui/ImageReveal'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Plane, PlaneTakeoff, PlaneLanding, Users, Crown, MapPin, ArrowUpRight } from 'lucide-react'
+import { Plane, PlaneTakeoff, PlaneLanding, Crown, Car, ArrowUpRight } from 'lucide-react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { prefersReducedMotion } from '@/lib/animations'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const cards = [
   {
     icon: PlaneLanding,
-    title: 'Arrival Assistance',
+    title: 'Arrival',
     desc: 'Meet and greet support for arriving passengers at Mogadishu airport.',
   },
   {
-    icon: PlaneTakeoff,
-    title: 'Departure Assistance',
-    desc: 'Check-in guidance and departure support for outbound travelers.',
-  },
-  {
-    icon: Users,
-    title: 'Group Travel Support',
-    desc: 'Coordinated group travel arrangements within Somalia.',
+    icon: Plane,
+    title: 'Meet & Assist',
+    desc: 'Dedicated representatives guiding you through airport procedures.',
   },
   {
     icon: Crown,
-    title: 'VIP Lounge Support',
+    title: 'VIP Lounge',
     desc: 'VIP lounge access connected to Kamil Travel Mogadishu presence.',
   },
   {
-    icon: MapPin,
-    title: 'Local Airport Coordination',
-    desc: 'Representatives across 6 local airports in Somalia.',
+    icon: Car,
+    title: 'Transfer',
+    desc: 'Ground transfer coordination from airport to your destination.',
+  },
+  {
+    icon: PlaneTakeoff,
+    title: 'Departure',
+    desc: 'Check-in guidance and departure support for outbound travelers.',
   },
 ]
 
@@ -38,45 +44,56 @@ const AIRPORT_IMAGE =
   'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=900&q=80'
 
 export function AirportExperience() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const cardsTrackRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const section = sectionRef.current
+    const cardsTrack = cardsTrackRef.current
+    if (!section || !cardsTrack) return
+
+    const reduceMotion = prefersReducedMotion()
+    const isMobile = window.matchMedia('(max-width: 1023px)').matches
+    if (reduceMotion || isMobile) return
+
+    const ctx = gsap.context(() => {
+      const scrollDistance = Math.max(0, cardsTrack.scrollWidth - cardsTrack.clientWidth + 40)
+
+      if (scrollDistance > 0) {
+        gsap.to(cardsTrack, {
+          x: -scrollDistance,
+          ease: 'none',
+          force3D: true,
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: () => `+=${scrollDistance + 200}`,
+            pin: true,
+            scrub: 1,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        })
+      }
+    }, section)
+
+    const onResize = () => ScrollTrigger.refresh()
+    window.addEventListener('resize', onResize)
+
+    return () => {
+      window.removeEventListener('resize', onResize)
+      ctx.revert()
+    }
+  }, [])
+
   return (
-    <section className="section-padding bg-sand" id="airport-experience">
+    <section className="section-padding bg-sand" id="airport-experience" ref={sectionRef}>
       <div className="mx-auto max-w-7xl px-5">
-        <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
-          <div className="relative">
-            <ImageReveal
-              className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl shadow-premium"
-              direction="left"
-            >
-              <Image
-                src={AIRPORT_IMAGE}
-                alt="Mogadishu airport support — meet and assist services"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-night/40 via-transparent to-transparent" />
-              <div className="absolute bottom-5 left-5 rounded-full bg-white/90 px-4 py-2 text-xs font-bold uppercase tracking-wider text-night">
-                Mogadishu Airport
-              </div>
-            </ImageReveal>
-
-            <div
-              className="animate-float pointer-events-none absolute -right-3 -top-3 z-20 flex h-16 w-16 items-center justify-center rounded-2xl border border-gold/30 bg-gold shadow-glow sm:-right-5 sm:-top-5 sm:h-20 sm:w-20"
-              aria-hidden
-            >
-              <Plane className="h-8 w-8 text-night sm:h-10 sm:w-10" />
-            </div>
-            <div
-              className="animate-float-delayed pointer-events-none absolute -bottom-2 -left-2 z-20 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-night/80 backdrop-blur-sm sm:-bottom-4 sm:-left-4"
-              aria-hidden
-            >
-              <PlaneTakeoff className="h-5 w-5 text-gold" />
-            </div>
-          </div>
-
-          <div>
+        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[minmax(0,420px)_1fr] lg:gap-16">
+          {/* Left: pinned text on desktop */}
+          <div className="lg:sticky lg:top-32 lg:self-start">
             <FadeUp>
-              <p className="eyebrow">Mogadishu Airport Support</p>
+              <p className="eyebrow">Mogadishu Airport Experience</p>
               <h2 className="mb-6 font-display text-4xl font-semibold leading-[0.95] tracking-tight text-ink md:text-5xl">
                 A smoother airport experience from arrival to departure.
               </h2>
@@ -87,31 +104,81 @@ export function AirportExperience() {
               </p>
             </FadeUp>
 
-            <div className="space-y-3">
-              {cards.map((card, i) => (
-                <FadeUp key={card.title} delay={i * 0.08}>
-                  <div className="flex items-center gap-4 rounded-2xl border border-border bg-surface p-4 transition-all hover:border-gold/30 hover:shadow-lg">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gold/10 text-gold">
-                      <card.icon className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-bold text-ink">{card.title}</h4>
-                      <p className="text-xs text-ink-muted">{card.desc}</p>
-                    </div>
+            <FadeUp delay={0.2}>
+              <div className="relative mb-8 hidden lg:block">
+                <ImageReveal
+                  className="relative aspect-[4/3] w-full overflow-hidden rounded-4xl shadow-premium"
+                  direction="left"
+                >
+                  <Image
+                    src={AIRPORT_IMAGE}
+                    alt="Mogadishu airport support — meet and assist services"
+                    fill
+                    className="object-cover"
+                    sizes="420px"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/25 via-transparent to-transparent" />
+                  <div className="absolute bottom-5 left-5 rounded-full bg-white/90 px-4 py-2 text-xs font-bold uppercase tracking-wider text-night">
+                    Mogadishu Airport
                   </div>
-                </FadeUp>
-              ))}
-            </div>
+                </ImageReveal>
+              </div>
+            </FadeUp>
 
-            <FadeUp delay={0.45}>
+            <FadeUp delay={0.3}>
               <Link
                 href="/services#meet-assist"
-                className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-gold transition hover:gap-3"
+                className="inline-flex items-center gap-2 text-sm font-bold text-gold transition-all hover:gap-3"
               >
                 Explore airport services <ArrowUpRight className="h-4 w-4" />
               </Link>
             </FadeUp>
           </div>
+
+          {/* Right: horizontal scroll cards on desktop, vertical on mobile */}
+          <div className="overflow-hidden">
+            <div
+              ref={cardsTrackRef}
+              className="flex flex-col gap-4 lg:flex-row lg:gap-5 lg:pr-5"
+            >
+              {cards.map((card, i) => (
+                <div
+                  key={card.title}
+                  className="w-full shrink-0 lg:w-[300px]"
+                >
+                  <FadeUp delay={i * 0.08}>
+                    <div className="group flex h-full flex-col rounded-3xl border border-border bg-surface p-6 transition-all duration-500 hover:-translate-y-1 hover:border-gold/30 hover:shadow-premium">
+                      <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-gold/10 text-gold transition-colors group-hover:bg-gold group-hover:text-night">
+                        <card.icon className="h-5 w-5" />
+                      </div>
+                      <h4 className="mb-2 font-display text-xl font-semibold text-ink">{card.title}</h4>
+                      <p className="text-sm leading-relaxed text-ink-muted">{card.desc}</p>
+                    </div>
+                  </FadeUp>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile airport image */}
+        <div className="relative mt-12 lg:hidden">
+          <ImageReveal
+            className="relative aspect-[4/3] w-full overflow-hidden rounded-4xl shadow-premium"
+            direction="left"
+          >
+            <Image
+              src={AIRPORT_IMAGE}
+              alt="Mogadishu airport support — meet and assist services"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 420px"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/25 via-transparent to-transparent" />
+            <div className="absolute bottom-5 left-5 rounded-full bg-white/90 px-4 py-2 text-xs font-bold uppercase tracking-wider text-night">
+              Mogadishu Airport
+            </div>
+          </ImageReveal>
         </div>
       </div>
     </section>

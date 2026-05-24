@@ -1,84 +1,60 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import Link from 'next/link'
 import { destinations } from '@/lib/content'
-import { SectionHeader } from '@/components/ui/SectionHeader'
-import { DestinationCard } from '@/components/ui/DestinationCard'
-import { FadeUp } from '@/components/ui/FadeUp'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { LineReveal } from '@/components/ui/LineReveal'
+import {
+  ArchDestinationsCarousel,
+  type ArchDestinationItem,
+} from '@/components/ui/ArchDestinationsCarousel'
+import { ArrowUpRight } from 'lucide-react'
 
-gsap.registerPlugin(ScrollTrigger)
+const placeItems: ArchDestinationItem[] = destinations
+  .filter((d) => d.status !== 'client-to-confirm')
+  .map((d) => ({
+    slug: d.slug,
+    title: d.title,
+    country: d.country,
+    image: d.image,
+    href: `/destinations#${d.slug}`,
+  }))
 
 export function DestinationsPreview() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const scrollContainerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const section = sectionRef.current
-    const scrollContainer = scrollContainerRef.current
-    if (!section || !scrollContainer) return
-
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const isMobile = window.matchMedia('(max-width: 768px)').matches
-    if (reduceMotion || isMobile) return
-
-    const ctx = gsap.context(() => {
-      const scrollDistance = Math.max(0, scrollContainer.scrollWidth - window.innerWidth + 80)
-
-      if (scrollDistance > 0) {
-        gsap.to(scrollContainer, {
-          x: -scrollDistance,
-          ease: 'none',
-          force3D: true,
-          scrollTrigger: {
-            trigger: section,
-            start: 'top top',
-            end: () => `+=${scrollDistance}`,
-            pin: true,
-            scrub: 1,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          },
-        })
-      }
-    }, section)
-
-    const onResize = () => ScrollTrigger.refresh()
-    window.addEventListener('resize', onResize)
-
-    return () => {
-      window.removeEventListener('resize', onResize)
-      ctx.revert()
-    }
-  }, [])
-
   return (
-    <section ref={sectionRef} className="overflow-hidden bg-sand-light" id="destinations">
-      <div className="mx-auto max-w-7xl px-5 pt-24 pb-8">
-        <FadeUp>
-          <SectionHeader
-            eyebrow="Destinations"
-            title="Destinations with purpose, planning, and support."
-            description="Explore confirmed travel points across our Somalia airport network and beyond."
-            align="left"
-          />
-        </FadeUp>
-      </div>
+    <section className="section-padding overflow-x-clip bg-night" id="destinations">
+      <div className="mx-auto max-w-7xl px-5">
+        <div className="mb-12 text-center md:mb-16">
+          <p className="animate-eyebrow eyebrow mb-6 justify-center before:!bg-gold">Destinations</p>
+          <LineReveal
+            tag="h2"
+            align="center"
+            className="mb-6 font-display text-4xl font-semibold leading-[0.95] tracking-tight text-white md:text-5xl lg:text-[56px]"
+          >
+            Places To Go
+          </LineReveal>
+          <p className="animate-fade-up mx-auto max-w-2xl text-lg leading-relaxed text-white/55">
+            From African hubs to global city breaks — explore destinations Kamil Travel arranges
+            worldwide.
+          </p>
+        </div>
 
-      <div className="md:pb-24">
-        <div
-          ref={scrollContainerRef}
-          className="flex flex-col gap-6 px-5 pb-24 md:flex-row md:px-[max(1.25rem,calc((100vw-80rem)/2))] md:pb-0"
-        >
-          {destinations.slice(0, 5).map((dest, i) => (
-            <div key={dest.slug} className="w-full flex-shrink-0 md:w-[380px]">
-              <FadeUp delay={i * 0.08}>
-                <DestinationCard {...dest} />
-              </FadeUp>
-            </div>
-          ))}
-          <div className="hidden w-[10vw] flex-shrink-0 md:block" aria-hidden />
+        <ArchDestinationsCarousel
+          items={placeItems}
+          size="md"
+          autoPlayMs={4200}
+          focusPop
+          controlsTheme="light"
+          cardClassName="places-arch-card arch-reveal-on-scroll"
+          trackClassName="px-2 md:px-4"
+        />
+
+        <div className="animate-fade-up mt-12 text-center md:mt-14">
+          <Link
+            href="/destinations"
+            className="inline-flex items-center gap-2 rounded-full border border-white/20 px-8 py-3.5 text-sm font-bold uppercase tracking-[0.1em] text-white transition-all hover:border-gold hover:text-gold"
+          >
+            View All Destinations <ArrowUpRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>
