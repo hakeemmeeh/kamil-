@@ -3,6 +3,7 @@ import { site } from '@/lib/content'
 import { FadeUp } from '@/components/ui/FadeUp'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { ContactFormWrapper } from '@/components/ui/ContactFormWrapper'
+import { PageBanner } from '@/components/shared/PageBanner'
 import { Mail, Phone, Smartphone, MapPin } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -20,15 +21,12 @@ const contacts = [
 export default function ContactPage() {
   return (
     <>
-      <section className="relative pt-40 pb-20 bg-night overflow-hidden">
-        <div className="banner-photo absolute inset-0 bg-[url('https://images.unsplash.com/photo-1529074963764-98f45c47344b?w=1920&q=90')] bg-cover bg-center" />
-        <div className="banner-photo-overlay absolute inset-0" aria-hidden />
-        <div className="relative z-10 mx-auto max-w-4xl px-5 text-center">
-          <p className="eyebrow !text-white/60 justify-center before:!bg-surface/40">Get in Touch</p>
-          <h1 className="font-display text-5xl md:text-7xl font-semibold text-white leading-[0.95] tracking-tight mb-6">Contact Kamil Travel</h1>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto">We are here to help with your travel needs.</p>
-        </div>
-      </section>
+      <PageBanner
+        eyebrow="Get in Touch"
+        title="Contact Kamil Travel"
+        subtitle="We are here to help with your travel needs."
+        imageKey="bannerContact"
+      />
 
       <section className="section-padding bg-sand-light">
         <div className="mx-auto max-w-7xl px-5">

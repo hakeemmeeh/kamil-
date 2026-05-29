@@ -93,7 +93,7 @@ export function SomaliaRepresentativeNetwork() {
           <LineReveal
             tag="h2"
             align="center"
-            className="font-display text-4xl font-semibold leading-[0.95] tracking-tight text-ink md:text-5xl"
+            className="font-kanila-display text-4xl font-normal leading-[0.95] tracking-tight text-ink md:text-5xl"
           >
             Somalia Airport Network
           </LineReveal>

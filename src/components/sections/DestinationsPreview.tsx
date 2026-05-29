@@ -28,7 +28,7 @@ export function DestinationsPreview() {
           <LineReveal
             tag="h2"
             align="center"
-            className="mb-6 font-display text-4xl font-semibold leading-[0.95] tracking-tight text-white md:text-5xl lg:text-[56px]"
+            className="mb-6 font-kanila-display text-4xl font-normal leading-[0.95] tracking-tight text-white md:text-5xl lg:text-[56px]"
           >
             Places To Go
           </LineReveal>

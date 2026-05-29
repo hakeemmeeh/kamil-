@@ -21,7 +21,7 @@ export function SectionHeader({
     >
       {eyebrow && <p className="eyebrow">{eyebrow}</p>}
       <h2
-        className={`font-display text-4xl md:text-5xl lg:text-[56px] font-semibold leading-[0.95] tracking-tight ${
+        className={`font-kanila-display text-4xl font-normal md:text-5xl lg:text-[56px] leading-[0.95] tracking-tight ${
           dark ? 'text-white' : 'text-ink'
         }`}
       >

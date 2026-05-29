@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import { FadeUp } from '@/components/ui/FadeUp'
 import { ImageReveal } from '@/components/ui/ImageReveal'
 import Image from 'next/image'
@@ -47,7 +47,7 @@ export function AirportExperience() {
   const sectionRef = useRef<HTMLElement>(null)
   const cardsTrackRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const section = sectionRef.current
     const cardsTrack = cardsTrackRef.current
     if (!section || !cardsTrack) return
@@ -94,7 +94,7 @@ export function AirportExperience() {
           <div className="lg:sticky lg:top-32 lg:self-start">
             <FadeUp>
               <p className="eyebrow">Mogadishu Airport Experience</p>
-              <h2 className="mb-6 font-display text-4xl font-semibold leading-[0.95] tracking-tight text-ink md:text-5xl">
+              <h2 className="mb-6 font-kanila-display text-4xl font-normal leading-[0.95] tracking-tight text-ink md:text-5xl">
                 A smoother airport experience from arrival to departure.
               </h2>
               <p className="mb-8 text-lg leading-relaxed text-ink-muted">

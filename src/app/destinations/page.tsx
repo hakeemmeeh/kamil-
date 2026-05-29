@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { destinations, travelRegions } from '@/lib/content'
-import { cityImage } from '@/lib/cityImages'
+import { PageBanner } from '@/components/shared/PageBanner'
 import { FadeUp } from '@/components/ui/FadeUp'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { DestinationCard } from '@/components/ui/DestinationCard'
@@ -26,23 +26,12 @@ const globalDestinations = destinations.filter(
 export default function DestinationsPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-night pt-40 pb-20">
-        <div
-          className="banner-photo absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('${cityImage('international', 1400)}')` }}
-        />
-        <div className="banner-photo-overlay absolute inset-0" aria-hidden />
-        <div className="relative z-10 mx-auto max-w-4xl px-5 text-center">
-          <p className="eyebrow justify-center !text-white/60 before:!bg-surface/40">Where We Go</p>
-          <h1 className="mb-6 font-display text-5xl font-semibold leading-[0.95] tracking-tight text-white md:text-7xl">
-            Destinations Worldwide
-          </h1>
-          <p className="mx-auto max-w-2xl text-lg text-white/60">
-            From Nairobi to Oslo, New York, and Sydney — Kamil Travel arranges global journeys with
-            deep regional expertise in East Africa.
-          </p>
-        </div>
-      </section>
+      <PageBanner
+        eyebrow="Where We Go"
+        title="Destinations Worldwide"
+        subtitle="From Nairobi to Oslo, New York, and Sydney — Kamil Travel arranges global journeys with deep regional expertise in East Africa."
+        imageKey="international"
+      />
 
       <section className="region-section relative overflow-hidden py-24 md:py-28" id="travel-by-region">
         <div className="absolute inset-0 bg-[#F3EDE4]" aria-hidden />
@@ -112,7 +101,7 @@ export default function DestinationsPage() {
 
       <section className="section-padding bg-night text-center">
         <div className="mx-auto max-w-3xl px-5">
-          <FadeUp>
+          <FadeUp instant>
             <h2 className="mb-4 font-display text-3xl font-semibold text-white md:text-4xl">
               Ready to plan your next journey?
             </h2>

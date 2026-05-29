@@ -47,7 +47,7 @@ export function CuratedJourneysSection() {
             <p className="animate-eyebrow eyebrow mb-6 before:!bg-gold">Travel Packages</p>
             <LineReveal
               tag="h2"
-              className="font-display text-4xl font-semibold leading-[0.95] tracking-tight text-ink md:text-5xl lg:text-[52px]"
+              className="font-kanila-display text-4xl font-normal leading-[0.95] tracking-tight text-ink md:text-5xl lg:text-[52px]"
             >
               Curated Luxury Journeys
             </LineReveal>
@@ -112,7 +112,7 @@ export function CuratedJourneysSection() {
                       {tour.duration}
                     </span>
                   </div>
-                  <h3 className="mb-2 font-display text-2xl font-semibold text-white">
+                  <h3 className="mb-2 font-kanila-display text-2xl font-normal text-white">
                     {tour.title}
                   </h3>
                   <p className="mb-5 line-clamp-2 text-sm leading-relaxed text-white/65">

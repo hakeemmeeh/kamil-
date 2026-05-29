@@ -16,6 +16,65 @@ function revealAll(selectors: string) {
   gsap.set(selectors, { opacity: 1, y: 0, scale: 1, clearProps: 'transform' })
 }
 
+/** Only run tweens when targets exist — avoids GSAP "target not found" console errors */
+function gsapToIfPresent(targets: gsap.TweenTarget, vars: gsap.TweenVars) {
+  const els = gsap.utils.toArray(targets)
+  if (!els.length) return
+  return gsap.to(els, vars)
+}
+
+const sectionContexts = new Map<string, gsap.Context>()
+let homeScrollCtx: gsap.Context | null = null
+
+function scrollTriggerBelongsToSection(st: ScrollTrigger, root: Element, sectionKey: string) {
+  const trigger = st.trigger as Element | undefined
+  const pin = st.pin as Element | undefined
+
+  if (trigger && (root === trigger || root.contains(trigger))) return true
+  if (pin && (root === pin || root.contains(pin))) return true
+  if (trigger?.closest?.(sectionKey) === root) return true
+  if (pin?.closest?.(sectionKey) === root) return true
+
+  return false
+}
+
+/** Revert GSAP pins/tweens for a sticky section — must run before React unmounts */
+export function revertSectionScroll(section: string) {
+  if (typeof window === 'undefined') return
+
+  sectionContexts.get(section)?.revert()
+  sectionContexts.delete(section)
+
+  const root = document.querySelector(section)
+  if (!root) return
+
+  ScrollTrigger.getAll().forEach((st) => {
+    if (scrollTriggerBelongsToSection(st, root, section)) {
+      st.kill(true)
+    }
+  })
+
+  ScrollTrigger.refresh()
+}
+
+/** Tear down all homepage pinned sections (hero + popular) */
+export function cleanupHomePinnedSections() {
+  revertSectionScroll('#hero')
+  revertSectionScroll('#popular-destinations')
+  cleanupHomeScrollAnimations()
+
+  ScrollTrigger.getAll().forEach((st) => {
+    if (st.pin) st.kill(true)
+  })
+  ScrollTrigger.refresh()
+}
+
+/** @deprecated use revertSectionScroll */
+export function killScrollTriggersWithin(section: string | Element) {
+  const key = typeof section === 'string' ? section : `#${(section as Element).id}`
+  revertSectionScroll(key)
+}
+
 export function fadeUp(selector: string) {
   if (typeof window === 'undefined' || prefersReducedMotion()) return
 
@@ -162,6 +221,48 @@ export function archReveal(selector: string) {
   })
 }
 
+/** Plan Your Trip — stacked pair + lead arch slide in from the right with fade */
+export function planTripCollageReveal() {
+  if (typeof window === 'undefined') return
+
+  const section = document.querySelector('#plan-your-trip')
+  if (!section) return
+
+  const pair = section.querySelectorAll('.plan-trip-arch--from-right')
+  const lead = section.querySelector('.plan-trip-arch--lead')
+  const frame = section.querySelector('.plan-trip-arch-frame')
+
+  if (!pair.length && !lead) return
+
+  const scroll = { trigger: section, start: 'top 80%', once: true }
+  const slideDuration = 1.1
+  const slideEase = 'power3.out'
+  const fromRight = { x: 88, opacity: 0 }
+  const toRest = { x: 0, opacity: 1, duration: slideDuration, ease: slideEase, scrollTrigger: scroll }
+
+  if (prefersReducedMotion()) {
+    gsap.set([...pair, lead].filter(Boolean), { x: 0, opacity: 1 })
+    if (frame) gsap.set(frame, { opacity: 1, x: 0 })
+    return
+  }
+
+  if (pair.length) {
+    gsap.fromTo(pair, fromRight, { ...toRest, stagger: 0.2 })
+  }
+
+  if (lead) {
+    gsap.fromTo(lead, fromRight, { ...toRest, delay: 0.38 })
+  }
+
+  if (frame) {
+    gsap.fromTo(
+      frame,
+      { opacity: 0, x: 56 },
+      { opacity: 1, x: 0, duration: 0.95, delay: 0.28, ease: slideEase, scrollTrigger: scroll }
+    )
+  }
+}
+
 export function parallaxImage(selector: string, amount = 15) {
   if (typeof window === 'undefined' || prefersReducedMotion()) return
 
@@ -183,16 +284,18 @@ export function parallaxImage(selector: string, amount = 15) {
 export function heroIntroHome3() {
   if (typeof window === 'undefined') return
 
-  const targets = '.line-reveal-inner, .heading-line, .hero-kicker, .hero-arch-card'
+  const targets = '.line-reveal-inner, .heading-line, .hero-kicker, .hero-social, .hero-desc, .hero-cta'
 
   if (prefersReducedMotion()) {
     revealAll(targets)
     gsap.set('.hero-parallax-layer .hero-bg', { scale: 1, clearProps: 'transform' })
+    gsap.set('.hero-kanila-arch-item', { opacity: 1, clearProps: 'all' })
     return
   }
 
   gsap.set('.hero-parallax-layer .hero-bg', { scale: 1.08, transformOrigin: 'center center' })
-  gsap.set('.hero-kicker', { opacity: 0, y: 20 })
+  gsap.set('.hero-kicker', { opacity: 0, y: 16 })
+  gsap.set('.hero-social, .hero-desc, .hero-cta', { opacity: 0, y: 20 })
   gsap.set('.hero-headline .heading-line, .hero-headline .line-reveal-inner', {
     opacity: 0,
     yPercent: 110,
@@ -203,83 +306,80 @@ export function heroIntroHome3() {
   tl.fromTo('.hero-parallax-layer .hero-bg', { scale: 1.12 }, { scale: 1, duration: 2.2 })
     .fromTo(
       '.hero-kicker',
-      { y: 20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.65, ease: 'power3.out' },
-      '-=1.6'
+      { y: 16, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' },
+      '-=1.65'
     )
     .fromTo(
       '.hero-headline .heading-line, .hero-headline .line-reveal-inner',
       { yPercent: 110, opacity: 0 },
       { yPercent: 0, opacity: 1, duration: 1, stagger: 0.12, ease: 'power4.out' },
-      '-=1.2'
+      '-=1.15'
     )
     .fromTo(
-      '.hero-arch-card',
-      { y: 80, opacity: 0, scale: 0.85 },
-      {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 1.1,
-        stagger: 0.1,
-        ease: 'power3.out',
-      },
-      '-=0.35'
+      '.hero-social',
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.65, ease: 'power3.out' },
+      '-=0.75'
+    )
+    .fromTo(
+      '.hero-desc',
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.65, ease: 'power3.out' },
+      '-=0.5'
+    )
+    .fromTo(
+      '.hero-cta',
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.65, ease: 'power3.out' },
+      '-=0.5'
     )
 }
 
 export type KanilaStickyCoverOptions = {
   /** Section wrapper, e.g. `#hero` */
   section: string
-  /** Element to pin (full-viewport bg), e.g. `.hero-sticky-bg` */
-  pin: string
-  /** Inner layer for parallax zoom while pinned */
+  /** @deprecated CSS sticky handles the bg; kept for API compat */
+  pin?: string
+  /** Inner layer for parallax zoom while scrolling the section */
   parallaxInner?: string
 }
 
 /**
- * Kanila Home 3 — image stays fixed while user scrolls through the section;
- * the next solid panel (Celebrate / Stats) slides up over it.
- * Uses GSAP pin (reliable with Lenis). Section needs `.kanila-sticky-cover__scroll` + runway.
+ * Kanila Home 3 — parallax on sticky-cover bg (CSS sticky, no GSAP pin).
  */
 export function initKanilaStickyCover({
   section: sectionSel,
-  pin: pinSel,
   parallaxInner,
 }: KanilaStickyCoverOptions) {
   if (typeof window === 'undefined' || prefersReducedMotion()) return
 
   const section = document.querySelector(sectionSel)
-  const pinEl = document.querySelector(pinSel)
-  if (!section || !pinEl) return
+  if (!section) return
 
-  const mm = gsap.matchMedia()
+  revertSectionScroll(sectionSel)
 
-  mm.add('(min-width: 768px)', () => {
-    ScrollTrigger.create({
-      trigger: section,
-      start: 'top top',
-      end: 'bottom bottom',
-      pin: pinEl,
-      pinSpacing: false,
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
+  const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia()
+
+    mm.add('(min-width: 768px)', () => {
+      if (parallaxInner) {
+        gsapToIfPresent(parallaxInner, {
+          yPercent: 18,
+          scale: 1.1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1.35,
+          },
+        })
+      }
     })
+  }, section)
 
-    if (parallaxInner) {
-      gsap.to(parallaxInner, {
-        yPercent: 18,
-        scale: 1.1,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: 1.35,
-        },
-      })
-    }
-  })
+  sectionContexts.set(sectionSel, ctx)
 }
 
 /** Sticky hero bg + sections scroll up over it (Kanila cover effect) */
@@ -289,35 +389,52 @@ export function initHeroCoverScroll() {
   const hero = document.querySelector('#hero')
   if (!hero) return
 
-  initKanilaStickyCover({
-    section: '#hero',
-    pin: '.hero-sticky-bg',
-    parallaxInner: '#hero .hero-parallax-layer',
-  })
+  revertSectionScroll('#hero')
 
-  gsap.to('.hero-foreground-copy', {
-    y: -48,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: hero,
-      start: 'top top',
-      end: 'center top',
-      scrub: 1,
-    },
-  })
+  const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia()
 
-  gsap.to('.hero-arch-rail', {
-    y: -36,
-    x: -12,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: hero,
-      start: 'top top',
-      end: 'bottom bottom',
-      scrub: 1,
-    },
-  })
+    mm.add('(min-width: 768px)', () => {
+      const parallaxInner = hero.querySelector('.hero-parallax-layer')
+      if (parallaxInner) {
+        gsapToIfPresent(parallaxInner, {
+          yPercent: 18,
+          scale: 1.1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: hero,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1.35,
+          },
+        })
+      }
+    })
 
+    gsapToIfPresent(hero.querySelectorAll('.hero-foreground-copy'), {
+      y: -48,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: hero,
+        start: 'top top',
+        end: 'center top',
+        scrub: 1,
+      },
+    })
+
+    gsapToIfPresent(hero.querySelectorAll('.hero-arch-rail'), {
+      y: -28,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: hero,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1,
+      },
+    })
+  }, hero)
+
+  sectionContexts.set('#hero', ctx)
   ScrollTrigger.refresh()
 }
 
@@ -328,45 +445,73 @@ export function initPopularDestinationsScroll() {
   const section = document.querySelector('#popular-destinations')
   if (!section) return
 
-  initKanilaStickyCover({
-    section: '#popular-destinations',
-    pin: '.popular-sticky-bg',
-    parallaxInner: '#popular-destinations .popular-parallax-layer',
-  })
+  revertSectionScroll('#popular-destinations')
 
-  gsap.to('.popular-foreground .popular-copy', {
-    y: -36,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: section,
-      start: 'top top',
-      end: '45% top',
-      scrub: 1,
-    },
-  })
+  const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia()
 
-  gsap.to('.popular-cards-stage', {
-    y: -24,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: section,
-      start: 'top top',
-      end: 'bottom bottom',
-      scrub: 1.1,
-    },
-  })
+    mm.add('(min-width: 768px)', () => {
+      const parallaxInner = section.querySelector('.popular-parallax-layer')
+      if (parallaxInner) {
+        gsapToIfPresent(parallaxInner, {
+          yPercent: 18,
+          scale: 1.1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1.35,
+          },
+        })
+      }
+    })
 
+    gsapToIfPresent(section.querySelectorAll('.popular-copy'), {
+      y: -36,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top top',
+        end: '45% top',
+        scrub: 1,
+      },
+    })
+
+    gsapToIfPresent(section.querySelectorAll('.popular-cards-stage'), {
+      y: -24,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1.1,
+      },
+    })
+  }, section)
+
+  sectionContexts.set('#popular-destinations', ctx)
   ScrollTrigger.refresh()
 }
 
-/** Run sticky-cover + scroll inits after Lenis is ready */
-export function whenLenisReady(fn: () => void) {
-  if (typeof window === 'undefined') return
+/** Revert homepage scroll animations (call when leaving `/`) */
+export function cleanupHomeScrollAnimations() {
+  homeScrollCtx?.revert()
+  homeScrollCtx = null
+}
+
+/** Run sticky-cover + scroll inits after Lenis is ready. Returns cancel fn. */
+export function whenLenisReady(fn: () => void): () => void {
+  if (typeof window === 'undefined') return () => {}
+
   if (window.__lenisReady) {
     requestAnimationFrame(fn)
-    return
+    return () => {}
   }
-  window.addEventListener('lenis-ready', () => requestAnimationFrame(fn), { once: true })
+
+  const handler = () => requestAnimationFrame(fn)
+  window.addEventListener('lenis-ready', handler, { once: true })
+  return () => window.removeEventListener('lenis-ready', handler)
 }
 
 /** @deprecated use initHeroCoverScroll */
@@ -378,50 +523,58 @@ export function initHeroParallax() {
 export function initHomeScrollAnimations() {
   if (typeof window === 'undefined' || prefersReducedMotion()) return
 
-  staggerFadeUp('[data-stagger="features"]', '[data-stagger-item]')
-  staggerFadeUp('[data-stagger="stats"]', '[data-stagger-item]')
-  staggerFadeUp('[data-stagger="process"]', '[data-stagger-item]')
-  staggerFadeUp('[data-stagger="stories"]', '[data-stagger-item]')
-  staggerFadeUp('[data-stagger="trust"]', '[data-stagger-item]')
-  staggerFadeUp('[data-stagger="regions"]', '[data-stagger-item]')
+  const main = document.querySelector('main')
+  if (!main) return
 
-  gsap.utils.toArray('.animate-eyebrow').forEach((el: unknown) => {
-    gsap.fromTo(
-      el as gsap.TweenTarget,
-      { y: 24, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: el as Element, start: 'top 88%', once: true },
-      }
-    )
-  })
+  cleanupHomeScrollAnimations()
 
-  gsap.utils.toArray('.animate-fade-up').forEach((el: unknown) => {
-    const node = el as Element
-    const inAbout = node.closest('#about')
-    gsap.fromTo(
-      el as gsap.TweenTarget,
-      { y: 48, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.9,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: node,
-          start: inAbout ? 'top 92%' : 'top 86%',
-          once: true,
-        },
-      }
-    )
-  })
+  homeScrollCtx = gsap.context(() => {
+    staggerFadeUp('[data-stagger="features"]', '[data-stagger-item]')
+    staggerFadeUp('[data-stagger="stats"]', '[data-stagger-item]')
+    staggerFadeUp('[data-stagger="process"]', '[data-stagger-item]')
+    staggerFadeUp('[data-stagger="stories"]', '[data-stagger-item]')
+    staggerFadeUp('[data-stagger="trust"]', '[data-stagger-item]')
+    staggerFadeUp('[data-stagger="regions"]', '[data-stagger-item]')
 
-  archReveal('.arch-reveal-on-scroll')
-  imageRevealScroll('.image-reveal-scroll')
-  initHeadingLineReveals()
+    gsap.utils.toArray(main.querySelectorAll('.animate-eyebrow')).forEach((el: unknown) => {
+      gsap.fromTo(
+        el as gsap.TweenTarget,
+        { y: 24, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: el as Element, start: 'top 88%', once: true },
+        }
+      )
+    })
+
+    gsap.utils.toArray(main.querySelectorAll('.animate-fade-up')).forEach((el: unknown) => {
+      const node = el as Element
+      const inCelebrate = node.closest('#about')
+      gsap.fromTo(
+        el as gsap.TweenTarget,
+        { y: 48, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: node,
+            start: inCelebrate ? 'top 92%' : 'top 86%',
+            once: true,
+          },
+        }
+      )
+    })
+
+    archReveal('.arch-reveal-on-scroll')
+    planTripCollageReveal()
+    imageRevealScroll('.image-reveal-scroll')
+    initHeadingLineReveals()
+  }, main)
 }
 
 /** @deprecated use heroIntroHome3 */

@@ -5,6 +5,7 @@ import { ImageReveal } from '@/components/ui/ImageReveal'
 import { Button } from '@/components/ui/Button'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import Image from 'next/image'
+import { PageBanner } from '@/components/shared/PageBanner'
 import { Eye, Target, Users, Shield, Heart, Zap } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -15,16 +16,12 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative pt-40 pb-20 bg-night overflow-hidden">
-        <div className="banner-photo absolute inset-0 bg-[url('https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1920&q=90')] bg-cover bg-center" />
-        <div className="banner-photo-overlay absolute inset-0" aria-hidden />
-        <div className="relative z-10 mx-auto max-w-4xl px-5 text-center">
-          <p className="eyebrow !text-white/60 justify-center before:!bg-surface/40">About Us</p>
-          <h1 className="font-display text-5xl md:text-7xl font-semibold text-white leading-[0.95] tracking-tight mb-6">About Kamil Travel</h1>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto">Professional travel management for corporate and regional travelers.</p>
-        </div>
-      </section>
+      <PageBanner
+        eyebrow="About Us"
+        title="About Kamil Travel"
+        subtitle="Professional travel management for corporate and regional travelers."
+        imageKey="nairobi"
+      />
 
       {/* Story */}
       <section className="section-padding bg-sand-light">
@@ -117,7 +114,7 @@ export default function AboutPage() {
       {/* CTA */}
       <section className="section-padding bg-night text-center">
         <div className="mx-auto max-w-3xl px-5">
-          <FadeUp>
+          <FadeUp instant>
             <h2 className="font-display text-4xl md:text-5xl font-semibold text-white leading-[0.95] tracking-tight mb-6">Ready to travel with confidence?</h2>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button href="/contact" variant="primary" size="lg">Plan a Trip</Button>

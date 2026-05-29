@@ -39,7 +39,7 @@ export function CelebrateSection() {
           <LineReveal
             tag="h2"
             align="center"
-            className="mx-auto mb-6 max-w-3xl font-display text-4xl font-semibold leading-[0.95] tracking-tight text-ink md:text-5xl lg:text-[52px]"
+            className="mx-auto mb-6 max-w-3xl font-kanila-display text-4xl font-normal leading-[0.95] tracking-tight text-ink md:text-5xl lg:text-[52px]"
           >
             {`Celebrating 10+ Years of\nProfessional Travel`}
           </LineReveal>
@@ -61,7 +61,7 @@ export function CelebrateSection() {
               <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gold/10 text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-night">
                 <feature.icon className="h-6 w-6" />
               </div>
-              <h3 className="mb-3 font-display text-xl font-semibold text-ink">{feature.title}</h3>
+              <h3 className="mb-3 font-kanila-display text-xl font-normal text-ink">{feature.title}</h3>
               <p className="text-sm leading-relaxed text-ink-muted">{feature.desc}</p>
             </div>
           ))}

@@ -7,11 +7,15 @@ import type { KanilaPopularDestination } from '@/components/ui/KanilaPopularDest
 import { KanilaCompassMark } from '@/components/ui/KanilaCompassMark'
 import { cityImage, cityImageAlts } from '@/lib/cityImages'
 import { destinations } from '@/lib/content'
-import { initPopularDestinationsScroll, whenLenisReady } from '@/lib/animations'
+import {
+  initPopularDestinationsScroll,
+  revertSectionScroll,
+  whenLenisReady,
+} from '@/lib/animations'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-const BG_PRIMARY = cityImage('kanilaPopular', 1400)
-const BG_FALLBACK = cityImage('sydney', 1400)
+const BG_PRIMARY = cityImage('kanilaPopular', 1920)
+const BG_FALLBACK = cityImage('sydney', 1920)
 const BG_ALT = cityImageAlts.kanilaPopular
 
 function tourCountForSlug(slug: string): number {
@@ -39,14 +43,23 @@ export function PopularDestinationsSection() {
   const [bgSrc, setBgSrc] = useState(BG_PRIMARY)
 
   useLayoutEffect(() => {
+    let cancelled = false
+
     const setup = () => {
-      if (initRan.current) return
+      if (cancelled || initRan.current) return
       initRan.current = true
       initPopularDestinationsScroll()
       ScrollTrigger.refresh()
     }
 
-    whenLenisReady(setup)
+    const cancelLenis = whenLenisReady(setup)
+
+    return () => {
+      cancelled = true
+      cancelLenis()
+      initRan.current = false
+      revertSectionScroll('#popular-destinations')
+    }
   }, [])
 
   return (
@@ -56,15 +69,13 @@ export function PopularDestinationsSection() {
       aria-label="Popular destinations"
     >
       <div className="kanila-sticky-cover__pin popular-sticky-bg h-[100svh] w-full overflow-hidden bg-[#2a3544]">
-        <div
-          className="popular-parallax-layer relative h-full w-full bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${bgSrc})` }}
-        >
+        <div className="popular-parallax-layer relative h-full w-full">
           <Image
             src={bgSrc}
             alt={BG_ALT}
             fill
             priority
+            quality={90}
             className="popular-bg object-cover object-[center_40%]"
             sizes="100vw"
             onError={() => setBgSrc(BG_FALLBACK)}

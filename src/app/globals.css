@@ -83,10 +83,13 @@ h1, h2, h3, .font-display {
 
 .font-kanila-display {
   font-family: var(--font-kanila-display), var(--font-display), Georgia, serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 .font-kanila-script {
   font-family: var(--font-kanila-script), cursive;
+  text-rendering: optimizeLegibility;
 }
 
 .text-kanila-orange {
@@ -96,6 +99,11 @@ h1, h2, h3, .font-display {
 /* Logo PNG has baked-in black — screen blend hides dark backdrop (use true transparent PNG when available) */
 .site-logo {
   mix-blend-mode: screen;
+}
+
+/* Footer / light sections — no blend; logo must stay visible on sand/cream */
+.footer-logo {
+  mix-blend-mode: normal;
 }
 
 /* Photos — full clarity, no faded image layers */
@@ -114,9 +122,9 @@ h1, h2, h3, .font-display {
 .banner-photo-overlay {
   background: linear-gradient(
     180deg,
-    rgba(7, 17, 31, 0.55) 0%,
-    rgba(7, 17, 31, 0.4) 50%,
-    rgba(7, 17, 31, 0.6) 100%
+    rgba(7, 17, 31, 0.42) 0%,
+    rgba(7, 17, 31, 0.22) 45%,
+    rgba(7, 17, 31, 0.48) 100%
   );
 }
 
@@ -321,7 +329,7 @@ h1, h2, h3, .font-display {
 
   .hero-copy,
   .hero-cta,
-  .hero-arch-card,
+  .hero-kanila-arch-item,
   .hero-booking-card,
   .booking-card,
   .hero-headline .line-reveal-inner,
@@ -338,6 +346,10 @@ h1, h2, h3, .font-display {
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   background: rgba(255, 255, 255, 0.82);
+}
+
+.dark .glass {
+  background: rgba(7, 17, 31, 0.85);
 }
 
 .glass-dark {
@@ -374,12 +386,22 @@ h1, h2, h3, .font-display {
 }
 
 .hero-copy,
-.hero-cta,
-.hero-arch-card,
 .hero-kicker,
+.hero-social,
+.hero-desc,
+.hero-cta,
 .hero-headline .line-reveal-inner,
 .hero-headline .heading-line {
   opacity: 0;
+}
+
+.hero-kanila-arch-item {
+  opacity: 1;
+}
+
+/* Kanila Home 3 — tombstone arch shape */
+.kanila-hero-arch__shape {
+  border-radius: 50% 50% 0 0 / 48% 48% 0 0;
 }
 
 .hero-headline .line-reveal-inner {
@@ -395,13 +417,15 @@ h1, h2, h3, .font-display {
 }
 
 .hero-copy,
-.hero-cta,
-.hero-arch-card,
 .hero-kicker,
+.hero-social,
+.hero-desc,
+.hero-cta,
 .hero-headline .line-reveal-inner,
 .hero-headline .heading-line {
   animation: hero-content-fallback 0.01s ease-out 2s forwards;
 }
+
 
 /* Kanila Home 3 hero */
 .kanila-hero .hero-headline {
@@ -413,25 +437,121 @@ h1, h2, h3, .font-display {
   font-weight: 500;
 }
 
-/* Kanila Home 3 — side arch rail (fade left edge into hero photo) */
-.hero-arch-rail .hero-arch-carousel {
-  mask-image: linear-gradient(to right, transparent, black 10%, black 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 100%);
+/* Kanila Home 3 — hero arch cluster (bottom-right) */
+.hero-arch-rail {
+  width: 100%;
+  max-width: 100%;
 }
 
-.hero-arch-viewport {
-  width: min(100%, 340px);
-  margin-left: auto;
-  margin-right: 0;
+.kanila-hero .kanila-sticky-cover__scroll {
+  overflow-x: clip;
 }
 
 @media (min-width: 1024px) {
-  .hero-arch-rail .hero-arch-viewport {
-    width: min(100%, 400px);
+  .hero-arch-rail {
+    width: auto;
+    max-width: 56%;
   }
 }
 
-.hero-arch-track .hero-arch-card {
+/* Width driven by Framer Motion per card — classes mark lead vs compact styling */
+.hero-kanila-arch-item {
+  transform-origin: left bottom;
+}
+
+.hero-kanila-arch-item--lead {
+  z-index: 30;
+}
+
+.hero-kanila-arch-item--compact {
+  z-index: 10;
+}
+
+/* Lead grows taller + lifts slightly; compact arches stay smaller */
+.kanila-hero-arch-card--lead .kanila-hero-arch__shape {
+  aspect-ratio: 4 / 5;
+  box-shadow: 0 20px 50px rgba(7, 17, 31, 0.35);
+  transform: scale(1);
+}
+
+.kanila-hero-arch-card--compact .kanila-hero-arch__shape {
+  aspect-ratio: 3 / 4;
+  box-shadow: 0 12px 32px rgba(7, 17, 31, 0.28);
+  transform: scale(0.94);
+}
+
+.kanila-hero-arch-card--lead,
+.kanila-hero-arch-card--compact {
+  width: 100%;
+}
+
+.kanila-hero-arch-card--lead .kanila-hero-arch__shape,
+.kanila-hero-arch-card--compact .kanila-hero-arch__shape {
+  transition:
+    aspect-ratio 800ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 800ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.kanila-hero-arch-card__caption {
+  overflow: hidden;
+  transition:
+    max-height 800ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
+    margin 800ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.kanila-hero-arch-card__caption--visible {
+  margin-top: 1rem;
+  max-height: 7rem;
+  opacity: 1;
+}
+
+.kanila-hero-arch-card__caption--hidden {
+  margin-top: 0;
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hero-kanila-arch-viewport {
+  width: 100%;
+  max-width: 100%;
+  padding-right: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .hero-kanila-arch-viewport {
+    width: max-content;
+    max-width: min(100%, 720px);
+  }
+}
+
+.hero-kanila-arch-track {
+  min-height: 220px;
+  padding-bottom: 0.25rem;
+}
+
+@media (min-width: 768px) {
+  .hero-kanila-arch-track {
+    min-height: 280px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-kanila-arch-track {
+    min-height: 320px;
+  }
+}
+
+.hero-arch-card--active,
+.popular-arch-card--center {
+  transform-origin: center bottom;
+}
+
+.kanila-arch-card,
+.hero-arch-card,
+.popular-arch-card {
   transition:
     transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
     opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
@@ -440,6 +560,19 @@ h1, h2, h3, .font-display {
 
 .arch-card-mask {
   border-radius: 50% 50% 0 0 / 42% 42% 0 0;
+}
+
+.plan-trip-arch {
+  will-change: transform, opacity;
+}
+
+.plan-trip-arch--from-right,
+.plan-trip-arch--lead {
+  transform-origin: right center;
+}
+
+.plan-trip-arch-frame {
+  transform-origin: center bottom;
 }
 
 .arch-card {
@@ -574,6 +707,22 @@ h1, h2, h3, .font-display {
   animation: draw-line 2.5s ease-out forwards;
 }
 
+/* === Kanila — section script eyebrow (Explore the World, Tour Activity, …) === */
+.kanila-section-eyebrow {
+  display: block;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.kanila-section-eyebrow::before {
+  display: none;
+}
+
+.kanila-section-heading .kanila-section-eyebrow + h2 {
+  margin-top: 0.35rem;
+}
+
 /* === Kanila — Travel by Region (Best Destinations) === */
 .region-blob,
 .region-blob-soft {
@@ -584,16 +733,14 @@ h1, h2, h3, .font-display {
   will-change: transform, box-shadow;
 }
 
-/* === Kanila Home 3 — pinned background + scroll-over cover === */
+/* === Kanila Home 3 — sticky background + scroll-over cover (CSS only — no GSAP pin) === */
 .kanila-sticky-cover {
   position: relative;
   isolation: isolate;
 }
 
 .kanila-sticky-cover__pin {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
   height: 100svh;
   z-index: 0;
@@ -602,6 +749,19 @@ h1, h2, h3, .font-display {
 .kanila-sticky-cover__scroll {
   position: relative;
   z-index: 2;
+}
+
+@media (min-width: 768px) {
+  .kanila-sticky-cover__pin {
+    position: sticky;
+    top: 0;
+    left: 0;
+  }
+
+  .kanila-sticky-cover__scroll {
+    margin-top: -100svh;
+    min-height: 100svh;
+  }
 }
 
 .kanila-sticky-cover__runway {

@@ -52,11 +52,25 @@ const photos = {
     'photo-1507525428034-b5c55cefb08b', // Tropical beach — leisure escape
   vacationResort:
     'photo-1571896349842-33c89424de2d', // Pool / resort leisure
+  bannerContact:
+    'photo-1529074963764-98f45c47344b',
+  bannerCorporate:
+    'photo-1497366216548-37526070297c',
+  bannerServices:
+    'photo-1556388158-158ea5ccacbd',
+  bannerCarRental:
+    'photo-1544620347-c4fd4a3d5957',
+  bannerVisa:
+    'photo-1569154941061-e231b4725ef1',
+  bannerCta:
+    'photo-1507812984078-917a274065be',
 } as const
 
 export type CityImageKey = keyof typeof photos
 
-export function cityImage(key: CityImageKey, width: 800 | 1400 = 800): string {
+export type CityImageWidth = 800 | 1400 | 1920
+
+export function cityImage(key: CityImageKey, width: CityImageWidth = 800): string {
   const q = width >= 1400 ? 90 : 85
   return `https://images.unsplash.com/${photos[key]}?w=${width}&q=${q}&auto=format&fit=crop`
 }
@@ -86,6 +100,12 @@ export const cityImageAlts: Record<CityImageKey, string> = {
   kanilaKayak: 'Kayaks on calm emerald water — adventure travel',
   vacationBeach: 'Tropical beach — vacation escape',
   vacationResort: 'Resort pool and palm trees — luxury leisure',
+  bannerContact: 'Contact and travel planning',
+  bannerCorporate: 'Corporate office and business travel',
+  bannerServices: 'Airport and travel services',
+  bannerCarRental: 'Car rental and airport transfer',
+  bannerVisa: 'Visa assistance and documentation',
+  bannerCta: 'Travel destination aerial view',
 }
 
 

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { FadeUp } from '@/components/ui/FadeUp'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { Button } from '@/components/ui/Button'
+import { PageBanner } from '@/components/shared/PageBanner'
 import { AlertTriangle, FileText, CheckCircle, Send } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -19,15 +20,12 @@ const steps = [
 export default function VisaAssistancePage() {
   return (
     <>
-      <section className="relative pt-40 pb-20 bg-night overflow-hidden">
-        <div className="banner-photo absolute inset-0 bg-[url('https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=1920&q=90')] bg-cover bg-center" />
-        <div className="banner-photo-overlay absolute inset-0" aria-hidden />
-        <div className="relative z-10 mx-auto max-w-4xl px-5 text-center">
-          <p className="eyebrow !text-white/60 justify-center before:!bg-surface/40">Travel Support</p>
-          <h1 className="font-display text-5xl md:text-7xl font-semibold text-white leading-[0.95] tracking-tight mb-6">Visa Assistance</h1>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto">Travel preparation support and guidance for visa-related travel needs.</p>
-        </div>
-      </section>
+      <PageBanner
+        eyebrow="Travel Support"
+        title="Visa Assistance"
+        subtitle="Travel preparation support and guidance for visa-related travel needs."
+        imageKey="bannerVisa"
+      />
 
       <section className="section-padding bg-sand-light">
         <div className="mx-auto max-w-4xl px-5">
@@ -69,7 +67,7 @@ export default function VisaAssistancePage() {
 
       <section className="section-padding bg-night text-center">
         <div className="mx-auto max-w-3xl px-5">
-          <FadeUp>
+          <FadeUp instant>
             <h2 className="font-display text-4xl md:text-5xl font-semibold text-white leading-[0.95] tracking-tight mb-6">Need visa guidance?</h2>
             <Button href="/contact" variant="primary" size="lg">Start an Inquiry</Button>
           </FadeUp>

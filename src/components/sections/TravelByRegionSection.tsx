@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { travelRegions } from '@/lib/content'
 import { RegionPremiumCard } from '@/components/ui/RegionPremiumCard'
+import { KanilaSectionHeading } from '@/components/ui/KanilaSectionHeading'
 
 export function TravelByRegionSection() {
   return (
@@ -15,16 +16,13 @@ export function TravelByRegionSection() {
       <div className="region-blob-soft pointer-events-none absolute -bottom-16 -left-12 h-[min(320px,50vw)] w-[min(320px,50vw)] rounded-[40%] bg-gold/35 md:-bottom-20 md:-left-16" aria-hidden />
 
       <div className="relative mx-auto max-w-7xl px-5">
-        <div className="mb-12 text-center md:mb-16">
-          <p className="animate-eyebrow eyebrow mb-5 justify-center">Explore the World</p>
-          <h2 className="animate-fade-up mx-auto font-display text-[2.15rem] font-semibold leading-[1.05] tracking-tight text-ink sm:text-[2.75rem] md:text-[3.15rem]">
-            <span className="text-gold/70">‹</span> The Best Destinations{' '}
-            <span className="text-gold/70">›</span>
-          </h2>
-          <p className="animate-fade-up mx-auto mt-5 max-w-lg text-base leading-relaxed text-ink-muted md:mt-6 md:text-lg">
-            Browse routes by region — from East African hubs to global city breaks, coordinated
-            from Nairobi.
-          </p>
+        <div className="mb-12 md:mb-16">
+          <KanilaSectionHeading
+            eyebrow="Explore the World"
+            title="The Best Destinations"
+            withBrackets
+            subtitle="Browse routes by region — from East African hubs to global city breaks, coordinated from Nairobi."
+          />
         </div>
 
         <div

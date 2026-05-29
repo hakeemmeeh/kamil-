@@ -45,7 +45,7 @@ export function Footer() {
                 alt={`${site.name} logo`}
                 width={200}
                 height={64}
-                className="site-logo h-12 w-auto max-w-[200px] object-contain md:h-14"
+                className="footer-logo h-12 w-auto max-w-[200px] object-contain md:h-14"
               />
             </Link>
             <p className="mb-1 text-xs font-semibold uppercase tracking-[0.14em] text-gold">{site.tagline}</p>

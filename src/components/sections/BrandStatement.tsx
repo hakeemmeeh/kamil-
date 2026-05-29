@@ -26,39 +26,48 @@ export function BrandStatement() {
       <div className="mx-auto max-w-7xl px-5">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
           {/* Kanila — arched photo collage (left on desktop) */}
-          <div className="order-2 grid grid-cols-2 items-end gap-4 sm:gap-5 lg:order-1">
+          <div className="plan-trip-collage order-2 grid grid-cols-2 items-end gap-4 sm:gap-5 lg:order-1">
             <div className="relative pt-2 pl-2 sm:pt-3 sm:pl-3">
               <div
-                className="pointer-events-none absolute left-0 top-0 z-0 aspect-[3/4] w-[calc(100%-8px)] rounded-t-full rounded-b-3xl border-2 border-gold/50"
+                className="plan-trip-arch-frame pointer-events-none absolute left-0 top-0 z-0 aspect-[3/4] w-[calc(100%-8px)] rounded-t-full rounded-b-3xl border-2 border-gold/50"
                 aria-hidden
               />
-              <div className={`arch-card-mask overflow-hidden shadow-2xl ${planTripImages[0].className}`}>
+              <div
+                className={`plan-trip-arch plan-trip-arch--lead arch-card-mask overflow-hidden shadow-2xl ${planTripImages[0].className}`}
+              >
                 <Image
-                  src={cityImage(planTripImages[0].key, 800)}
+                  src={cityImage(planTripImages[0].key, 1400)}
                   alt={cityImageAlts[planTripImages[0].key]}
                   width={400}
                   height={520}
-                  className="h-full w-full object-cover"
+                  quality={90}
+                  className="h-full w-full object-cover will-change-transform"
                 />
               </div>
             </div>
             <div className="flex flex-col gap-4 sm:gap-5">
-              <div className={`arch-card-mask overflow-hidden shadow-premium ${planTripImages[1].className}`}>
+              <div
+                className={`plan-trip-arch plan-trip-arch--from-right arch-card-mask overflow-hidden shadow-premium ${planTripImages[1].className}`}
+              >
                 <Image
-                  src={cityImage(planTripImages[1].key, 800)}
+                  src={cityImage(planTripImages[1].key, 1400)}
                   alt={cityImageAlts[planTripImages[1].key]}
                   width={360}
                   height={480}
-                  className="h-full w-full object-cover"
+                  quality={90}
+                  className="h-full w-full object-cover will-change-transform"
                 />
               </div>
-              <div className={`arch-card-mask overflow-hidden shadow-premium ${planTripImages[2].className}`}>
+              <div
+                className={`plan-trip-arch plan-trip-arch--from-right arch-card-mask overflow-hidden shadow-premium ${planTripImages[2].className}`}
+              >
                 <Image
-                  src={cityImage(planTripImages[2].key, 800)}
+                  src={cityImage(planTripImages[2].key, 1400)}
                   alt={cityImageAlts[planTripImages[2].key]}
                   width={360}
                   height={480}
-                  className="h-full w-full object-cover"
+                  quality={90}
+                  className="h-full w-full object-cover will-change-transform"
                 />
               </div>
             </div>
@@ -69,7 +78,7 @@ export function BrandStatement() {
             <p className="animate-eyebrow eyebrow mb-4">Plan Your Trip</p>
             <LineReveal
               tag="h2"
-              className="mb-6 font-display text-4xl font-semibold leading-[0.95] tracking-tight text-ink md:text-5xl lg:text-[3.25rem]"
+              className="mb-6 font-kanila-display text-4xl font-normal leading-[0.95] tracking-tight text-ink md:text-5xl lg:text-[3.25rem]"
             >
               {`Plan Your Trip\nWith Us`}
             </LineReveal>

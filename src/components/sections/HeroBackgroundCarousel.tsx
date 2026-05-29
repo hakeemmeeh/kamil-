@@ -6,12 +6,11 @@ import { cityImage, cityImageAlts, type CityImageKey } from '@/lib/cityImages'
 import { cn } from '@/lib/utils'
 
 const HERO_SLIDES: CityImageKey[] = [
+  'kanilaKayak',
   'kanilaHero',
+  'kanilaHeroAlt',
   'newYork',
-  'london',
-  'tokyo',
   'sydney',
-  'kanilaHeroCity',
 ]
 
 const INTERVAL_MS = 5500
@@ -56,7 +55,8 @@ export function HeroBackgroundCarousel() {
             style={{ transitionDuration: `${FADE_MS}ms` }}
           >
             <Image
-              src={cityImage(key, 1400)}
+              src={cityImage(key, 1920)}
+              quality={90}
               alt={cityImageAlts[key]}
               fill
               priority={i === 0}

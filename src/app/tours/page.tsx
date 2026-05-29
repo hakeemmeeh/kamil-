@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { FadeUp } from '@/components/ui/FadeUp'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { Button } from '@/components/ui/Button'
+import { PageBanner } from '@/components/shared/PageBanner'
 import { ToursCatalog } from '@/components/tours/ToursCatalog'
 
 export const metadata: Metadata = {
@@ -32,22 +33,12 @@ const steps = [
 export default function ToursPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-night pt-40 pb-20">
-        <div
-          className="banner-photo absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1775309310157-2721accecb28?w=1920&q=90')" }}
-        />
-        <div className="banner-photo-overlay absolute inset-0" aria-hidden />
-        <div className="relative z-10 mx-auto max-w-4xl px-5 text-center">
-          <p className="eyebrow !text-white/60 justify-center before:!bg-surface/40">Explore</p>
-          <h1 className="mb-6 font-display text-5xl font-semibold leading-[0.95] tracking-tight text-white md:text-7xl">
-            Tours & Travel Packages
-          </h1>
-          <p className="mx-auto max-w-2xl text-lg text-white/60">
-            Curated travel packages for Somalia, Kenya, and beyond — coordinated with full airport support and professional service.
-          </p>
-        </div>
-      </section>
+      <PageBanner
+        eyebrow="Explore"
+        title="Tours & Travel Packages"
+        subtitle="Curated travel packages for Somalia, Kenya, and beyond — coordinated with full airport support and professional service."
+        imageKey="international"
+      />
 
       <section className="section-padding bg-sand-light">
         <div className="mx-auto max-w-7xl px-5">
@@ -75,7 +66,7 @@ export default function ToursPage() {
 
       <section className="bg-night py-20 text-center">
         <div className="mx-auto max-w-3xl px-5">
-          <FadeUp>
+          <FadeUp instant>
             <h2 className="mb-4 font-display text-4xl font-semibold text-white md:text-5xl">
               Need a custom itinerary?
             </h2>

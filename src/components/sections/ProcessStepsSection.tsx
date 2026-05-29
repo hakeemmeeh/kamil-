@@ -12,7 +12,7 @@ export function ProcessStepsSection() {
           <LineReveal
             tag="h2"
             align="center"
-            className="mx-auto max-w-3xl font-display text-4xl font-semibold leading-[0.95] tracking-tight text-ink md:text-5xl"
+            className="mx-auto max-w-3xl font-kanila-display text-4xl font-normal leading-[0.95] tracking-tight text-ink md:text-5xl"
           >
             {`From Inquiry to\nDeparture — Five Steps`}
           </LineReveal>

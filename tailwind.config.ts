@@ -40,6 +40,8 @@ const config: Config = {
       },
       fontFamily: {
         display: ['var(--font-display)', 'serif'],
+        'kanila-display': ['var(--font-kanila-display)', 'var(--font-display)', 'serif'],
+        'kanila-script': ['var(--font-kanila-script)', 'cursive'],
         body: ['var(--font-body)', 'sans-serif'],
       },
       boxShadow: {

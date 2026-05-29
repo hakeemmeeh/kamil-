@@ -23,7 +23,7 @@ export function StatsStrip() {
         >
           {stats.map((stat) => (
             <div key={stat.label} data-stagger-item className="text-center">
-              <p className="font-display text-4xl font-semibold text-gold md:text-5xl">
+              <p className="font-kanila-display text-4xl font-normal text-gold md:text-5xl">
                 {stat.value}
               </p>
               <p className="mt-2 text-xs font-semibold uppercase tracking-[0.12em] text-ink-muted md:text-sm">

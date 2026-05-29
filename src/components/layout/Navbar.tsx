@@ -25,11 +25,11 @@ export function Navbar() {
     setMobileOpen(false)
   }, [pathname])
 
-  const isHome = pathname === '/'
-  const overHero = isHome && !scrolled
-  const linkColor = overHero ? 'text-white/85 hover:text-gold' : 'text-ink-muted hover:text-gold'
+  /** Transparent nav over dark hero/banner — white links + screen-blend logo */
+  const overDarkBg = !scrolled
+  const linkColor = overDarkBg ? 'text-white/85 hover:text-gold' : 'text-ink-muted hover:text-gold'
   const activeColor = 'text-gold'
-  const hamburgerColor = overHero ? 'bg-white' : 'bg-ink'
+  const hamburgerColor = overDarkBg ? 'bg-white' : 'bg-ink'
 
   return (
     <>
@@ -58,7 +58,10 @@ export function Navbar() {
                 alt={`${site.name} logo`}
                 width={240}
                 height={76}
-                className="site-logo h-11 w-auto max-w-[min(52vw,220px)] object-contain md:h-12 lg:h-[52px]"
+                className={cn(
+                  'h-11 w-auto max-w-[min(52vw,220px)] object-contain md:h-12 lg:h-[52px]',
+                  overDarkBg && 'site-logo'
+                )}
                 priority
               />
             </Link>
@@ -78,7 +81,7 @@ export function Navbar() {
             </div>
 
             <div className="hidden items-center gap-4 lg:flex">
-              <DarkModeToggle overHero={overHero} />
+              <DarkModeToggle overHero={overDarkBg} />
               <Link
                 href="/contact"
                 className={`text-[13px] font-semibold uppercase tracking-[0.08em] transition-colors duration-300 ${linkColor}`}

@@ -12,9 +12,10 @@ function isElementInViewport(el: HTMLElement) {
   return rect.top < window.innerHeight * 0.95 && rect.bottom > 0
 }
 
-export function useInView<T extends HTMLElement>() {
+export function useInView<T extends HTMLElement>(options?: { instant?: boolean }) {
   const ref = useRef<T>(null)
-  const [inView, setInView] = useState(false)
+  const instant = options?.instant ?? false
+  const [inView, setInView] = useState(instant)
 
   useEffect(() => {
     const el = ref.current
@@ -22,16 +23,18 @@ export function useInView<T extends HTMLElement>() {
 
     const reveal = () => setInView(true)
 
-    if (prefersReducedMotion()) {
+    if (instant || prefersReducedMotion()) {
       reveal()
       return
     }
 
     // Already on screen when section mounts (e.g. after fast scroll or refresh mid-page)
-    if (isElementInViewport(el)) {
-      reveal()
-      return
+    const checkVisible = () => {
+      if (isElementInViewport(el)) reveal()
     }
+
+    checkVisible()
+    requestAnimationFrame(() => requestAnimationFrame(checkVisible))
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -60,7 +63,7 @@ export function useInView<T extends HTMLElement>() {
       window.clearTimeout(failsafe)
       window.removeEventListener('load', onLoad)
     }
-  }, [])
+  }, [instant])
 
   return { ref, inView }
 }

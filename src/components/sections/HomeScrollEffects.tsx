@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { initHomeScrollAnimations } from '@/lib/animations'
+import { cleanupHomePinnedSections, initHomeScrollAnimations } from '@/lib/animations'
 
 export function HomeScrollEffects() {
   useEffect(() => {
@@ -17,7 +17,10 @@ export function HomeScrollEffects() {
       window.addEventListener('lenis-ready', init, { once: true })
     }
 
-    return () => window.removeEventListener('lenis-ready', init)
+    return () => {
+      window.removeEventListener('lenis-ready', init)
+      cleanupHomePinnedSections()
+    }
   }, [])
 
   return null
