@@ -540,6 +540,67 @@ export const travelStories = [
   },
 ]
 
+/** Kanila-style — homepage “Things to know before travelling” */
+export const travelTipsBefore = [
+  {
+    title: 'Visa & entry requirements',
+    desc: 'Confirm passport validity, visa rules, and transit requirements for every country on your itinerary.',
+    href: '/visa-assistance',
+  },
+  {
+    title: 'Travel documents',
+    desc: 'Keep tickets, insurance, corporate letters, and ID accessible in print and digital copies.',
+    href: '/visa-assistance',
+  },
+  {
+    title: 'Airport meet & assist',
+    desc: 'Book arrival and departure support — especially at Mogadishu and regional Somalia airports.',
+    href: '/services#airport-experience',
+  },
+  {
+    title: 'Insurance & health',
+    desc: 'Arrange travel cover and check health advisories before international departures.',
+    href: '/services',
+  },
+  {
+    title: 'Baggage & connections',
+    desc: 'Allow connection time on multi-sector tickets; confirm baggage allowances with your airline.',
+    href: '/contact',
+  },
+  {
+    title: '24-hour support',
+    desc: 'Save Kamil contact details for changes, delays, or emergency travel assistance.',
+    href: '/contact',
+  },
+]
+
+export const homeFaqs = [
+  {
+    q: 'How do I book a tour or flight with Kamil Travel?',
+    a: 'We work on an inquiry basis — share your dates, route, and group size via our contact form or email. Our team responds with options and a tailored quote; there is no instant online checkout.',
+  },
+  {
+    q: 'Do you offer corporate travel management?',
+    a: 'Yes. We provide customized booking, group coordination, emergency support, and account-style service for organizations in Kenya, Somalia, and on global routes.',
+  },
+  {
+    q: 'What airport support do you provide in Somalia?',
+    a: 'We operate a branch at Mogadishu airport for meet & assist, plus representatives at Hargeisa, Garowe, Bosaso, Galkayo, Kismayu, and Baidoa.',
+  },
+  {
+    q: 'Can you help with visa preparation?',
+    a: 'We offer guidance and checklists for travel preparation. We do not guarantee visa approval or provide legal immigration advice.',
+  },
+  {
+    q: 'Which destinations do you cover?',
+    a: 'From Nairobi we coordinate travel across East Africa, Europe, the Americas, and Asia-Pacific — including corporate hubs such as Oslo, London, New York, and Sydney.',
+  },
+  {
+    q: 'Is car hire and airport transfer available?',
+    a: 'Yes — airport pickup, drop-off, corporate movement, and car hire can be arranged through our transfers page or by inquiry.',
+  },
+]
+
 export const trustPartners = [
   'Global Airline Partners',
   'Nairobi Headquarters',

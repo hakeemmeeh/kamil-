@@ -7,6 +7,10 @@ import { SectionHeader } from '@/components/ui/SectionHeader'
 import Image from 'next/image'
 import { PageBanner } from '@/components/shared/PageBanner'
 import { Eye, Target, Users, Shield, Heart, Zap } from 'lucide-react'
+import { WhyKamil } from '@/components/sections/WhyKamil'
+import { SomaliaRepresentativeNetwork } from '@/components/sections/SomaliaRepresentativeNetwork'
+import { TrustPartnersStrip } from '@/components/sections/TrustPartnersStrip'
+import { CorporateTravelSection } from '@/components/sections/CorporateTravelSection'
 
 export const metadata: Metadata = {
   title: 'About',
@@ -91,6 +95,16 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <WhyKamil />
+
+      <div id="somalia-network">
+        <SomaliaRepresentativeNetwork />
+      </div>
+
+      <CorporateTravelSection />
+
+      <TrustPartnersStrip />
 
       {/* Core Values */}
       <section className="section-padding bg-sand-light">

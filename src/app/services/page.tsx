@@ -2,6 +2,10 @@ import type { Metadata } from 'next'
 import { FadeUp } from '@/components/ui/FadeUp'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { ServicesPageGrid } from '@/components/services/ServicesPageGrid'
+import { SignatureServices } from '@/components/sections/SignatureServices'
+import { AirportExperience } from '@/components/sections/AirportExperience'
+import { TrustPartnersStrip } from '@/components/sections/TrustPartnersStrip'
+import { TravelTipsSection } from '@/components/sections/TravelTipsSection'
 import { PageBanner } from '@/components/shared/PageBanner'
 import { Button } from '@/components/ui/Button'
 
@@ -26,6 +30,11 @@ export default function ServicesPage() {
           <ServicesPageGrid />
         </div>
       </section>
+
+      <SignatureServices />
+      <AirportExperience />
+      <TravelTipsSection />
+      <TrustPartnersStrip />
 
       <section className="section-padding bg-night text-center">
         <div className="mx-auto max-w-3xl px-5">

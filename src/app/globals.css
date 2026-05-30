@@ -532,6 +532,16 @@ h1, h2, h3, .font-display {
   padding-bottom: 0.25rem;
 }
 
+/* Kanila travel agency — arched tops on photo cards */
+.kanila-arch-top,
+.kanila-travel-service-card__arch {
+  border-radius: 50% 50% 0 0;
+}
+
+.kanila-travel-service-card__arch {
+  border-radius: 50% 50% 0 0;
+}
+
 @media (min-width: 768px) {
   .hero-kanila-arch-track {
     min-height: 280px;

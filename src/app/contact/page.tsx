@@ -3,6 +3,8 @@ import { site } from '@/lib/content'
 import { FadeUp } from '@/components/ui/FadeUp'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { ContactFormWrapper } from '@/components/ui/ContactFormWrapper'
+import { BookingSearch } from '@/components/sections/BookingSearch'
+import { HomeFAQSection } from '@/components/sections/HomeFAQSection'
 import { PageBanner } from '@/components/shared/PageBanner'
 import { Mail, Phone, Smartphone, MapPin } from 'lucide-react'
 
@@ -27,6 +29,8 @@ export default function ContactPage() {
         subtitle="We are here to help with your travel needs."
         imageKey="bannerContact"
       />
+
+      <BookingSearch />
 
       <section className="section-padding bg-sand-light">
         <div className="mx-auto max-w-7xl px-5">
@@ -79,6 +83,8 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      <HomeFAQSection />
     </>
   )
 }

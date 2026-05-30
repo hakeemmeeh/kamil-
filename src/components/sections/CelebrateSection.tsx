@@ -1,40 +1,51 @@
 'use client'
 
-import { Plane, Building2, MapPin } from 'lucide-react'
+import Image from 'next/image'
 import { LineReveal } from '@/components/ui/LineReveal'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { about } from '@/lib/content'
+import { cn } from '@/lib/utils'
+import { cityImage } from '@/lib/cityImages'
 
 const features = [
   {
-    icon: Plane,
     title: 'Global Air Ticketing',
     desc: 'Professional flight booking for corporate and leisure travel to destinations worldwide.',
+    imageKey: 'international' as const,
   },
   {
-    icon: Building2,
     title: 'Corporate Travel Management',
     desc: 'Cost-effective, customized travel planning for organizations — from Nairobi to global hubs.',
+    imageKey: 'bannerCorporate' as const,
   },
   {
-    icon: MapPin,
     title: 'Regional & Airport Support',
     desc: 'Meet & assist at Mogadishu and representatives across six Somalia airports.',
+    imageKey: 'mogadishuCoast' as const,
   },
 ]
 
-export function CelebrateSection() {
+interface CelebrateSectionProps {
+  /** Tighter band on homepage — full story on /about */
+  compact?: boolean
+}
+
+export function CelebrateSection({ compact = false }: CelebrateSectionProps) {
   return (
     <section
-      className="hero-cover-panel relative z-40 isolate overlap-panel -mt-[min(22vh,200px)] rounded-t-[2.5rem] bg-sand-light pb-20 pt-16 shadow-[0_-48px_120px_rgba(7,17,31,0.35)] md:-mt-[min(28vh,240px)] md:pb-28 md:pt-20"
+      className={
+        compact
+          ? 'hero-cover-panel relative z-40 isolate overlap-panel -mt-[min(22vh,200px)] rounded-t-[2.5rem] bg-sand-light pb-12 pt-14 shadow-[0_-48px_120px_rgba(7,17,31,0.35)] md:-mt-[min(28vh,240px)] md:pb-16 md:pt-16'
+          : 'hero-cover-panel relative z-40 isolate overlap-panel -mt-[min(22vh,200px)] rounded-t-[2.5rem] bg-sand-light pb-20 pt-16 shadow-[0_-48px_120px_rgba(7,17,31,0.35)] md:-mt-[min(28vh,240px)] md:pb-28 md:pt-20'
+      }
       id="about"
     >
       {/* Orange accent line — Kanila Home 3 */}
       <div className="absolute left-0 right-0 top-0 h-1 bg-gold" aria-hidden />
 
       <div className="mx-auto max-w-7xl px-5">
-        <div className="mb-16 text-center">
+        <div className={compact ? 'mb-10 text-center' : 'mb-16 text-center'}>
           <p className="animate-eyebrow eyebrow mb-6 justify-center">About Us</p>
           <LineReveal
             tag="h2"
@@ -44,25 +55,38 @@ export function CelebrateSection() {
             {`Celebrating 10+ Years of\nProfessional Travel`}
           </LineReveal>
           <p className="animate-fade-up mx-auto max-w-2xl text-lg leading-relaxed text-ink-muted">
-            {about.intro}
+            {compact
+              ? 'Cost-effective, customized travel management for corporate and leisure clients in Kenya, Somalia, and worldwide.'
+              : about.intro}
           </p>
         </div>
 
         <div
           data-stagger="features"
-          className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-10"
+          className={cn(
+            'grid grid-cols-1 md:grid-cols-3',
+            compact ? 'gap-5 md:gap-6' : 'gap-8 md:gap-10'
+          )}
         >
           {features.map((feature) => (
             <div
               key={feature.title}
               data-stagger-item
-              className="group rounded-3xl border border-border bg-white p-8 text-center transition-all duration-500 hover:-translate-y-1 hover:border-gold/30 hover:shadow-premium dark:bg-surface"
+              className="group overflow-hidden rounded-3xl border border-border bg-white text-center shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-gold/30 hover:shadow-premium dark:bg-surface"
             >
-              <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gold/10 text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-night">
-                <feature.icon className="h-6 w-6" />
+              <div className="kanila-arch-top relative aspect-[5/3] w-full overflow-hidden">
+                <Image
+                  src={cityImage(feature.imageKey, 800)}
+                  alt=""
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="200px"
+                />
               </div>
-              <h3 className="mb-3 font-kanila-display text-xl font-normal text-ink">{feature.title}</h3>
-              <p className="text-sm leading-relaxed text-ink-muted">{feature.desc}</p>
+              <div className={cn(compact ? 'px-5 pb-6 pt-4' : 'px-6 pb-8 pt-5')}>
+                <h3 className="mb-2 font-kanila-display text-xl font-normal text-ink">{feature.title}</h3>
+                <p className="text-sm leading-relaxed text-ink-muted">{feature.desc}</p>
+              </div>
             </div>
           ))}
         </div>

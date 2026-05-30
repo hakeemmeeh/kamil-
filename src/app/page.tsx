@@ -1,51 +1,44 @@
 import { HeroSection } from '@/components/sections/HeroSection'
 import { CelebrateSection } from '@/components/sections/CelebrateSection'
 import { BrandStatement } from '@/components/sections/BrandStatement'
-import { BookingSearch } from '@/components/sections/BookingSearch'
-import { SignatureServices } from '@/components/sections/SignatureServices'
+import { SignatureServicesShowcase } from '@/components/sections/SignatureServicesShowcase'
 import { TravelByRegionSection } from '@/components/sections/TravelByRegionSection'
 import { PopularDestinationsSection } from '@/components/sections/PopularDestinationsSection'
 import { StatsStrip } from '@/components/sections/StatsStrip'
 import { CuratedJourneysSection } from '@/components/sections/CuratedJourneysSection'
-import { CorporateTravelSection } from '@/components/sections/CorporateTravelSection'
-import { AirportExperience } from '@/components/sections/AirportExperience'
-import { SomaliaRepresentativeNetwork } from '@/components/sections/SomaliaRepresentativeNetwork'
-import { WhyKamil } from '@/components/sections/WhyKamil'
+import { TravelTipsSection } from '@/components/sections/TravelTipsSection'
+import { HomeFAQSection } from '@/components/sections/HomeFAQSection'
+import { KamilServicesTeaser } from '@/components/sections/KamilServicesTeaser'
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection'
-import { TrustPartnersStrip } from '@/components/sections/TrustPartnersStrip'
 import { CinematicCTA } from '@/components/sections/CinematicCTA'
 import { HomeScrollEffects } from '@/components/sections/HomeScrollEffects'
 
 /**
- * Kanila Home 3 structure + Kamil critical sections (services, booking, corporate, airport, tours).
- * DestinationsPreview omitted on home (hero arches + Popular cover the same ground).
+ * Kanila Home 3 core + Kamil essentials (teasers link to full sections on inner pages).
  */
 export default function HomePage() {
   return (
     <>
       <HomeScrollEffects />
 
-      {/* Kanila Home 3 core */}
       <HeroSection />
-      <CelebrateSection />
+      <CelebrateSection compact />
       <BrandStatement />
 
-      {/* Kamil — inquiry & services */}
-      <BookingSearch />
-      <SignatureServices />
+      <SignatureServicesShowcase />
 
       <TravelByRegionSection />
       <PopularDestinationsSection />
 
       <StatsStrip />
       <CuratedJourneysSection />
-      <CorporateTravelSection />
-      <AirportExperience />
-      <SomaliaRepresentativeNetwork />
 
-      <WhyKamil />
+      <TravelTipsSection />
+      <HomeFAQSection />
+
+      <KamilServicesTeaser />
+
       <TestimonialsSection />
-      <TrustPartnersStrip />
       <CinematicCTA />
     </>
   )

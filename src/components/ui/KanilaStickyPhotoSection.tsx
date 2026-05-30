@@ -1,0 +1,74 @@
+'use client'
+
+import Image from 'next/image'
+import { cn } from '@/lib/utils'
+
+type OverlayTone = 'dark' | 'warm' | 'light'
+
+interface KanilaStickyPhotoSectionProps {
+  id: string
+  imageSrc: string
+  imageAlt: string
+  children: React.ReactNode
+  className?: string
+  overlay?: OverlayTone
+  /** Scroll runway below content (Kanila cover effect) */
+  runway?: string | false
+  pinClassName?: string
+}
+
+const overlays: Record<OverlayTone, string> = {
+  dark: 'from-night/75 via-night/45 to-night/65',
+  warm: 'from-night/60 via-night/25 to-night/50',
+  light: 'from-white/88 via-white/72 to-white/88',
+}
+
+/**
+ * Kanila Home 3 — full-bleed sticky background, foreground scrolls over it.
+ */
+export function KanilaStickyPhotoSection({
+  id,
+  imageSrc,
+  imageAlt,
+  children,
+  className,
+  overlay = 'dark',
+  runway = '50vh',
+  pinClassName,
+}: KanilaStickyPhotoSectionProps) {
+  return (
+    <section id={id} className={cn('kanila-sticky-cover relative w-full', className)}>
+      <div
+        className={cn(
+          'kanila-sticky-cover__pin h-[100svh] w-full overflow-hidden bg-ink',
+          pinClassName
+        )}
+      >
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          fill
+          quality={90}
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+        <div
+          className={cn('pointer-events-none absolute inset-0 bg-gradient-to-b', overlays[overlay])}
+          aria-hidden
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/50 via-transparent to-night/20" aria-hidden />
+      </div>
+
+      <div className="kanila-sticky-cover__scroll relative z-10">
+        {children}
+        {runway !== false && (
+          <div
+            className="kanila-sticky-cover__runway pointer-events-none w-full"
+            style={{ height: runway }}
+            aria-hidden
+          />
+        )}
+      </div>
+    </section>
+  )
+}

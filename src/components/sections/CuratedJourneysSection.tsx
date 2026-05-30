@@ -40,18 +40,20 @@ export function CuratedJourneysSection() {
   }, [advance, paused, journeys.length])
 
   return (
-    <section className="section-padding overflow-hidden bg-sand" id="curated-journeys">
+    <section className="section-padding overflow-hidden bg-night" id="popular-tours">
       <div className="mx-auto max-w-7xl px-5">
         <div className="mb-10 flex flex-col gap-6 md:mb-14 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <p className="animate-eyebrow eyebrow mb-6 before:!bg-gold">Travel Packages</p>
+            <p className="animate-eyebrow eyebrow mb-6 justify-start before:!bg-gold text-white/80">
+              Tour Packages
+            </p>
             <LineReveal
               tag="h2"
-              className="font-kanila-display text-4xl font-normal leading-[0.95] tracking-tight text-ink md:text-5xl lg:text-[52px]"
+              className="font-kanila-display text-4xl font-normal leading-[0.95] tracking-tight text-white md:text-5xl lg:text-[52px]"
             >
-              Curated Luxury Journeys
+              Most Popular Tours
             </LineReveal>
-            <p className="animate-fade-up mt-5 text-lg leading-relaxed text-ink-muted">
+            <p className="animate-fade-up mt-5 text-lg leading-relaxed text-white/65">
               From Weekend in Oslo to Faraway Sydney — inquiry-based packages worldwide, coordinated
               from our Nairobi headquarters.
             </p>
@@ -61,7 +63,7 @@ export function CuratedJourneysSection() {
             <button
               type="button"
               onClick={() => advance(-1)}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-white text-ink-muted transition hover:border-gold hover:text-gold"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition hover:border-gold hover:bg-gold/20 hover:text-gold"
               aria-label="Previous journey"
             >
               <ChevronLeft className="h-5 w-5" />
@@ -69,7 +71,7 @@ export function CuratedJourneysSection() {
             <button
               type="button"
               onClick={() => advance(1)}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-white text-ink-muted transition hover:border-gold hover:text-gold"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition hover:border-gold hover:bg-gold/20 hover:text-gold"
               aria-label="Next journey"
             >
               <ChevronRight className="h-5 w-5" />
