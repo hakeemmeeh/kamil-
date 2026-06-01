@@ -33,6 +33,11 @@ export interface Tour {
   image: string
   highlights: string[]
   featured: boolean
+  rating?: number
+  reviewCount?: number
+  interests?: string[]
+  promoLabel?: string
+  firstMinute?: boolean
 }
 
 export interface NavItem {

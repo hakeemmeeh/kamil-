@@ -72,7 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${cormorant.variable} ${manrope.variable} ${marcellus.variable} ${satisfy.variable}`}
       suppressHydrationWarning
     >
-      <body className="font-body antialiased">
+      <body className="font-body font-medium antialiased text-ink">
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <SmoothScroll>
           <RouteTransitionCleanup />

@@ -21,7 +21,7 @@ export function SectionHeader({
     >
       {eyebrow && <p className="eyebrow">{eyebrow}</p>}
       <h2
-        className={`font-kanila-display text-4xl font-normal md:text-5xl lg:text-[56px] leading-[0.95] tracking-tight ${
+        className={`font-kanila-display text-4xl md:text-5xl lg:text-[56px] leading-[0.95] tracking-tight ${
           dark ? 'text-white' : 'text-ink'
         }`}
       >
@@ -31,7 +31,7 @@ export function SectionHeader({
         <p
           className={`mt-6 text-lg md:text-xl leading-relaxed max-w-2xl ${
             align === 'center' ? 'mx-auto' : ''
-          } ${dark ? 'text-white/60' : 'text-ink-muted'}`}
+          } ${dark ? 'text-white/85' : 'text-body-contrast'}`}
         >
           {description}
         </p>

@@ -7,11 +7,13 @@ import { AirportExperience } from '@/components/sections/AirportExperience'
 import { TrustPartnersStrip } from '@/components/sections/TrustPartnersStrip'
 import { TravelTipsSection } from '@/components/sections/TravelTipsSection'
 import { PageBanner } from '@/components/shared/PageBanner'
-import { Button } from '@/components/ui/Button'
+import { InnerPageOverlap } from '@/components/shared/InnerPageOverlap'
+import { InnerPageCTA } from '@/components/shared/InnerPageCTA'
 
 export const metadata: Metadata = {
   title: 'Travel Services',
-  description: 'Explore Kamil Travel services — air ticketing, meet & assist, travel insurance, VIP lounge, airport transfers, and more.',
+  description:
+    'Explore Kamil Travel services — air ticketing, meet & assist, travel insurance, VIP lounge, airport transfers, and more.',
 }
 
 export default function ServicesPage() {
@@ -22,28 +24,32 @@ export default function ServicesPage() {
         title="Travel Services"
         subtitle="Comprehensive travel support designed around professional delivery and client convenience."
         imageKey="bannerServices"
+        breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Services' }]}
       />
 
-      <section className="section-padding bg-sand-light">
-        <div className="mx-auto max-w-7xl px-5">
-          <FadeUp><SectionHeader eyebrow="All Services" title="Everything you need for your journey" /></FadeUp>
-          <ServicesPageGrid />
-        </div>
-      </section>
+      <InnerPageOverlap>
+        <section className="section-padding pt-14 md:pt-16">
+          <div className="mx-auto max-w-7xl px-5">
+            <FadeUp>
+              <SectionHeader eyebrow="All Services" title="Everything you need for your journey" />
+            </FadeUp>
+            <ServicesPageGrid />
+          </div>
+        </section>
+      </InnerPageOverlap>
 
       <SignatureServices />
       <AirportExperience />
       <TravelTipsSection />
       <TrustPartnersStrip />
 
-      <section className="section-padding bg-night text-center">
-        <div className="mx-auto max-w-3xl px-5">
-          <FadeUp instant>
-            <h2 className="font-display text-4xl md:text-5xl font-semibold text-white leading-[0.95] tracking-tight mb-6">Need travel support?</h2>
-            <Button href="/contact" variant="primary" size="lg">Start an Inquiry</Button>
-          </FadeUp>
-        </div>
-      </section>
+      <InnerPageCTA
+        title="Need travel support?"
+        description="From ticketing to meet & assist — tell us what you need and we will respond within 24 hours."
+        primaryLabel="Start an Inquiry"
+        secondaryLabel=""
+        imageKey="bannerServices"
+      />
     </>
   )
 }

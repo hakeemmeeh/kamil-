@@ -94,7 +94,7 @@ export function PopularDestinationsSection() {
       <div className="kanila-sticky-cover__scroll relative z-10">
         <div className="relative flex min-h-[100svh] flex-col justify-center py-16 md:py-20">
           <header className="popular-copy mb-10 px-5 text-center md:mb-14">
-            <p className="font-kanila-script mb-2 text-[1.65rem] text-kanila-orange md:mb-3 md:text-[1.85rem]">
+            <p className="font-kanila-script mb-2 text-[1.65rem] text-kamil-green-light md:mb-3 md:text-[1.85rem]">
               Tour Activity
             </p>
             <h2 className="popular-title font-kanila-display text-[clamp(2.75rem,6.5vw,4.75rem)] font-normal leading-[0.95] tracking-tight text-white">

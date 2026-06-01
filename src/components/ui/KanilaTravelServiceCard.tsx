@@ -52,7 +52,7 @@ export function KanilaTravelServiceCard({
             {title}
           </h3>
           <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink-muted">{desc}</p>
-          <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.12em] text-kanila-orange transition-all group-hover:gap-2.5">
+          <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.12em] text-kamil-green transition-all group-hover:gap-2.5">
             Discover
             <ArrowUpRight className="h-4 w-4" />
           </span>

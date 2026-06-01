@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import { Suspense } from 'react'
 import { FadeUp } from '@/components/ui/FadeUp'
 import { SectionHeader } from '@/components/ui/SectionHeader'
-import { Button } from '@/components/ui/Button'
 import { PageBanner } from '@/components/shared/PageBanner'
+import { InnerPageOverlap } from '@/components/shared/InnerPageOverlap'
+import { InnerPageCTA } from '@/components/shared/InnerPageCTA'
 import { ToursCatalog } from '@/components/tours/ToursCatalog'
 
 export const metadata: Metadata = {
@@ -38,52 +39,48 @@ export default function ToursPage() {
         title="Tours & Travel Packages"
         subtitle="Curated travel packages for Somalia, Kenya, and beyond — coordinated with full airport support and professional service."
         imageKey="international"
+        breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Tours' }]}
       />
 
-      <section className="section-padding bg-sand-light">
-        <div className="mx-auto max-w-7xl px-5">
-          <FadeUp>
-            <SectionHeader
-              eyebrow="How It Works"
-              title="Inquiry-based booking"
-              description="Kamil Travel does not offer instant online checkout. Every package starts with a conversation so we can tailor flights, transfers, and support to your needs."
-            />
-          </FadeUp>
-          <div className="mb-16 grid grid-cols-1 gap-6 md:grid-cols-3">
-            {steps.map((item, i) => (
-              <FadeUp key={item.step} delay={i * 0.08}>
-                <div className="rounded-2xl border border-border bg-surface p-6">
-                  <span className="mb-3 block font-display text-3xl font-semibold text-gold">{item.step}</span>
-                  <h3 className="mb-2 font-display text-xl font-semibold text-ink">{item.title}</h3>
-                  <p className="text-sm leading-relaxed text-ink-muted">{item.desc}</p>
-                </div>
-              </FadeUp>
-            ))}
-          </div>
-          <ToursCatalog />
-        </div>
-      </section>
-
-      <section className="bg-night py-20 text-center">
-        <div className="mx-auto max-w-3xl px-5">
-          <FadeUp instant>
-            <h2 className="mb-4 font-display text-4xl font-semibold text-white md:text-5xl">
-              Need a custom itinerary?
-            </h2>
-            <p className="mb-8 text-white/60">
-              Corporate groups, multi-city Somalia routes, and international packages — tell us what you need and we will build it.
-            </p>
-            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button href="/contact?inquiry=Tour+Inquiry" variant="primary" size="lg">
-                Send Tour Enquiry
-              </Button>
-              <Link href="/destinations" className="text-sm font-bold text-gold hover:underline">
-                View destinations
-              </Link>
+      <InnerPageOverlap>
+        <section className="section-padding pt-14 md:pt-16">
+          <div className="mx-auto max-w-7xl px-5">
+            <FadeUp>
+              <SectionHeader
+                eyebrow="How It Works"
+                title="Inquiry-based booking"
+                description="Kamil Travel does not offer instant online checkout. Every package starts with a conversation so we can tailor flights, transfers, and support to your needs."
+              />
+            </FadeUp>
+            <div className="mb-16 grid grid-cols-1 gap-6 md:grid-cols-3">
+              {steps.map((item, i) => (
+                <FadeUp key={item.step} delay={i * 0.08}>
+                  <div className="rounded-2xl border border-border bg-white p-6 shadow-sm transition-all hover:border-gold/30 hover:shadow-md">
+                    <span className="mb-3 block font-kanila-display text-3xl font-normal text-gold">
+                      {item.step}
+                    </span>
+                    <h3 className="mb-2 font-kanila-display text-xl font-normal text-ink">{item.title}</h3>
+                    <p className="text-sm leading-relaxed text-ink-muted">{item.desc}</p>
+                  </div>
+                </FadeUp>
+              ))}
             </div>
-          </FadeUp>
-        </div>
-      </section>
+            <Suspense fallback={<p className="text-center text-ink-muted">Loading packages…</p>}>
+              <ToursCatalog />
+            </Suspense>
+          </div>
+        </section>
+      </InnerPageOverlap>
+
+      <InnerPageCTA
+        title="Need a custom itinerary?"
+        description="Corporate groups, multi-city Somalia routes, and international packages — tell us what you need and we will build it."
+        primaryLabel="Send Tour Enquiry"
+        primaryHref="/contact?inquiry=Tour+Inquiry"
+        secondaryLabel="View destinations"
+        secondaryHref="/destinations"
+        imageKey="santorini"
+      />
     </>
   )
 }

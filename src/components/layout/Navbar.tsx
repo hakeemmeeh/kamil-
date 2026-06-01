@@ -6,45 +6,53 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { nav, site } from '@/lib/content'
 import { MobileMenu } from './MobileMenu'
+import { ServicesNavDropdown } from './ServicesNavDropdown'
 import { DarkModeToggle } from '@/components/ui/DarkModeToggle'
-import { cn } from '@/lib/utils'
+
+const desktopNav = nav.filter((item) => item.href !== '/' && item.href !== '/contact')
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  const isHome = pathname === '/'
+  const overHero = isHome && !scrolled
 
   useEffect(() => {
     setMobileOpen(false)
   }, [pathname])
 
-  /** Transparent nav over dark hero/banner — white links + screen-blend logo */
-  const overDarkBg = !scrolled
-  const linkColor = overDarkBg ? 'text-white/85 hover:text-gold' : 'text-ink-muted hover:text-gold'
-  const activeColor = 'text-gold'
-  const hamburgerColor = overDarkBg ? 'bg-white' : 'bg-ink'
+  useEffect(() => {
+    const update = () => {
+      const y = window.__lenis?.scroll ?? window.scrollY
+      setScrolled(y > 32)
+    }
+    update()
+    const lenis = window.__lenis
+    lenis?.on('scroll', update)
+    window.addEventListener('scroll', update, { passive: true })
+    return () => {
+      lenis?.off('scroll', update)
+      window.removeEventListener('scroll', update)
+    }
+  }, [pathname])
+
+  const linkColor = 'text-ink-soft hover:text-gold'
+  const activeColor = 'text-gold font-bold'
+  const hamburgerColor = 'bg-ink'
 
   return (
     <>
       <header
-        className={`fixed left-0 right-0 top-0 z-50 transition-all duration-[400ms] ${
-          scrolled ? 'py-3' : 'py-5'
+        className={`z-50 w-full py-4 transition-[background-color,box-shadow] duration-300 ${
+          isHome
+            ? `fixed inset-x-0 top-0 ${scrolled ? 'bg-sand-light/95 shadow-sm backdrop-blur-md' : 'bg-transparent'}`
+            : 'relative bg-sand-light'
         }`}
       >
         <div className="mx-auto max-w-7xl px-5">
           <nav
-            className={`flex items-center justify-between transition-all duration-[400ms] ${
-              scrolled
-                ? 'glass rounded-full px-6 py-3 shadow-premium'
-                : 'px-2 py-2'
-            }`}
+            className="glass flex items-center justify-between rounded-full px-6 py-3 shadow-premium ring-1 ring-black/[0.04]"
             role="navigation"
             aria-label="Main navigation"
           >
@@ -56,32 +64,34 @@ export function Navbar() {
               <Image
                 src="/logo/kamil-logo.png"
                 alt={`${site.name} logo`}
-                width={240}
-                height={76}
-                className={cn(
-                  'h-11 w-auto max-w-[min(52vw,220px)] object-contain md:h-12 lg:h-[52px]',
-                  overDarkBg && 'site-logo'
-                )}
+                width={320}
+                height={102}
+                className="h-14 w-auto max-w-[min(62vw,280px)] object-contain sm:h-[3.75rem] md:h-16 lg:h-[4.5rem] lg:max-w-[320px]"
                 priority
               />
             </Link>
 
             <div className="hidden items-center gap-1 lg:flex">
-              {nav.slice(0, 6).map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`nav-link relative px-3 py-2 text-[13px] font-semibold uppercase tracking-[0.08em] transition-colors duration-300 ${
-                    pathname === item.href ? activeColor : linkColor
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {desktopNav.map((item) =>
+                item.children ? (
+                  <ServicesNavDropdown key={item.href} linkColor={linkColor} activeColor={activeColor} />
+                ) : (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`nav-link relative px-3 py-2 text-[13px] font-bold uppercase tracking-[0.1em] transition-colors duration-300 ${
+                      pathname === item.href ? activeColor : linkColor
+                    }`}
+                    aria-current={pathname === item.href ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </Link>
+                )
+              )}
             </div>
 
             <div className="hidden items-center gap-4 lg:flex">
-              <DarkModeToggle overHero={overDarkBg} />
+              <DarkModeToggle overHero={overHero} />
               <Link
                 href="/contact"
                 className={`text-[13px] font-semibold uppercase tracking-[0.08em] transition-colors duration-300 ${linkColor}`}

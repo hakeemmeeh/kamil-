@@ -20,7 +20,7 @@ export function HomeFAQSection() {
       <div className="relative px-5 py-20 md:py-28">
         <div className="mx-auto max-w-3xl">
           <FadeUp>
-            <p className="font-kanila-script mb-3 text-center text-[1.5rem] text-kanila-orange md:text-[1.65rem]">
+            <p className="font-kanila-script mb-3 text-center text-[1.5rem] text-kamil-green md:text-[1.65rem]">
               Questions
             </p>
             <h2 className="text-center font-kanila-display text-[2.25rem] font-normal leading-[0.95] tracking-tight text-ink md:text-[2.75rem]">
@@ -51,7 +51,7 @@ export function HomeFAQSection() {
                     </span>
                     <ChevronDown
                       className={cn(
-                        'h-5 w-5 shrink-0 text-kanila-orange transition-transform duration-300',
+                        'h-5 w-5 shrink-0 text-kamil-green transition-transform duration-300',
                         open === i && 'rotate-180'
                       )}
                     />
@@ -76,7 +76,7 @@ export function HomeFAQSection() {
           <FadeUp delay={0.2}>
             <p className="mt-8 text-center text-sm text-ink-muted">
               Still have questions?{' '}
-              <Link href="/contact" className="font-bold text-kanila-orange hover:underline">
+              <Link href="/contact" className="font-bold text-kamil-green hover:underline">
                 Contact our team
               </Link>
             </p>

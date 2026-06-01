@@ -340,6 +340,30 @@ export const destinations = [
     image: cityImage('tokyo'),
     status: 'confirmed-context',
   },
+  {
+    slug: 'moscow',
+    title: 'Moscow',
+    country: 'Russia',
+    desc: 'European gateway city — business and leisure routing coordinated by Kamil Travel.',
+    image: cityImage('moscow'),
+    status: 'confirmed-context',
+  },
+  {
+    slug: 'belgrade',
+    title: 'Belgrade',
+    country: 'Serbia',
+    desc: 'Balkan hub for regional and connecting international itineraries.',
+    image: cityImage('belgrade'),
+    status: 'confirmed-context',
+  },
+  {
+    slug: 'portugal',
+    title: 'Portugal',
+    country: 'Portugal',
+    desc: 'Atlantic coast holidays and curated Portuguese city breaks.',
+    image: cityImage('portugal'),
+    status: 'confirmed-context',
+  },
 ]
 
 export const testimonials = [
@@ -380,6 +404,23 @@ export const testimonials = [
   },
 ]
 
+/** Leisure filters — matches legacy kamiltravel.com footer interests */
+export const tourInterests = [
+  'Adventure',
+  'Family Holidays',
+  'Festivals',
+  'Wildlife',
+  'Cruises',
+  'Backpacking',
+  'Faraway Travels',
+  'Honeymoon & Romancing',
+  'Budget Travels',
+  'First Minute',
+  'Weekend',
+] as const
+
+export type TourInterest = (typeof tourInterests)[number]
+
 export const tourCategories = [
   'All',
   'Somalia Domestic',
@@ -389,6 +430,20 @@ export const tourCategories = [
 ] as const
 
 export type TourCategory = (typeof tourCategories)[number]
+
+export const footerInterestLinks = tourInterests.map((interest) => ({
+  label: interest,
+  href: `/tours?interest=${encodeURIComponent(interest)}`,
+}))
+
+export const visaGalleryImages = [
+  { key: 'oslo', label: 'Oslo, Norway', src: cityImage('oslo', 1400), alt: 'Oslo waterfront' },
+  { key: 'newYork', label: 'New York, USA', src: cityImage('newYork', 1400), alt: 'New York skyline' },
+  { key: 'sydney', label: 'Sydney, Australia', src: cityImage('sydney', 1400), alt: 'Sydney harbour' },
+  { key: 'portugal', label: 'Portugal', src: cityImage('portugal', 1400), alt: 'Lisbon, Portugal' },
+  { key: 'mogadishu', label: 'Mogadishu', src: cityImage('mogadishu', 1400), alt: 'Mogadishu coast' },
+  { key: 'santorini', label: 'Santorini', src: cityImage('santorini', 1400), alt: 'Santorini caldera' },
+] as const
 
 export const tours = [
   {
@@ -402,6 +457,9 @@ export const tours = [
     image: cityImage('santorini'),
     highlights: ['Caldera views', 'Sunset cruises', 'Boutique hotels'],
     featured: true,
+    rating: 4.8,
+    reviewCount: 4,
+    interests: ['Adventure', 'Honeymoon & Romancing', 'Cruises'],
   },
   {
     slug: 'bali-retreat',
@@ -414,6 +472,9 @@ export const tours = [
     image: cityImage('bali'),
     highlights: ['Rice terraces', 'Temple culture', 'Beach resorts'],
     featured: true,
+    rating: 4.9,
+    reviewCount: 5,
+    interests: ['Adventure', 'Family Holidays', 'Faraway Travels'],
   },
   {
     slug: 'thailand-discovery',
@@ -426,6 +487,9 @@ export const tours = [
     image: cityImage('thailand'),
     highlights: ['Temple tours', 'Tropical beaches', 'Island hopping'],
     featured: true,
+    rating: 4.7,
+    reviewCount: 3,
+    interests: ['Adventure', 'Budget Travels', 'Faraway Travels'],
   },
   {
     slug: 'seychelles-luxury',
@@ -438,6 +502,26 @@ export const tours = [
     image: cityImage('seychelles'),
     highlights: ['Luxury resorts', 'Snorkelling', 'Island transfers'],
     featured: true,
+    rating: 5,
+    reviewCount: 2,
+    interests: ['Cruises', 'Honeymoon & Romancing', 'Faraway Travels'],
+  },
+  {
+    slug: 'portugal-vacation',
+    title: 'Vacation in Portugal',
+    destination: 'Portugal',
+    country: 'Portugal',
+    category: 'International' as TourCategory,
+    duration: '14 Days',
+    desc: 'Atlantic coast, historic cities, and curated Portuguese escapes — a popular first-minute favourite on kamiltravel.com.',
+    image: cityImage('portugal'),
+    highlights: ['Coastal towns', 'Wine & culture', 'Flexible routing'],
+    featured: true,
+    rating: 5,
+    reviewCount: 3,
+    interests: ['Cruises', 'Family Holidays', 'First Minute'],
+    promoLabel: 'POPULAR',
+    firstMinute: true,
   },
   {
     slug: 'oslo-weekend',
@@ -450,6 +534,10 @@ export const tours = [
     image: cityImage('oslo'),
     highlights: ['Weekend escape', 'Waterfront & city', 'First minute offers'],
     featured: true,
+    rating: 4.7,
+    reviewCount: 3,
+    interests: ['Backpacking', 'Budget Travels', 'First Minute', 'Weekend'],
+    firstMinute: true,
   },
   {
     slug: 'new-york-adventure',
@@ -462,6 +550,9 @@ export const tours = [
     image: cityImage('newYork'),
     highlights: ['City adventure', 'Curated itinerary', 'Group & solo'],
     featured: true,
+    rating: 5,
+    reviewCount: 2,
+    interests: ['Faraway Travels', 'Festivals', 'Adventure'],
   },
   {
     slug: 'sydney-faraway',
@@ -474,6 +565,11 @@ export const tours = [
     image: cityImage('sydney'),
     highlights: ['Long-haul leisure', 'Harbour & coast', 'Family holidays'],
     featured: true,
+    rating: 4,
+    reviewCount: 2,
+    interests: ['Cruises', 'Family Holidays', 'Faraway Travels'],
+    promoLabel: '20% OFF',
+    firstMinute: true,
   },
   {
     slug: 'mogadishu-travel-package',
@@ -486,6 +582,9 @@ export const tours = [
     image: cityImage('mogadishu'),
     highlights: ['Meet & assist', 'Airport transfers', 'Group coordination'],
     featured: true,
+    rating: 4.8,
+    reviewCount: 6,
+    interests: ['Adventure', 'Family Holidays'],
   },
   {
     slug: 'hargeisa-regional-travel',
@@ -564,10 +663,11 @@ export const footerDestinationLinks = [
 ]
 
 export const footerGlobalCityLinks = [
-  { label: 'London', href: '/tours/international-flight-package' },
-  { label: 'Tokyo', href: '/tours/international-flight-package' },
-  { label: 'Moscow', href: '/tours/international-flight-package' },
-  { label: 'Belgrade', href: '/tours/international-flight-package' },
+  { label: 'London', href: '/destinations#london' },
+  { label: 'New York', href: '/tours/new-york-adventure' },
+  { label: 'Tokyo', href: '/destinations#tokyo' },
+  { label: 'Moscow', href: '/destinations#moscow' },
+  { label: 'Belgrade', href: '/destinations#belgrade' },
 ]
 
 export const becomeAGuide = {
@@ -728,14 +828,25 @@ export const trustPartners = [
   '24-Hour Emergency Support',
 ]
 
-export const nav = [
+/** Links shown under Services in the main nav */
+export const servicesSubnav = [
+  { label: 'All Services', href: '/services' },
+  { label: 'Car Rental & Transfers', href: '/car-rental-airport-transfers' },
+  { label: 'Tours & Packages', href: '/tours' },
+]
+
+export type NavLink = {
+  label: string
+  href: string
+  children?: { label: string; href: string }[]
+}
+
+export const nav: NavLink[] = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'Corporate Travel', href: '/corporate-travel' },
-  { label: 'Services', href: '/services' },
+  { label: 'Services', href: '/services', children: servicesSubnav },
   { label: 'Destinations', href: '/destinations' },
   { label: 'Visa Assistance', href: '/visa-assistance' },
-  { label: 'Car Rental / Transfers', href: '/car-rental-airport-transfers' },
-  { label: 'Tours', href: '/tours' },
   { label: 'Contact', href: '/contact' },
 ]

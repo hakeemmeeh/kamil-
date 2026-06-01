@@ -29,8 +29,10 @@ export function Button({
     'group/btn inline-flex items-center justify-center gap-2 rounded-full font-extrabold uppercase tracking-[0.1em] transition-all duration-300 cursor-pointer'
 
   const variants = {
-    primary: 'bg-gold !text-white hover:bg-gold-dark hover:!text-white hover:shadow-glow',
-    secondary: 'bg-surface text-ink border border-border hover:border-gold hover:text-gold',
+    primary:
+      'bg-gold !text-white shadow-cta hover:bg-gold-dark hover:!text-white hover:shadow-glow hover:-translate-y-0.5',
+    secondary:
+      'bg-white text-ink border-2 border-border shadow-sm hover:border-gold hover:text-gold hover:shadow-md',
     outline: 'border-2 border-white/30 text-white hover:border-gold hover:text-gold',
     ghost: 'text-ocean hover:text-ocean-dark',
   }

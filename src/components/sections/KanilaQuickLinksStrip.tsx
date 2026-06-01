@@ -46,7 +46,7 @@ export function KanilaQuickLinksStrip({ className }: KanilaQuickLinksStripProps)
               href={item.href}
               className="group flex flex-col items-center gap-2 px-3 py-5 text-center transition-colors hover:bg-white/60 sm:gap-2.5 sm:py-6 md:py-7"
             >
-              <span className="flex h-11 w-11 items-center justify-center rounded-full border border-gold/25 bg-white text-kanila-orange shadow-sm transition group-hover:border-gold/50 group-hover:bg-gold/10 sm:h-12 sm:w-12">
+              <span className="flex h-11 w-11 items-center justify-center rounded-full border border-gold/25 bg-white text-kamil-green shadow-sm transition group-hover:border-gold/50 group-hover:bg-gold/10 sm:h-12 sm:w-12">
                 <item.icon className="h-5 w-5 sm:h-[1.35rem] sm:w-[1.35rem]" strokeWidth={1.75} />
               </span>
               <span className="font-kanila-display text-base font-normal text-ink sm:text-lg">

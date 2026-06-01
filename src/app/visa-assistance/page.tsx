@@ -1,9 +1,13 @@
 import type { Metadata } from 'next'
 import { FadeUp } from '@/components/ui/FadeUp'
 import { SectionHeader } from '@/components/ui/SectionHeader'
-import { Button } from '@/components/ui/Button'
 import { PageBanner } from '@/components/shared/PageBanner'
-import { AlertTriangle, FileText, CheckCircle, Send } from 'lucide-react'
+import { InnerPageOverlap } from '@/components/shared/InnerPageOverlap'
+import { InnerPageCTA } from '@/components/shared/InnerPageCTA'
+import { PhotoFeatureGrid } from '@/components/shared/PhotoFeatureGrid'
+import { VisaGallerySection } from '@/components/sections/VisaGallerySection'
+import { TourSearchBar } from '@/components/tours/TourSearchBar'
+import { AlertTriangle } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Visa Assistance',
@@ -11,10 +15,26 @@ export const metadata: Metadata = {
 }
 
 const steps = [
-  { icon: FileText, title: 'Share travel need', desc: 'Tell us about your destination and travel plans.' },
-  { icon: CheckCircle, title: 'Confirm destination requirements', desc: 'We help identify relevant requirements.' },
-  { icon: FileText, title: 'Prepare guidance/checklist', desc: 'Receive a preparation guide for your journey.' },
-  { icon: Send, title: 'Submit inquiry for support', desc: 'Get in touch for further visa-related assistance.' },
+  {
+    imageKey: 'bannerContact' as const,
+    title: 'Share travel need',
+    description: 'Tell us about your destination, dates, and travel plans.',
+  },
+  {
+    imageKey: 'london' as const,
+    title: 'Confirm requirements',
+    description: 'We help identify relevant embassy and destination requirements.',
+  },
+  {
+    imageKey: 'bannerVisa' as const,
+    title: 'Preparation checklist',
+    description: 'Receive a practical guide for documents and timelines.',
+  },
+  {
+    imageKey: 'international' as const,
+    title: 'Submit for support',
+    description: 'Get in touch for further visa-related travel assistance.',
+  },
 ]
 
 export default function VisaAssistancePage() {
@@ -25,54 +45,58 @@ export default function VisaAssistancePage() {
         title="Visa Assistance"
         subtitle="Travel preparation support and guidance for visa-related travel needs."
         imageKey="bannerVisa"
+        breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Visa Assistance' }]}
       />
+
+      <InnerPageOverlap>
+        <section className="section-padding pt-14 md:pt-16">
+          <div className="mx-auto max-w-4xl px-5">
+            <FadeUp>
+              <div className="mb-12 flex items-start gap-4 rounded-2xl border border-gold/20 bg-gold/10 p-6">
+                <AlertTriangle className="mt-0.5 h-6 w-6 shrink-0 text-gold" />
+                <div>
+                  <h3 className="mb-1 font-kanila-display text-xl font-normal text-ink">Important Notice</h3>
+                  <p className="text-sm text-ink-muted">
+                    Kamil Travel provides guidance and preparation support. We do not guarantee visa approval
+                    or provide legal immigration advice.
+                  </p>
+                </div>
+              </div>
+            </FadeUp>
+          </div>
+        </section>
+      </InnerPageOverlap>
+
+      <PhotoFeatureGrid
+        eyebrow="How It Works"
+        title="Visa Support Process"
+        items={steps}
+        bgClassName="section-padding bg-white"
+      />
+
+      <VisaGallerySection />
+
+      <TourSearchBar compact className="bg-sand-light pb-0" />
 
       <section className="section-padding bg-sand-light">
         <div className="mx-auto max-w-4xl px-5">
           <FadeUp>
-            <div className="rounded-2xl bg-gold/10 border border-gold/20 p-6 mb-12 flex items-start gap-4">
-              <AlertTriangle className="h-6 w-6 text-gold shrink-0 mt-0.5" />
-              <div>
-                <h3 className="font-bold text-ink mb-1">Important Notice</h3>
-                <p className="text-sm text-ink-muted">Kamil Travel provides guidance and preparation support. We do not guarantee visa approval or provide legal immigration advice.</p>
-              </div>
-            </div>
-          </FadeUp>
-
-          <FadeUp>
-            <SectionHeader eyebrow="How It Works" title="Visa Support Process" />
-          </FadeUp>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {steps.map((step, i) => (
-              <FadeUp key={step.title} delay={i * 0.08}>
-                <div className="rounded-2xl bg-surface border border-border p-6 hover:border-gold/30 transition-all h-full">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold/10 text-gold mb-4">
-                    <step.icon className="h-5 w-5" />
-                  </div>
-                  <h3 className="font-display text-xl font-semibold text-ink mb-2">{step.title}</h3>
-                  <p className="text-sm text-ink-muted">{step.desc}</p>
-                </div>
-              </FadeUp>
-            ))}
-          </div>
-
-          <FadeUp delay={0.3}>
-            <div className="mt-12 rounded-2xl bg-sand border border-border p-8 text-center">
-              <p className="text-ink-muted mb-2 text-sm italic">[CLIENT TO PROVIDE: exact visa services offered]</p>
+            <div className="rounded-2xl border border-border bg-sand p-8 text-center">
+              <p className="text-sm italic text-ink-muted">
+                [CLIENT TO PROVIDE: exact visa services offered]
+              </p>
             </div>
           </FadeUp>
         </div>
       </section>
 
-      <section className="section-padding bg-night text-center">
-        <div className="mx-auto max-w-3xl px-5">
-          <FadeUp instant>
-            <h2 className="font-display text-4xl md:text-5xl font-semibold text-white leading-[0.95] tracking-tight mb-6">Need visa guidance?</h2>
-            <Button href="/contact" variant="primary" size="lg">Start an Inquiry</Button>
-          </FadeUp>
-        </div>
-      </section>
+      <InnerPageCTA
+        title="Need visa guidance?"
+        description="Share your itinerary and we will help you prepare with clarity and professional support."
+        primaryLabel="Start an Inquiry"
+        secondaryLabel=""
+        imageKey="bannerVisa"
+      />
     </>
   )
 }

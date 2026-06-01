@@ -1,29 +1,28 @@
 'use client'
 
-import Image from 'next/image'
 import { LineReveal } from '@/components/ui/LineReveal'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { KanilaQuickLinksStrip } from '@/components/sections/KanilaQuickLinksStrip'
+import { ArchFeatureCard } from '@/components/ui/ArchFeatureCard'
 import { about } from '@/lib/content'
 import { cn } from '@/lib/utils'
-import { cityImage } from '@/lib/cityImages'
 
 const features = [
   {
     title: 'Global Air Ticketing',
-    desc: 'Professional flight booking for corporate and leisure travel to destinations worldwide.',
     imageKey: 'santorini' as const,
+    href: '/services#air-ticketing',
   },
   {
-    title: 'Corporate Travel Management',
-    desc: 'Cost-effective, customized travel planning for organizations — from Nairobi to global hubs.',
+    title: 'Corporate Travel',
     imageKey: 'bali' as const,
+    href: '/corporate-travel',
   },
   {
-    title: 'Regional & Airport Support',
-    desc: 'Meet & assist at Mogadishu and representatives across six Somalia airports.',
+    title: 'Airport Support',
     imageKey: 'thailand' as const,
+    href: '/services#meet-assist',
   },
 ]
 
@@ -37,7 +36,7 @@ export function CelebrateSection({ compact = false }: CelebrateSectionProps) {
     <section
       className={
         compact
-          ? 'hero-cover-panel relative z-40 isolate overlap-panel -mt-[min(22vh,200px)] rounded-t-[2.5rem] bg-sand-light pb-12 pt-14 shadow-[0_-48px_120px_rgba(7,17,31,0.35)] md:-mt-[min(28vh,240px)] md:pb-16 md:pt-16'
+          ? 'hero-cover-panel relative z-40 isolate overlap-panel -mt-[min(14vh,120px)] rounded-t-[2.5rem] bg-sand-light pb-12 pt-8 shadow-[0_-48px_120px_rgba(7,17,31,0.35)] md:-mt-[min(18vh,160px)] md:pb-16 md:pt-10'
           : 'hero-cover-panel relative z-40 isolate overlap-panel -mt-[min(22vh,200px)] rounded-t-[2.5rem] bg-sand-light pb-20 pt-16 shadow-[0_-48px_120px_rgba(7,17,31,0.35)] md:-mt-[min(28vh,240px)] md:pb-28 md:pt-20'
       }
       id="about"
@@ -67,27 +66,16 @@ export function CelebrateSection({ compact = false }: CelebrateSectionProps) {
         {!compact && (
           <div
             data-stagger="features"
-            className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-10"
+            className="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-6 md:gap-8"
           >
-            {features.map((feature) => (
-              <div
-                key={feature.title}
-                data-stagger-item
-                className="group overflow-hidden rounded-3xl border border-border bg-white text-center shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-gold/30 hover:shadow-premium dark:bg-surface"
-              >
-                <div className="kanila-arch-top relative aspect-[5/3] w-full overflow-hidden">
-                  <Image
-                    src={cityImage(feature.imageKey, 800)}
-                    alt=""
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="200px"
-                  />
-                </div>
-                <div className="px-6 pb-8 pt-5">
-                  <h3 className="mb-2 font-kanila-display text-xl font-normal text-ink">{feature.title}</h3>
-                  <p className="text-sm leading-relaxed text-ink-muted">{feature.desc}</p>
-                </div>
+            {features.map((feature, i) => (
+              <div key={feature.title} data-stagger-item>
+                <ArchFeatureCard
+                  imageKey={feature.imageKey}
+                  title={feature.title}
+                  href={feature.href}
+                  index={i}
+                />
               </div>
             ))}
           </div>

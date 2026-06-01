@@ -360,9 +360,10 @@ export function initHeroCoverScroll() {
     mm.add('(min-width: 768px)', () => {
       const parallaxInner = hero.querySelector('.hero-parallax-layer')
       if (parallaxInner) {
+        gsap.set(parallaxInner, { transformOrigin: 'center top' })
         gsapToIfPresent(parallaxInner, {
-          yPercent: 18,
-          scale: 1.1,
+          yPercent: 10,
+          scale: 1.05,
           ease: 'none',
           scrollTrigger: {
             trigger: hero,
@@ -457,10 +458,86 @@ export function initPopularDestinationsScroll() {
   ScrollTrigger.refresh()
 }
 
+let statsShowcaseCtx: gsap.Context | null = null
+
+/** Stats band below Popular Destinations — intro, stamp cards, ticker */
+export function initStatsShowcaseAnimations() {
+  if (typeof window === 'undefined' || prefersReducedMotion()) return
+
+  const section = document.querySelector('#stats')
+  if (!section) return
+
+  statsShowcaseCtx?.revert()
+  statsShowcaseCtx = null
+
+  statsShowcaseCtx = gsap.context(() => {
+    const introItems = section.querySelectorAll('[data-stats-intro-item]')
+    const cardsRoot = section.querySelector('[data-stagger="stats"]')
+    const cards = cardsRoot?.querySelectorAll('[data-stagger-item]')
+    const ticker = section.querySelector('[data-stats-ticker]')
+
+    if (introItems.length) {
+      gsap.set(introItems, { y: 36, opacity: 0 })
+      gsap.to(introItems, {
+        y: 0,
+        opacity: 1,
+        stagger: 0.12,
+        duration: 0.85,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 72%',
+          once: true,
+        },
+      })
+    }
+
+    if (cards?.length && cardsRoot) {
+      gsap.set(cards, { y: 80, opacity: 0, scale: 0.9 })
+      gsap.to(cards, {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        stagger: 0.16,
+        duration: 0.95,
+        ease: 'back.out(1.35)',
+        scrollTrigger: {
+          trigger: cardsRoot,
+          start: 'top 80%',
+          once: true,
+        },
+      })
+    }
+
+    if (ticker) {
+      gsap.set(ticker, { y: 28, opacity: 0 })
+      gsap.to(ticker, {
+        y: 0,
+        opacity: 1,
+        duration: 0.75,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: ticker,
+          start: 'top 94%',
+          once: true,
+        },
+      })
+    }
+  }, section)
+
+  ScrollTrigger.refresh()
+}
+
+export function cleanupStatsShowcaseAnimations() {
+  statsShowcaseCtx?.revert()
+  statsShowcaseCtx = null
+}
+
 /** Revert homepage scroll animations (call when leaving `/`) */
 export function cleanupHomeScrollAnimations() {
   homeScrollCtx?.revert()
   homeScrollCtx = null
+  cleanupStatsShowcaseAnimations()
 }
 
 /** Run sticky-cover + scroll inits after Lenis is ready. Returns cancel fn. */
@@ -493,7 +570,7 @@ export function initHomeScrollAnimations() {
 
   homeScrollCtx = gsap.context(() => {
     staggerFadeUp('[data-stagger="features"]', '[data-stagger-item]')
-    staggerFadeUp('[data-stagger="stats"]', '[data-stagger-item]')
+    staggerFadeUp('[data-stagger="activities"]', '[data-stagger-item]')
     staggerFadeUp('[data-stagger="process"]', '[data-stagger-item]')
     staggerFadeUp('[data-stagger="stories"]', '[data-stagger-item]')
     staggerFadeUp('[data-stagger="trust"]', '[data-stagger-item]')

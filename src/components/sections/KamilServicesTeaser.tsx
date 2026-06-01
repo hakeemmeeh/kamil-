@@ -65,7 +65,7 @@ export function KamilServicesTeaser() {
                   </span>
                 </div>
                 <p className="mt-4 px-1 text-sm leading-relaxed text-ink-muted">{item.desc}</p>
-                <span className="mt-3 inline-flex items-center gap-1 px-1 text-xs font-bold uppercase tracking-[0.1em] text-kanila-orange">
+                <span className="mt-3 inline-flex items-center gap-1 px-1 text-xs font-bold uppercase tracking-[0.1em] text-kamil-green">
                   View details <ArrowUpRight className="h-3.5 w-3.5" />
                 </span>
               </Link>

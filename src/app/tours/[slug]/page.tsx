@@ -6,6 +6,7 @@ import { getTourBySlug, tours } from '@/lib/content'
 import { Button } from '@/components/ui/Button'
 import { TourCard } from '@/components/ui/TourCard'
 import { Clock, MapPin, Check } from 'lucide-react'
+import { TourRating } from '@/components/ui/TourRating'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -33,7 +34,7 @@ export default async function TourDetailPage({ params }: Props) {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-night pt-40 pb-16">
+      <section className="relative overflow-hidden bg-night pb-16 pt-12 md:pt-16">
         <div className="absolute inset-0">
           <Image
             src={tour.image}
@@ -47,10 +48,17 @@ export default async function TourDetailPage({ params }: Props) {
           <div className="absolute inset-0 bg-gradient-to-t from-night/55 via-night/30 to-night/20" />
         </div>
         <div className="relative z-10 mx-auto max-w-4xl px-5">
-          <p className="font-kanila-script mb-2 text-[1.25rem] text-kanila-orange">{tour.category}</p>
+          <p className="font-kanila-script mb-2 text-[1.25rem] text-kamil-green">{tour.category}</p>
           <h1 className="mb-4 font-kanila-display text-4xl font-normal leading-[0.95] tracking-tight text-white md:text-6xl">
             {tour.title}
           </h1>
+          <div className="mb-4">
+            <TourRating
+              rating={tour.rating ?? 4.5}
+              reviewCount={tour.reviewCount ?? 2}
+              dark
+            />
+          </div>
           <div className="mb-6 flex flex-wrap gap-4 text-sm text-white/70">
             <span className="inline-flex items-center gap-1.5">
               <MapPin className="h-4 w-4 text-gold" />
@@ -61,6 +69,18 @@ export default async function TourDetailPage({ params }: Props) {
               {tour.duration}
             </span>
           </div>
+          {(tour.interests?.length ?? 0) > 0 && (
+            <ul className="mb-6 flex flex-wrap gap-2">
+              {tour.interests!.map((tag) => (
+                <li
+                  key={tag}
+                  className="rounded-full bg-white/15 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white"
+                >
+                  {tag}
+                </li>
+              ))}
+            </ul>
+          )}
           <div className="flex flex-wrap gap-3">
             <Button href={enquiryHref} variant="primary" size="lg">
               Enquire About This Package

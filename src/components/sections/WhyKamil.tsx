@@ -37,7 +37,7 @@ export function WhyKamil() {
                 <div className={`rounded-2xl border transition-all cursor-pointer ${openIndex === i ? 'border-gold/30 bg-gold/5' : 'border-border bg-sand-light hover:border-gold/20'}`}
                   onClick={() => setOpenIndex(openIndex === i ? -1 : i)}>
                   <div className="flex items-center justify-between p-5">
-                    <h3 className="font-display text-lg font-semibold text-ink">{reason.title}</h3>
+                    <h3 className="font-kanila-display text-lg font-normal text-ink">{reason.title}</h3>
                     <ChevronDown className={`h-5 w-5 text-gold transition-transform ${openIndex === i ? 'rotate-180' : ''}`} />
                   </div>
                   <div className={`overflow-hidden transition-all duration-300 ${openIndex === i ? 'max-h-40 pb-5 px-5' : 'max-h-0'}`}>

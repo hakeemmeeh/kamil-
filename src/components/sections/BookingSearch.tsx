@@ -12,8 +12,8 @@ export function BookingSearch({ overlapHero = false }: BookingSearchProps) {
   return (
     <section
       className={cn(
-        'relative z-30 bg-sand-light pb-16 md:pb-20',
-        overlapHero ? '-mt-16 bg-transparent md:-mt-24' : 'pt-4 md:pt-6'
+        'relative bg-sand-light pb-16 md:pb-20',
+        overlapHero ? 'z-50 -mt-16 bg-transparent md:-mt-24' : 'z-30 pt-4 md:pt-6'
       )}
       id="booking"
     >

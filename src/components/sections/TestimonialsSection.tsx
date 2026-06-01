@@ -4,7 +4,8 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { testimonials } from '@/lib/content'
 import { KanilaCompassMark } from '@/components/ui/KanilaCompassMark'
-import { Quote, ChevronLeft, ChevronRight } from 'lucide-react'
+import Link from 'next/link'
+import { Quote, ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react'
 
 export function TestimonialsSection() {
   const [current, setCurrent] = useState(0)
@@ -16,11 +17,11 @@ export function TestimonialsSection() {
   return (
     <section className="relative z-20 bg-sand-light py-20 md:py-28" id="testimonials">
       <div className="mx-auto w-full max-w-4xl px-5 text-center">
-        <p className="font-kanila-script mb-3 text-[1.65rem] text-kanila-orange md:text-[1.85rem]">
-          Testimonials
+        <p className="font-kanila-script mb-3 text-[1.65rem] text-kamil-green md:text-[1.85rem]">
+          What our clients say
         </p>
         <h2 className="font-kanila-display text-[2.5rem] font-normal leading-[0.95] tracking-tight text-ink md:text-[3.25rem]">
-          Stories From the Journey
+          Awesome reviews
         </h2>
         <KanilaCompassMark className="mx-auto mt-4 text-gold/70" />
         <p className="mx-auto mt-5 max-w-xl text-base text-ink-muted md:text-lg">
@@ -38,7 +39,7 @@ export function TestimonialsSection() {
               className="mx-auto max-w-3xl rounded-[2rem] border border-border bg-white px-8 py-10 shadow-premium md:px-14 md:py-14"
             >
               <Quote className="mx-auto mb-5 h-9 w-9 text-gold/50" />
-              <p className="mb-3 text-xs font-extrabold uppercase tracking-[0.16em] text-kanila-orange">
+              <p className="mb-3 text-xs font-extrabold uppercase tracking-[0.16em] text-kamil-green">
                 {t.title}
               </p>
               <blockquote className="mb-8 font-kanila-display text-2xl font-normal italic leading-relaxed text-ink md:text-[1.75rem]">
@@ -67,7 +68,7 @@ export function TestimonialsSection() {
                   type="button"
                   onClick={() => setCurrent(i)}
                   className={`h-2 rounded-full transition-all ${
-                    i === current ? 'w-7 bg-kanila-orange' : 'w-2 bg-border hover:bg-gold/50'
+                    i === current ? 'w-7 bg-kamil-green-dark' : 'w-2 bg-border hover:bg-gold/50'
                   }`}
                   aria-label={`Go to testimonial ${i + 1}`}
                 />
@@ -82,6 +83,16 @@ export function TestimonialsSection() {
               <ChevronRight className="h-5 w-5" />
             </button>
           </div>
+        </div>
+
+        <div className="mt-12">
+          <Link
+            href="/contact?inquiry=General+Enquiry"
+            className="inline-flex items-center gap-2 rounded-full bg-gold px-8 py-3.5 text-sm font-extrabold uppercase tracking-[0.1em] text-white shadow-glow transition hover:bg-gold-dark"
+          >
+            Enquire a trip
+            <ArrowUpRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>

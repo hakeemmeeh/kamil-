@@ -27,7 +27,7 @@ export function TravelTipsSection() {
       <div className="relative px-5 py-20 md:py-28">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 text-center md:mb-14">
-            <p className="font-kanila-script mb-3 text-[1.65rem] text-kanila-orange md:text-[1.85rem]">
+            <p className="font-kanila-script mb-3 text-[1.65rem] text-kamil-green-light md:text-[1.85rem]">
               Before You Go
             </p>
             <h2 className="font-kanila-display text-[2.35rem] font-normal leading-[0.95] tracking-tight text-white md:text-[3rem]">
@@ -85,7 +85,7 @@ export function TravelTipsSection() {
                     <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-ink-muted">{tip.desc}</p>
                     <span
                       className={cn(
-                        'mt-4 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-[0.1em] text-kanila-orange'
+                        'mt-4 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-[0.1em] text-kamil-green'
                       )}
                     >
                       Learn more
@@ -100,7 +100,7 @@ export function TravelTipsSection() {
           <p className="mt-10 text-center">
             <Link
               href="/visa-assistance"
-              className="inline-flex items-center gap-2 text-sm font-bold text-white/90 transition hover:text-kanila-orange"
+              className="inline-flex items-center gap-2 text-sm font-bold text-white/90 transition hover:text-kamil-green"
             >
               Full visa & travel prep guide <ArrowUpRight className="h-4 w-4" />
             </Link>

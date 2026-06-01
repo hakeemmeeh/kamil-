@@ -36,6 +36,12 @@ const photos = {
     'photo-1513635269975-59663e0ac1ad', // London — Thames & cityscape
   tokyo:
     'photo-1528164344705-47542687000d', // Tokyo — urban skyline
+  moscow:
+    'photo-1591607508170-4a3e8007f4b4', // Moscow — St Basil's Cathedral, Red Square
+  belgrade:
+    'photo-1632343084054-5b108ffb8be3', // Belgrade — Kalemegdan fortress & city aerial
+  portugal:
+    'photo-1548013146-72479768bada', // Lisbon — terracotta rooftops & Tagus
   sydney:
     'photo-1469474968028-56623f02e42e', // Scenic harbour — Asia-Pacific travel
   santorini:
@@ -110,6 +116,9 @@ export const cityImageAlts: Record<CityImageKey, string> = {
   newYork: 'New York City — skyline and urban travel',
   london: 'London — Thames and cityscape',
   tokyo: 'Tokyo — Japan urban skyline',
+  moscow: 'Moscow — Saint Basil\'s Cathedral and Red Square',
+  belgrade: 'Belgrade — Kalemegdan fortress overlooking the city',
+  portugal: 'Lisbon, Portugal — historic rooftops and the Tagus',
   sydney: 'Sydney — harbour and coastal travel',
   santorini: 'Santorini — Oia caldera with blue domes',
   santoriniSunset: 'Santorini — whitewash and windmill at dusk',
@@ -142,8 +151,8 @@ export const heroBackgroundSlides: CityImageKey[] = [
   'santoriniSunset',
   'bali',
   'thailand',
-  'seychelles',
-  'greece',
+  'portugal',
+  'moscow',
   'kanilaHero',
   'mogadishu',
   'nairobi',
@@ -154,7 +163,8 @@ export const heroArchSlugs = [
   'santorini',
   'bali',
   'thailand',
-  'seychelles',
+  'portugal',
+  'moscow',
   'greece',
   'new-york',
   'sydney',
@@ -186,10 +196,16 @@ export const heroSlides = [
     tagline: 'Golden shores and vibrant cities',
   },
   {
-    imageKey: 'seychelles' as const,
-    destination: 'Seychelles',
-    subtitle: 'Indian Ocean · Luxury Isles',
-    tagline: 'Crystal waters and granite shores',
+    imageKey: 'portugal' as const,
+    destination: 'Portugal',
+    subtitle: 'Europe · Atlantic Coast',
+    tagline: 'Lisbon rooftops and golden-hour escapes',
+  },
+  {
+    imageKey: 'moscow' as const,
+    destination: 'Moscow',
+    subtitle: 'Russia · European Gateway',
+    tagline: 'Iconic architecture and curated city breaks',
   },
   {
     imageKey: 'mogadishu' as const,

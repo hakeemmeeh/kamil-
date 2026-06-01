@@ -1,20 +1,25 @@
 import { HeroSection } from '@/components/sections/HeroSection'
+import { TourSearchBar } from '@/components/tours/TourSearchBar'
 import { CelebrateSection } from '@/components/sections/CelebrateSection'
 import { BrandStatement } from '@/components/sections/BrandStatement'
+import { ExploreActivitiesSection } from '@/components/sections/ExploreActivitiesSection'
 import { SignatureServicesShowcase } from '@/components/sections/SignatureServicesShowcase'
 import { TravelByRegionSection } from '@/components/sections/TravelByRegionSection'
 import { PopularDestinationsSection } from '@/components/sections/PopularDestinationsSection'
 import { StatsStrip } from '@/components/sections/StatsStrip'
+import { FirstMinuteOffersSection } from '@/components/sections/FirstMinuteOffersSection'
 import { CuratedJourneysSection } from '@/components/sections/CuratedJourneysSection'
 import { TravelTipsSection } from '@/components/sections/TravelTipsSection'
 import { HomeFAQSection } from '@/components/sections/HomeFAQSection'
 import { KamilServicesTeaser } from '@/components/sections/KamilServicesTeaser'
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection'
+import { NewsletterSection } from '@/components/sections/NewsletterSection'
+import { ContactPreview } from '@/components/sections/ContactPreview'
 import { CinematicCTA } from '@/components/sections/CinematicCTA'
 import { HomeScrollEffects } from '@/components/sections/HomeScrollEffects'
 
 /**
- * Kanila Home 3 core + Kamil essentials (teasers link to full sections on inner pages).
+ * Kanila Home 3 core + Kamil legacy parity (search, offers, contact, newsletter).
  */
 export default function HomePage() {
   return (
@@ -22,8 +27,11 @@ export default function HomePage() {
       <HomeScrollEffects />
 
       <HeroSection />
+      <TourSearchBar overlap />
       <CelebrateSection compact />
       <BrandStatement />
+
+      <ExploreActivitiesSection />
 
       <SignatureServicesShowcase />
 
@@ -31,6 +39,7 @@ export default function HomePage() {
       <PopularDestinationsSection />
 
       <StatsStrip />
+      <FirstMinuteOffersSection />
       <CuratedJourneysSection />
 
       <TravelTipsSection />
@@ -39,6 +48,8 @@ export default function HomePage() {
       <KamilServicesTeaser />
 
       <TestimonialsSection />
+      <NewsletterSection />
+      <ContactPreview />
       <CinematicCTA />
     </>
   )

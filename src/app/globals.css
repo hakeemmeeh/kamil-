@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #111827;
-  --color-ink-soft: #1F2937;
-  --color-ink-muted: #4B5563;
+  --color-ink: #060D18;
+  --color-ink-soft: #1A2433;
+  --color-ink-muted: #3A4656;
   --color-night: #07111F;
   --color-night-light: #0D1B2E;
   --color-night-card: #101C2D;
@@ -13,36 +13,81 @@
   --color-gold: #1B4B8C;
   --color-gold-dark: #0F3260;
   --color-gold-light: #EBF2FF;
-  --color-kanila-orange: #E87524;
+  /* Legacy Kanila slot — mapped to Kamil green site-wide */
+  --color-kanila-orange: #3D9A6B;
+  --color-kamil-green: #5CB88A;
+  --color-kamil-green-light: #9ED9B8;
+  --color-kamil-green-dark: #3D9A6B;
   --font-kanila-display: var(--font-kanila-display);
   --font-kanila-script: var(--font-kanila-script);
-  --color-sand: #F5F0E8;
-  --color-sand-light: #FBF8F3;
-  --color-sand-deep: #E7D8C3;
+  --color-sand: #F3EDE4;
+  --color-sand-light: #FEFCF9;
+  --color-sand-deep: #E3D9CC;
   --color-sky: #EAF6FF;
   --color-sky-deep: #B9DDF2;
-  --color-border: #E6DED2;
+  --color-border: #D1C6B6;
   --color-error: #DC2626;
   --color-success: #16A34A;
   --color-white: #ffffff;
   --color-surface: #ffffff;
+  --color-cream: #FEFCF9;
   --font-display: var(--font-display);
   --font-body: var(--font-body);
-  --shadow-premium: 0 30px 80px rgba(7, 17, 31, 0.16);
-  --shadow-glow: 0 20px 60px rgba(27, 75, 140, 0.25);
+  --shadow-premium: 0 28px 72px rgba(7, 17, 31, 0.22);
+  --shadow-glow: 0 18px 52px rgba(27, 75, 140, 0.38);
+  --shadow-cta: 0 14px 36px rgba(27, 75, 140, 0.32);
   --radius-4xl: 2rem;
   --radius-5xl: 2.5rem;
 }
 
 /* === Base Styles === */
+html {
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   font-family: var(--font-body), system-ui, sans-serif;
+  font-weight: 500;
   background: var(--color-sand-light);
   color: var(--color-ink);
-  line-height: 1.7;
+  line-height: 1.65;
+  letter-spacing: 0.012em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  font-variant-ligatures: common-ligatures;
   transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Crisper type on light UI surfaces (retina-safe) */
+:where(
+  body,
+  .bg-sand-light,
+  .bg-sand,
+  .bg-cream,
+  .bg-white,
+  .bg-surface,
+  .glass,
+  .booking-card
+) {
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+p,
+li,
+label,
+input,
+select,
+textarea,
+button {
+  font-weight: 500;
+}
+
+strong,
+b {
+  font-weight: 700;
+  color: var(--color-ink);
 }
 
 html.lenis {
@@ -77,23 +122,62 @@ html.lenis body {
   --color-border: #1F2937;
 }
 
-h1, h2, h3, .font-display {
+h1,
+h2,
+h3,
+h4,
+.font-display {
   font-family: var(--font-display), Georgia, serif;
+  color: var(--color-ink);
+  letter-spacing: -0.025em;
+  line-height: 1.06;
+  text-wrap: balance;
 }
 
 .font-kanila-display {
   font-family: var(--font-kanila-display), var(--font-display), Georgia, serif;
-  text-rendering: optimizeLegibility;
+  color: var(--color-ink);
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+  text-rendering: geometricPrecision;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .font-kanila-script {
   font-family: var(--font-kanila-script), cursive;
-  text-rendering: optimizeLegibility;
+  letter-spacing: 0.02em;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Readable body copy — stronger than default muted */
+.text-body-contrast {
+  color: var(--color-ink-soft);
+}
+
+.text-muted-contrast {
+  color: var(--color-ink-muted);
 }
 
 .text-kanila-orange {
-  color: var(--color-kanila-orange);
+  color: var(--color-kamil-green);
+}
+
+.shadow-green-glow {
+  box-shadow: 0 14px 40px rgba(45, 130, 90, 0.48);
+}
+
+.shadow-cta {
+  box-shadow: var(--shadow-cta);
+}
+
+.text-kamil-green {
+  color: var(--color-kamil-green);
+}
+
+.text-kamil-green-light {
+  color: var(--color-kamil-green-light);
 }
 
 /* Logo PNG has baked-in black — screen blend hides dark backdrop (use true transparent PNG when available) */
@@ -116,6 +200,12 @@ h1, h2, h3, .font-display {
   opacity: 1 !important;
 }
 
+.hero-bg,
+.banner-photo,
+.popular-bg {
+  filter: contrast(1.06) saturate(1.1);
+}
+
 .banner-photo {
   opacity: 1;
 }
@@ -124,17 +214,26 @@ h1, h2, h3, .font-display {
   background: transparent;
 }
 
+.page-banner-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(7, 17, 31, 0.35) 0%,
+    rgba(7, 17, 31, 0.55) 45%,
+    rgba(7, 17, 31, 0.88) 100%
+  );
+}
+
 /* === Eyebrow === */
 .eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 12px;
   font-family: var(--font-body), system-ui, sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: #1B4B8C;
+  letter-spacing: 0.2em;
+  color: var(--color-gold-dark);
   margin-bottom: 18px;
 }
 
@@ -142,8 +241,9 @@ h1, h2, h3, .font-display {
   content: '';
   display: block;
   width: 42px;
-  height: 1px;
-  background: #1B4B8C;
+  height: 2px;
+  background: var(--color-gold);
+  border-radius: 999px;
 }
 
 /* === Selection === */
@@ -339,9 +439,13 @@ h1, h2, h3, .font-display {
 
 /* === Utility Classes === */
 .glass {
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px) saturate(200%);
+  -webkit-backdrop-filter: blur(16px) saturate(200%);
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow:
+    0 4px 24px rgba(7, 17, 31, 0.08),
+    0 0 0 1px rgba(7, 17, 31, 0.04);
 }
 
 .dark .glass {
@@ -423,9 +527,9 @@ h1, h2, h3, .font-display {
 }
 
 
-/* Kanila Home 3 hero — true full-viewport background (edge to edge under navbar) */
+/* Kanila Home 3 hero — full viewport under fixed navbar */
 :root {
-  --site-header: 5.5rem;
+  --site-header: 7rem;
 }
 
 .kanila-hero {
@@ -446,13 +550,24 @@ h1, h2, h3, .font-display {
   background-color: var(--color-night);
 }
 
-.kanila-hero__bg .hero-parallax-layer,
+.kanila-hero__bg .hero-parallax-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: center top;
+}
+
 .kanila-hero__bg .hero-bg-carousel,
 .kanila-hero__bg .hero-bg-slide {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+}
+
+.kanila-hero__bg .hero-bg {
+  object-position: center top;
 }
 
 .kanila-hero__foreground {
@@ -584,6 +699,10 @@ h1, h2, h3, .font-display {
 /* Kanila travel agency — arched tops on photo cards */
 .kanila-arch-top,
 .kanila-travel-service-card__arch {
+  border-radius: 50% 50% 0 0;
+}
+
+.kanila-activity-arch .kanila-arch-top {
   border-radius: 50% 50% 0 0;
 }
 
@@ -743,8 +862,14 @@ h1, h2, h3, .font-display {
   transform: translateX(-50%);
 }
 
-.nav-link:hover::after {
-  width: 60%;
+.nav-link:hover::after,
+.nav-link[aria-current='page']::after {
+  width: 72%;
+}
+
+.nav-link[aria-current='page'] {
+  color: var(--color-gold);
+  font-weight: 700;
 }
 
 /* === Footer link hover === */
@@ -862,6 +987,99 @@ h1, h2, h3, .font-display {
   }
 }
 
+/* === Kanila stats showcase — postage-stamp cards + ticker === */
+.kanila-stat-stamp {
+  --stamp-notch: 7px;
+  filter: drop-shadow(0 24px 48px rgba(7, 17, 31, 0.28));
+}
+
+.kanila-stat-stamp::before,
+.kanila-stat-stamp::after {
+  content: '';
+  position: absolute;
+  left: calc(var(--stamp-notch) * -0.5);
+  right: calc(var(--stamp-notch) * -0.5);
+  height: calc(var(--stamp-notch) * 2);
+  background-repeat: repeat-x;
+  background-size: calc(var(--stamp-notch) * 2) calc(var(--stamp-notch) * 2);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.kanila-stat-stamp::before {
+  top: calc(var(--stamp-notch) * -1);
+  background-image: radial-gradient(
+    circle at var(--stamp-notch) var(--stamp-notch),
+    transparent calc(var(--stamp-notch) - 0.5px),
+    currentColor calc(var(--stamp-notch) - 0.5px)
+  );
+  background-position: 0 0;
+  color: inherit;
+}
+
+.kanila-stat-stamp::after {
+  bottom: calc(var(--stamp-notch) * -1);
+  background-image: radial-gradient(
+    circle at var(--stamp-notch) 0,
+    transparent calc(var(--stamp-notch) - 0.5px),
+    currentColor calc(var(--stamp-notch) - 0.5px)
+  );
+  background-position: 0 0;
+  color: inherit;
+}
+
+.kanila-stat-stamp.bg-kamil-green-dark::before,
+.kanila-stat-stamp.bg-kamil-green-dark::after {
+  color: var(--color-kamil-green-dark);
+}
+
+.kanila-stat-stamp.bg-night::before,
+.kanila-stat-stamp.bg-night::after {
+  color: var(--color-night);
+}
+
+.kanila-stat-stamp.bg-white::before,
+.kanila-stat-stamp.bg-white::after {
+  color: var(--color-white);
+}
+
+@keyframes kanila-stats-ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.kanila-stats-ticker__track {
+  width: max-content;
+  animation: kanila-stats-ticker 36s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kanila-stats-ticker__track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem 2rem;
+    width: 100%;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 640px) {
+  .kanila-stat-stamp {
+    min-height: 160px !important;
+    padding-top: 1.75rem;
+    padding-bottom: 1.75rem;
+  }
+
+  .kanila-stat-stamp p:first-of-type {
+    font-size: 2rem !important;
+  }
+}
+
 /* === Kanila enhancement doc — sticky stack + overlap panels === */
 .sticky-stack-section {
   position: relative;
@@ -933,10 +1151,12 @@ h1, h2, h3, .font-display {
   background: var(--color-gold);
   color: var(--color-white);
   padding: 14px 28px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-cta);
   transition:
     transform 0.35s ease,
     background 0.35s ease,
@@ -946,7 +1166,7 @@ h1, h2, h3, .font-display {
 .btn-premium:hover {
   transform: translateY(-3px);
   background: var(--color-gold-dark);
-  box-shadow: 0 18px 40px rgba(27, 75, 140, 0.28);
+  box-shadow: 0 22px 48px rgba(27, 75, 140, 0.42);
 }
 
 .btn-premium svg {

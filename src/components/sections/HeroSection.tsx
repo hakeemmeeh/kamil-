@@ -54,7 +54,7 @@ export function HeroSection() {
       </div>
 
       <div className="kanila-hero__foreground">
-        <div className="relative mx-auto flex min-h-[100dvh] max-w-7xl flex-col gap-10 px-5 pt-[var(--site-header)] lg:flex-row lg:items-end lg:justify-between lg:gap-16 lg:px-8 lg:pt-[calc(var(--site-header)+0.5rem)] xl:gap-20 xl:px-10">
+        <div className="relative mx-auto flex min-h-[100dvh] max-w-7xl flex-col gap-10 px-5 pt-[calc(var(--site-header)+0.75rem)] lg:flex-row lg:items-end lg:justify-between lg:gap-16 lg:px-8 lg:pt-[calc(var(--site-header)+1.25rem)] xl:gap-20 xl:px-10">
           <div className="hero-foreground-copy flex flex-1 flex-col justify-center pb-4 lg:max-w-[44%] lg:pb-14 lg:pr-4 xl:max-w-[40%] xl:pr-8">
             <div className="hero-social mb-6 flex items-center gap-3">
               <div className="flex -space-x-2">
@@ -67,13 +67,13 @@ export function HeroSection() {
                   </span>
                 ))}
               </div>
-              <span className="text-sm font-medium text-white/85">50+ People Joined</span>
+              <span className="text-sm font-semibold text-white">50+ People Joined</span>
             </div>
 
-            <p className="hero-kicker mb-3 font-kanila-script text-[1.5rem] text-kanila-orange md:mb-4 md:text-[1.75rem]">
+            <p className="hero-kicker mb-3 font-kanila-script text-[1.5rem] text-kamil-green-light md:mb-4 md:text-[1.75rem]">
               It&apos;s time to
             </p>
-            <h1 className="hero-headline mb-6 font-kanila-display text-[2rem] font-normal leading-[1.08] tracking-tight text-white sm:text-[2.75rem] md:text-[3.1rem] lg:text-[3.35rem]">
+            <h1 className="hero-headline mb-6 font-kanila-display text-[2rem] leading-[1.06] tracking-tight text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.35)] sm:text-[2.75rem] md:text-[3.1rem] lg:text-[3.35rem]">
               <span className="block overflow-hidden">
                 <span className="heading-line line-reveal-inner inline-block">
                   Let&apos;s Design Your Next
@@ -86,14 +86,14 @@ export function HeroSection() {
               </span>
             </h1>
 
-            <p className="hero-desc mb-8 max-w-md text-base leading-relaxed text-white/70 md:text-lg">
+            <p className="hero-desc mb-8 max-w-md text-base font-medium leading-relaxed text-white/90 md:text-lg">
               Explore breathtaking volcanic landscapes, golden skies, and timeless beauty with
               expertly guided journeys worldwide.
             </p>
 
             <Link
               href="/contact"
-              className="hero-cta inline-flex w-fit items-center gap-2 rounded-full bg-kanila-orange px-8 py-3.5 text-sm font-extrabold uppercase tracking-[0.1em] text-white shadow-[0_12px_40px_rgba(232,117,36,0.35)] transition hover:-translate-y-0.5 hover:bg-[#d96818]"
+              className="hero-cta inline-flex w-fit items-center gap-2 rounded-full bg-kamil-green-dark px-8 py-3.5 text-sm font-extrabold uppercase tracking-[0.1em] text-white shadow-green-glow transition hover:-translate-y-0.5 hover:bg-kamil-green"
             >
               Book Now
               <ChevronsRight className="h-4 w-4" strokeWidth={2.5} />

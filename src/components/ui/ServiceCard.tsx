@@ -25,7 +25,7 @@ export function ServiceCard({ eyebrow, title, desc, image, slug, featured = fals
     >
       {/* Image */}
       <div
-        className={`relative overflow-hidden ${
+        className={`arch-card-mask relative overflow-hidden rounded-t-[1.75rem] ${
           featured ? 'md:w-1/2 min-h-[200px] h-full' : 'h-1/2 min-h-[160px]'
         }`}
       >
@@ -43,7 +43,7 @@ export function ServiceCard({ eyebrow, title, desc, image, slug, featured = fals
       <div className={`flex flex-1 flex-col justify-between p-6 ${featured ? 'md:p-8' : ''}`}>
         <div>
           <p className="eyebrow !text-[10px] !mb-3">{eyebrow}</p>
-          <h3 className={`font-display font-semibold text-ink mb-2 ${featured ? 'text-2xl md:text-3xl' : 'text-xl'}`}>
+          <h3 className={`font-kanila-display font-normal text-ink mb-2 ${featured ? 'text-2xl md:text-3xl' : 'text-xl'}`}>
             {title}
           </h3>
           <p className="text-sm text-ink-muted leading-relaxed line-clamp-3">{desc}</p>

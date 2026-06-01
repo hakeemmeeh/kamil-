@@ -1,22 +1,49 @@
 import type { Metadata } from 'next'
 import { FadeUp } from '@/components/ui/FadeUp'
-import { Button } from '@/components/ui/Button'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { PageBanner } from '@/components/shared/PageBanner'
-import { Briefcase, Users, Plane, HeadphonesIcon, Globe, Shield, ArrowRight } from 'lucide-react'
+import { InnerPageOverlap } from '@/components/shared/InnerPageOverlap'
+import { InnerPageCTA } from '@/components/shared/InnerPageCTA'
+import { PhotoFeatureGrid } from '@/components/shared/PhotoFeatureGrid'
+import { ArrowRight } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Corporate Travel',
-  description: 'Kamil Travel provides customized and comprehensive travel management services for corporate clientele in Kenya and Somalia.',
+  description:
+    'Kamil Travel provides customized and comprehensive travel management services for corporate clientele in Kenya and Somalia.',
 }
 
 const features = [
-  { icon: Briefcase, title: 'Flight booking', desc: 'Professional booking and reservation management.' },
-  { icon: Users, title: 'Group travel', desc: 'Coordinated logistics for team and group travel.' },
-  { icon: Globe, title: 'Travel consultancy', desc: 'Strategic guidance for complex travel needs.' },
-  { icon: Plane, title: 'Destination alerts', desc: 'Timely updates on travel destinations.' },
-  { icon: HeadphonesIcon, title: '24-hour emergency support', desc: 'Around-the-clock assistance.' },
-  { icon: Shield, title: 'Airport transfers', desc: 'Coordinated pickup and drop-off services.' },
+  {
+    imageKey: 'international' as const,
+    title: 'Flight booking',
+    description: 'Professional booking and reservation management for teams and executives.',
+  },
+  {
+    imageKey: 'groupTravel' as const,
+    title: 'Group travel',
+    description: 'Coordinated logistics for team and organizational movements.',
+  },
+  {
+    imageKey: 'london' as const,
+    title: 'Travel consultancy',
+    description: 'Strategic guidance for complex international travel needs.',
+  },
+  {
+    imageKey: 'bannerCorporate' as const,
+    title: 'Destination alerts',
+    description: 'Timely updates on routes, restrictions, and destination changes.',
+  },
+  {
+    imageKey: 'mogadishu' as const,
+    title: '24-hour emergency support',
+    description: 'Around-the-clock assistance when plans change unexpectedly.',
+  },
+  {
+    imageKey: 'bannerCarRental' as const,
+    title: 'Airport transfers',
+    description: 'Coordinated pickup and drop-off at Nairobi and regional hubs.',
+  },
 ]
 
 const steps = [
@@ -35,40 +62,35 @@ export default function CorporateTravelPage() {
         title="Corporate Travel Management"
         subtitle="Customized and comprehensive travel management services for corporate clientele in Kenya and Somalia."
         imageKey="bannerCorporate"
+        breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Corporate Travel' }]}
       />
 
-      <section className="section-padding bg-sand-light">
-        <div className="mx-auto max-w-7xl px-5">
-          <FadeUp><SectionHeader eyebrow="Services" title="Corporate Support Grid" /></FadeUp>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((f, i) => (
-              <FadeUp key={f.title} delay={i * 0.08}>
-                <div className="rounded-2xl bg-surface border border-border p-6 hover:border-gold/30 hover:shadow-lg transition-all h-full group">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold/10 text-gold mb-4 group-hover:bg-gold group-hover:text-night transition-colors">
-                    <f.icon className="h-5 w-5" />
-                  </div>
-                  <h3 className="font-display text-xl font-semibold text-ink mb-2">{f.title}</h3>
-                  <p className="text-sm text-ink-muted">{f.desc}</p>
-                </div>
-              </FadeUp>
-            ))}
-          </div>
-        </div>
-      </section>
+      <InnerPageOverlap>
+        <PhotoFeatureGrid
+          eyebrow="Services"
+          title="Corporate Support Grid"
+          items={features}
+          bgClassName="section-padding pt-14 md:pt-16 bg-sand-light"
+        />
+      </InnerPageOverlap>
 
-      <section className="section-padding bg-surface">
+      <section className="section-padding bg-white">
         <div className="mx-auto max-w-5xl px-5">
-          <FadeUp><SectionHeader eyebrow="Process" title="How We Work" /></FadeUp>
+          <FadeUp>
+            <SectionHeader eyebrow="Process" title="How We Work" />
+          </FadeUp>
           <div className="space-y-6">
             {steps.map((step, i) => (
               <FadeUp key={step.num} delay={i * 0.08}>
-                <div className="flex items-start gap-6 rounded-2xl bg-sand-light border border-border p-6 hover:border-gold/30 transition-all">
-                  <span className="font-display text-4xl font-bold text-gold/30">{step.num}</span>
-                  <div>
-                    <h3 className="font-display text-xl font-semibold text-ink mb-1">{step.title}</h3>
+                <div className="flex items-start gap-6 rounded-2xl border border-border bg-sand-light p-6 transition-all hover:border-gold/30 hover:shadow-md">
+                  <span className="font-kanila-display text-4xl font-normal text-gold/30">{step.num}</span>
+                  <div className="flex-1">
+                    <h3 className="mb-1 font-kanila-display text-xl font-normal text-ink">{step.title}</h3>
                     <p className="text-sm text-ink-muted">{step.desc}</p>
                   </div>
-                  {i < steps.length - 1 && <ArrowRight className="h-5 w-5 text-gold/30 mt-2 ml-auto hidden md:block" />}
+                  {i < steps.length - 1 && (
+                    <ArrowRight className="mt-2 hidden h-5 w-5 text-gold/30 md:block" aria-hidden />
+                  )}
                 </div>
               </FadeUp>
             ))}
@@ -76,14 +98,14 @@ export default function CorporateTravelPage() {
         </div>
       </section>
 
-      <section className="section-padding bg-night text-center">
-        <div className="mx-auto max-w-3xl px-5">
-          <FadeUp instant>
-            <h2 className="font-display text-4xl md:text-5xl font-semibold text-white leading-[0.95] tracking-tight mb-6">Make Corporate Travel Easier</h2>
-            <Button href="/contact" variant="primary" size="lg">Start an Inquiry</Button>
-          </FadeUp>
-        </div>
-      </section>
+      <InnerPageCTA
+        title="Make corporate travel easier"
+        description="Dedicated account support for organizations operating across Kenya, Somalia, and international routes."
+        primaryLabel="Start an Inquiry"
+        secondaryLabel="View Services"
+        secondaryHref="/services"
+        imageKey="bannerCorporate"
+      />
     </>
   )
 }
