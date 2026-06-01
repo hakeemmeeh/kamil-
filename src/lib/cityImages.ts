@@ -1,5 +1,5 @@
 /**
- * City-specific imagery (Unsplash — Somalia & Kenya destinations).
+ * City-specific imagery (Unsplash — leisure destinations + Somalia & Kenya).
  * Central source for hero, destinations, and tour package photos.
  */
 
@@ -38,12 +38,26 @@ const photos = {
     'photo-1528164344705-47542687000d', // Tokyo — urban skyline
   sydney:
     'photo-1469474968028-56623f02e42e', // Scenic harbour — Asia-Pacific travel
+  santorini:
+    'photo-1570077188670-e3a8d69ac5ff', // Oia caldera — blue domes & whitewash
+  santoriniSunset:
+    'photo-1720630941688-2cf38a01e433', // Santorini — whitewash & windmill at dusk
+  greece:
+    'photo-1533105079780-92b9be482077', // Santorini — caldera village & Aegean (Greece)
+  bali:
+    'photo-1555400038-63f5ba517a47', // Bali — rice terraces & lush green
+  thailand:
+    'photo-1552733407-5d5c46c3bb3b', // Thailand — tropical beach & palms
+  thailandTemple:
+    'photo-1506929562872-bb421503ef21', // Thailand — temple & culture
+  seychelles:
+    'photo-1432405972618-c60b0225b8f9', // Seychelles — turquoise lagoon
   kanilaHero:
     'photo-1514565131-fce0801e5785', // Epic city skyline at dusk — Kanila-style hero
   kanilaHeroAlt:
     'photo-1544551763-46a013bb70d5', // Coastal sunset — aerial sea overview
   kanilaPopular:
-    'photo-1544551763-46a013bb70d5', // Coastal sunset at dusk — Kanila Popular sticky bg
+    'photo-1570077188670-e3a8d69ac5ff', // Santorini caldera — Popular Destinations sticky bg
   kanilaHeroCity:
     'photo-1496442226666-8d4d0e62e6e9', // New York City skyline — alternate hero
   kanilaKayak:
@@ -64,6 +78,10 @@ const photos = {
     'photo-1569154941061-e231b4725ef1',
   bannerCta:
     'photo-1507812984078-917a274065be',
+  desertDunes:
+    'photo-1512453979798-5ea266f8880c', // Golden sand dunes — desert landscape
+  footerScenic:
+    'photo-1472214103451-9374bd1c798e', // Warm horizon — footer alternate
 } as const
 
 export type CityImageKey = keyof typeof photos
@@ -93,9 +111,16 @@ export const cityImageAlts: Record<CityImageKey, string> = {
   london: 'London — Thames and cityscape',
   tokyo: 'Tokyo — Japan urban skyline',
   sydney: 'Sydney — harbour and coastal travel',
+  santorini: 'Santorini — Oia caldera with blue domes',
+  santoriniSunset: 'Santorini — whitewash and windmill at dusk',
+  greece: 'Greece — Santorini caldera village and Aegean Sea',
+  bali: 'Bali — emerald rice terraces',
+  thailand: 'Thailand — tropical beach and palms',
+  thailandTemple: 'Thailand — golden temple architecture',
+  seychelles: 'Seychelles — turquoise Indian Ocean lagoon',
   kanilaHero: 'Epic city skyline at dusk — luxury travel hero',
   kanilaHeroAlt: 'Coastal sunset over the ocean',
-  kanilaPopular: 'Coastal landscape at dusk — Kanila Popular Destinations backdrop',
+  kanilaPopular: 'Santorini caldera — Popular Destinations backdrop',
   kanilaHeroCity: 'New York City skyline at twilight',
   kanilaKayak: 'Kayaks on calm emerald water — adventure travel',
   vacationBeach: 'Tropical beach — vacation escape',
@@ -106,11 +131,66 @@ export const cityImageAlts: Record<CityImageKey, string> = {
   bannerCarRental: 'Car rental and airport transfer',
   bannerVisa: 'Visa assistance and documentation',
   bannerCta: 'Travel destination aerial view',
+  desertDunes: 'Golden sand dunes in the desert',
+  footerScenic: 'Warm sunset horizon over open landscape',
 }
 
 
-/** Hero carousel — one slide per key market city */
+/** Full-bleed hero background rotation — leisure + core markets */
+export const heroBackgroundSlides: CityImageKey[] = [
+  'santorini',
+  'santoriniSunset',
+  'bali',
+  'thailand',
+  'seychelles',
+  'greece',
+  'kanilaHero',
+  'mogadishu',
+  'nairobi',
+]
+
+/** Hero arch carousel — curated destination slugs (homepage) */
+export const heroArchSlugs = [
+  'santorini',
+  'bali',
+  'thailand',
+  'seychelles',
+  'greece',
+  'new-york',
+  'sydney',
+  'mogadishu',
+  'nairobi',
+  'oslo',
+  'london',
+  'tokyo',
+] as const
+
+/** Hero carousel copy — one slide per key market city */
 export const heroSlides = [
+  {
+    imageKey: 'santorini' as const,
+    destination: 'Santorini',
+    subtitle: 'Greece · Aegean Escape',
+    tagline: 'Whitewashed cliffs and endless blue',
+  },
+  {
+    imageKey: 'bali' as const,
+    destination: 'Bali',
+    subtitle: 'Indonesia · Island Paradise',
+    tagline: 'Terraces, temples, and tropical calm',
+  },
+  {
+    imageKey: 'thailand' as const,
+    destination: 'Thailand',
+    subtitle: 'Southeast Asia · Beach & Culture',
+    tagline: 'Golden shores and vibrant cities',
+  },
+  {
+    imageKey: 'seychelles' as const,
+    destination: 'Seychelles',
+    subtitle: 'Indian Ocean · Luxury Isles',
+    tagline: 'Crystal waters and granite shores',
+  },
   {
     imageKey: 'mogadishu' as const,
     destination: 'Mogadishu',
@@ -122,17 +202,5 @@ export const heroSlides = [
     destination: 'Nairobi',
     subtitle: 'Kenya · Corporate Travel',
     tagline: 'The heartbeat of East Africa',
-  },
-  {
-    imageKey: 'hargeisa' as const,
-    destination: 'Hargeisa',
-    subtitle: 'Somaliland · Regional Gateway',
-    tagline: 'Gateway to the north',
-  },
-  {
-    imageKey: 'bosaso' as const,
-    destination: 'Bosaso',
-    subtitle: 'Somalia · Port City',
-    tagline: 'Gulf of Aden trade and travel',
   },
 ]

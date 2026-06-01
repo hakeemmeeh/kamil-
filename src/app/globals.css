@@ -104,6 +104,7 @@ h1, h2, h3, .font-display {
 /* Footer / light sections — no blend; logo must stay visible on sand/cream */
 .footer-logo {
   mix-blend-mode: normal;
+  filter: brightness(1.05) contrast(1.08);
 }
 
 /* Photos — full clarity, no faded image layers */
@@ -120,12 +121,7 @@ h1, h2, h3, .font-display {
 }
 
 .banner-photo-overlay {
-  background: linear-gradient(
-    180deg,
-    rgba(7, 17, 31, 0.42) 0%,
-    rgba(7, 17, 31, 0.22) 45%,
-    rgba(7, 17, 31, 0.48) 100%
-  );
+  background: transparent;
 }
 
 /* === Eyebrow === */
@@ -427,6 +423,62 @@ h1, h2, h3, .font-display {
 }
 
 
+/* Kanila Home 3 hero — true full-viewport background (edge to edge under navbar) */
+:root {
+  --site-header: 5.5rem;
+}
+
+.kanila-hero {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Sticky layer fills the viewport from the top of the screen */
+.kanila-hero__bg {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100dvh;
+  min-height: 100svh;
+  overflow: hidden;
+  background-color: var(--color-night);
+}
+
+.kanila-hero__bg .hero-parallax-layer,
+.kanila-hero__bg .hero-bg-carousel,
+.kanila-hero__bg .hero-bg-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.kanila-hero__foreground {
+  position: relative;
+  z-index: 1;
+  margin-top: -100svh;
+  min-height: 100svh;
+  overflow-x: clip;
+}
+
+@supports (height: 100dvh) {
+  .kanila-hero__bg {
+    height: 100dvh;
+  }
+
+  .kanila-hero__foreground {
+    margin-top: -100dvh;
+    min-height: 100dvh;
+  }
+}
+
+.kanila-hero__runway {
+  pointer-events: none;
+  width: 100%;
+}
+
 /* Kanila Home 3 hero */
 .kanila-hero .hero-headline {
   font-weight: 500;
@@ -443,9 +495,6 @@ h1, h2, h3, .font-display {
   max-width: 100%;
 }
 
-.kanila-hero .kanila-sticky-cover__scroll {
-  overflow-x: clip;
-}
 
 @media (min-width: 1024px) {
   .hero-arch-rail {
@@ -572,17 +621,23 @@ h1, h2, h3, .font-display {
   border-radius: 50% 50% 0 0 / 42% 42% 0 0;
 }
 
-.plan-trip-arch {
-  will-change: transform, opacity;
+.plan-trip-collage {
+  min-height: 0;
 }
 
-.plan-trip-arch--from-right,
-.plan-trip-arch--lead {
+.plan-trip-arch {
+  position: relative;
+  will-change: transform, opacity;
   transform-origin: right center;
+}
+
+.plan-trip-arch--lead {
+  z-index: 10;
 }
 
 .plan-trip-arch-frame {
   transform-origin: center bottom;
+  pointer-events: none;
 }
 
 .arch-card {

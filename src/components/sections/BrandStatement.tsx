@@ -1,23 +1,32 @@
 'use client'
 
-import Image from 'next/image'
+import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Check, ArrowUpRight } from 'lucide-react'
 import { LineReveal } from '@/components/ui/LineReveal'
-import { cityImage, cityImageAlts } from '@/lib/cityImages'
+import { PlanTripArchCard, type PlanTripSlide } from '@/components/ui/PlanTripArchCard'
 import { about } from '@/lib/content'
 
-const planTripImages = [
-  { key: 'newYork' as const, className: 'relative z-10 aspect-[3/4] w-full' },
-  { key: 'london' as const, className: 'relative mt-10 aspect-[3/4] w-full sm:mt-14' },
-  { key: 'tokyo' as const, className: 'relative aspect-[3/4] w-full' },
-] as const
+const planTripSlides: PlanTripSlide[] = [
+  { key: 'santorini', label: 'Santorini', place: 'Greece' },
+  { key: 'bali', label: 'Bali', place: 'Indonesia' },
+  { key: 'thailand', label: 'Thailand', place: 'Southeast Asia' },
+]
 
 const highlights = [
   { title: 'Exclusive Trips', desc: 'Tailored itineraries for corporate and leisure travellers.' },
   { title: 'Professional Guides', desc: 'Dedicated support from Nairobi to your destination.' },
   { title: 'Airport Assistance', desc: 'Meet & assist at Mogadishu and across Somalia.' },
 ]
+
+const frameVariants = {
+  hidden: { opacity: 0, x: 48 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.95, delay: 0.1, ease: [0.22, 1, 0.36, 1] as const },
+  },
+}
 
 /** Kanila About — Plan Your Trip With Us (images left, copy + checklist right) */
 export function BrandStatement() {
@@ -26,50 +35,38 @@ export function BrandStatement() {
       <div className="mx-auto max-w-7xl px-5">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
           {/* Kanila — arched photo collage (left on desktop) */}
-          <div className="plan-trip-collage order-2 grid grid-cols-2 items-end gap-4 sm:gap-5 lg:order-1">
-            <div className="relative pt-2 pl-2 sm:pt-3 sm:pl-3">
-              <div
-                className="plan-trip-arch-frame pointer-events-none absolute left-0 top-0 z-0 aspect-[3/4] w-[calc(100%-8px)] rounded-t-full rounded-b-3xl border-2 border-gold/50"
+          <div className="plan-trip-collage order-2 grid grid-cols-2 items-end gap-3 sm:gap-4 lg:order-1 lg:gap-5">
+            <div className="plan-trip-slot relative w-full self-end">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.35 }}
+                variants={frameVariants}
+                className="plan-trip-arch-frame pointer-events-none absolute -left-0.5 -top-0.5 z-20 aspect-[3/4] w-full rounded-t-full rounded-b-3xl border-2 border-gold/50"
                 aria-hidden
               />
-              <div
-                className={`plan-trip-arch plan-trip-arch--lead arch-card-mask overflow-hidden shadow-2xl ${planTripImages[0].className}`}
-              >
-                <Image
-                  src={cityImage(planTripImages[0].key, 1400)}
-                  alt={cityImageAlts[planTripImages[0].key]}
-                  width={400}
-                  height={520}
-                  quality={90}
-                  className="h-full w-full object-cover will-change-transform"
-                />
-              </div>
+              <PlanTripArchCard
+                slide={planTripSlides[0]}
+                index={0}
+                className="plan-trip-arch--lead z-10 shadow-2xl"
+                captionClassName="pb-4 pt-10"
+              />
             </div>
-            <div className="flex flex-col gap-4 sm:gap-5">
-              <div
-                className={`plan-trip-arch plan-trip-arch--from-right arch-card-mask overflow-hidden shadow-premium ${planTripImages[1].className}`}
-              >
-                <Image
-                  src={cityImage(planTripImages[1].key, 1400)}
-                  alt={cityImageAlts[planTripImages[1].key]}
-                  width={360}
-                  height={480}
-                  quality={90}
-                  className="h-full w-full object-cover will-change-transform"
-                />
-              </div>
-              <div
-                className={`plan-trip-arch plan-trip-arch--from-right arch-card-mask overflow-hidden shadow-premium ${planTripImages[2].className}`}
-              >
-                <Image
-                  src={cityImage(planTripImages[2].key, 1400)}
-                  alt={cityImageAlts[planTripImages[2].key]}
-                  width={360}
-                  height={480}
-                  quality={90}
-                  className="h-full w-full object-cover will-change-transform"
-                />
-              </div>
+
+            <div className="flex w-full flex-col gap-3 sm:gap-4">
+              <PlanTripArchCard
+                slide={planTripSlides[1]}
+                index={1}
+                className="plan-trip-arch--stack-first"
+                titleClassName="text-base"
+              />
+              <PlanTripArchCard
+                slide={planTripSlides[2]}
+                index={2}
+                className="plan-trip-arch--stack-second"
+                titleClassName="text-base"
+                captionClassName="pb-3 pt-7"
+              />
             </div>
           </div>
 

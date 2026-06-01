@@ -5,10 +5,13 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { KanilaHeroArchCard } from '@/components/ui/KanilaHeroArchCard'
 import { cn } from '@/lib/utils'
 import { destinations } from '@/lib/content'
+import { heroArchSlugs } from '@/lib/cityImages'
 
-const ITEMS = destinations
-  .filter((d) => d.status !== 'client-to-confirm')
-  .slice(0, 12)
+const destBySlug = new Map(destinations.map((d) => [d.slug, d]))
+
+const ITEMS = heroArchSlugs
+  .map((slug) => destBySlug.get(slug))
+  .filter((d): d is NonNullable<typeof d> => !!d && d.status !== 'client-to-confirm')
   .map((d) => ({
     slug: d.slug,
     title: d.title,

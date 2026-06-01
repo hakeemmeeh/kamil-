@@ -19,7 +19,7 @@ if (typeof window !== 'undefined') {
 }
 
 /**
- * Kanila Home 3 — pinned photo hero · copy left · arch carousel bottom-right
+ * Kanila Home 3 — full-viewport photo hero · copy left · arch carousel bottom-right
  */
 export function HeroSection() {
   const initRan = useRef(false)
@@ -46,18 +46,15 @@ export function HeroSection() {
   }, [])
 
   return (
-    <section className="kanila-sticky-cover kanila-hero relative z-0 w-full" id="hero">
-      <div className="kanila-sticky-cover__pin hero-sticky-bg h-[100svh] w-full overflow-hidden bg-ink isolate">
-        <div className="hero-parallax-layer relative h-full w-full">
+    <section className="kanila-hero relative z-0 w-full" id="hero">
+      <div className="kanila-hero__bg" aria-hidden>
+        <div className="hero-parallax-layer absolute inset-0">
           <HeroBackgroundCarousel />
         </div>
-        <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-night/40 via-night/10 to-transparent" />
-        <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-night/15 via-transparent to-night/35" />
-        <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-night/45 via-transparent to-transparent" />
       </div>
 
-      <div className="kanila-sticky-cover__scroll relative z-10">
-        <div className="relative mx-auto flex min-h-[100svh] max-w-7xl flex-col gap-10 px-5 pt-24 lg:flex-row lg:items-end lg:justify-between lg:gap-16 lg:px-8 lg:pt-28 xl:gap-20 xl:px-10">
+      <div className="kanila-hero__foreground">
+        <div className="relative mx-auto flex min-h-[100dvh] max-w-7xl flex-col gap-10 px-5 pt-[var(--site-header)] lg:flex-row lg:items-end lg:justify-between lg:gap-16 lg:px-8 lg:pt-[calc(var(--site-header)+0.5rem)] xl:gap-20 xl:px-10">
           <div className="hero-foreground-copy flex flex-1 flex-col justify-center pb-4 lg:max-w-[44%] lg:pb-14 lg:pr-4 xl:max-w-[40%] xl:pr-8">
             <div className="hero-social mb-6 flex items-center gap-3">
               <div className="flex -space-x-2">
@@ -108,7 +105,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="kanila-sticky-cover__runway h-[55vh] md:h-[70vh]" aria-hidden />
+        <div className="kanila-hero__runway h-[55vh] md:h-[70vh]" aria-hidden />
       </div>
     </section>
   )

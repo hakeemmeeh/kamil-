@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { LineReveal } from '@/components/ui/LineReveal'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
+import { KanilaQuickLinksStrip } from '@/components/sections/KanilaQuickLinksStrip'
 import { about } from '@/lib/content'
 import { cn } from '@/lib/utils'
 import { cityImage } from '@/lib/cityImages'
@@ -12,17 +13,17 @@ const features = [
   {
     title: 'Global Air Ticketing',
     desc: 'Professional flight booking for corporate and leisure travel to destinations worldwide.',
-    imageKey: 'international' as const,
+    imageKey: 'santorini' as const,
   },
   {
     title: 'Corporate Travel Management',
     desc: 'Cost-effective, customized travel planning for organizations — from Nairobi to global hubs.',
-    imageKey: 'bannerCorporate' as const,
+    imageKey: 'bali' as const,
   },
   {
     title: 'Regional & Airport Support',
     desc: 'Meet & assist at Mogadishu and representatives across six Somalia airports.',
-    imageKey: 'mogadishuCoast' as const,
+    imageKey: 'thailand' as const,
   },
 ]
 
@@ -42,10 +43,12 @@ export function CelebrateSection({ compact = false }: CelebrateSectionProps) {
       id="about"
     >
       {/* Orange accent line — Kanila Home 3 */}
-      <div className="absolute left-0 right-0 top-0 h-1 bg-gold" aria-hidden />
+      <div className="absolute left-0 right-0 top-0 z-10 h-1 bg-gold" aria-hidden />
+
+      {compact && <KanilaQuickLinksStrip className="relative z-10 -mx-0 rounded-t-[2.5rem]" />}
 
       <div className="mx-auto max-w-7xl px-5">
-        <div className={compact ? 'mb-10 text-center' : 'mb-16 text-center'}>
+        <div className={cn('text-center', compact ? 'mb-8 pt-10' : 'mb-16 pt-0')}>
           <p className="animate-eyebrow eyebrow mb-6 justify-center">About Us</p>
           <LineReveal
             tag="h2"
@@ -61,37 +64,36 @@ export function CelebrateSection({ compact = false }: CelebrateSectionProps) {
           </p>
         </div>
 
-        <div
-          data-stagger="features"
-          className={cn(
-            'grid grid-cols-1 md:grid-cols-3',
-            compact ? 'gap-5 md:gap-6' : 'gap-8 md:gap-10'
-          )}
-        >
-          {features.map((feature) => (
-            <div
-              key={feature.title}
-              data-stagger-item
-              className="group overflow-hidden rounded-3xl border border-border bg-white text-center shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-gold/30 hover:shadow-premium dark:bg-surface"
-            >
-              <div className="kanila-arch-top relative aspect-[5/3] w-full overflow-hidden">
-                <Image
-                  src={cityImage(feature.imageKey, 800)}
-                  alt=""
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="200px"
-                />
+        {!compact && (
+          <div
+            data-stagger="features"
+            className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-10"
+          >
+            {features.map((feature) => (
+              <div
+                key={feature.title}
+                data-stagger-item
+                className="group overflow-hidden rounded-3xl border border-border bg-white text-center shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-gold/30 hover:shadow-premium dark:bg-surface"
+              >
+                <div className="kanila-arch-top relative aspect-[5/3] w-full overflow-hidden">
+                  <Image
+                    src={cityImage(feature.imageKey, 800)}
+                    alt=""
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="200px"
+                  />
+                </div>
+                <div className="px-6 pb-8 pt-5">
+                  <h3 className="mb-2 font-kanila-display text-xl font-normal text-ink">{feature.title}</h3>
+                  <p className="text-sm leading-relaxed text-ink-muted">{feature.desc}</p>
+                </div>
               </div>
-              <div className={cn(compact ? 'px-5 pb-6 pt-4' : 'px-6 pb-8 pt-5')}>
-                <h3 className="mb-2 font-kanila-display text-xl font-normal text-ink">{feature.title}</h3>
-                <p className="text-sm leading-relaxed text-ink-muted">{feature.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
-        <div className="animate-fade-up mt-12 text-center">
+        <div className={cn('animate-fade-up text-center', compact ? 'mt-6' : 'mt-12')}>
           <Link
             href="/about"
             className="inline-flex items-center gap-2 text-sm font-bold text-gold transition-all hover:gap-3"

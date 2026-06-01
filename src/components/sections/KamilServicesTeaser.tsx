@@ -11,25 +11,25 @@ const teasers = [
     title: 'Corporate Travel',
     desc: 'Cost-effective planning, group coordination, and 24-hour support for organizations.',
     href: '/corporate-travel',
-    imageKey: 'bannerCorporate' as CityImageKey,
+    imageKey: 'santorini' as CityImageKey,
   },
   {
     title: 'Airport Experience',
     desc: 'Meet & assist, VIP lounge, and transfers — including Mogadishu airport operations.',
     href: '/services#airport-experience',
-    imageKey: 'bannerServices' as CityImageKey,
+    imageKey: 'bali' as CityImageKey,
   },
   {
     title: 'Somalia Network',
     desc: 'Representatives at six regional airports plus worldwide airline partnerships.',
     href: '/about#somalia-network',
-    imageKey: 'somaliaNetwork' as CityImageKey,
+    imageKey: 'thailand' as CityImageKey,
   },
 ]
 
 export function KamilServicesTeaser() {
   return (
-    <section className="relative overflow-hidden bg-cream-2 py-16 md:py-20" id="kamil-services">
+    <section className="relative z-20 overflow-hidden bg-white py-16 md:py-20" id="kamil-services">
       <div className="mx-auto max-w-7xl px-5">
         <p className="eyebrow mb-10 justify-center">Kamil Expertise</p>
         <motion.div

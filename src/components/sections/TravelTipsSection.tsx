@@ -9,14 +9,9 @@ import { KanilaStickyPhotoSection } from '@/components/ui/KanilaStickyPhotoSecti
 import { cityImage, cityImageAlts, type CityImageKey } from '@/lib/cityImages'
 import { cn } from '@/lib/utils'
 
-const BG = cityImage('kanilaKayak', 1920)
+const BG = cityImage('thailand', 1920)
 
-const tipPhotos: CityImageKey[] = [
-  'bannerVisa',
-  'international',
-  'bannerServices',
-  'bannerCarRental',
-]
+const tipPhotos: CityImageKey[] = ['santorini', 'bali', 'thailandTemple', 'seychelles']
 
 const tipsHome = travelTipsBefore.slice(0, 4)
 
@@ -25,8 +20,8 @@ export function TravelTipsSection() {
     <KanilaStickyPhotoSection
       id="travel-tips"
       imageSrc={BG}
-      imageAlt={cityImageAlts.kanilaKayak}
-      overlay="warm"
+      imageAlt={cityImageAlts.thailand}
+      overlay="subtle"
       runway="38vh"
     >
       <div className="relative px-5 py-20 md:py-28">

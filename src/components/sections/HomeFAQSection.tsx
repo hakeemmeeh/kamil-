@@ -1,28 +1,23 @@
 'use client'
 
-import Image from 'next/image'
 import { useState } from 'react'
 import Link from 'next/link'
 import { ChevronDown } from 'lucide-react'
 import { homeFaqs } from '@/lib/content'
 import { FadeUp } from '@/components/ui/FadeUp'
-import { cityImage } from '@/lib/cityImages'
 import { cn } from '@/lib/utils'
-
-const FAQ_BG = cityImage('vacationResort', 1920)
 
 export function HomeFAQSection() {
   const [open, setOpen] = useState(0)
 
   return (
-    <section className="relative overflow-hidden" id="faq">
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <Image src={FAQ_BG} alt="" fill className="object-cover object-center opacity-20" sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-b from-sand-light via-sand-light/95 to-cream" />
-      </div>
+    <section
+      className="relative z-40 -mt-[min(12vh,140px)] overflow-hidden rounded-t-[2.5rem] bg-white shadow-[0_-24px_60px_rgba(7,17,31,0.08)]"
+      id="faq"
+    >
+      <div className="absolute left-0 right-0 top-0 z-10 h-1 bg-gold" aria-hidden />
 
-      <div className="overlap-panel relative z-10 -mt-0 rounded-t-[2.5rem] bg-sand-light/95 px-5 py-20 shadow-[0_-24px_60px_rgba(7,17,31,0.06)] backdrop-blur-sm md:py-28">
-        <div className="absolute left-0 right-0 top-0 h-1 bg-gold" aria-hidden />
+      <div className="relative px-5 py-20 md:py-28">
         <div className="mx-auto max-w-3xl">
           <FadeUp>
             <p className="font-kanila-script mb-3 text-center text-[1.5rem] text-kanila-orange md:text-[1.65rem]">
@@ -41,8 +36,8 @@ export function HomeFAQSection() {
               <FadeUp key={item.q} delay={i * 0.05}>
                 <div
                   className={cn(
-                    'overflow-hidden rounded-2xl border bg-white/90 backdrop-blur-sm transition-colors',
-                    open === i ? 'border-gold/35 shadow-md' : 'border-border/80'
+                    'overflow-hidden rounded-2xl border bg-sand-light transition-colors',
+                    open === i ? 'border-gold/40 shadow-md' : 'border-border'
                   )}
                 >
                   <button
@@ -68,7 +63,7 @@ export function HomeFAQSection() {
                     )}
                   >
                     <div className="overflow-hidden">
-                      <p className="border-t border-border/80 px-5 pb-5 pt-3 text-sm leading-relaxed text-ink-muted md:px-6">
+                      <p className="border-t border-border px-5 pb-5 pt-3 text-sm leading-relaxed text-ink-muted md:px-6">
                         {item.a}
                       </p>
                     </div>

@@ -221,46 +221,9 @@ export function archReveal(selector: string) {
   })
 }
 
-/** Plan Your Trip — stacked pair + lead arch slide in from the right with fade */
+/** Plan Your Trip — arch intros handled in PlanTripArchCard (Framer Motion) */
 export function planTripCollageReveal() {
-  if (typeof window === 'undefined') return
-
-  const section = document.querySelector('#plan-your-trip')
-  if (!section) return
-
-  const pair = section.querySelectorAll('.plan-trip-arch--from-right')
-  const lead = section.querySelector('.plan-trip-arch--lead')
-  const frame = section.querySelector('.plan-trip-arch-frame')
-
-  if (!pair.length && !lead) return
-
-  const scroll = { trigger: section, start: 'top 80%', once: true }
-  const slideDuration = 1.1
-  const slideEase = 'power3.out'
-  const fromRight = { x: 88, opacity: 0 }
-  const toRest = { x: 0, opacity: 1, duration: slideDuration, ease: slideEase, scrollTrigger: scroll }
-
-  if (prefersReducedMotion()) {
-    gsap.set([...pair, lead].filter(Boolean), { x: 0, opacity: 1 })
-    if (frame) gsap.set(frame, { opacity: 1, x: 0 })
-    return
-  }
-
-  if (pair.length) {
-    gsap.fromTo(pair, fromRight, { ...toRest, stagger: 0.2 })
-  }
-
-  if (lead) {
-    gsap.fromTo(lead, fromRight, { ...toRest, delay: 0.38 })
-  }
-
-  if (frame) {
-    gsap.fromTo(
-      frame,
-      { opacity: 0, x: 56 },
-      { opacity: 1, x: 0, duration: 0.95, delay: 0.28, ease: slideEase, scrollTrigger: scroll }
-    )
-  }
+  /* no-op: avoids GSAP opacity:0 leaving cards hidden */
 }
 
 export function parallaxImage(selector: string, amount = 15) {

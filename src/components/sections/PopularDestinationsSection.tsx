@@ -81,9 +81,15 @@ export function PopularDestinationsSection() {
             onError={() => setBgSrc(BG_FALLBACK)}
           />
         </div>
-        <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-night/20 via-night/5 to-night/25" />
-        <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-night/40 via-transparent to-night/10" />
-      </div>
+        </div>
+        <div
+          className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-night/15 via-night/5 to-night/20"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-night/20 via-transparent to-night/10"
+          aria-hidden
+        />
 
       <div className="kanila-sticky-cover__scroll relative z-10">
         <div className="relative flex min-h-[100svh] flex-col justify-center py-16 md:py-20">

@@ -8,7 +8,7 @@ import { RegionPremiumCard } from '@/components/ui/RegionPremiumCard'
 import { KanilaSectionHeading } from '@/components/ui/KanilaSectionHeading'
 import { cityImage } from '@/lib/cityImages'
 
-const REGION_BG = cityImage('kanilaHero', 1920)
+const REGION_BG = cityImage('greece', 1920)
 
 export function TravelByRegionSection() {
   return (
@@ -21,10 +21,11 @@ export function TravelByRegionSection() {
           src={REGION_BG}
           alt=""
           fill
-          className="object-cover object-center opacity-[0.14]"
+          quality={90}
+          className="object-cover object-center"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#F3EDE4]/90 via-[#F3EDE4]/75 to-[#F3EDE4]/95" />
+        <div className="absolute inset-0 bg-[#F3EDE4]/82" />
       </div>
 
       <div className="region-blob pointer-events-none absolute -bottom-24 -left-20 z-[1] h-[min(520px,70vw)] w-[min(520px,70vw)] rounded-[44%] bg-gold/25 blur-[1px] md:-bottom-32 md:-left-28" aria-hidden />

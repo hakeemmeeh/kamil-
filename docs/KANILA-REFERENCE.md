@@ -86,7 +86,7 @@ Use this order on `src/app/page.tsx` unless the user opts out of a section.
 |---|----------------|-----------------|-------|
 | 1 | Top bar + nav + Book Now | `TopBar` + `Navbar` | Transparent over hero → solid on scroll |
 | 2 | **§1.1 Hero** — photo + headline + bottom arches | `HeroSection` + `HeroArchCarousel` | Sticky bg, arch autoplay, center card pops |
-| 3 | Thin cream strip (optional): Events · Destinations · Activities | *Not built* — optional 3-icon strip | Celebrate replaces with 3 feature cards |
+| 3 | Thin cream strip (optional): Events · Destinations · Activities | `KanilaQuickLinksStrip` (in `CelebrateSection` when `compact`) | Full Celebrate cards on `/about` only |
 | 4 | **Celebrate** — cream overlap, gold top line | `CelebrateSection` | `overlap-panel`, negative margin over hero |
 | 5 | **Places To Go** — dark, arched grid | `DestinationsPreview` | **Removed from home** (user: repetition) — still on `/destinations` |
 | 6 | **‹ The Best Destinations ›** — sand + topo + region cards | `TravelByRegionSection` | Line art via `/public/regions/*.svg` |

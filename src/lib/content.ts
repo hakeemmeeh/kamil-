@@ -28,7 +28,7 @@ export const brandPositioning = {
   eyebrow: 'Global Travel · Corporate · Airport Services',
   headline: 'Your World, Your Way — Premium Travel Management',
   subtext:
-    'From Nairobi to Oslo, New York, Sydney, and beyond — Kamil Travel delivers customized booking, airport support, and end-to-end journey management worldwide.',
+    'From Santorini and Bali to Thailand, the Seychelles, Nairobi, and beyond — Kamil Travel delivers customized booking, airport support, and end-to-end journey management worldwide.',
 }
 
 export const travelRegions = [
@@ -49,13 +49,13 @@ export const travelRegions = [
   {
     slug: 'europe',
     name: 'Europe',
-    image: 'oslo' as const,
-    desc: 'City breaks, corporate routes, and curated holidays across the continent.',
+    image: 'santorini' as const,
+    desc: 'City breaks, island escapes, and curated holidays from the Aegean to the Arctic.',
     places: [
+      { name: 'Santorini', href: '/destinations#santorini' },
+      { name: 'Greece', href: '/destinations#greece' },
       { name: 'Oslo', href: '/tours/oslo-weekend' },
       { name: 'London', href: '/tours/international-flight-package' },
-      { name: 'Moscow', href: '/tours/international-flight-package' },
-      { name: 'Belgrade', href: '/tours/international-flight-package' },
     ],
   },
   {
@@ -71,11 +71,24 @@ export const travelRegions = [
   {
     slug: 'asia-pacific',
     name: 'Asia-Pacific',
-    image: 'sydney' as const,
-    desc: 'Long-haul leisure and corporate travel to major hubs in Asia and Oceania.',
+    image: 'bali' as const,
+    desc: 'Long-haul leisure and corporate travel across Southeast Asia and Oceania.',
     places: [
+      { name: 'Bali', href: '/destinations#bali' },
+      { name: 'Thailand', href: '/destinations#thailand' },
       { name: 'Tokyo', href: '/tours/international-flight-package' },
       { name: 'Sydney', href: '/tours/sydney-faraway' },
+    ],
+  },
+  {
+    slug: 'indian-ocean',
+    name: 'Indian Ocean',
+    image: 'seychelles' as const,
+    desc: 'Luxury island escapes with turquoise waters, granite shores, and boutique resorts.',
+    places: [
+      { name: 'Seychelles', href: '/destinations#seychelles' },
+      { name: 'Mauritius', href: '/tours/international-flight-package' },
+      { name: 'Maldives', href: '/tours/international-flight-package' },
     ],
   },
 ]
@@ -248,6 +261,46 @@ export const destinations = [
     status: 'confirmed-context',
   },
   {
+    slug: 'santorini',
+    title: 'Santorini',
+    country: 'Greece',
+    desc: 'Iconic caldera views, whitewashed villages, and sunset cruises across the Aegean.',
+    image: cityImage('santorini'),
+    status: 'confirmed-context',
+  },
+  {
+    slug: 'greece',
+    title: 'Greece',
+    country: 'Greece',
+    desc: 'Island-hopping, ancient heritage, and Mediterranean leisure from Athens to the Cyclades.',
+    image: cityImage('greece'),
+    status: 'confirmed-context',
+  },
+  {
+    slug: 'bali',
+    title: 'Bali',
+    country: 'Indonesia',
+    desc: 'Rice terraces, temple culture, and boutique beach resorts across the Island of the Gods.',
+    image: cityImage('bali'),
+    status: 'confirmed-context',
+  },
+  {
+    slug: 'thailand',
+    title: 'Thailand',
+    country: 'Thailand',
+    desc: 'Golden temples, tropical beaches, and vibrant cities from Bangkok to the Andaman coast.',
+    image: cityImage('thailand'),
+    status: 'confirmed-context',
+  },
+  {
+    slug: 'seychelles',
+    title: 'Seychelles',
+    country: 'Seychelles',
+    desc: 'Granite boulders, turquoise lagoons, and exclusive Indian Ocean island escapes.',
+    image: cityImage('seychelles'),
+    status: 'confirmed-context',
+  },
+  {
     slug: 'oslo',
     title: 'Oslo',
     country: 'Norway',
@@ -338,6 +391,54 @@ export const tourCategories = [
 export type TourCategory = (typeof tourCategories)[number]
 
 export const tours = [
+  {
+    slug: 'santorini-escape',
+    title: 'Santorini Escape',
+    destination: 'Santorini',
+    country: 'Greece',
+    category: 'International' as TourCategory,
+    duration: '5 Days',
+    desc: 'Caldera sunsets, whitewashed Oia, and Aegean sailing — a classic Mediterranean getaway arranged by Kamil Travel.',
+    image: cityImage('santorini'),
+    highlights: ['Caldera views', 'Sunset cruises', 'Boutique hotels'],
+    featured: true,
+  },
+  {
+    slug: 'bali-retreat',
+    title: 'Bali Island Retreat',
+    destination: 'Bali',
+    country: 'Indonesia',
+    category: 'International' as TourCategory,
+    duration: '7 Days',
+    desc: 'Ubud terraces, temple visits, and beachfront relaxation across Bali\u2019s cultural heart and southern coast.',
+    image: cityImage('bali'),
+    highlights: ['Rice terraces', 'Temple culture', 'Beach resorts'],
+    featured: true,
+  },
+  {
+    slug: 'thailand-discovery',
+    title: 'Thailand Discovery',
+    destination: 'Thailand',
+    country: 'Thailand',
+    category: 'International' as TourCategory,
+    duration: '6 Days',
+    desc: 'Bangkok temples, Andaman beaches, and curated island hops — Southeast Asia at its most vibrant.',
+    image: cityImage('thailand'),
+    highlights: ['Temple tours', 'Tropical beaches', 'Island hopping'],
+    featured: true,
+  },
+  {
+    slug: 'seychelles-luxury',
+    title: 'Seychelles Luxury Isles',
+    destination: 'Seychelles',
+    country: 'Seychelles',
+    category: 'International' as TourCategory,
+    duration: '8 Days',
+    desc: 'Private island resorts, granite coves, and crystal-clear lagoons in the Indian Ocean\u2019s most exclusive archipelago.',
+    image: cityImage('seychelles'),
+    highlights: ['Luxury resorts', 'Snorkelling', 'Island transfers'],
+    featured: true,
+  },
   {
     slug: 'oslo-weekend',
     title: 'Weekend in Oslo',
@@ -453,12 +554,12 @@ export function getTourBySlug(slug: string) {
 }
 
 export const footerDestinationLinks = [
-  { label: 'Africa', href: '/destinations#region-africa' },
+  { label: 'Santorini', href: '/destinations#santorini' },
+  { label: 'Bali', href: '/destinations#bali' },
+  { label: 'Thailand', href: '/destinations#thailand' },
+  { label: 'Seychelles', href: '/destinations#seychelles' },
   { label: 'Mogadishu', href: '/destinations#mogadishu' },
-  { label: 'Hargeisa', href: '/destinations#hargeisa' },
-  { label: 'Oslo', href: '/tours/oslo-weekend' },
-  { label: 'New York', href: '/tours/new-york-adventure' },
-  { label: 'Sydney', href: '/tours/sydney-faraway' },
+  { label: 'Nairobi', href: '/tours/nairobi-corporate-travel' },
   { label: 'All Destinations', href: '/destinations' },
 ]
 
@@ -511,6 +612,24 @@ export const processSteps = [
 ]
 
 export const travelStories = [
+  {
+    slug: 'santorini-aegean-escape',
+    category: 'International',
+    title: 'Santorini — sunsets over the caldera',
+    excerpt:
+      'Whitewashed cliffs, blue-domed chapels, and sailing the Aegean — how we craft Mediterranean escapes.',
+    image: cityImage('santorini'),
+    href: '/tours/santorini-escape',
+  },
+  {
+    slug: 'bali-island-retreat',
+    category: 'International',
+    title: 'Bali — terraces, temples, and tropical calm',
+    excerpt:
+      'From Ubud rice fields to southern beaches — curated Indonesia itineraries for leisure travellers.',
+    image: cityImage('bali'),
+    href: '/tours/bali-retreat',
+  },
   {
     slug: 'oslo-scandinavian-weekend',
     category: 'International',

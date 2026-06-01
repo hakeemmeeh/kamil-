@@ -2,16 +2,10 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
-import { cityImage, cityImageAlts, type CityImageKey } from '@/lib/cityImages'
+import { cityImage, cityImageAlts, heroBackgroundSlides } from '@/lib/cityImages'
 import { cn } from '@/lib/utils'
 
-const HERO_SLIDES: CityImageKey[] = [
-  'kanilaKayak',
-  'kanilaHero',
-  'kanilaHeroAlt',
-  'newYork',
-  'sydney',
-]
+const HERO_SLIDES = heroBackgroundSlides
 
 const INTERVAL_MS = 5500
 const FADE_MS = 1400
@@ -61,7 +55,7 @@ export function HeroBackgroundCarousel() {
               fill
               priority={i === 0}
               className={cn(
-                'hero-bg object-cover object-center',
+                'hero-bg h-full w-full object-cover object-center',
                 active && !prefersReducedMotion() && 'hero-bg-ken-burns'
               )}
               sizes="100vw"

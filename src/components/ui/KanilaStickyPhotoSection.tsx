@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
-type OverlayTone = 'dark' | 'warm' | 'light'
+type OverlayTone = 'none' | 'subtle' | 'dark' | 'warm' | 'light'
 
 interface KanilaStickyPhotoSectionProps {
   id: string
@@ -17,11 +17,14 @@ interface KanilaStickyPhotoSectionProps {
   pinClassName?: string
 }
 
-const overlays: Record<OverlayTone, string> = {
+const overlays: Record<Exclude<OverlayTone, 'none'>, string> = {
+  subtle: 'from-night/20 via-night/8 to-night/25',
   dark: 'from-night/75 via-night/45 to-night/65',
   warm: 'from-night/60 via-night/25 to-night/50',
   light: 'from-white/88 via-white/72 to-white/88',
 }
+
+const subtleTopFade = 'from-night/15 via-transparent to-night/10'
 
 /**
  * Kanila Home 3 — full-bleed sticky background, foreground scrolls over it.
@@ -32,7 +35,7 @@ export function KanilaStickyPhotoSection({
   imageAlt,
   children,
   className,
-  overlay = 'dark',
+  overlay = 'none',
   runway = '50vh',
   pinClassName,
 }: KanilaStickyPhotoSectionProps) {
@@ -52,11 +55,21 @@ export function KanilaStickyPhotoSection({
           className="object-cover object-center"
           sizes="100vw"
         />
-        <div
-          className={cn('pointer-events-none absolute inset-0 bg-gradient-to-b', overlays[overlay])}
-          aria-hidden
-        />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/50 via-transparent to-night/20" aria-hidden />
+        {overlay !== 'none' && (
+          <>
+            <div
+              className={cn('pointer-events-none absolute inset-0 bg-gradient-to-b', overlays[overlay])}
+              aria-hidden
+            />
+            <div
+              className={cn(
+                'pointer-events-none absolute inset-0 bg-gradient-to-t',
+                overlay === 'subtle' ? subtleTopFade : 'from-night/50 via-transparent to-night/20'
+              )}
+              aria-hidden
+            />
+          </>
+        )}
       </div>
 
       <div className="kanila-sticky-cover__scroll relative z-10">

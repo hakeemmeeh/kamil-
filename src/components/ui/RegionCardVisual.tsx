@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from 'react'
 import Image from 'next/image'
 import { cityImage, cityImageAlts, type CityImageKey } from '@/lib/cityImages'
 import { cn } from '@/lib/utils'
@@ -8,8 +11,12 @@ interface RegionCardVisualProps {
   className?: string
 }
 
+const FALLBACK_KEY: CityImageKey = 'greece'
+
 /** Kanila Best Destinations — arched photo accent (replaces line-art sketches) */
 export function RegionCardVisual({ imageKey, regionName, className }: RegionCardVisualProps) {
+  const [src, setSrc] = useState(() => cityImage(imageKey, 800))
+
   return (
     <div
       className={cn(
@@ -18,16 +25,18 @@ export function RegionCardVisual({ imageKey, regionName, className }: RegionCard
       )}
       aria-hidden
     >
-      <div className="relative w-full">
-        <div className="arch-card-mask relative aspect-[3/4] w-full overflow-hidden shadow-[0_16px_40px_rgba(7,17,31,0.12)] ring-1 ring-black/[0.04]">
+      <div className="relative h-full w-full">
+        <div className="arch-card-mask relative aspect-[3/4] h-full w-full min-h-[120px] overflow-hidden bg-sand-deep shadow-[0_16px_40px_rgba(7,17,31,0.12)] ring-1 ring-black/[0.04]">
           <Image
-            src={cityImage(imageKey, 800)}
+            src={src}
             alt={cityImageAlts[imageKey] ?? regionName}
             fill
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            quality={85}
+            className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
             sizes="(max-width: 768px) 120px, 165px"
+            onError={() => setSrc(cityImage(FALLBACK_KEY, 800))}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-night/25 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-night/20 via-transparent to-transparent" />
         </div>
       </div>
     </div>
