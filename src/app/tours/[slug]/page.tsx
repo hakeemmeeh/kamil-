@@ -34,32 +34,34 @@ export default async function TourDetailPage({ params }: Props) {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-night pb-16 pt-12 md:pt-16">
-        <div className="absolute inset-0">
+      <section className="page-banner tour-detail-hero relative overflow-hidden bg-night">
+        <div className="pointer-events-none absolute inset-0" aria-hidden>
           <Image
             src={tour.image}
             alt={tour.title}
             fill
-            className="banner-photo object-cover"
+            className="banner-photo object-cover object-center"
             priority
-            quality={90}
+            quality={80}
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-night/55 via-night/30 to-night/20" />
+          <div className="page-banner-overlay absolute inset-0" />
         </div>
-        <div className="relative z-10 mx-auto max-w-4xl px-5">
-          <p className="font-kanila-script mb-2 text-[1.25rem] text-kamil-green">{tour.category}</p>
-          <h1 className="mb-4 font-kanila-display text-4xl font-normal leading-[0.95] tracking-tight text-white md:text-6xl">
+        <div className="relative z-10 mx-auto max-w-4xl px-5 py-8 md:py-10">
+          <p className="font-kanila-script mb-1.5 text-[1.15rem] text-kamil-green-light md:text-[1.25rem]">
+            {tour.category}
+          </p>
+          <h1 className="page-banner__title font-kanila-display text-[clamp(1.75rem,4.5vw,2.75rem)] font-normal leading-[1] tracking-tight text-white">
             {tour.title}
           </h1>
-          <div className="mb-4">
+          <div className="mt-3">
             <TourRating
               rating={tour.rating ?? 4.5}
               reviewCount={tour.reviewCount ?? 2}
               dark
             />
           </div>
-          <div className="mb-6 flex flex-wrap gap-4 text-sm text-white/70">
+          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-xs text-white/70 md:text-sm">
             <span className="inline-flex items-center gap-1.5">
               <MapPin className="h-4 w-4 text-gold" />
               {tour.destination}, {tour.country}

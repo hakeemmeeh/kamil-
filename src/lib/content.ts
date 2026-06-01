@@ -457,9 +457,11 @@ export const tours = [
     image: cityImage('santorini'),
     highlights: ['Caldera views', 'Sunset cruises', 'Boutique hotels'],
     featured: true,
-    rating: 4.8,
-    reviewCount: 4,
+    rating: 4.6,
+    reviewCount: 8,
     interests: ['Adventure', 'Honeymoon & Romancing', 'Cruises'],
+    firstMinute: true,
+    priceFrom: '$1,450',
   },
   {
     slug: 'bali-retreat',
@@ -522,6 +524,7 @@ export const tours = [
     interests: ['Cruises', 'Family Holidays', 'First Minute'],
     promoLabel: 'POPULAR',
     firstMinute: true,
+    priceFrom: '$1,380',
   },
   {
     slug: 'oslo-weekend',
@@ -538,6 +541,7 @@ export const tours = [
     reviewCount: 3,
     interests: ['Backpacking', 'Budget Travels', 'First Minute', 'Weekend'],
     firstMinute: true,
+    priceFrom: '$890',
   },
   {
     slug: 'new-york-adventure',
@@ -570,6 +574,8 @@ export const tours = [
     interests: ['Cruises', 'Family Holidays', 'Faraway Travels'],
     promoLabel: '20% OFF',
     firstMinute: true,
+    priceFrom: '$2,560',
+    priceWas: '$3,200',
   },
   {
     slug: 'mogadishu-travel-package',
@@ -759,37 +765,50 @@ export const travelStories = [
   },
 ]
 
-/** Kanila-style — homepage “Things to know before travelling” */
-export const travelTipsBefore = [
+export type TravelTipIllustrationKey = 'around' | 'visa' | 'arrival' | 'tip'
+
+/** Kanila-style — “Things to know before travelling” cards */
+export const travelTipsBefore: {
+  title: string
+  desc: string
+  href: string
+  illustration: TravelTipIllustrationKey
+}[] = [
   {
-    title: 'Visa & entry requirements',
-    desc: 'Confirm passport validity, visa rules, and transit requirements for every country on your itinerary.',
+    title: 'Getting Around',
+    desc: 'Airport transfers, meet & assist, and coordinated ground transport so every leg of your journey stays smooth.',
+    href: '/car-rental-airport-transfers',
+    illustration: 'around',
+  },
+  {
+    title: 'Visa',
+    desc: 'Passport validity, visa rules, and transit requirements for each country on your itinerary.',
     href: '/visa-assistance',
+    illustration: 'visa',
   },
   {
-    title: 'Travel documents',
-    desc: 'Keep tickets, insurance, corporate letters, and ID accessible in print and digital copies.',
-    href: '/visa-assistance',
+    title: 'Getting Here',
+    desc: 'Flight booking, connections, and arrival support — including Mogadishu meet & assist when you land.',
+    href: '/services#meet-assist',
+    illustration: 'arrival',
   },
   {
-    title: 'Airport meet & assist',
-    desc: 'Book arrival and departure support — especially at Mogadishu and regional Somalia airports.',
-    href: '/services#airport-experience',
-  },
-  {
-    title: 'Insurance & health',
-    desc: 'Arrange travel cover and check health advisories before international departures.',
-    href: '/services',
+    title: 'Travel Tip',
+    desc: 'Insurance, documents, baggage allowances, and how to reach our 24-hour team when plans change.',
+    href: '/contact',
+    illustration: 'tip',
   },
   {
     title: 'Baggage & connections',
     desc: 'Allow connection time on multi-sector tickets; confirm baggage allowances with your airline.',
     href: '/contact',
+    illustration: 'arrival',
   },
   {
     title: '24-hour support',
     desc: 'Save Kamil contact details for changes, delays, or emergency travel assistance.',
     href: '/contact',
+    illustration: 'tip',
   },
 ]
 

@@ -88,6 +88,8 @@ const photos = {
     'photo-1512453979798-5ea266f8880c', // Golden sand dunes — desert landscape
   footerScenic:
     'photo-1472214103451-9374bd1c798e', // Warm horizon — footer alternate
+  travelTips:
+    'photo-1432405972618-c60b0225b8f9', // Aerial turquoise coast — before you travel section
 } as const
 
 export type CityImageKey = keyof typeof photos
@@ -142,6 +144,7 @@ export const cityImageAlts: Record<CityImageKey, string> = {
   bannerCta: 'Travel destination aerial view',
   desertDunes: 'Golden sand dunes in the desert',
   footerScenic: 'Warm sunset horizon over open landscape',
+  travelTips: 'Aerial view of turquoise ocean and coastline',
 }
 
 

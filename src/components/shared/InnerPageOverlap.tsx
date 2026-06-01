@@ -15,7 +15,7 @@ const bgClass = {
   surface: 'bg-surface',
 } as const
 
-/** Rounded panel that slides over PageBanner — Kanila inner-page rhythm */
+/** Rounded content panel below compact PageBanner */
 export function InnerPageOverlap({
   children,
   className,
@@ -24,7 +24,7 @@ export function InnerPageOverlap({
   return (
     <div
       className={cn(
-        'inner-page-overlap relative z-40 -mt-[min(14vh,120px)] rounded-t-[2.5rem] shadow-[0_-24px_60px_rgba(7,17,31,0.12)] md:-mt-[min(18vh,140px)]',
+        'inner-page-overlap relative z-40 rounded-t-[1.75rem] shadow-[0_-12px_40px_rgba(7,17,31,0.08)] md:rounded-t-[2rem]',
         bgClass[bg],
         className
       )}

@@ -59,14 +59,48 @@ export function revertSectionScroll(section: string) {
 
 /** Tear down all homepage pinned sections (hero + popular) */
 export function cleanupHomePinnedSections() {
-  revertSectionScroll('#hero')
-  revertSectionScroll('#popular-destinations')
-  cleanupHomeScrollAnimations()
+  cleanupSiteScroll()
+}
 
-  ScrollTrigger.getAll().forEach((st) => {
-    if (st.pin) st.kill(true)
-  })
+const SITE_STICKY_SECTIONS = [
+  '#hero',
+  '#popular-destinations',
+  '#travel-tips',
+] as const
+
+/** Revert all Kanila sticky-cover sections + scroll tweens */
+export function cleanupSiteScroll() {
+  SITE_STICKY_SECTIONS.forEach((sel) => revertSectionScroll(sel))
+  revertSectionScroll('.page-banner[data-kanila-sticky]')
+  cleanupHomeScrollAnimations()
   ScrollTrigger.refresh()
+}
+
+export function initTravelTipsStickyScroll() {
+  initKanilaStickyCover({
+    section: '#travel-tips',
+    parallaxInner: '.travel-tips-parallax',
+  })
+}
+
+export function initPageBannerStickyCovers() {
+  if (typeof window === 'undefined' || prefersReducedMotion()) return
+  if (!document.querySelector('.page-banner[data-kanila-sticky]')) return
+
+  initKanilaStickyCover({
+    section: '.page-banner[data-kanila-sticky]',
+    parallaxInner: '.page-banner-parallax',
+  })
+}
+
+export function initCtaStickyScroll() {
+  const cta = document.querySelector('#cta, #inner-cta, [data-kanila-sticky-cta]')
+  if (!cta || !(cta instanceof HTMLElement)) return
+  const id = cta.id ? `#${cta.id}` : '[data-kanila-sticky-cta]'
+  initKanilaStickyCover({
+    section: id,
+    parallaxInner: '.cta-parallax-layer',
+  })
 }
 
 /** @deprecated use revertSectionScroll */
@@ -414,44 +448,48 @@ export function initPopularDestinationsScroll() {
   const ctx = gsap.context(() => {
     const mm = gsap.matchMedia()
 
+    const scrollLayer = section.querySelector('.kanila-sticky-cover__scroll')
+
     mm.add('(min-width: 768px)', () => {
       const parallaxInner = section.querySelector('.popular-parallax-layer')
-      if (parallaxInner) {
+      if (parallaxInner && scrollLayer) {
         gsapToIfPresent(parallaxInner, {
-          yPercent: 18,
-          scale: 1.1,
+          yPercent: 12,
+          scale: 1.05,
           ease: 'none',
           scrollTrigger: {
-            trigger: section,
+            trigger: scrollLayer,
             start: 'top top',
-            end: 'bottom bottom',
-            scrub: 1.35,
+            end: 'bottom top',
+            scrub: 0.85,
           },
         })
       }
     })
 
-    gsapToIfPresent(section.querySelectorAll('.popular-copy'), {
-      y: -36,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: section,
-        start: 'top top',
-        end: '45% top',
-        scrub: 1,
-      },
-    })
+    if (scrollLayer) {
+      gsapToIfPresent(section.querySelectorAll('.popular-copy'), {
+        y: -28,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: scrollLayer,
+          start: 'top top',
+          end: '60% top',
+          scrub: 0.75,
+        },
+      })
 
-    gsapToIfPresent(section.querySelectorAll('.popular-cards-stage'), {
-      y: -24,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: section,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 1.1,
-      },
-    })
+      gsapToIfPresent(section.querySelectorAll('.popular-cards-stage'), {
+        y: -18,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: scrollLayer,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 0.75,
+        },
+      })
+    }
   }, section)
 
   sectionContexts.set('#popular-destinations', ctx)
@@ -559,7 +597,12 @@ export function initHeroParallax() {
   initHeroCoverScroll()
 }
 
-/** Page-wide scroll animations for Home 3 sections */
+/** Page-wide scroll animations — all routes */
+export function initSiteScrollAnimations() {
+  initHomeScrollAnimations()
+}
+
+/** @deprecated use initSiteScrollAnimations */
 export function initHomeScrollAnimations() {
   if (typeof window === 'undefined' || prefersReducedMotion()) return
 

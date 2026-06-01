@@ -4,6 +4,7 @@ import './globals.css'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { SmoothScroll } from '@/components/layout/SmoothScroll'
+import { SiteScrollEffects } from '@/components/layout/SiteScrollEffects'
 import { HashScroll } from '@/components/layout/HashScroll'
 import { RouteTransitionCleanup } from '@/components/layout/RouteTransitionCleanup'
 
@@ -75,6 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-body font-medium antialiased text-ink">
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <SmoothScroll>
+          <SiteScrollEffects />
           <RouteTransitionCleanup />
           <HashScroll />
           <Navbar />

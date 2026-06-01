@@ -24,7 +24,9 @@ export function DestinationsPreview() {
     <section className="section-padding overflow-x-clip bg-night" id="destinations">
       <div className="mx-auto max-w-7xl px-5">
         <div className="mb-12 text-center md:mb-16">
-          <p className="animate-eyebrow eyebrow mb-6 justify-center before:!bg-gold">Destinations</p>
+          <p className="animate-eyebrow mb-6 justify-center text-xs font-extrabold uppercase tracking-[0.2em] text-white/80 before:!bg-white/60">
+            Destinations
+          </p>
           <LineReveal
             tag="h2"
             align="center"

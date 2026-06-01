@@ -15,7 +15,7 @@ interface KanilaTravelServiceCardProps {
   className?: string
 }
 
-/** Kanila-style travel service — arched photo, script eyebrow, leisure not corporate */
+/** Kanila-style travel service — arched photo, all copy in bottom white panel */
 export function KanilaTravelServiceCard({
   eyebrow,
   title,
@@ -33,7 +33,7 @@ export function KanilaTravelServiceCard({
       className={cn('kanila-travel-service-card group', className)}
     >
       <Link href={href} className="block">
-        <div className="kanila-travel-service-card__arch relative aspect-[4/5] overflow-hidden shadow-[0_20px_50px_rgba(7,17,31,0.18)]">
+        <div className="kanila-travel-service-card__arch relative aspect-[4/5] overflow-hidden shadow-[0_20px_50px_rgba(7,17,31,0.18)] transition-shadow duration-500 group-hover:shadow-[0_24px_56px_rgba(7,17,31,0.22)]">
           <Image
             src={image}
             alt={title}
@@ -41,21 +41,29 @@ export function KanilaTravelServiceCard({
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             sizes="(max-width: 640px) 88vw, 280px"
           />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/55 via-transparent to-transparent" />
-          <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.14em] text-night shadow-sm">
-            {eyebrow}
-          </span>
-        </div>
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/50 via-night/10 to-transparent" />
 
-        <div className="mt-5 px-1">
-          <h3 className="font-kanila-display text-[1.35rem] font-normal leading-snug text-ink md:text-[1.5rem]">
-            {title}
-          </h3>
-          <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink-muted">{desc}</p>
-          <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.12em] text-kamil-green transition-all group-hover:gap-2.5">
-            Discover
-            <ArrowUpRight className="h-4 w-4" />
-          </span>
+          <div className="absolute inset-x-0 bottom-0 z-10 border-t border-border/60 bg-white">
+            <div className="px-4 py-4 md:px-5 md:py-5">
+              <p className="mb-1.5 text-[10px] font-extrabold uppercase tracking-[0.14em] text-gold">
+                {eyebrow}
+              </p>
+              <h3 className="font-kanila-display text-lg font-normal leading-tight text-ink md:text-xl">
+                {title}
+              </h3>
+              <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink-muted">{desc}</p>
+            </div>
+
+            <div className="flex items-center justify-between gap-3 border-t border-border/50 bg-sand-light/80 px-4 py-2.5 md:px-5 md:py-3">
+              <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-kamil-green transition-all group-hover:tracking-[0.14em]">
+                Discover
+              </span>
+              <ArrowUpRight
+                className="h-4 w-4 shrink-0 text-kamil-green transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 md:h-[18px] md:w-[18px]"
+                aria-hidden
+              />
+            </div>
+          </div>
         </div>
       </Link>
     </motion.article>

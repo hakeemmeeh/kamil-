@@ -10,9 +10,14 @@ import { cn } from '@/lib/utils'
 interface ServicesNavDropdownProps {
   linkColor: string
   activeColor: string
+  overHero?: boolean
 }
 
-export function ServicesNavDropdown({ linkColor, activeColor }: ServicesNavDropdownProps) {
+export function ServicesNavDropdown({
+  linkColor,
+  activeColor,
+  overHero = false,
+}: ServicesNavDropdownProps) {
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
@@ -47,7 +52,11 @@ export function ServicesNavDropdown({ linkColor, activeColor }: ServicesNavDropd
       >
         Services
         <ChevronDown
-          className={cn('h-3.5 w-3.5 transition-transform duration-300', open && 'rotate-180')}
+          className={cn(
+            'h-3.5 w-3.5 transition-transform duration-300',
+            overHero && 'text-white/90',
+            open && 'rotate-180'
+          )}
           aria-hidden
         />
       </button>

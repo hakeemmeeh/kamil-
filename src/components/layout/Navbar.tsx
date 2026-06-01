@@ -37,9 +37,11 @@ export function Navbar() {
     }
   }, [pathname])
 
-  const linkColor = 'text-ink-soft hover:text-gold'
-  const activeColor = 'text-gold font-bold'
-  const hamburgerColor = 'bg-ink'
+  const linkColor = overHero
+    ? 'text-white/90 hover:text-white'
+    : 'text-ink-soft hover:text-gold'
+  const activeColor = overHero ? 'text-white font-bold' : 'text-gold font-bold'
+  const hamburgerColor = overHero ? 'bg-white' : 'bg-ink'
 
   return (
     <>
@@ -52,7 +54,11 @@ export function Navbar() {
       >
         <div className="mx-auto max-w-7xl px-5">
           <nav
-            className="glass flex items-center justify-between rounded-full px-6 py-3 shadow-premium ring-1 ring-black/[0.04]"
+            className={`flex items-center justify-between rounded-full px-6 py-3 shadow-premium ${
+              overHero
+                ? 'glass-dark border border-white/15'
+                : 'glass ring-1 ring-black/[0.04]'
+            }`}
             role="navigation"
             aria-label="Main navigation"
           >
@@ -74,7 +80,12 @@ export function Navbar() {
             <div className="hidden items-center gap-1 lg:flex">
               {desktopNav.map((item) =>
                 item.children ? (
-                  <ServicesNavDropdown key={item.href} linkColor={linkColor} activeColor={activeColor} />
+                  <ServicesNavDropdown
+                    key={item.href}
+                    linkColor={linkColor}
+                    activeColor={activeColor}
+                    overHero={overHero}
+                  />
                 ) : (
                   <Link
                     key={item.href}

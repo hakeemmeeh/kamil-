@@ -1,50 +1,12 @@
-'use client'
-
-import { useLayoutEffect, useRef } from 'react'
 import Link from 'next/link'
 import { HeroArchCarousel } from '@/components/sections/HeroArchCarousel'
 import { HeroBackgroundCarousel } from '@/components/sections/HeroBackgroundCarousel'
-import {
-  heroIntroHome3,
-  initHeroCoverScroll,
-  revertSectionScroll,
-  whenLenisReady,
-} from '@/lib/animations'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ChevronsRight } from 'lucide-react'
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger)
-}
 
 /**
  * Kanila Home 3 — full-viewport photo hero · copy left · arch carousel bottom-right
  */
 export function HeroSection() {
-  const initRan = useRef(false)
-
-  useLayoutEffect(() => {
-    let cancelled = false
-
-    const setup = () => {
-      if (cancelled || initRan.current) return
-      initRan.current = true
-      heroIntroHome3()
-      initHeroCoverScroll()
-      ScrollTrigger.refresh()
-    }
-
-    const cancelLenis = whenLenisReady(setup)
-
-    return () => {
-      cancelled = true
-      cancelLenis()
-      initRan.current = false
-      revertSectionScroll('#hero')
-    }
-  }, [])
-
   return (
     <section className="kanila-hero relative z-0 w-full" id="hero">
       <div className="kanila-hero__bg" aria-hidden>
@@ -70,10 +32,10 @@ export function HeroSection() {
               <span className="text-sm font-semibold text-white">50+ People Joined</span>
             </div>
 
-            <p className="hero-kicker mb-3 font-kanila-script text-[1.5rem] text-kamil-green-light md:mb-4 md:text-[1.75rem]">
+            <p className="hero-kicker mb-3 font-kanila-script text-[1.5rem] text-white md:mb-4 md:text-[1.75rem]">
               It&apos;s time to
             </p>
-            <h1 className="hero-headline mb-6 font-kanila-display text-[2rem] leading-[1.06] tracking-tight text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.35)] sm:text-[2.75rem] md:text-[3.1rem] lg:text-[3.35rem]">
+            <h1 className="hero-headline mb-6 font-kanila-display text-[2rem] leading-[1.06] tracking-tight text-white sm:text-[2.75rem] md:text-[3.1rem] lg:text-[3.35rem]">
               <span className="block overflow-hidden">
                 <span className="heading-line line-reveal-inner inline-block">
                   Let&apos;s Design Your Next
@@ -86,7 +48,7 @@ export function HeroSection() {
               </span>
             </h1>
 
-            <p className="hero-desc mb-8 max-w-md text-base font-medium leading-relaxed text-white/90 md:text-lg">
+            <p className="hero-desc mb-8 max-w-md text-base font-medium leading-relaxed text-white md:text-lg">
               Explore breathtaking volcanic landscapes, golden skies, and timeless beauty with
               expertly guided journeys worldwide.
             </p>

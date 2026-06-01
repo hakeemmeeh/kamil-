@@ -1,11 +1,9 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
 import Image from 'next/image'
+import { motion, useReducedMotion } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
 import { MagneticButton } from '@/components/ui/MagneticButton'
-import { LineReveal } from '@/components/ui/LineReveal'
-import { parallaxImage, prefersReducedMotion } from '@/lib/animations'
 import { cityImage, type CityImageKey } from '@/lib/cityImages'
 
 export interface InnerPageCTAProps {
@@ -19,6 +17,16 @@ export interface InnerPageCTAProps {
   id?: string
 }
 
+const fade = {
+  hidden: { opacity: 0, y: 28 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] as const },
+  },
+}
+
+/** Full-width enquiry CTA — content always visible (no GSAP scroll trap) */
 export function InnerPageCTA({
   title = 'Ready to plan your next journey?',
   description = 'Send an inquiry and the Kamil Travel team will help you choose the right travel support for your needs.',
@@ -29,31 +37,25 @@ export function InnerPageCTA({
   imageKey = 'bannerCta',
   id = 'inner-cta',
 }: InnerPageCTAProps) {
-  const bgRef = useRef<HTMLDivElement>(null)
+  const reduced = useReducedMotion()
   const bgSrc = cityImage(imageKey, 1920)
-
-  useEffect(() => {
-    const el = bgRef.current
-    if (!el || prefersReducedMotion()) return
-    el.id = `${id}-parallax-bg`
-    parallaxImage(`#${id}-parallax-bg`, 12)
-  }, [id])
+  const viewport = { once: true, margin: '-8%' as const }
 
   return (
-    <section className="relative overflow-hidden py-28 md:py-36" id={id}>
-      <div ref={bgRef} className="parallax-wrap absolute inset-[-20%] h-[140%]">
+    <section className="inner-page-cta relative overflow-hidden py-24 md:py-32" id={id}>
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
         <Image
           src={bgSrc}
           alt=""
           fill
           quality={90}
-          className="parallax-img banner-photo object-cover object-center"
+          className="banner-photo object-cover object-center"
           sizes="100vw"
         />
+        <div className="absolute inset-0 bg-gradient-to-r from-white/88 via-white/78 to-white/88" />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-r from-white/85 via-white/70 to-white/85" />
 
-      <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-20">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-20" aria-hidden>
         <svg className="absolute h-full w-full" viewBox="0 0 1200 400" preserveAspectRatio="none">
           <path
             d="M0,200 Q300,100 600,200 T1200,200"
@@ -65,18 +67,32 @@ export function InnerPageCTA({
         </svg>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-3xl px-5 text-center">
-        <LineReveal
-          tag="h2"
-          align="center"
+      <motion.div
+        className="relative z-10 mx-auto max-w-3xl px-5 text-center"
+        initial={reduced ? 'show' : 'hidden'}
+        whileInView="show"
+        viewport={viewport}
+        variants={{
+          hidden: {},
+          show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
+        }}
+      >
+        <motion.h2
+          variants={fade}
           className="mb-6 font-kanila-display text-4xl font-normal leading-[0.95] tracking-tight text-ink md:text-5xl lg:text-[56px]"
         >
           {title}
-        </LineReveal>
-        <p className="animate-fade-up mx-auto mb-10 max-w-xl text-lg leading-relaxed text-ink-muted">
+        </motion.h2>
+        <motion.p
+          variants={fade}
+          className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-ink-muted"
+        >
           {description}
-        </p>
-        <div className="animate-fade-up flex flex-col items-center justify-center gap-4 sm:flex-row">
+        </motion.p>
+        <motion.div
+          variants={fade}
+          className="flex flex-col items-center justify-center gap-4 sm:flex-row"
+        >
           <MagneticButton>
             <Button href={primaryHref} variant="primary" size="lg" arrow className="hover:-translate-y-0.5">
               {primaryLabel}
@@ -87,8 +103,8 @@ export function InnerPageCTA({
               {secondaryLabel}
             </Button>
           ) : null}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   )
 }

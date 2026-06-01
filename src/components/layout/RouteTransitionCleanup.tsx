@@ -3,7 +3,7 @@
 import { useEffect, useLayoutEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { cleanupHomePinnedSections } from '@/lib/animations'
+import { cleanupSiteScroll } from '@/lib/animations'
 
 function isInternalRoute(href: string) {
   return href.startsWith('/') && !href.startsWith('//') && !href.startsWith('/#')
@@ -27,7 +27,7 @@ export function RouteTransitionCleanup() {
       const href = anchor.getAttribute('href')
       if (!href || !isInternalRoute(href) || href === '/') return
 
-      cleanupHomePinnedSections()
+      cleanupSiteScroll()
       window.__lenis?.scrollTo(0, { immediate: true })
     }
 
@@ -38,8 +38,8 @@ export function RouteTransitionCleanup() {
   useLayoutEffect(() => {
     const prev = previousPath.current
 
-    if (prev === '/' && pathname !== '/') {
-      cleanupHomePinnedSections()
+    if (prev !== pathname) {
+      cleanupSiteScroll()
       window.__lenis?.scrollTo(0, { immediate: true })
       window.scrollTo(0, 0)
       ScrollTrigger.refresh()

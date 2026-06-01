@@ -1,18 +1,12 @@
 'use client'
 
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import { KanilaPopularDestinationCarousel } from '@/components/ui/KanilaPopularDestinationCarousel'
 import type { KanilaPopularDestination } from '@/components/ui/KanilaPopularDestinationCard'
 import { KanilaCompassMark } from '@/components/ui/KanilaCompassMark'
 import { cityImage, cityImageAlts } from '@/lib/cityImages'
 import { destinations } from '@/lib/content'
-import {
-  initPopularDestinationsScroll,
-  revertSectionScroll,
-  whenLenisReady,
-} from '@/lib/animations'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const BG_PRIMARY = cityImage('kanilaPopular', 1920)
 const BG_FALLBACK = cityImage('sydney', 1920)
@@ -39,36 +33,15 @@ const popularItems: KanilaPopularDestination[] = destinations
  * Sticky coastal bg · Tour Activity script · Marcellus title · arch cards + white footer
  */
 export function PopularDestinationsSection() {
-  const initRan = useRef(false)
   const [bgSrc, setBgSrc] = useState(BG_PRIMARY)
-
-  useLayoutEffect(() => {
-    let cancelled = false
-
-    const setup = () => {
-      if (cancelled || initRan.current) return
-      initRan.current = true
-      initPopularDestinationsScroll()
-      ScrollTrigger.refresh()
-    }
-
-    const cancelLenis = whenLenisReady(setup)
-
-    return () => {
-      cancelled = true
-      cancelLenis()
-      initRan.current = false
-      revertSectionScroll('#popular-destinations')
-    }
-  }, [])
 
   return (
     <section
-      className="kanila-sticky-cover kanila-popular relative w-full"
+      className="kanila-sticky-cover kanila-popular relative z-20 w-full"
       id="popular-destinations"
       aria-label="Popular destinations"
     >
-      <div className="kanila-sticky-cover__pin popular-sticky-bg h-[100svh] w-full overflow-hidden bg-[#2a3544]">
+      <div className="kanila-sticky-cover__pin popular-sticky-bg h-[100svh] w-full overflow-hidden bg-night/30">
         <div className="popular-parallax-layer relative h-full w-full">
           <Image
             src={bgSrc}
@@ -76,20 +49,24 @@ export function PopularDestinationsSection() {
             fill
             priority
             quality={90}
-            className="popular-bg object-cover object-[center_40%]"
+            className="popular-bg kanila-fullbleed-bg"
             sizes="100vw"
             onError={() => setBgSrc(BG_FALLBACK)}
           />
         </div>
-        </div>
         <div
-          className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-night/15 via-night/5 to-night/20"
+          className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-night/8 via-transparent to-night/10"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-night/20 via-transparent to-night/10"
+          className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-night/12 via-transparent to-transparent"
           aria-hidden
         />
+        <div
+          className="popular-cover-fade pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-28 bg-gradient-to-t from-night/40 to-transparent md:h-36"
+          aria-hidden
+        />
+      </div>
 
       <div className="kanila-sticky-cover__scroll relative z-10">
         <div className="relative flex min-h-[100svh] flex-col justify-center py-16 md:py-20">
@@ -108,7 +85,7 @@ export function PopularDestinationsSection() {
           </div>
         </div>
 
-        <div className="kanila-sticky-cover__runway h-[45vh] md:h-[58vh]" aria-hidden />
+        <div className="kanila-sticky-cover__runway h-[14vh] md:h-[18vh]" aria-hidden />
       </div>
     </section>
   )

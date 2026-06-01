@@ -18,7 +18,7 @@ interface PageBannerProps {
   breadcrumbs?: BreadcrumbItem[]
 }
 
-/** Inner-page hero — full-bleed photo + Kanila typography */
+/** Compact inner-page header — short photo strip, not a full hero */
 export function PageBanner({
   eyebrow,
   title,
@@ -28,32 +28,35 @@ export function PageBanner({
   imageAlt,
   breadcrumbs,
 }: PageBannerProps) {
-  const src = imageSrc ?? cityImage(imageKey, 1920)
+  const src = imageSrc ?? cityImage(imageKey, 1400)
   const alt = imageAlt ?? cityImageAlts[imageKey] ?? title
 
   return (
-    <section className="relative overflow-hidden bg-night pb-24 pt-12 md:pb-28 md:pt-16">
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        priority
-        loading="eager"
-        fetchPriority="high"
-        quality={90}
-        className="banner-photo object-cover object-center"
-        sizes="100vw"
-      />
-      <div className="page-banner-overlay absolute inset-0" aria-hidden />
-      <div className="relative z-10 mx-auto max-w-4xl px-5 text-center">
+    <section className="page-banner relative w-full overflow-hidden bg-night" aria-label={title}>
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          priority
+          quality={80}
+          className="banner-photo object-cover object-center"
+          sizes="100vw"
+        />
+        <div className="page-banner-overlay absolute inset-0" />
+      </div>
+
+      <div className="relative z-10 mx-auto flex min-h-[11.5rem] max-w-4xl flex-col justify-center px-5 py-8 text-center sm:min-h-[12.5rem] md:min-h-[13.75rem] md:py-10">
         {breadcrumbs && breadcrumbs.length > 0 && (
           <nav
             aria-label="Breadcrumb"
-            className="mb-6 flex flex-wrap items-center justify-center gap-1 text-sm text-white/60"
+            className="mb-3 flex flex-wrap items-center justify-center gap-1 text-xs text-white/60 md:text-sm"
           >
             {breadcrumbs.map((crumb, i) => (
               <span key={`${crumb.label}-${i}`} className="inline-flex items-center gap-1">
-                {i > 0 && <ChevronRight className="h-3.5 w-3.5 shrink-0 text-white/40" aria-hidden />}
+                {i > 0 && (
+                  <ChevronRight className="h-3 w-3 shrink-0 text-white/40 md:h-3.5 md:w-3.5" aria-hidden />
+                )}
                 {crumb.href ? (
                   <Link href={crumb.href} className="transition-colors hover:text-white">
                     {crumb.label}
@@ -66,15 +69,17 @@ export function PageBanner({
           </nav>
         )}
         {eyebrow && (
-          <p className="font-kanila-script mb-3 text-[1.35rem] text-kamil-green-light md:text-[1.5rem]">
+          <p className="font-kanila-script mb-1.5 text-[1.2rem] text-kamil-green-light md:mb-2 md:text-[1.35rem]">
             {eyebrow}
           </p>
         )}
-        <h1 className="mb-6 font-kanila-display text-5xl font-normal leading-[0.95] tracking-tight text-white md:text-7xl">
+        <h1 className="page-banner__title font-kanila-display text-[clamp(1.75rem,4.5vw,2.75rem)] font-normal leading-[1] tracking-tight text-white">
           {title}
         </h1>
         {subtitle && (
-          <p className="mx-auto max-w-2xl text-lg text-white/75 md:text-xl">{subtitle}</p>
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-white/75 md:mt-3.5 md:text-base">
+            {subtitle}
+          </p>
         )}
       </div>
     </section>

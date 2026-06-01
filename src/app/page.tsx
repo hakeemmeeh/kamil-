@@ -16,16 +16,12 @@ import { TestimonialsSection } from '@/components/sections/TestimonialsSection'
 import { NewsletterSection } from '@/components/sections/NewsletterSection'
 import { ContactPreview } from '@/components/sections/ContactPreview'
 import { CinematicCTA } from '@/components/sections/CinematicCTA'
-import { HomeScrollEffects } from '@/components/sections/HomeScrollEffects'
-
 /**
  * Kanila Home 3 core + Kamil legacy parity (search, offers, contact, newsletter).
  */
 export default function HomePage() {
   return (
     <>
-      <HomeScrollEffects />
-
       <HeroSection />
       <TourSearchBar overlap />
       <CelebrateSection compact />
@@ -38,6 +34,8 @@ export default function HomePage() {
       <TravelByRegionSection />
       <PopularDestinationsSection />
 
+      <TestimonialsSection />
+
       <StatsStrip />
       <FirstMinuteOffersSection />
       <CuratedJourneysSection />
@@ -47,7 +45,6 @@ export default function HomePage() {
 
       <KamilServicesTeaser />
 
-      <TestimonialsSection />
       <NewsletterSection />
       <ContactPreview />
       <CinematicCTA />

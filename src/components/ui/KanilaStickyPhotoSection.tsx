@@ -15,6 +15,8 @@ interface KanilaStickyPhotoSectionProps {
   /** Scroll runway below content (Kanila cover effect) */
   runway?: string | false
   pinClassName?: string
+  /** GSAP parallax target inside the sticky pin */
+  parallaxClassName?: string
 }
 
 const overlays: Record<Exclude<OverlayTone, 'none'>, string> = {
@@ -38,6 +40,7 @@ export function KanilaStickyPhotoSection({
   overlay = 'none',
   runway = '50vh',
   pinClassName,
+  parallaxClassName,
 }: KanilaStickyPhotoSectionProps) {
   return (
     <section id={id} className={cn('kanila-sticky-cover relative w-full', className)}>
@@ -47,14 +50,16 @@ export function KanilaStickyPhotoSection({
           pinClassName
         )}
       >
-        <Image
-          src={imageSrc}
-          alt={imageAlt}
-          fill
-          quality={90}
-          className="object-cover object-center"
-          sizes="100vw"
-        />
+        <div className={cn('absolute inset-0', parallaxClassName)}>
+          <Image
+            src={imageSrc}
+            alt={imageAlt}
+            fill
+            quality={90}
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+        </div>
         {overlay !== 'none' && (
           <>
             <div

@@ -31,13 +31,13 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     const isTouch = window.matchMedia('(pointer: coarse)').matches
 
     const lenis = new Lenis({
-      duration: 1.35,
-      lerp: isTouch ? 0.09 : 0.075,
+      duration: 1.2,
+      lerp: isTouch ? 0.09 : 0.082,
       smoothWheel: true,
       syncTouch: isTouch,
-      syncTouchLerp: 0.085,
-      wheelMultiplier: 0.92,
-      touchMultiplier: 1.05,
+      syncTouchLerp: 0.08,
+      wheelMultiplier: 0.88,
+      touchMultiplier: 1,
       infinite: false,
     })
 

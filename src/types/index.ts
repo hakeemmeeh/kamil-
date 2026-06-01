@@ -38,6 +38,9 @@ export interface Tour {
   interests?: string[]
   promoLabel?: string
   firstMinute?: boolean
+  /** Display “From” price on hot-deal cards (indicative — confirm with team) */
+  priceFrom?: string
+  priceWas?: string
 }
 
 export interface NavItem {
