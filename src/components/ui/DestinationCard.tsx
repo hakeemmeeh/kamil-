@@ -58,7 +58,7 @@ export function DestinationCard({ title, country, desc, image, status }: Destina
       <div className="relative z-20 p-6 md:p-8">
         <h3 className="mb-2 font-display text-2xl font-semibold text-white md:text-3xl">{title}</h3>
         <p className="mb-5 line-clamp-2 text-sm text-white/60">{desc}</p>
-        <span className="card-arrow inline-flex items-center gap-2 text-sm font-bold text-gold">
+        <span className="card-arrow inline-flex items-center gap-2 text-sm font-bold text-kamil-green">
           Enquire
           <ArrowUpRight className="h-4 w-4" />
         </span>
