@@ -198,6 +198,20 @@ h4,
   color: var(--color-kamil-green);
 }
 
+/* Mobile menu font-display overrides (force white/gold text on dark backdrop) */
+.lg\:hidden button.font-display,
+.lg\:hidden a.font-display {
+  color: rgba(255, 255, 255, 0.8);
+}
+.lg\:hidden button.font-display:hover,
+.lg\:hidden a.font-display:hover {
+  color: #ffffff;
+}
+.lg\:hidden button.font-display.text-gold,
+.lg\:hidden a.font-display.text-gold {
+  color: var(--color-gold);
+}
+
 .shadow-green-glow {
   box-shadow: 0 14px 40px rgba(45, 130, 90, 0.48);
 }
