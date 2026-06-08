@@ -959,6 +959,18 @@ h4,
   text-shadow: 0 4px 48px rgba(0, 0, 0, 0.35);
 }
 
+@media (max-width: 767px) {
+  .kanila-popular .popular-title,
+  .kanila-popular h2.text-white {
+    color: var(--color-ink) !important;
+    text-shadow: none !important;
+  }
+
+  .kanila-popular svg.text-white\/90 {
+    color: var(--color-ink-muted) !important;
+  }
+}
+
 .popular-kicker {
   text-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
 }
