@@ -148,20 +148,7 @@ export const cityImageAlts: Record<CityImageKey, string> = {
 }
 
 
-/** Full-bleed hero background rotation — leisure + core markets */
-export const heroBackgroundSlides: CityImageKey[] = [
-  'santorini',
-  'santoriniSunset',
-  'bali',
-  'thailand',
-  'portugal',
-  'moscow',
-  'kanilaHero',
-  'mogadishu',
-  'nairobi',
-]
-
-/** Hero arch carousel — curated destination slugs (homepage) */
+/** Hero carousel — curated destination slugs (background + arch cards stay in sync) */
 export const heroArchSlugs = [
   'santorini',
   'bali',
@@ -177,49 +164,3 @@ export const heroArchSlugs = [
   'london',
   'tokyo',
 ] as const
-
-/** Hero carousel copy — one slide per key market city */
-export const heroSlides = [
-  {
-    imageKey: 'santorini' as const,
-    destination: 'Santorini',
-    subtitle: 'Greece · Aegean Escape',
-    tagline: 'Whitewashed cliffs and endless blue',
-  },
-  {
-    imageKey: 'bali' as const,
-    destination: 'Bali',
-    subtitle: 'Indonesia · Island Paradise',
-    tagline: 'Terraces, temples, and tropical calm',
-  },
-  {
-    imageKey: 'thailand' as const,
-    destination: 'Thailand',
-    subtitle: 'Southeast Asia · Beach & Culture',
-    tagline: 'Golden shores and vibrant cities',
-  },
-  {
-    imageKey: 'portugal' as const,
-    destination: 'Portugal',
-    subtitle: 'Europe · Atlantic Coast',
-    tagline: 'Lisbon rooftops and golden-hour escapes',
-  },
-  {
-    imageKey: 'moscow' as const,
-    destination: 'Moscow',
-    subtitle: 'Russia · European Gateway',
-    tagline: 'Iconic architecture and curated city breaks',
-  },
-  {
-    imageKey: 'mogadishu' as const,
-    destination: 'Mogadishu',
-    subtitle: 'Somalia · Coastal Hub',
-    tagline: 'Where the city meets the ocean',
-  },
-  {
-    imageKey: 'nairobi' as const,
-    destination: 'Nairobi',
-    subtitle: 'Kenya · Corporate Travel',
-    tagline: 'The heartbeat of East Africa',
-  },
-]

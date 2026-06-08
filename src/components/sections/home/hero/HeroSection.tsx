@@ -1,6 +1,8 @@
 import Link from 'next/link'
-import { HeroArchCarousel } from '@/components/sections/HeroArchCarousel'
-import { HeroBackgroundCarousel } from '@/components/sections/HeroBackgroundCarousel'
+import { HeroArchCarousel } from '@/components/sections/home/hero/HeroArchCarousel'
+import { HeroBackgroundCarousel } from '@/components/sections/home/hero/HeroBackgroundCarousel'
+import { HeroCarouselProvider } from '@/components/sections/home/hero/HeroCarouselContext'
+import { HeroPauseZone } from '@/components/sections/home/hero/HeroPauseZone'
 import { ChevronsRight } from 'lucide-react'
 
 /**
@@ -8,6 +10,8 @@ import { ChevronsRight } from 'lucide-react'
  */
 export function HeroSection() {
   return (
+    <HeroCarouselProvider>
+    <HeroPauseZone>
     <section className="kanila-hero relative z-0 w-full" id="hero">
       <div className="kanila-hero__bg" aria-hidden>
         <div className="hero-parallax-layer absolute inset-0">
@@ -70,5 +74,7 @@ export function HeroSection() {
         <div className="kanila-hero__runway h-[55vh] md:h-[70vh]" aria-hidden />
       </div>
     </section>
+    </HeroPauseZone>
+    </HeroCarouselProvider>
   )
 }

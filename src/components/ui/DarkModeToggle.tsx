@@ -1,9 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useSyncExternalStore } from 'react'
 import { Moon, Sun } from 'lucide-react'
 
 const STORAGE_KEY = 'kamil-theme'
+
+const themeListeners = new Set<() => void>()
 
 function applyTheme(dark: boolean) {
   document.documentElement.classList.toggle('dark', dark)
@@ -12,28 +14,34 @@ function applyTheme(dark: boolean) {
   } catch {
     // ignore storage errors
   }
+  themeListeners.forEach((listener) => listener())
 }
+
+function getSnapshot() {
+  return localStorage.getItem(STORAGE_KEY) === 'dark'
+}
+
+function getServerSnapshot() {
+  return false
+}
+
+function subscribe(onStoreChange: () => void) {
+  themeListeners.add(onStoreChange)
+  return () => themeListeners.delete(onStoreChange)
+}
+
+const emptySubscribe = () => () => {}
 
 interface DarkModeToggleProps {
   overHero?: boolean
 }
 
 export function DarkModeToggle({ overHero = false }: DarkModeToggleProps) {
-  const [isDark, setIsDark] = useState(false)
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-    const saved = localStorage.getItem(STORAGE_KEY)
-    const dark = saved === 'dark'
-    applyTheme(dark)
-    setIsDark(dark)
-  }, [])
+  const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false)
+  const isDark = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 
   const toggleDark = () => {
-    const next = !isDark
-    applyTheme(next)
-    setIsDark(next)
+    applyTheme(!isDark)
   }
 
   return (

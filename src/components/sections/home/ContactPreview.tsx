@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { FadeUp } from '@/components/ui/FadeUp'
 import { Button } from '@/components/ui/Button'
 import { Mail, Phone, MapPin } from 'lucide-react'

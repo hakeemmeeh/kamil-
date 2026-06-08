@@ -34,10 +34,6 @@ export function ServicesNavDropdown({
     return () => document.removeEventListener('mousedown', onPointerDown)
   }, [])
 
-  useEffect(() => {
-    setOpen(false)
-  }, [pathname])
-
   return (
     <div ref={ref} className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
       <button

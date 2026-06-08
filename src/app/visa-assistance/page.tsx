@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { FadeUp } from '@/components/ui/FadeUp'
-import { SectionHeader } from '@/components/ui/SectionHeader'
 import { PageBanner } from '@/components/shared/PageBanner'
 import { InnerPageOverlap } from '@/components/shared/InnerPageOverlap'
 import { InnerPageCTA } from '@/components/shared/InnerPageCTA'

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -12,53 +12,25 @@ import { DarkModeToggle } from '@/components/ui/DarkModeToggle'
 const desktopNav = nav.filter((item) => item.href !== '/' && item.href !== '/contact')
 
 export function Navbar() {
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  const [mobileOpenPath, setMobileOpenPath] = useState<string | null>(null)
   const pathname = usePathname()
   const isHome = pathname === '/'
-  const overHero = isHome && !scrolled
+  const mobileOpen = mobileOpenPath === pathname
 
-  useEffect(() => {
-    setMobileOpen(false)
-  }, [pathname])
-
-  useEffect(() => {
-    const update = () => {
-      const y = window.__lenis?.scroll ?? window.scrollY
-      setScrolled(y > 32)
-    }
-    update()
-    const lenis = window.__lenis
-    lenis?.on('scroll', update)
-    window.addEventListener('scroll', update, { passive: true })
-    return () => {
-      lenis?.off('scroll', update)
-      window.removeEventListener('scroll', update)
-    }
-  }, [pathname])
-
-  const linkColor = overHero
-    ? 'text-white/90 hover:text-white'
-    : 'text-ink-soft hover:text-gold'
-  const activeColor = overHero ? 'text-white font-bold' : 'text-gold font-bold'
-  const hamburgerColor = overHero ? 'bg-white' : 'bg-ink'
+  const linkColor = 'text-ink-soft hover:text-gold'
+  const activeColor = 'text-gold font-bold'
+  const hamburgerColor = 'bg-ink'
 
   return (
     <>
       <header
-        className={`z-50 w-full py-4 transition-[background-color,box-shadow] duration-300 ${
-          isHome
-            ? `fixed inset-x-0 top-0 ${scrolled ? 'bg-sand-light/95 shadow-sm backdrop-blur-md' : 'bg-transparent'}`
-            : 'relative bg-sand-light'
+        className={`z-50 w-full bg-white/95 py-4 shadow-sm backdrop-blur-md transition-[box-shadow] duration-300 ${
+          isHome ? 'fixed inset-x-0 top-0' : 'relative'
         }`}
       >
         <div className="mx-auto max-w-7xl px-5">
           <nav
-            className={`flex items-center justify-between rounded-full px-6 py-3 shadow-premium ${
-              overHero
-                ? 'glass-dark border border-white/15'
-                : 'glass ring-1 ring-black/[0.04]'
-            }`}
+            className="glass flex items-center justify-between rounded-full bg-white/90 px-6 py-3 shadow-premium ring-1 ring-black/[0.04]"
             role="navigation"
             aria-label="Main navigation"
           >
@@ -84,7 +56,6 @@ export function Navbar() {
                     key={item.href}
                     linkColor={linkColor}
                     activeColor={activeColor}
-                    overHero={overHero}
                   />
                 ) : (
                   <Link
@@ -102,7 +73,7 @@ export function Navbar() {
             </div>
 
             <div className="hidden items-center gap-4 lg:flex">
-              <DarkModeToggle overHero={overHero} />
+              <DarkModeToggle />
               <Link
                 href="/contact"
                 className={`text-[13px] font-semibold uppercase tracking-[0.08em] transition-colors duration-300 ${linkColor}`}
@@ -118,7 +89,7 @@ export function Navbar() {
             </div>
 
             <button
-              onClick={() => setMobileOpen(!mobileOpen)}
+              onClick={() => setMobileOpenPath(mobileOpen ? null : pathname)}
               className="flex flex-col gap-1.5 p-2 lg:hidden"
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileOpen}
@@ -143,7 +114,7 @@ export function Navbar() {
         </div>
       </header>
 
-      <MobileMenu isOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
+      <MobileMenu isOpen={mobileOpen} onClose={() => setMobileOpenPath(null)} />
     </>
   )
 }

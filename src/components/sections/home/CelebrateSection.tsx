@@ -3,7 +3,7 @@
 import { LineReveal } from '@/components/ui/LineReveal'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
-import { KanilaQuickLinksStrip } from '@/components/sections/KanilaQuickLinksStrip'
+import { KanilaQuickLinksStrip } from '@/components/sections/home/KanilaQuickLinksStrip'
 import { ArchFeatureCard } from '@/components/ui/ArchFeatureCard'
 import { about } from '@/lib/content'
 import { cn } from '@/lib/utils'

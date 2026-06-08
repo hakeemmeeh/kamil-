@@ -1,6 +1,6 @@
 'use client'
 
-import { HeroKanilaArchCarousel } from '@/components/sections/HeroKanilaArchCarousel'
+import { HeroKanilaArchCarousel } from '@/components/sections/home/hero/HeroKanilaArchCarousel'
 import { cn } from '@/lib/utils'
 
 interface HeroArchCarouselProps {

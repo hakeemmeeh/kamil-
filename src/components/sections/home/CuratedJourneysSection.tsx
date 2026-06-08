@@ -37,7 +37,7 @@ export function CuratedJourneysSection() {
     if (paused || journeys.length <= 1) return
     const timer = window.setInterval(() => advance(1), 5000)
     return () => window.clearInterval(timer)
-  }, [advance, paused, journeys.length])
+  }, [advance, paused])
 
   return (
     <section className="section-padding overflow-hidden bg-white" id="popular-tours">

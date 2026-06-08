@@ -1,30 +1,40 @@
 'use client'
 
-import { useMemo, useState, useEffect } from 'react'
+import { useMemo, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { tours, tourCategories, tourInterests, type TourCategory } from '@/lib/content'
 import { TourCard } from '@/components/ui/TourCard'
 import { filterTours } from '@/lib/tourFilters'
 import { Search } from 'lucide-react'
 
-export function ToursCatalog() {
+type TourFilters = {
+  keyword: string
+  destination: string
+  category: TourCategory | 'All'
+  interest: string
+  departureDate: string
+}
+
+function filtersFromSearchParams(searchParams: URLSearchParams): TourFilters {
+  const cat = searchParams.get('category')
+  return {
+    keyword: searchParams.get('q') ?? '',
+    destination: searchParams.get('dest') ?? 'All',
+    category:
+      cat && tourCategories.includes(cat as TourCategory) ? (cat as TourCategory) : 'All',
+    interest: searchParams.get('interest') ?? 'All',
+    departureDate: searchParams.get('date') ?? '',
+  }
+}
+
+function ToursCatalogForm({ initial }: { initial: TourFilters }) {
+  const [keyword, setKeyword] = useState(initial.keyword)
+  const [destination, setDestination] = useState(initial.destination)
+  const [category, setCategory] = useState<TourCategory | 'All'>(initial.category)
+  const [interest, setInterest] = useState(initial.interest)
+  const [departureDate, setDepartureDate] = useState(initial.departureDate)
+
   const searchParams = useSearchParams()
-
-  const [keyword, setKeyword] = useState('')
-  const [destination, setDestination] = useState('All')
-  const [category, setCategory] = useState<TourCategory | 'All'>('All')
-  const [interest, setInterest] = useState('All')
-  const [departureDate, setDepartureDate] = useState('')
-
-  useEffect(() => {
-    setKeyword(searchParams.get('q') ?? '')
-    setDestination(searchParams.get('dest') ?? 'All')
-    const cat = searchParams.get('category')
-    setCategory(cat && tourCategories.includes(cat as TourCategory) ? (cat as TourCategory) : 'All')
-    setInterest(searchParams.get('interest') ?? 'All')
-    setDepartureDate(searchParams.get('date') ?? '')
-  }, [searchParams])
-
   const firstMinuteOnly = searchParams.get('offers') === '1'
 
   const destinations = useMemo(() => {
@@ -155,4 +165,12 @@ export function ToursCatalog() {
       )}
     </div>
   )
+}
+
+export function ToursCatalog() {
+  const searchParams = useSearchParams()
+  const filterKey = searchParams.toString()
+  const initial = useMemo(() => filtersFromSearchParams(searchParams), [searchParams])
+
+  return <ToursCatalogForm key={filterKey} initial={initial} />
 }

@@ -2,26 +2,10 @@
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useHeroCarousel } from '@/components/sections/home/hero/HeroCarouselContext'
 import { KanilaHeroArchCard } from '@/components/ui/KanilaHeroArchCard'
 import { cn } from '@/lib/utils'
-import { destinations } from '@/lib/content'
-import { heroArchSlugs } from '@/lib/cityImages'
 
-const destBySlug = new Map(destinations.map((d) => [d.slug, d]))
-
-const ITEMS = heroArchSlugs
-  .map((slug) => destBySlug.get(slug))
-  .filter((d): d is NonNullable<typeof d> => !!d && d.status !== 'client-to-confirm')
-  .map((d) => ({
-    slug: d.slug,
-    title: d.title,
-    subtitle: d.country,
-    image: d.image,
-    href: `/destinations#${d.slug}`,
-  }))
-
-const COUNT = ITEMS.length
-const AUTO_MS = 4200
 const GAP = 16
 const DURATION = 0.88
 const EASE = [0.22, 1, 0.36, 1] as const
@@ -48,16 +32,23 @@ interface HeroKanilaArchCarouselProps {
   className?: string
 }
 
-type VisibleItem = (typeof ITEMS)[number] & { slot: number }
+type VisibleItem = {
+  slug: string
+  title: string
+  subtitle: string
+  image: string
+  href: string
+  slot: number
+}
 
 /**
  * Kanila Home 3 hero — each arch has its own motion:
  * lead grows (title + arrow), then hands off to the next card.
  */
 export function HeroKanilaArchCarousel({ className }: HeroKanilaArchCarouselProps) {
+  const { slides: items, index } = useHeroCarousel()
   const visibleCount = useVisibleCount()
-  const [index, setIndex] = useState(0)
-  const [paused, setPaused] = useState(false)
+  const count = items.length
   const [dims, setDims] = useState({ lead: 300, compact: 148 })
   const [intro, setIntro] = useState(true)
   const leadProbe = useRef<HTMLDivElement>(null)
@@ -82,29 +73,17 @@ export function HeroKanilaArchCarousel({ className }: HeroKanilaArchCarouselProp
   }, [])
 
   const visible: VisibleItem[] = Array.from({ length: visibleCount }, (_, slot) => ({
-    ...ITEMS[(index + slot) % COUNT],
+    ...items[(index + slot) % Math.max(count, 1)],
     slot,
   }))
 
-  const advance = useCallback(() => {
-    setIndex((i) => (i + 1) % COUNT)
-  }, [])
-
-  useEffect(() => {
-    if (paused || COUNT <= 1) return
-    const t = window.setInterval(advance, AUTO_MS)
-    return () => window.clearInterval(t)
-  }, [advance, paused])
-
   const viewportW = dims.lead + (visibleCount - 1) * (dims.compact + GAP)
-  const probe = ITEMS[0]
+  const probe = items[0]
   const motionDuration = reduceMotion ? 0.01 : DURATION
 
   return (
     <div
       className={cn('hero-kanila-arch-carousel', className)}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
       aria-roledescription="carousel"
       aria-label="Featured destinations"
     >
