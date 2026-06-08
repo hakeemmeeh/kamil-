@@ -91,7 +91,7 @@ export function CuratedJourneysSection() {
               key={tour.slug}
               className="journey-card group relative w-[min(88vw,420px)] shrink-0 snap-start overflow-hidden rounded-4xl bg-white shadow-premium ring-1 ring-border/60 md:w-[460px]"
             >
-              <div className="relative aspect-[4/5] overflow-hidden rounded-4xl">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-4xl reveal-image-up">
                 <Image
                   src={tour.image}
                   alt={tour.title}

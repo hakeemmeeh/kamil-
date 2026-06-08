@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Cormorant_Garamond, Manrope, Marcellus, Satisfy } from 'next/font/google'
 import './globals.css'
 import { Navbar } from '@/components/layout/Navbar'
+import { ScrollRevealSetup } from '@/components/layout/ScrollRevealSetup'
 import { Footer } from '@/components/layout/Footer'
 import { SmoothScroll } from '@/components/layout/SmoothScroll'
 import { SiteScrollEffects } from '@/components/layout/SiteScrollEffects'
@@ -76,6 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-body font-medium antialiased text-ink">
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <SmoothScroll>
+          <ScrollRevealSetup />
           <SiteScrollEffects />
           <RouteTransitionCleanup />
           <HashScroll />

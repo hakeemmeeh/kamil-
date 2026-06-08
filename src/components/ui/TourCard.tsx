@@ -23,7 +23,7 @@ export function TourCard({
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-surface shadow-lg transition-[transform,box-shadow,scale] duration-300 hover:-translate-y-1 hover:shadow-premium active:scale-[0.99]">
-      <div className="relative aspect-[16/10] overflow-hidden">
+      <div className="relative aspect-[16/10] overflow-hidden reveal-image-up">
         <Image
           src={image}
           alt={title}

@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button'
 import { TourCard } from '@/components/ui/TourCard'
 import { Clock, MapPin, Check } from 'lucide-react'
 import { TourRating } from '@/components/ui/TourRating'
+import { TourItinerary } from '@/components/tours/TourItinerary'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -109,6 +110,11 @@ export default async function TourDetailPage({ params }: Props) {
             <div>
               <h2 className="mb-4 font-display text-3xl font-semibold text-ink">Package overview</h2>
               <p className="mb-8 text-lg leading-relaxed text-ink-muted">{tour.desc}</p>
+              
+              <div className="mb-10 border-t border-border/60 pt-8">
+                <TourItinerary tour={tour} />
+              </div>
+
               <h3 className="mb-4 text-sm font-extrabold uppercase tracking-wider text-gold">What&apos;s included</h3>
               <ul className="space-y-3">
                 {tour.highlights.map((item) => (
