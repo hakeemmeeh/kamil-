@@ -23,7 +23,7 @@ export function HeroSection() {
       <div className="kanila-hero__foreground">
         <div className="relative mx-auto flex min-h-[100dvh] max-w-7xl flex-col gap-10 px-5 pt-[calc(var(--site-header)+0.75rem)] lg:flex-row lg:items-end lg:justify-between lg:gap-16 lg:px-8 lg:pt-[calc(var(--site-header)+1.25rem)] xl:gap-20 xl:px-10">
           <div className="hero-foreground-copy flex flex-1 flex-col justify-center pb-4 lg:max-w-[44%] lg:pb-14 lg:pr-4 xl:max-w-[40%] xl:pr-8">
-            <div className="hero-social mb-6 flex items-center gap-3">
+            <div className="hero-social mb-6 hidden sm:flex items-center gap-3">
               <div className="flex -space-x-2">
                 {[1, 2, 3, 4].map((n) => (
                   <span
@@ -37,7 +37,7 @@ export function HeroSection() {
               <span className="text-sm font-semibold text-white">50+ People Joined</span>
             </div>
 
-            <p className="hero-kicker mb-3 font-kanila-script text-[1.5rem] text-white md:mb-4 md:text-[1.75rem]">
+            <p className="hero-kicker mb-3 hidden sm:block font-kanila-script text-[1.5rem] text-white md:mb-4 md:text-[1.75rem]">
               It&apos;s time to
             </p>
             <h1 className="hero-headline mb-6 font-kanila-display text-[2rem] leading-[1.06] tracking-tight text-white sm:text-[2.75rem] md:text-[3.1rem] lg:text-[3.35rem]">
@@ -53,9 +53,14 @@ export function HeroSection() {
               </span>
             </h1>
 
-            <p className="hero-desc mb-8 max-w-md text-base font-medium leading-relaxed text-white md:text-lg">
-              Explore breathtaking volcanic landscapes, golden skies, and timeless beauty with
-              expertly guided journeys worldwide.
+            <p className="hero-desc mb-8 max-w-md text-sm sm:text-base font-medium leading-relaxed text-white md:text-lg">
+              <span className="hidden sm:inline">
+                Explore breathtaking volcanic landscapes, golden skies, and timeless beauty with
+                expertly guided journeys worldwide.
+              </span>
+              <span className="inline sm:hidden">
+                Expertly guided luxury journeys worldwide.
+              </span>
             </p>
 
             <Link

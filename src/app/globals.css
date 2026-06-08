@@ -704,9 +704,12 @@ h4,
   transform: scale(0.94);
 }
 
-.kanila-hero-arch-card--lead,
+.kanila-hero-arch-card--lead {
+  width: 300px;
+}
+
 .kanila-hero-arch-card--compact {
-  width: 100%;
+  width: 148px;
 }
 
 .kanila-hero-arch-card--lead .kanila-hero-arch__shape,
@@ -779,6 +782,40 @@ h4,
 @media (min-width: 1024px) {
   .hero-kanila-arch-track {
     min-height: 320px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .hero-arch-rail {
+    position: absolute !important;
+    bottom: 1.5rem !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    justify-content: center !important;
+    padding: 0 1rem !important;
+    z-index: 30 !important;
+  }
+
+  .kanila-hero-arch-card--lead {
+    width: 140px !important;
+  }
+
+  .kanila-hero-arch-card--compact {
+    width: 80px !important;
+  }
+
+  .kanila-hero-arch-card__caption {
+    display: none !important;
+  }
+
+  .hero-kanila-arch-track {
+    min-height: 180px !important;
+  }
+
+  .hero-foreground-copy {
+    padding-bottom: 220px !important;
   }
 }
 
