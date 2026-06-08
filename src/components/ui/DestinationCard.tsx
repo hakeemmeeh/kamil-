@@ -44,7 +44,7 @@ export function DestinationCard({ title, country, desc, image, status }: Destina
       <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-night/50 via-night/15 to-transparent" />
 
       <div className="absolute top-5 left-5 z-20">
-        <p className="rounded-full bg-white/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-gold backdrop-blur-sm">
+        <p className="rounded-full bg-white/90 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-kamil-green-dark backdrop-blur-sm">
           {country}
         </p>
       </div>
