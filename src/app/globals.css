@@ -919,6 +919,12 @@ h4,
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
 }
 
+@media (max-width: 767px) {
+  .kanila-stats-copy {
+    text-shadow: none !important;
+  }
+}
+
 .kanila-fullbleed-bg {
   width: 112% !important;
   height: 112% !important;
@@ -1460,6 +1466,18 @@ h4,
 @media (min-width: 1024px) {
   .travel-tips-kanila .travel-tip-card {
     min-height: 340px;
+  }
+}
+
+@media (max-width: 767px) {
+  .travel-tips-kanila h2.font-kanila-display {
+    color: var(--color-ink) !important;
+    text-shadow: none !important;
+    filter: none !important;
+  }
+
+  .travel-tips-kanila p.font-kanila-script {
+    color: var(--color-kamil-green-dark) !important;
   }
 }
 

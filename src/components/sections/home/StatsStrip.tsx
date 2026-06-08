@@ -39,17 +39,17 @@ export function StatsStrip() {
                   {['KA', 'YM', 'TR'].map((initials, i) => (
                     <span
                       key={initials}
-                      className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-white/90 bg-white/20 text-[10px] font-bold text-white md:h-10 md:w-10"
+                      className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-white/30 bg-gold text-[10px] font-bold text-white md:h-10 md:w-10"
                       style={{ zIndex: 3 - i }}
                     >
                       {initials}
                     </span>
                   ))}
                 </div>
-                <p className="text-sm font-semibold text-white/90">50+ People Joined</p>
+                <p className="text-sm font-semibold text-ink/90">50+ People Joined</p>
               </div>
 
-              <p className="max-w-md text-base leading-relaxed text-white/80 md:text-lg">
+              <p className="max-w-md text-base leading-relaxed text-ink-muted md:text-lg">
                 Explore breathtaking destinations, seamless airport support, and expertly guided
                 journeys — from Nairobi and Somalia to Europe, the GCC, and beyond.
               </p>
