@@ -65,7 +65,7 @@ export function PhotoFeatureGrid({
 
             <div
               data-stagger="activities"
-              className="grid grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:col-span-8 lg:gap-7"
+              className="grid grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-5 md:gap-6 lg:col-span-8 lg:gap-7"
             >
               {items.slice(0, 3).map((item, i) => (
                 <div key={item.title} data-stagger-item className="min-w-0">

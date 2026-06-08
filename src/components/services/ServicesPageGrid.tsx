@@ -9,14 +9,14 @@ import { cn } from '@/lib/utils'
 const BENTO_SLOTS: { span: string; variant: ServicesBentoVariant }[] = [
   { span: 'sm:col-span-2 lg:col-span-7 lg:row-span-2', variant: 'hero' },
   { span: 'sm:col-span-2 lg:col-span-5 lg:row-span-2', variant: 'portrait' },
-  { span: 'lg:col-span-4', variant: 'tile' },
-  { span: 'lg:col-span-4', variant: 'tile' },
-  { span: 'lg:col-span-4', variant: 'tile' },
-  { span: 'lg:col-span-6', variant: 'landscape' },
-  { span: 'lg:col-span-6', variant: 'landscape' },
-  { span: 'lg:col-span-4', variant: 'tile' },
-  { span: 'lg:col-span-4', variant: 'tile' },
-  { span: 'lg:col-span-4', variant: 'tile' },
+  { span: 'sm:col-span-1 lg:col-span-4', variant: 'tile' },
+  { span: 'sm:col-span-1 lg:col-span-4', variant: 'tile' },
+  { span: 'sm:col-span-1 lg:col-span-4', variant: 'tile' },
+  { span: 'sm:col-span-2 lg:col-span-6', variant: 'landscape' },
+  { span: 'sm:col-span-2 lg:col-span-6', variant: 'landscape' },
+  { span: 'sm:col-span-1 lg:col-span-4', variant: 'tile' },
+  { span: 'sm:col-span-1 lg:col-span-4', variant: 'tile' },
+  { span: 'sm:col-span-1 lg:col-span-4', variant: 'tile' },
 ]
 
 export function ServicesPageGrid() {

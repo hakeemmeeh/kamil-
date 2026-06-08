@@ -63,7 +63,7 @@ export function StatsStrip() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:col-span-8 lg:gap-6">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-4 md:gap-5 lg:col-span-8 lg:gap-6">
               {stats.map((stat) => (
                 <KanilaStampStatCard
                   key={stat.label}

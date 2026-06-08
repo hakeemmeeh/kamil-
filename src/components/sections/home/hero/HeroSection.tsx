@@ -16,6 +16,7 @@ export function HeroSection() {
       <div className="kanila-hero__bg" aria-hidden>
         <div className="hero-parallax-layer absolute inset-0">
           <HeroBackgroundCarousel />
+          <div className="absolute inset-0 bg-black/25" />
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -13,9 +13,20 @@ const desktopNav = nav.filter((item) => item.href !== '/' && item.href !== '/con
 
 export function Navbar() {
   const [mobileOpenPath, setMobileOpenPath] = useState<string | null>(null)
+  const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
   const isHome = pathname === '/'
   const mobileOpen = mobileOpenPath === pathname
+
+  useEffect(() => {
+    if (!isHome) return
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [isHome])
 
   const linkColor = 'text-ink-soft hover:text-gold'
   const activeColor = 'text-gold font-bold'
@@ -24,8 +35,12 @@ export function Navbar() {
   return (
     <>
       <header
-        className={`z-50 w-full bg-white/95 py-4 shadow-sm backdrop-blur-md transition-[box-shadow] duration-300 ${
-          isHome ? 'fixed inset-x-0 top-0' : 'relative'
+        className={`z-50 w-full transition-all duration-500 ${
+          isHome
+            ? scrolled
+              ? 'fixed inset-x-0 top-0 bg-transparent py-4 shadow-none'
+              : 'fixed inset-x-0 top-0 bg-transparent py-5 shadow-none'
+            : 'relative bg-white py-4 shadow-sm border-b border-border/40'
         }`}
       >
         <div className="mx-auto max-w-7xl px-5">

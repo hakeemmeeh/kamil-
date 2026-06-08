@@ -102,7 +102,39 @@ export function SomaliaRepresentativeNetwork() {
           </p>
         </div>
 
-        <div className="relative mx-auto aspect-[16/10] max-w-4xl rounded-3xl border border-border bg-white p-6 shadow-premium md:p-10">
+        {/* Mobile grid list to prevent coordinate overlapping on small screens */}
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:hidden">
+          {airports.map((airport) => {
+            const isMogadishu = airport.name === 'Mogadishu'
+            return (
+              <div
+                key={airport.name}
+                className={cn(
+                  'flex flex-col items-center justify-center rounded-2xl border p-5 text-center shadow-sm transition-all duration-300',
+                  isMogadishu
+                    ? 'border-gold bg-gold-light/45 dark:bg-gold/10'
+                    : 'border-border/70 bg-white'
+                )}
+              >
+                <span
+                  className={cn(
+                    'mb-2 block h-2.5 w-2.5 rounded-full ring-4',
+                    isMogadishu ? 'bg-gold ring-gold/30' : 'bg-gold/70 ring-gold/15'
+                  )}
+                />
+                <p className={cn('text-sm font-extrabold text-ink', isMogadishu && 'text-gold')}>
+                  {airport.name}
+                </p>
+                <p className="mt-1 text-[9px] font-bold uppercase tracking-wider text-ink-muted">
+                  {airport.role}
+                </p>
+              </div>
+            )
+          })}
+        </div>
+
+        {/* Desktop map view */}
+        <div className="hidden md:block relative mx-auto aspect-[16/10] max-w-4xl rounded-3xl border border-border bg-white p-6 shadow-premium md:p-10">
           <svg
             className="absolute inset-0 h-full w-full text-gold/25"
             viewBox="0 0 100 100"
