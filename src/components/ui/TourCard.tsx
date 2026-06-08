@@ -22,7 +22,7 @@ export function TourCard({
   const tags = interests.length > 0 ? interests : highlights
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-surface shadow-lg transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-premium">
+    <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-surface shadow-lg transition-[transform,box-shadow,scale] duration-300 hover:-translate-y-1 hover:shadow-premium active:scale-[0.99]">
       <div className="relative aspect-[16/10] overflow-hidden">
         <Image
           src={image}

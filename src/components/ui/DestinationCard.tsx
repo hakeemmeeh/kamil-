@@ -29,7 +29,7 @@ export function DestinationCard({ title, country, desc, image, status }: Destina
   return (
     <Link
       href="/contact"
-      className="card-premium group relative flex h-full w-full flex-col justify-end overflow-hidden rounded-4xl aspect-[3/4] shadow-xl transition-[transform,box-shadow] duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
+      className="card-premium group relative flex h-full w-full flex-col justify-end overflow-hidden rounded-4xl aspect-[3/4] shadow-xl transition-[transform,box-shadow,scale] duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98]"
     >
       <div ref={imageRef} id={imageId} className="absolute inset-0 overflow-hidden">
         <Image

@@ -33,7 +33,7 @@ export function KanilaPopularDestinationCard({
         className
       )}
     >
-      <Link href={href} className="block">
+      <Link href={href} className="block active:scale-[0.99] transition-transform duration-300">
         <div className="kanila-popular-card__arch relative aspect-[4/5] overflow-hidden">
           <Image
             src={image}

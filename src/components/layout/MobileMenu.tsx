@@ -62,7 +62,12 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                           )}
                           aria-expanded={servicesOpen}
                         >
-                          Services
+                          <span className="flex items-center gap-3">
+                            Services
+                            {servicesActive && (
+                              <span className="h-2 w-2 rounded-full bg-gold inline-block" />
+                            )}
+                          </span>
                           <ChevronDown
                             className={cn('h-6 w-6 transition-transform', servicesOpen && 'rotate-180')}
                             aria-hidden
@@ -82,11 +87,14 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                                     href={sub.href}
                                     onClick={onClose}
                                     className={cn(
-                                      'block py-2 font-body text-lg font-semibold transition-colors',
+                                      'flex items-center gap-2.5 py-2 font-body text-lg font-semibold transition-colors',
                                       pathname === sub.href ? 'text-gold' : 'text-white/65 hover:text-white'
                                     )}
                                   >
                                     {sub.label}
+                                    {pathname === sub.href && (
+                                      <span className="h-1.5 w-1.5 rounded-full bg-gold inline-block" />
+                                    )}
                                   </Link>
                                 </li>
                               ))}
@@ -96,7 +104,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                       </motion.div>
                     )
                   }
-
+ 
                   return (
                     <motion.div
                       key={item.href}
@@ -108,11 +116,14 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                         href={item.href}
                         onClick={onClose}
                         className={cn(
-                          'block py-3 font-display text-3xl font-semibold transition-colors',
+                          'flex items-center gap-3 py-3 font-display text-3xl font-semibold transition-colors',
                           pathname === item.href ? 'text-gold' : 'text-white/80 hover:text-white'
                         )}
                       >
                         {item.label}
+                        {pathname === item.href && (
+                          <span className="h-2 w-2 rounded-full bg-gold inline-block" />
+                        )}
                       </Link>
                     </motion.div>
                   )
