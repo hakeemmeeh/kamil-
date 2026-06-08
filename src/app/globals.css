@@ -628,20 +628,6 @@ h4,
 }
 
 /* Kanila Home 3 hero — force light copy (beats .font-kanila-display ink default) */
-.kanila-hero__bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: linear-gradient(
-    105deg,
-    rgba(7, 17, 31, 0.42) 0%,
-    rgba(7, 17, 31, 0.22) 42%,
-    rgba(7, 17, 31, 0.1) 100%
-  );
-}
-
 .kanila-hero .hero-foreground-copy :is(
     .hero-kicker,
     .hero-headline,
@@ -874,6 +860,10 @@ h4,
 }
 
 /* Full-bleed section photos — always touch left/right edges (parallax-safe) */
+.kanila-stats-copy {
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
+}
+
 .kanila-fullbleed-bg {
   width: 112% !important;
   height: 112% !important;

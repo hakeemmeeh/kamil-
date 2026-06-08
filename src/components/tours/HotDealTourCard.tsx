@@ -40,8 +40,6 @@ export function HotDealTourCard({ tour, className }: HotDealTourCardProps) {
           className="object-cover transition-transform duration-[800ms] ease-out group-hover:scale-[1.05]"
           sizes="(max-width: 640px) 88vw, 400px"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/25 via-transparent to-transparent" />
-
         {tour.promoLabel && (
           <span className="absolute right-4 top-4 rounded-full bg-kamil-green-dark px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.14em] text-white shadow-md">
             {tour.promoLabel}

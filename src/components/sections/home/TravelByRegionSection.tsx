@@ -25,7 +25,7 @@ export function TravelByRegionSection() {
           className="object-cover object-center"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-[#F3EDE4]/82" />
+        <div className="absolute inset-0 bg-[#F3EDE4]/52" />
       </div>
 
       <div className="region-blob pointer-events-none absolute -bottom-24 -left-20 z-[1] h-[min(520px,70vw)] w-[min(520px,70vw)] rounded-[44%] bg-gold/25 blur-[1px] md:-bottom-32 md:-left-28" aria-hidden />

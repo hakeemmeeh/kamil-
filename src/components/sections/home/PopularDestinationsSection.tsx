@@ -41,7 +41,7 @@ export function PopularDestinationsSection() {
       id="popular-destinations"
       aria-label="Popular destinations"
     >
-      <div className="kanila-sticky-cover__pin popular-sticky-bg h-[100svh] w-full overflow-hidden bg-night/30">
+      <div className="kanila-sticky-cover__pin popular-sticky-bg h-[100svh] w-full overflow-hidden bg-night">
         <div className="popular-parallax-layer relative h-full w-full">
           <Image
             src={bgSrc}
@@ -54,18 +54,6 @@ export function PopularDestinationsSection() {
             onError={() => setBgSrc(BG_FALLBACK)}
           />
         </div>
-        <div
-          className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-night/8 via-transparent to-night/10"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-night/12 via-transparent to-transparent"
-          aria-hidden
-        />
-        <div
-          className="popular-cover-fade pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-28 bg-gradient-to-t from-night/40 to-transparent md:h-36"
-          aria-hidden
-        />
       </div>
 
       <div className="kanila-sticky-cover__scroll relative z-10">

@@ -99,7 +99,6 @@ export function CuratedJourneysSection() {
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 768px) 88vw, 460px"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/45 via-night/10 to-transparent" />
                 <span className="absolute left-5 top-5 rounded-full bg-gold px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.12em] text-white">
                   {tour.category}
                 </span>

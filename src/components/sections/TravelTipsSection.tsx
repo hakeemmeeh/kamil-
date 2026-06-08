@@ -35,7 +35,7 @@ export function TravelTipsSection() {
       id="travel-tips"
       imageSrc={BG}
       imageAlt={cityImageAlts.travelTips}
-      overlay="subtle"
+      overlay="none"
       runway="48vh"
       className="travel-tips-kanila"
       parallaxClassName="travel-tips-parallax"

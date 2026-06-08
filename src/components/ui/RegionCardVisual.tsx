@@ -36,7 +36,6 @@ export function RegionCardVisual({ imageKey, regionName, className }: RegionCard
             sizes="(max-width: 768px) 120px, 165px"
             onError={() => setSrc(cityImage(FALLBACK_KEY, 800))}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-night/20 via-transparent to-transparent" />
         </div>
       </div>
     </div>

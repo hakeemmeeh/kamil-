@@ -27,22 +27,13 @@ export function StatsStrip() {
           src={STATS_BG}
           alt={cityImageAlts.bali}
           fill
-          quality={75}
+          quality={90}
           className="kanila-fullbleed-bg"
           sizes="100vw"
         />
-        <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-night/48 via-night/32 to-night/28"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_50%,rgba(27,75,140,0.12),transparent_55%)]"
-          aria-hidden
-        />
-
         <div className="relative z-10 mx-auto flex min-h-[min(72vh,620px)] max-w-7xl flex-col justify-center px-5 py-14 md:min-h-[min(68vh,680px)] md:py-16 lg:py-20">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10 xl:gap-14">
-            <div className="lg:col-span-4 xl:col-span-4">
+            <div className="kanila-stats-copy lg:col-span-4 xl:col-span-4">
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex -space-x-2.5" aria-hidden>
                   {['KA', 'YM', 'TR'].map((initials, i) => (

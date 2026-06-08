@@ -41,7 +41,6 @@ export function KanilaTravelServiceCard({
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             sizes="(max-width: 640px) 88vw, 280px"
           />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/50 via-night/10 to-transparent" />
 
           <div className="absolute inset-x-0 bottom-0 z-10 border-t border-border/60 bg-white">
             <div className="px-4 py-4 md:px-5 md:py-5">
