@@ -73,6 +73,11 @@ const photos = {
   heroNewYork: 'photo-1514565131-fce0801e5785', // New York — skyline at dusk
   heroMogadishu: 'photo-1723151684036-d014403c33b2', // Somalia — city skyline at sunset
   heroParis: 'photo-1502602898657-3e91760cbb34', // Paris — Eiffel Tower at dusk
+  heroSafari: 'photo-1516426122078-c23e76319801', // Safari wildlife
+  heroBeachLeisure: 'photo-1507525428034-b5c55cefb08b', // Tropical beach
+  heroAdventure: 'photo-1540959733332-eab4deabeeaf', // Kayaking
+  heroCulture: 'photo-1533105079780-92b9be482077', // Santorini culture
+  heroTourists: 'photo-1527631746610-bca00a040d60', // Tourists exploring
   kanilaKayak:
     'photo-1540959733332-eab4deabeeaf', // Kayaks on emerald water
   vacationBeach:
@@ -146,6 +151,11 @@ export const cityImageAlts: Record<CityImageKey, string> = {
   heroNewYork: 'New York City — skyline at dusk',
   heroMogadishu: 'Somalia — city skyline at sunset',
   heroParis: 'Paris — Eiffel Tower at dusk',
+  heroSafari: 'Kenya — Safari wildlife and nature',
+  heroBeachLeisure: 'Tropical beach — relaxing vacation',
+  heroAdventure: 'Kayaking on emerald waters — adventure travel',
+  heroCulture: 'Santorini — historic coastal architecture',
+  heroTourists: 'Tourists exploring a historic city',
   kanilaKayak: 'Kayaks on calm emerald water — adventure travel',
   vacationBeach: 'Tropical beach — vacation escape',
   vacationResort: 'Resort pool and palm trees — luxury leisure',

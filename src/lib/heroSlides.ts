@@ -17,35 +17,35 @@ type HeroSlideDef = {
   href: string
 }
 
-/** Dusk/night city skylines — separate from destination card photos */
+/** Diverse hero slides — cities, nature, activities, and tourists */
 const HERO_SLIDE_DEFS: HeroSlideDef[] = [
   {
-    slug: 'new-york',
-    title: 'New York',
-    subtitle: 'USA',
-    imageKey: 'heroNewYork',
-    href: '/destinations#new-york',
+    slug: 'safari-adventure',
+    title: 'Wild Encounters',
+    subtitle: 'Kenya Safari',
+    imageKey: 'heroSafari',
+    href: '/tours',
   },
   {
-    slug: 'dubai',
-    title: 'Dubai',
-    subtitle: 'United Arab Emirates',
-    imageKey: 'heroDubai',
-    href: '/destinations#global-destinations',
+    slug: 'tropical-escape',
+    title: 'Island Retreats',
+    subtitle: 'Indian Ocean',
+    imageKey: 'heroBeachLeisure',
+    href: '/destinations#seychelles',
   },
   {
-    slug: 'london',
-    title: 'London',
-    subtitle: 'United Kingdom',
-    imageKey: 'heroLondon',
+    slug: 'cultural-exploration',
+    title: 'Historic Wonders',
+    subtitle: 'European Tours',
+    imageKey: 'heroCulture',
     href: '/destinations#london',
   },
   {
-    slug: 'tokyo',
-    title: 'Tokyo',
-    subtitle: 'Japan',
-    imageKey: 'heroTokyo',
-    href: '/destinations#tokyo',
+    slug: 'active-leisure',
+    title: 'Active Leisure',
+    subtitle: 'Global Adventures',
+    imageKey: 'heroAdventure',
+    href: '/tours',
   },
   {
     slug: 'mogadishu',
