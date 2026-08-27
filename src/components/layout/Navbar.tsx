@@ -34,10 +34,10 @@ export function Navbar() {
   return (
     <>
       <header
-        className={`z-50 w-full transition-all duration-500 ${
+        className={`z-[60] w-full transition-all duration-500 ${
           isHome
             ? `fixed inset-x-0 top-0 bg-transparent ${scrolled ? 'py-4' : 'py-5'}`
-            : 'relative bg-white py-4 shadow-sm border-b border-border/40'
+            : 'sticky top-0 bg-white py-3 shadow-sm border-b border-border/40 md:py-4'
         }`}
       >
         <div className="mx-auto max-w-7xl px-5">
@@ -56,7 +56,7 @@ export function Navbar() {
                 alt={`${site.name} logo`}
                 width={320}
                 height={102}
-                className="h-14 w-auto max-w-[min(62vw,280px)] object-contain sm:h-[3.75rem] md:h-16 lg:h-[4.5rem] lg:max-w-[320px]"
+                className="h-11 w-auto max-w-[min(48vw,200px)] object-contain sm:h-14 sm:max-w-[min(62vw,280px)] md:h-16 lg:h-[4.5rem] lg:max-w-[320px]"
                 priority
               />
             </Link>
@@ -95,7 +95,7 @@ export function Navbar() {
 
             <button
               onClick={() => setMobileOpenPath(mobileOpen ? null : pathname)}
-              className="flex flex-col gap-1.5 p-2 lg:hidden"
+              className="relative z-[70] flex flex-col gap-1.5 p-2 lg:hidden"
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileOpen}
             >

@@ -61,18 +61,18 @@ export default function CarRentalPage() {
           eyebrow="Services"
           title="Transfer & Hire Options"
           items={transferOptions}
-          bgClassName="section-padding pt-14 md:pt-16 bg-sand-light"
+          bgClassName="bg-sand-light pb-8 pt-10 md:pb-10 md:pt-12"
         />
       </InnerPageOverlap>
 
-      <section className="section-padding bg-white">
+      <section className="bg-white pb-12 pt-8 md:pb-16 md:pt-10">
         <div className="mx-auto max-w-2xl px-5">
           <FadeUp>
             <SectionHeader eyebrow="Inquiry" title="Request a Transfer or Car Hire" />
           </FadeUp>
           <FadeUp delay={0.1}>
-            <div className="rounded-3xl border border-border bg-sand-light p-8">
-              <ContactFormWrapper />
+            <div className="rounded-3xl border border-border bg-sand-light p-5 md:p-8">
+              <ContactFormWrapper presetInquiry="Car Hire" />
             </div>
           </FadeUp>
         </div>

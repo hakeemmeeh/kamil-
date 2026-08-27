@@ -68,13 +68,13 @@ export default function CorporateTravelPage() {
       <InnerPageOverlap>
         <PhotoFeatureGrid
           eyebrow="Services"
-          title="Corporate Support Grid"
+          title="What we handle"
           items={features}
-          bgClassName="section-padding pt-14 md:pt-16 bg-sand-light"
+          bgClassName="bg-sand-light px-0 pb-8 pt-10 md:pb-10 md:pt-12"
         />
       </InnerPageOverlap>
 
-      <section className="section-padding bg-white">
+      <section className="bg-white pb-12 pt-8 md:pb-16 md:pt-10">
         <div className="mx-auto max-w-5xl px-5">
           <FadeUp>
             <SectionHeader eyebrow="Process" title="How We Work" />
@@ -82,7 +82,7 @@ export default function CorporateTravelPage() {
           <div className="space-y-6">
             {steps.map((step, i) => (
               <FadeUp key={step.num} delay={i * 0.08}>
-                <div className="flex items-start gap-6 rounded-2xl border border-border bg-sand-light p-6 transition-all hover:border-gold/30 hover:shadow-md">
+                <div className="flex items-start gap-4 rounded-2xl border border-border bg-sand-light p-4 md:gap-6 md:p-6">
                   <span className="font-kanila-display text-4xl font-normal text-gold/30">{step.num}</span>
                   <div className="flex-1">
                     <h3 className="mb-1 font-kanila-display text-xl font-normal text-ink">{step.title}</h3>

@@ -17,11 +17,11 @@ export function SectionHeader({
 }: SectionHeaderProps) {
   return (
     <div
-      className={`mb-16 ${align === 'center' ? 'text-center mx-auto max-w-3xl' : ''} ${className}`}
+      className={`mb-8 md:mb-10 ${align === 'center' ? 'text-center mx-auto max-w-3xl' : ''} ${className}`}
     >
       {eyebrow && <p className="eyebrow">{eyebrow}</p>}
       <h2
-        className={`font-kanila-display text-4xl md:text-5xl lg:text-[56px] leading-[0.95] tracking-tight ${
+        className={`font-kanila-display text-[1.85rem] md:text-4xl lg:text-5xl leading-[0.95] tracking-tight ${
           dark ? 'text-white' : 'text-ink'
         }`}
       >

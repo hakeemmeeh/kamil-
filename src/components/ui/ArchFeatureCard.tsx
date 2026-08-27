@@ -48,7 +48,7 @@ export function ArchFeatureCard({
         className={cn(
           'kanila-arch-top relative w-full overflow-hidden shadow-[0_16px_48px_rgba(7,17,31,0.14)] transition-shadow duration-500 group-hover:shadow-[0_24px_56px_rgba(7,17,31,0.2)] reveal-image-up',
           isLarge
-            ? 'aspect-[4/5] min-h-[260px] sm:min-h-[300px] md:min-h-[340px] lg:min-h-[380px]'
+            ? 'aspect-[4/5] min-h-[180px] sm:min-h-[260px] md:min-h-[340px] lg:min-h-[380px]'
             : 'aspect-[3/4]'
         )}
       >

@@ -91,7 +91,7 @@ export function PhotoFeatureGrid({
         <FadeUp>
           <SectionHeader eyebrow={eyebrow} title={title} align="center" />
         </FadeUp>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+        <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3 lg:gap-8">
           {items.map((item, i) => (
             <ArchFeatureCard
               key={item.title}

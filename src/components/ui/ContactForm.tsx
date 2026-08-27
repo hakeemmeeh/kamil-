@@ -28,13 +28,19 @@ const schema = z.object({
 })
 
 type FormData = z.infer<typeof schema>
+export type InquiryType = (typeof inquiryTypes)[number]
 
-export function ContactForm() {
+export function ContactForm({
+  presetInquiry,
+}: {
+  presetInquiry?: InquiryType
+}) {
   const searchParams = useSearchParams()
   const [submitted, setSubmitted] = useState(false)
 
+  const paramInquiry = searchParams.get('inquiry')?.replace(/\+/g, ' ')
   const defaultInquiry =
-    (searchParams.get('inquiry')?.replace(/\+/g, ' ') as FormData['inquiryType']) || 'General Inquiry'
+    (paramInquiry as FormData['inquiryType'] | undefined) || presetInquiry || 'General Inquiry'
   const defaultMessage = searchParams.get('message')?.replace(/\+/g, ' ') || ''
 
   const {
@@ -46,10 +52,8 @@ export function ContactForm() {
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
-      inquiryType: inquiryTypes.includes(defaultInquiry as (typeof inquiryTypes)[number])
-        ? (defaultInquiry as FormData['inquiryType'])
-        : 'General Inquiry',
-      message: defaultMessage,
+      inquiryType: 'General Inquiry',
+      message: '',
     },
   })
 

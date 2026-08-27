@@ -47,10 +47,10 @@ export default function VisaAssistancePage() {
       />
 
       <InnerPageOverlap>
-        <section className="section-padding pt-14 md:pt-16">
+        <section className="pb-8 pt-10 md:pb-10 md:pt-12">
           <div className="mx-auto max-w-4xl px-5">
             <FadeUp>
-              <div className="mb-10 flex items-start gap-4 rounded-2xl border border-gold/20 bg-gold/10 p-6">
+              <div className="mb-10 flex items-start gap-4 rounded-2xl border border-gold/20 bg-gold/10 p-5 md:p-6">
                 <AlertTriangle className="mt-0.5 h-6 w-6 shrink-0 text-gold" />
                 <div>
                   <h3 className="mb-1 font-kanila-display text-xl font-normal text-ink">Important Notice</h3>
@@ -62,7 +62,7 @@ export default function VisaAssistancePage() {
               </div>
             </FadeUp>
             <FadeUp delay={0.08}>
-              <div className="rounded-2xl border border-border bg-white p-8 md:p-10">
+              <div className="rounded-2xl border border-border bg-white p-6 md:p-10">
                 <p className="eyebrow mb-3">What we help with</p>
                 <h2 className="mb-6 font-kanila-display text-3xl font-normal tracking-tight text-ink md:text-4xl">
                   Practical visa preparation
@@ -87,7 +87,7 @@ export default function VisaAssistancePage() {
         eyebrow="How It Works"
         title="Visa Support Process"
         items={steps}
-        bgClassName="section-padding bg-white"
+        bgClassName="bg-white pb-8 pt-8 md:pb-10 md:pt-10"
       />
 
       <VisaGallerySection />

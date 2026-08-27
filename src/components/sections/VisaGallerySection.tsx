@@ -15,7 +15,7 @@ export function VisaGallerySection() {
   const item = visaGalleryImages[active]
 
   return (
-    <section className="section-padding bg-white" id="visa-gallery">
+    <section className="bg-sand-light pb-12 pt-8 md:pb-16 md:pt-10" id="visa-gallery">
       <div className="mx-auto max-w-7xl px-5">
         <FadeUp>
           <SectionHeader
