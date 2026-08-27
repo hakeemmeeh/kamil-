@@ -2,9 +2,6 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { FadeUp } from '@/components/ui/FadeUp'
 import { ServicesPageGrid } from '@/components/services/ServicesPageGrid'
-import { AirportExperience } from '@/components/sections/AirportExperience'
-import { TrustPartnersStrip } from '@/components/sections/TrustPartnersStrip'
-import { TravelTipsSection } from '@/components/sections/TravelTipsSection'
 import { PageBanner } from '@/components/shared/PageBanner'
 import { InnerPageOverlap } from '@/components/shared/InnerPageOverlap'
 import { InnerPageCTA } from '@/components/shared/InnerPageCTA'
@@ -63,10 +60,6 @@ export default function ServicesPage() {
           </div>
         </section>
       </InnerPageOverlap>
-
-      <AirportExperience />
-      <TravelTipsSection />
-      <TrustPartnersStrip />
 
       <InnerPageCTA
         title="Need travel support?"

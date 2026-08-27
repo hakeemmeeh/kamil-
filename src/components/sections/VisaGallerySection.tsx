@@ -49,7 +49,7 @@ export function VisaGallerySection() {
                   type="button"
                   onClick={() => setActive(i)}
                   className={cn(
-                    'arch-card-mask relative aspect-[4/3] w-full overflow-hidden rounded-t-2xl transition ring-2 ring-offset-2',
+                    'relative aspect-[4/3] w-full overflow-hidden rounded-xl transition ring-2 ring-offset-2',
                     i === active ? 'ring-gold' : 'ring-transparent hover:ring-gold/40'
                   )}
                 >

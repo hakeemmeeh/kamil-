@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { nav, servicesSubnav, site } from '@/lib/content'
+import { nav, servicesSubnav, officePhones, mobilePhones, site } from '@/lib/content'
 import { Mail, Phone, Smartphone, ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -153,18 +153,27 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   {site.email}
                 </a>
                 <a
-                  href="tel:0202220011"
+                  href={officePhones[0].href}
                   className="flex items-center gap-3 text-sm text-white/60 transition-colors hover:text-kamil-green-light"
                 >
                   <Phone className="h-4 w-4 text-kamil-green-light" />
                   {site.phone}
                 </a>
                 <a
-                  href="tel:0752800800"
+                  href={mobilePhones[0].href}
                   className="flex items-center gap-3 text-sm text-white/60 transition-colors hover:text-kamil-green-light"
                 >
                   <Smartphone className="h-4 w-4 text-kamil-green-light" />
                   {site.mobile}
+                </a>
+                <a
+                  href={site.whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-sm text-white/60 transition-colors hover:text-kamil-green-light"
+                >
+                  <Smartphone className="h-4 w-4 text-kamil-green-light" />
+                  WhatsApp
                 </a>
               </div>
             </motion.div>

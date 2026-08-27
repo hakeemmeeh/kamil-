@@ -5,7 +5,6 @@ import { InnerPageOverlap } from '@/components/shared/InnerPageOverlap'
 import { InnerPageCTA } from '@/components/shared/InnerPageCTA'
 import { PhotoFeatureGrid } from '@/components/shared/PhotoFeatureGrid'
 import { VisaGallerySection } from '@/components/sections/VisaGallerySection'
-import { TourSearchBar } from '@/components/tours/TourSearchBar'
 import { AlertTriangle } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -51,7 +50,7 @@ export default function VisaAssistancePage() {
         <section className="section-padding pt-14 md:pt-16">
           <div className="mx-auto max-w-4xl px-5">
             <FadeUp>
-              <div className="mb-12 flex items-start gap-4 rounded-2xl border border-gold/20 bg-gold/10 p-6">
+              <div className="mb-10 flex items-start gap-4 rounded-2xl border border-gold/20 bg-gold/10 p-6">
                 <AlertTriangle className="mt-0.5 h-6 w-6 shrink-0 text-gold" />
                 <div>
                   <h3 className="mb-1 font-kanila-display text-xl font-normal text-ink">Important Notice</h3>
@@ -60,6 +59,24 @@ export default function VisaAssistancePage() {
                     or provide legal immigration advice.
                   </p>
                 </div>
+              </div>
+            </FadeUp>
+            <FadeUp delay={0.08}>
+              <div className="rounded-2xl border border-border bg-white p-8 md:p-10">
+                <p className="eyebrow mb-3">What we help with</p>
+                <h2 className="mb-6 font-kanila-display text-3xl font-normal tracking-tight text-ink md:text-4xl">
+                  Practical visa preparation
+                </h2>
+                <ul className="space-y-3 text-sm leading-relaxed text-ink-muted md:text-base">
+                  <li>Document checklists matched to your destination and travel type.</li>
+                  <li>Embassy and entry-requirement pointers so you know what to prepare.</li>
+                  <li>Timeline guidance for appointments, photos, and supporting letters.</li>
+                  <li>Coordination with flights, transfers, and airport support once travel is confirmed.</li>
+                </ul>
+                <p className="mt-6 text-sm text-ink-muted">
+                  We do not file visas on your behalf, guarantee approval, or give legal immigration advice.
+                  For a specific route, send an inquiry with your destination and travel dates.
+                </p>
               </div>
             </FadeUp>
           </div>
@@ -74,20 +91,6 @@ export default function VisaAssistancePage() {
       />
 
       <VisaGallerySection />
-
-      <TourSearchBar compact className="bg-sand-light pb-0" />
-
-      <section className="section-padding bg-sand-light">
-        <div className="mx-auto max-w-4xl px-5">
-          <FadeUp>
-            <div className="rounded-2xl border border-border bg-sand p-8 text-center">
-              <p className="text-sm italic text-ink-muted">
-                [CLIENT TO PROVIDE: exact visa services offered]
-              </p>
-            </div>
-          </FadeUp>
-        </div>
-      </section>
 
       <InnerPageCTA
         title="Need visa guidance?"

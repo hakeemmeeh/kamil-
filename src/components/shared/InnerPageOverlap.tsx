@@ -24,7 +24,7 @@ export function InnerPageOverlap({
   return (
     <div
       className={cn(
-        'inner-page-overlap relative z-40 rounded-t-[1.75rem] shadow-[0_-12px_40px_rgba(7,17,31,0.08)] md:rounded-t-[2rem]',
+        'inner-page-overlap relative z-40 -mt-8 rounded-t-[1.75rem] shadow-[0_-12px_40px_rgba(7,17,31,0.08)] md:-mt-10 md:rounded-t-[2rem]',
         bgClass[bg],
         className
       )}

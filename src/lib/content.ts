@@ -2,6 +2,16 @@
 
 import { cityImage } from './cityImages'
 
+export const officePhones = [
+  { label: '020 2220011', href: 'tel:+254202220011' },
+  { label: '020 2220022', href: 'tel:+254202220022' },
+] as const
+
+export const mobilePhones = [
+  { label: '0752 800 800', href: 'tel:+254752800800' },
+  { label: '0752 800 801', href: 'tel:+254752800801' },
+] as const
+
 export const site = {
   name: 'Kamil Travel',
   tagline: 'Beyond Words',
@@ -9,6 +19,7 @@ export const site = {
   email: 'info@kamiltravel.com',
   phone: '020 2220011 | 020 2220022',
   mobile: '0752 800 800 | 0752 800 801',
+  whatsappHref: 'https://wa.me/254752800800',
   address:
     'Eco Bank Towers, 4th Floor, Muindi Mbingu Street, P.O. Box 24378, 00100, Nairobi, Kenya',
   mapEmbedUrl:

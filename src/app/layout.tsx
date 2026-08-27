@@ -8,6 +8,7 @@ import { SmoothScroll } from '@/components/layout/SmoothScroll'
 import { SiteScrollEffects } from '@/components/layout/SiteScrollEffects'
 import { HashScroll } from '@/components/layout/HashScroll'
 import { RouteTransitionCleanup } from '@/components/layout/RouteTransitionCleanup'
+import { WhatsAppFAB } from '@/components/layout/WhatsAppFAB'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -84,6 +85,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Navbar />
           <main>{children}</main>
           <Footer />
+          <WhatsAppFAB />
         </SmoothScroll>
       </body>
     </html>

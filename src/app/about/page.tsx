@@ -8,10 +8,7 @@ import { PhotoFeatureGrid } from '@/components/shared/PhotoFeatureGrid'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { AboutStorySection } from '@/components/about/AboutStorySection'
 import { PhotoVisionMission } from '@/components/about/PhotoVisionMission'
-import { WhyKamil } from '@/components/sections/WhyKamil'
 import { SomaliaRepresentativeNetwork } from '@/components/sections/SomaliaRepresentativeNetwork'
-import { TrustPartnersStrip } from '@/components/sections/TrustPartnersStrip'
-import { CorporateTravelSection } from '@/components/sections/CorporateTravelSection'
 
 export const metadata: Metadata = {
   title: 'About',
@@ -80,15 +77,9 @@ export default function AboutPage() {
         bgClassName="section-padding bg-sand"
       />
 
-      <WhyKamil />
-
       <div id="somalia-network">
         <SomaliaRepresentativeNetwork />
       </div>
-
-      <CorporateTravelSection />
-
-      <TrustPartnersStrip />
 
       <section className="section-padding bg-sand-light">
         <div className="mx-auto max-w-6xl px-5">

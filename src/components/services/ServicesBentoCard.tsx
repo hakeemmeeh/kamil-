@@ -68,9 +68,9 @@ export function ServicesBentoCard({
         <div
           className={cn(
             'relative overflow-hidden',
-            isPortrait && 'arch-card-mask min-h-[58%] flex-1',
-            isLandscape && 'arch-card-mask relative min-h-[200px] sm:min-h-0 sm:w-[42%] sm:shrink-0',
-            isTile && 'arch-card-mask h-[52%] min-h-[150px] shrink-0'
+            isPortrait && 'min-h-[58%] flex-1 rounded-t-[1.75rem]',
+            isLandscape && 'relative min-h-[200px] sm:min-h-0 sm:w-[42%] sm:shrink-0 sm:rounded-l-[1.75rem]',
+            isTile && 'h-[52%] min-h-[150px] shrink-0 rounded-t-[1.75rem]'
           )}
         >
           <Image

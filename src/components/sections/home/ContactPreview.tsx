@@ -3,7 +3,7 @@
 import { FadeUp } from '@/components/ui/FadeUp'
 import { Button } from '@/components/ui/Button'
 import { Mail, Phone, MapPin } from 'lucide-react'
-import { site } from '@/lib/content'
+import { mobilePhones, officePhones, site } from '@/lib/content'
 
 export function ContactPreview() {
   return (
@@ -45,8 +45,26 @@ export function ContactPreview() {
                 <Phone className="mt-0.5 h-5 w-5 shrink-0 text-kamil-green-dark" />
                 <div>
                   <p className="mb-1 text-xs font-bold uppercase tracking-wider text-ink-muted">Call us</p>
-                  <p className="text-sm font-medium text-ink">{site.phone}</p>
-                  <p className="text-sm font-medium text-ink">{site.mobile}</p>
+                  <p className="flex flex-wrap gap-x-1 text-sm font-medium text-ink">
+                    {officePhones.map((p, i) => (
+                      <span key={p.href}>
+                        {i > 0 && <span className="text-ink-muted"> | </span>}
+                        <a href={p.href} className="transition-colors hover:text-gold">
+                          {p.label}
+                        </a>
+                      </span>
+                    ))}
+                  </p>
+                  <p className="flex flex-wrap gap-x-1 text-sm font-medium text-ink">
+                    {mobilePhones.map((p, i) => (
+                      <span key={p.href}>
+                        {i > 0 && <span className="text-ink-muted"> | </span>}
+                        <a href={p.href} className="transition-colors hover:text-gold">
+                          {p.label}
+                        </a>
+                      </span>
+                    ))}
+                  </p>
                 </div>
               </li>
               <li className="flex items-start gap-4 rounded-2xl border border-border bg-white p-5 shadow-sm">

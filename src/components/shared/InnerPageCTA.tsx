@@ -41,7 +41,7 @@ export function InnerPageCTA({
 
   return (
     <section
-      className="inner-page-cta relative overflow-hidden bg-cream py-20 md:py-28"
+      className="inner-page-cta relative overflow-hidden bg-cream py-16 md:py-20"
       id={id}
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gold" aria-hidden />

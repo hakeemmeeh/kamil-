@@ -13,7 +13,7 @@ interface RegionCardVisualProps {
 
 const FALLBACK_KEY: CityImageKey = 'greece'
 
-/** Kanila Best Destinations — arched photo accent (replaces line-art sketches) */
+/** Region card photo accent — rounded, not arched */
 export function RegionCardVisual({ imageKey, regionName, className }: RegionCardVisualProps) {
   const [src, setSrc] = useState(() => cityImage(imageKey, 800))
 
@@ -26,7 +26,7 @@ export function RegionCardVisual({ imageKey, regionName, className }: RegionCard
       aria-hidden
     >
       <div className="relative h-full w-full">
-        <div className="arch-card-mask relative aspect-[3/4] h-full w-full min-h-[120px] overflow-hidden bg-sand-deep shadow-[0_16px_40px_rgba(7,17,31,0.12)] ring-1 ring-black/[0.04]">
+        <div className="relative aspect-[3/4] h-full w-full min-h-[120px] overflow-hidden rounded-2xl bg-sand-deep shadow-[0_16px_40px_rgba(7,17,31,0.12)] ring-1 ring-black/[0.04]">
           <Image
             src={src}
             alt={cityImageAlts[imageKey] ?? regionName}

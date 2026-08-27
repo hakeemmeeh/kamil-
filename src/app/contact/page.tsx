@@ -1,13 +1,11 @@
 import type { Metadata } from 'next'
-import { site } from '@/lib/content'
+import { officePhones, mobilePhones, site } from '@/lib/content'
 import { FadeUp } from '@/components/ui/FadeUp'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { ContactFormWrapper } from '@/components/ui/ContactFormWrapper'
-import { BookingSearch } from '@/components/sections/BookingSearch'
 import { HomeFAQSection } from '@/components/sections/HomeFAQSection'
 import { PageBanner } from '@/components/shared/PageBanner'
 import { InnerPageOverlap } from '@/components/shared/InnerPageOverlap'
-import { InnerPageCTA } from '@/components/shared/InnerPageCTA'
 import { Mail, Phone, Smartphone, MapPin } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -18,8 +16,8 @@ export const metadata: Metadata = {
 
 const contacts = [
   { icon: Mail, label: 'Email', value: site.email, href: `mailto:${site.email}` },
-  { icon: Phone, label: 'Telephone', value: site.phone, href: 'tel:0202220011' },
-  { icon: Smartphone, label: 'Mobile', value: site.mobile, href: 'tel:0752800800' },
+  { icon: Phone, label: 'Telephone', value: site.phone, href: officePhones[0].href },
+  { icon: Smartphone, label: 'Mobile', value: site.mobile, href: mobilePhones[0].href },
   { icon: MapPin, label: 'Address', value: site.address, href: site.mapLink },
 ]
 
@@ -33,8 +31,6 @@ export default function ContactPage() {
         imageKey="bannerContact"
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Contact' }]}
       />
-
-      <BookingSearch overlapHero />
 
       <InnerPageOverlap bg="white">
         <section className="section-padding pt-12 md:pt-14">
@@ -72,7 +68,7 @@ export default function ContactPage() {
                 </div>
 
                 <FadeUp delay={0.4}>
-                  <div className="mt-8 overflow-hidden rounded-2xl border border-border arch-card-mask">
+                  <div className="mt-8 overflow-hidden rounded-2xl border border-border">
                     <iframe
                       title="Kamil Travel office location"
                       src={site.mapEmbedUrl}
@@ -99,15 +95,7 @@ export default function ContactPage() {
         </section>
       </InnerPageOverlap>
 
-      <HomeFAQSection />
-
-      <InnerPageCTA
-        title="Prefer to talk now?"
-        description="Call our Nairobi office or send a trade enquiry — we respond to all genuine requests within 24 hours."
-        primaryLabel="Send an Inquiry"
-        secondaryLabel=""
-        imageKey="nairobi"
-      />
+      <HomeFAQSection overlap={false} />
     </>
   )
 }

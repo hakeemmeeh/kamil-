@@ -40,7 +40,9 @@ export function TourSearchBar({ className, overlap = false, compact = false }: T
       id="find-tour"
       className={cn(
         'relative',
-        overlap ? 'z-50 -mt-12 pb-6 md:-mt-16 md:pb-8' : 'z-30 section-padding bg-sand-light pt-6',
+        overlap
+          ? 'z-50 -mt-14 pb-10 md:-mt-[4.5rem] md:pb-12'
+          : 'z-30 bg-sand-light py-10 md:py-12',
         className
       )}
     >

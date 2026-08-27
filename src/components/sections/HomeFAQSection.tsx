@@ -7,12 +7,17 @@ import { homeFaqs } from '@/lib/content'
 import { FadeUp } from '@/components/ui/FadeUp'
 import { cn } from '@/lib/utils'
 
-export function HomeFAQSection() {
+export function HomeFAQSection({ overlap = true }: { overlap?: boolean }) {
   const [open, setOpen] = useState(0)
 
   return (
     <section
-      className="relative z-40 -mt-[min(12vh,140px)] overflow-hidden rounded-t-[2.5rem] bg-white shadow-[0_-24px_60px_rgba(7,17,31,0.08)]"
+      className={cn(
+        'relative z-40 overflow-hidden bg-white',
+        overlap
+          ? '-mt-[min(12vh,140px)] rounded-t-[2.5rem] shadow-[0_-24px_60px_rgba(7,17,31,0.08)]'
+          : 'border-t border-border'
+      )}
       id="faq"
     >
       <div className="absolute left-0 right-0 top-0 z-10 h-1 bg-gold" aria-hidden />

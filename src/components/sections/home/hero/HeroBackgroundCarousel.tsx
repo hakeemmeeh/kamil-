@@ -34,7 +34,7 @@ export function HeroBackgroundCarousel() {
               fill
               priority={i === 0}
               className={cn(
-                'hero-bg h-full w-full object-cover object-center',
+                'hero-bg h-full w-full object-cover object-[58%_center] md:object-[72%_center]',
                 active && !prefersReducedMotion() && 'hero-bg-ken-burns'
               )}
               sizes="100vw"

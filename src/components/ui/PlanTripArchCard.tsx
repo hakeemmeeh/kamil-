@@ -75,7 +75,7 @@ export function PlanTripArchCard({
         fill
         quality={90}
         className="object-cover object-center"
-        sizes="(max-width: 1024px) 44vw, 320px"
+        sizes="(max-width: 1024px) 40vw, 220px"
         onError={() => setSrc(cityImage(FALLBACK_KEY, 1400))}
       />
       <motion.div

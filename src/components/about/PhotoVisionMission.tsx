@@ -35,7 +35,7 @@ function PhotoPanel({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
-      className="arch-card-mask relative min-h-[320px] overflow-hidden rounded-t-[2.75rem] rounded-b-3xl md:min-h-[380px]"
+      className="relative min-h-[320px] overflow-hidden rounded-2xl md:min-h-[380px]"
     >
       <Image
         src={src}

@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { CheckCircle } from 'lucide-react'
+import { site } from '@/lib/content'
 
 const inquiryTypes = [
   'Flight Booking',
@@ -60,19 +61,23 @@ export function ContactForm() {
   }, [defaultInquiry, defaultMessage, setValue])
 
   async function onSubmit(data: FormData) {
-    console.log('Kamil Travel inquiry:', data)
-    await new Promise((r) => setTimeout(r, 1000))
+    const subject = encodeURIComponent(`Kamil Travel — ${data.inquiryType}`)
+    const body = encodeURIComponent(
+      `Name: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone || '—'}\nInquiry: ${data.inquiryType}\n\n${data.message}`
+    )
+    window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`
     reset()
     setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 4000)
   }
 
   if (submitted) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center">
         <CheckCircle className="mb-4 h-14 w-14 text-success" />
-        <h3 className="mb-2 font-display text-2xl font-semibold text-ink">Inquiry Sent</h3>
-        <p className="text-ink-muted">Thank you! The Kamil Travel team will be in touch soon.</p>
+        <h3 className="mb-2 font-display text-2xl font-semibold text-ink">Opening your email app</h3>
+        <p className="text-ink-muted">
+          Send the message to {site.email}, or write us directly if nothing opens.
+        </p>
       </div>
     )
   }

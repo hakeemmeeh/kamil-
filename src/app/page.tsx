@@ -4,14 +4,13 @@ import { BrandStatement } from '@/components/sections/home/BrandStatement'
 import { SignatureServicesShowcase } from '@/components/sections/home/SignatureServicesShowcase'
 import { TravelByRegionSection } from '@/components/sections/home/TravelByRegionSection'
 import { PopularDestinationsSection } from '@/components/sections/home/PopularDestinationsSection'
-import { FirstMinuteOffersSection } from '@/components/sections/home/FirstMinuteOffersSection'
 import { StatsStrip } from '@/components/sections/home/StatsStrip'
 import { TestimonialsSection } from '@/components/sections/home/TestimonialsSection'
 import { ContactPreview } from '@/components/sections/home/ContactPreview'
-import { CinematicCTA } from '@/components/sections/home/CinematicCTA'
+import { HomeFAQSection } from '@/components/sections/HomeFAQSection'
 
 /**
- * Phase 1 homepage — lean conversion path (~core sections only).
+ * Homepage — one destinations story (regions + leisure arches), one closer.
  */
 export default function HomePage() {
   return (
@@ -22,11 +21,10 @@ export default function HomePage() {
       <SignatureServicesShowcase />
       <TravelByRegionSection />
       <PopularDestinationsSection />
-      <FirstMinuteOffersSection />
       <StatsStrip />
       <TestimonialsSection />
       <ContactPreview />
-      <CinematicCTA />
+      <HomeFAQSection overlap={false} />
     </>
   )
 }

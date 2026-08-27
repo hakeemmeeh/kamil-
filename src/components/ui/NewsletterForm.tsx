@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CheckCircle } from 'lucide-react'
+import { site } from '@/lib/content'
 
 const schema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -26,11 +27,11 @@ export function NewsletterForm({ variant = 'default' }: NewsletterFormProps) {
   } = useForm<FormData>({ resolver: zodResolver(schema) })
 
   async function onSubmit(data: FormData) {
-    console.log('Kamil Travel newsletter signup:', data)
-    await new Promise((r) => setTimeout(r, 800))
+    const subject = encodeURIComponent('Kamil Travel newsletter')
+    const body = encodeURIComponent(`Please add this address to travel updates:\n${data.email}`)
+    window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`
     reset()
     setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 5000)
   }
 
   const isFooter = variant === 'footer'
@@ -45,7 +46,7 @@ export function NewsletterForm({ variant = 'default' }: NewsletterFormProps) {
         role="status"
       >
         <CheckCircle className="h-5 w-5 shrink-0" />
-        <span>Thank you — you&apos;re on the list.</span>
+        <span>Opening email to {site.email} — send it to join updates.</span>
       </div>
     )
   }

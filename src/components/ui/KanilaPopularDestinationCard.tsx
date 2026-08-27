@@ -10,7 +10,7 @@ export interface KanilaPopularDestination {
   title: string
   image: string
   href?: string
-  tourCount: number
+  caption?: string
 }
 
 interface KanilaPopularDestinationCardProps {
@@ -23,8 +23,7 @@ export function KanilaPopularDestinationCard({
   destination,
   className,
 }: KanilaPopularDestinationCardProps) {
-  const { title, image, href = `/destinations#${destination.slug}`, tourCount } = destination
-  const tourLabel = tourCount === 1 ? '1 Tour' : `${tourCount} Tours`
+  const { title, image, href = `/destinations#${destination.slug}`, caption } = destination
 
   return (
     <article
@@ -51,7 +50,7 @@ export function KanilaPopularDestinationCard({
             </h3>
             <p className="mt-1.5 flex items-center gap-1.5 text-xs text-ink-muted md:text-sm">
               <MapPin className="h-3.5 w-3.5 shrink-0 opacity-60" strokeWidth={2} />
-              <span>{tourLabel}</span>
+              <span>{caption ?? 'View destination'}</span>
             </p>
           </div>
           <span

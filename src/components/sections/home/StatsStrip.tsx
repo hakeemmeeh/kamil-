@@ -4,8 +4,8 @@ import { KanilaStampStatCard } from '@/components/ui/KanilaStampStatCard'
 import { KanilaStatsTicker } from '@/components/ui/KanilaStatsTicker'
 
 const stats = [
-  { value: '300+', label: 'Curated Travel Experiences', variant: 'green' as const },
-  { value: '98%', label: 'Client Satisfaction', variant: 'night' as const },
+  { value: '10+', label: 'Years of Service', variant: 'green' as const },
+  { value: '6', label: 'Somalia Airports', variant: 'night' as const },
   { value: '24h', label: 'Enquiry Response', variant: 'white' as const },
 ]
 
@@ -34,7 +34,7 @@ export function StatsStrip() {
                     </span>
                   ))}
                 </div>
-                <p className="text-sm font-semibold text-ink/90">50+ People Joined</p>
+                <p className="text-sm font-semibold text-ink/90">Nairobi HQ · Somalia network</p>
               </div>
 
               <p className="max-w-md text-base leading-relaxed text-ink-muted md:text-lg">

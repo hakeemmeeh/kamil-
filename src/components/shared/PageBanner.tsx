@@ -18,7 +18,7 @@ interface PageBannerProps {
   breadcrumbs?: BreadcrumbItem[]
 }
 
-/** Compact inner-page header — short photo strip, not a full hero */
+/** Compact photo header — short strip, not sticky full-bleed */
 export function PageBanner({
   eyebrow,
   title,
@@ -43,10 +43,10 @@ export function PageBanner({
           className="banner-photo object-cover object-center"
           sizes="100vw"
         />
-        <div className="page-banner-overlay absolute inset-0" />
+        <div className="absolute inset-0 bg-night/70" />
       </div>
 
-      <div className="relative z-10 mx-auto flex min-h-[11.5rem] max-w-4xl flex-col justify-center px-5 py-8 text-center sm:min-h-[12.5rem] md:min-h-[13.75rem] md:py-10">
+      <div className="relative z-10 mx-auto flex min-h-[10rem] max-w-4xl flex-col justify-center px-5 py-8 text-center sm:min-h-[11rem] md:min-h-[12rem] md:py-9">
         {breadcrumbs && breadcrumbs.length > 0 && (
           <nav
             aria-label="Breadcrumb"

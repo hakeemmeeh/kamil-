@@ -3,17 +3,9 @@
 import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import {
-  cleanupSiteScroll,
-  heroIntroHome3,
-  initHeroCoverScroll,
-  initPageBannerStickyCovers,
-  initSiteScrollAnimations,
-  initTravelTipsStickyScroll,
-  whenLenisReady,
-} from '@/lib/animations'
+import { cleanupSiteScroll, initSiteScrollAnimations, whenLenisReady } from '@/lib/animations'
 
-/** Sitewide Lenis + GSAP sticky-cover scroll (Kanila Home 3 rhythm) */
+/** Light site scroll — no sticky scenic covers */
 export function SiteScrollEffects() {
   const pathname = usePathname()
 
@@ -24,17 +16,7 @@ export function SiteScrollEffects() {
       if (cancelled) return
       requestAnimationFrame(() => {
         if (cancelled) return
-
         initSiteScrollAnimations()
-        initPageBannerStickyCovers()
-
-        if (document.querySelector('#hero')) {
-          if (pathname === '/') heroIntroHome3()
-          initHeroCoverScroll()
-        }
-        if (document.querySelector('#travel-tips')) {
-          initTravelTipsStickyScroll()
-        }
         ScrollTrigger.refresh()
       })
     }

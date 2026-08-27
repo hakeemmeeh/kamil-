@@ -14,31 +14,20 @@ const featured = FEATURED_SLUGS.map((slug) => services.find((s) => s.slug === sl
 const container = {
   hidden: {},
   show: {
-    transition: { staggerChildren: 0.14, delayChildren: 0.08 },
+    transition: { staggerChildren: 0.1, delayChildren: 0.05 },
   },
 }
 
-/**
- * Kanila Home 3 — limited animated service arches (full grid on /services).
- */
+/** Home services preview — solid cream, rounded cards */
 export function SignatureServicesShowcase() {
   return (
-    <section className="relative overflow-hidden bg-cream py-20 md:py-28" id="services-preview">
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.35]"
-        style={{
-          backgroundImage:
-            'radial-gradient(ellipse 80% 50% at 90% 10%, rgba(200,168,93,0.25), transparent 55%), radial-gradient(ellipse 60% 40% at 0% 100%, rgba(7,17,31,0.06), transparent 50%)',
-        }}
-        aria-hidden
-      />
-
-      <div className="relative mx-auto max-w-7xl px-5">
-        <div className="mb-12 flex flex-col gap-6 md:mb-16 md:flex-row md:items-end md:justify-between">
+    <section className="bg-cream py-16 md:py-24" id="services-preview">
+      <div className="mx-auto max-w-7xl px-5">
+        <div className="mb-10 flex flex-col gap-6 md:mb-12 md:flex-row md:items-end md:justify-between">
           <KanilaSectionHeading
             eyebrow="What We Offer"
             title={<>Travel Services</>}
-            subtitle="A curated selection of how we support your journey — ticketing, airports, and VIP care worldwide."
+            subtitle="Ticketing, airport support, and VIP care — coordinated from Nairobi."
             align="left"
             showCompass={false}
             className="max-w-2xl"
@@ -56,7 +45,7 @@ export function SignatureServicesShowcase() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: '-8%' }}
-          className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6"
+          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
         >
           {featured.map((service) =>
             service ? (

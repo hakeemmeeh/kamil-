@@ -1,15 +1,10 @@
 'use client'
 
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { LineReveal } from '@/components/ui/LineReveal'
-import { PlanTripArchCard, type PlanTripSlide } from '@/components/ui/PlanTripArchCard'
 import { about } from '@/lib/content'
-
-const storySlides: PlanTripSlide[] = [
-  { key: 'nairobi', label: 'Nairobi', place: 'Headquarters' },
-  { key: 'mogadishu', label: 'Mogadishu', place: 'Airport Office' },
-  { key: 'international', label: 'Global', place: 'Destinations' },
-]
+import { cityImage, cityImageAlts } from '@/lib/cityImages'
 
 const stats = [
   { value: '10+', label: 'Years of service' },
@@ -18,18 +13,10 @@ const stats = [
   { value: '2', label: 'Regional hubs' },
 ]
 
-const frameVariants = {
-  hidden: { opacity: 0, x: 48 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.95, delay: 0.1, ease: [0.22, 1, 0.36, 1] as const },
-  },
-}
-
+/** About story — one photo, no arch collage */
 export function AboutStorySection() {
   return (
-    <section className="section-padding pt-14 md:pt-16">
+    <section className="pb-16 pt-10 md:pb-20 md:pt-12">
       <div className="mx-auto max-w-7xl px-5">
         <div className="mb-12 grid grid-cols-2 gap-4 rounded-2xl border border-gold/15 bg-white/80 p-6 shadow-sm backdrop-blur-sm md:mb-16 md:grid-cols-4 md:gap-6 md:p-8">
           {stats.map((stat, i) => (
@@ -48,38 +35,14 @@ export function AboutStorySection() {
         </div>
 
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
-          <div className="plan-trip-collage order-2 grid grid-cols-2 items-end gap-3 sm:gap-4 lg:order-1 lg:gap-5">
-            <div className="plan-trip-slot relative w-full self-end">
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.35 }}
-                variants={frameVariants}
-                className="plan-trip-arch-frame pointer-events-none absolute -left-0.5 -top-0.5 z-20 aspect-[3/4] w-full rounded-t-full rounded-b-3xl border-2 border-gold/50"
-                aria-hidden
-              />
-              <PlanTripArchCard
-                slide={storySlides[0]}
-                index={0}
-                className="plan-trip-arch--lead z-10 shadow-2xl"
-                captionClassName="pb-4 pt-10"
-              />
-            </div>
-            <div className="flex w-full flex-col gap-3 sm:gap-4">
-              <PlanTripArchCard
-                slide={storySlides[1]}
-                index={1}
-                className="plan-trip-arch--stack-first"
-                titleClassName="text-base"
-              />
-              <PlanTripArchCard
-                slide={storySlides[2]}
-                index={2}
-                className="plan-trip-arch--stack-second"
-                titleClassName="text-base"
-                captionClassName="pb-3 pt-7"
-              />
-            </div>
+          <div className="relative order-2 aspect-[4/5] overflow-hidden rounded-2xl bg-sand sm:aspect-[5/4] lg:order-1 lg:aspect-[4/5]">
+            <Image
+              src={cityImage('nairobi', 1400)}
+              alt={cityImageAlts.nairobi}
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
           </div>
 
           <div className="order-1 lg:order-2">
@@ -91,8 +54,7 @@ export function AboutStorySection() {
               A decade of professional travel management
             </LineReveal>
             <p className="mb-5 text-lg leading-relaxed text-ink-muted">{about.intro}</p>
-            <p className="mb-5 leading-relaxed text-ink-muted">{about.airportOffice}</p>
-            <p className="leading-relaxed text-ink-muted">{about.airportRepresentatives}</p>
+            <p className="leading-relaxed text-ink-muted">{about.airportOffice}</p>
           </div>
         </div>
       </div>

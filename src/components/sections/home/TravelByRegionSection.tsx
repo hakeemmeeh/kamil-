@@ -9,7 +9,7 @@ import { KanilaSectionHeading } from '@/components/ui/KanilaSectionHeading'
 export function TravelByRegionSection() {
   return (
     <section
-      className="region-section relative overflow-hidden bg-sand py-24 md:py-32 lg:py-36"
+      className="region-section relative overflow-hidden bg-sand py-16 md:py-24"
       id="travel-by-region"
     >
       <div className="region-blob pointer-events-none absolute -bottom-24 -left-20 z-[1] h-[min(520px,70vw)] w-[min(520px,70vw)] rounded-[44%] bg-gold/20 blur-[1px] md:-bottom-32 md:-left-28" aria-hidden />

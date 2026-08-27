@@ -5,42 +5,52 @@ import type { KanilaPopularDestination } from '@/components/ui/KanilaPopularDest
 import { KanilaCompassMark } from '@/components/ui/KanilaCompassMark'
 import { destinations } from '@/lib/content'
 
-function tourCountForSlug(slug: string): number {
-  let n = 0
-  for (let i = 0; i < slug.length; i++) n += slug.charCodeAt(i)
-  return (n % 14) + 1
-}
+const POPULAR_SLUGS = [
+  'santorini',
+  'bali',
+  'thailand',
+  'seychelles',
+  'london',
+  'tokyo',
+  'new-york',
+  'portugal',
+] as const
 
-const popularItems: KanilaPopularDestination[] = destinations
-  .filter((d) => d.status !== 'client-to-confirm')
-  .slice(0, 10)
-  .map((d) => ({
-    slug: d.slug,
-    title: d.title,
-    image: d.image,
-    href: `/destinations#${d.slug}`,
-    tourCount: tourCountForSlug(d.slug),
-  }))
+const destBySlug = new Map(destinations.map((d) => [d.slug, d]))
 
-/** Popular Destinations — solid section, card photos only (no sticky scenic bg) */
+const popularItems: KanilaPopularDestination[] = POPULAR_SLUGS.flatMap((slug) => {
+  const d = destBySlug.get(slug)
+  if (!d || d.status === 'client-to-confirm') return []
+  return [
+    {
+      slug: d.slug,
+      title: d.title,
+      image: d.image,
+      href: `/destinations#${d.slug}`,
+      caption: d.country,
+    },
+  ]
+})
+
+/** Leisure arch cards — Somalia network stays in Travel by Region */
 export function PopularDestinationsSection() {
   return (
     <section
-      className="kanila-popular relative z-20 bg-night py-20 md:py-28"
+      className="relative z-20 bg-night py-16 md:py-24"
       id="popular-destinations"
       aria-label="Popular destinations"
     >
-      <header className="popular-copy mb-10 px-5 text-center md:mb-14">
-        <p className="font-kanila-script mb-2 text-[1.65rem] text-kamil-green-light md:mb-3 md:text-[1.85rem]">
+      <header className="mb-10 px-5 text-center md:mb-12">
+        <p className="font-kanila-script mb-2 text-[1.5rem] text-kamil-green-light md:text-[1.75rem]">
           Tour Activity
         </p>
-        <h2 className="popular-title font-kanila-display text-[clamp(2.5rem,5.5vw,4rem)] font-normal leading-[0.95] tracking-tight text-white">
+        <h2 className="font-kanila-display text-[clamp(2.25rem,4.5vw,3.5rem)] font-normal leading-[0.95] tracking-tight text-white">
           Popular Destinations
         </h2>
         <KanilaCompassMark className="mx-auto mt-4 text-white/90" />
       </header>
 
-      <div className="popular-cards-stage relative z-10 w-full pb-4">
+      <div className="w-full">
         <KanilaPopularDestinationCarousel items={popularItems} />
       </div>
     </section>

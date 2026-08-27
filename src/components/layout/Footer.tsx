@@ -7,6 +7,8 @@ import {
   footerGlobalCityLinks,
   footerInterestLinks,
   newsletter,
+  officePhones,
+  mobilePhones,
 } from '@/lib/content'
 import { cityImage, cityImageAlts } from '@/lib/cityImages'
 import { NewsletterForm } from '@/components/ui/NewsletterForm'
@@ -77,7 +79,7 @@ export function Footer() {
                   <Mail className="h-4 w-4" />
                 </a>
                 <a
-                  href="tel:0202220011"
+                  href={officePhones[0].href}
                   className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 text-white transition-all hover:border-gold hover:bg-gold/15 hover:text-gold"
                   aria-label="Call us"
                 >
@@ -137,7 +139,7 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#popular-tours" className="text-sm font-semibold text-white transition-colors hover:text-gold-light">
+                  <Link href="/tours" className="text-sm font-semibold text-white transition-colors hover:text-gold-light">
                     Popular tours
                   </Link>
                 </li>
@@ -183,11 +185,29 @@ export function Footer() {
                 </li>
                 <li className="flex items-start gap-3">
                   <Phone className="mt-0.5 h-4 w-4 shrink-0 text-kamil-green-dark" />
-                  <span>{site.phone}</span>
+                  <span className="flex flex-wrap gap-x-1">
+                    {officePhones.map((p, i) => (
+                      <span key={p.href}>
+                        {i > 0 && <span className="text-white/60"> | </span>}
+                        <a href={p.href} className="text-white transition-colors hover:text-kamil-green">
+                          {p.label}
+                        </a>
+                      </span>
+                    ))}
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <Smartphone className="mt-0.5 h-4 w-4 shrink-0 text-kamil-green-dark" />
-                  <span>{site.mobile}</span>
+                  <span className="flex flex-wrap gap-x-1">
+                    {mobilePhones.map((p, i) => (
+                      <span key={p.href}>
+                        {i > 0 && <span className="text-white/60"> | </span>}
+                        <a href={p.href} className="text-white transition-colors hover:text-kamil-green">
+                          {p.label}
+                        </a>
+                      </span>
+                    ))}
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-kamil-green-dark" />
@@ -237,7 +257,7 @@ export function Footer() {
                 Terms of Service
               </Link>
               <Link
-                href="/car-rental-airport-transfers#become-a-guide"
+                href="/contact?inquiry=Guide+Application&message=I+would+like+to+apply+as+a+guide+or+transport+partner."
                 className="text-xs font-semibold text-white/90 transition-colors hover:text-gold-light"
               >
                 Become Our Guide

@@ -520,13 +520,16 @@ h4,
   background-clip: text;
 }
 
+/* Separate longhands so Tailwind pt-/pb- utilities can override */
 .section-padding {
-  padding: 120px 0;
+  padding-top: 4.5rem;
+  padding-bottom: 4.5rem;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .section-padding {
-    padding: 80px 0;
+    padding-top: 5.5rem;
+    padding-bottom: 5.5rem;
   }
 }
 

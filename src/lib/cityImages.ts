@@ -66,6 +66,13 @@ const photos = {
     'photo-1570077188670-e3a8d69ac5ff', // Santorini caldera — Popular Destinations sticky bg
   kanilaHeroCity:
     'photo-1496442226666-8d4d0e62e6e9', // New York City skyline — alternate hero
+  /** Hero background — dusk/night skylines (text-safe, less busy on the left) */
+  heroLondon: 'photo-1513635269975-59663e0ac1ad', // London — Thames & cityscape
+  heroTokyo: 'photo-1528164344705-47542687000d', // Tokyo — urban skyline
+  heroDubai: 'photo-1512453979798-5ea266f8880c', // Dubai — downtown towers
+  heroNewYork: 'photo-1514565131-fce0801e5785', // New York — skyline at dusk
+  heroMogadishu: 'photo-1723151684036-d014403c33b2', // Somalia — city skyline at sunset
+  heroParis: 'photo-1502602898657-3e91760cbb34', // Paris — Eiffel Tower at dusk
   kanilaKayak:
     'photo-1540959733332-eab4deabeeaf', // Kayaks on emerald water
   vacationBeach:
@@ -133,6 +140,12 @@ export const cityImageAlts: Record<CityImageKey, string> = {
   kanilaHeroAlt: 'Coastal sunset over the ocean',
   kanilaPopular: 'Santorini caldera — Popular Destinations backdrop',
   kanilaHeroCity: 'New York City skyline at twilight',
+  heroLondon: 'London — city lights along the Thames at night',
+  heroTokyo: 'Tokyo — neon skyline at dusk',
+  heroDubai: 'Dubai — Marina towers at blue hour',
+  heroNewYork: 'New York City — skyline at dusk',
+  heroMogadishu: 'Somalia — city skyline at sunset',
+  heroParis: 'Paris — Eiffel Tower at dusk',
   kanilaKayak: 'Kayaks on calm emerald water — adventure travel',
   vacationBeach: 'Tropical beach — vacation escape',
   vacationResort: 'Resort pool and palm trees — luxury leisure',
@@ -148,12 +161,11 @@ export const cityImageAlts: Record<CityImageKey, string> = {
 }
 
 
-/** Hero carousel — short curated set (background + arch cards stay in sync) */
+/** Hero carousel cities — dusk skylines chosen for headline readability */
 export const heroArchSlugs = [
-  'santorini',
-  'bali',
-  'mogadishu',
-  'nairobi',
-  'oslo',
+  'london',
+  'tokyo',
+  'dubai',
   'new-york',
+  'mogadishu',
 ] as const
