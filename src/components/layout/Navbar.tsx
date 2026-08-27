@@ -7,7 +7,6 @@ import { usePathname } from 'next/navigation'
 import { nav, site } from '@/lib/content'
 import { MobileMenu } from './MobileMenu'
 import { ServicesNavDropdown } from './ServicesNavDropdown'
-import { DarkModeToggle } from '@/components/ui/DarkModeToggle'
 
 const desktopNav = nav.filter((item) => item.href !== '/' && item.href !== '/contact')
 
@@ -37,9 +36,7 @@ export function Navbar() {
       <header
         className={`z-50 w-full transition-all duration-500 ${
           isHome
-            ? scrolled
-              ? 'fixed inset-x-0 top-0 bg-transparent py-4 shadow-none'
-              : 'fixed inset-x-0 top-0 bg-transparent py-5 shadow-none'
+            ? `fixed inset-x-0 top-0 bg-transparent ${scrolled ? 'py-4' : 'py-5'}`
             : 'relative bg-white py-4 shadow-sm border-b border-border/40'
         }`}
       >
@@ -88,13 +85,6 @@ export function Navbar() {
             </div>
 
             <div className="hidden items-center gap-4 lg:flex">
-              <DarkModeToggle />
-              <Link
-                href="/contact"
-                className={`text-[13px] font-semibold uppercase tracking-[0.08em] transition-colors duration-300 ${linkColor}`}
-              >
-                Contact
-              </Link>
               <Link
                 href="/contact"
                 className="rounded-full bg-gold px-7 py-3 text-[13px] font-extrabold uppercase tracking-[0.1em] text-white shadow-glow transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold-dark"
