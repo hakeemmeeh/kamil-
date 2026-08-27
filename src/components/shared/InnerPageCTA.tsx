@@ -1,10 +1,9 @@
 'use client'
 
-import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
 import { MagneticButton } from '@/components/ui/MagneticButton'
-import { cityImage, type CityImageKey } from '@/lib/cityImages'
+import type { CityImageKey } from '@/lib/cityImages'
 
 export interface InnerPageCTAProps {
   title?: string
@@ -13,6 +12,7 @@ export interface InnerPageCTAProps {
   primaryHref?: string
   secondaryLabel?: string
   secondaryHref?: string
+  /** Kept for API compat — scenic bg removed */
   imageKey?: CityImageKey
   id?: string
 }
@@ -26,7 +26,7 @@ const fade = {
   },
 }
 
-/** Full-width enquiry CTA — content always visible (no GSAP scroll trap) */
+/** Full-width enquiry CTA — solid cream surface, no background photo */
 export function InnerPageCTA({
   title = 'Ready to plan your next journey?',
   description = 'Send an inquiry and the Kamil Travel team will help you choose the right travel support for your needs.',
@@ -34,38 +34,17 @@ export function InnerPageCTA({
   primaryHref = '/contact',
   secondaryLabel = 'Contact Us',
   secondaryHref = '/contact',
-  imageKey = 'bannerCta',
   id = 'inner-cta',
 }: InnerPageCTAProps) {
   const reduced = useReducedMotion()
-  const bgSrc = cityImage(imageKey, 1920)
   const viewport = { once: true, margin: '-8%' as const }
 
   return (
-    <section className="inner-page-cta relative overflow-hidden py-24 md:py-32" id={id}>
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <Image
-          src={bgSrc}
-          alt=""
-          fill
-          quality={90}
-          className="banner-photo object-cover object-center"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-white/88 via-white/78 to-white/88" />
-      </div>
-
-      <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-20" aria-hidden>
-        <svg className="absolute h-full w-full" viewBox="0 0 1200 400" preserveAspectRatio="none">
-          <path
-            d="M0,200 Q300,100 600,200 T1200,200"
-            stroke="#1B4B8C"
-            strokeWidth="1"
-            fill="none"
-            className="route-line animate"
-          />
-        </svg>
-      </div>
+    <section
+      className="inner-page-cta relative overflow-hidden bg-cream py-20 md:py-28"
+      id={id}
+    >
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gold" aria-hidden />
 
       <motion.div
         className="relative z-10 mx-auto max-w-3xl px-5 text-center"

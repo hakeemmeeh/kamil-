@@ -148,19 +148,12 @@ export const cityImageAlts: Record<CityImageKey, string> = {
 }
 
 
-/** Hero carousel — curated destination slugs (background + arch cards stay in sync) */
+/** Hero carousel — short curated set (background + arch cards stay in sync) */
 export const heroArchSlugs = [
   'santorini',
   'bali',
-  'thailand',
-  'portugal',
-  'moscow',
-  'greece',
-  'new-york',
-  'sydney',
   'mogadishu',
   'nairobi',
   'oslo',
-  'london',
-  'tokyo',
+  'new-york',
 ] as const

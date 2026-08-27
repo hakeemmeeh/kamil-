@@ -1,11 +1,7 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { cityImage, cityImageAlts } from '@/lib/cityImages'
 import { KanilaStampStatCard } from '@/components/ui/KanilaStampStatCard'
 import { KanilaStatsTicker } from '@/components/ui/KanilaStatsTicker'
-
-const STATS_BG = cityImage('bali', 1920)
 
 const stats = [
   { value: '300+', label: 'Curated Travel Experiences', variant: 'green' as const },
@@ -13,33 +9,25 @@ const stats = [
   { value: '24h', label: 'Enquiry Response', variant: 'white' as const },
 ]
 
-/** Kanila Home 3 — scenic stats band (static content + compositor-only ticker) */
+/** Stats band — solid brand surface, no scenic background photo */
 export function StatsStrip() {
   return (
     <section
-      className="kanila-stats-showcase relative z-[45] mt-0 w-full overflow-hidden shadow-[0_-24px_64px_rgba(7,17,31,0.16)]"
+      className="kanila-stats-showcase relative z-[45] mt-0 w-full overflow-hidden bg-sand-light shadow-[0_-24px_64px_rgba(7,17,31,0.08)]"
       id="stats"
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-1 bg-gold" aria-hidden />
 
-      <div className="relative min-h-[min(72vh,620px)] md:min-h-[min(68vh,680px)]">
-        <Image
-          src={STATS_BG}
-          alt={cityImageAlts.bali}
-          fill
-          quality={90}
-          className="kanila-fullbleed-bg"
-          sizes="100vw"
-        />
-        <div className="relative z-10 mx-auto flex min-h-[min(72vh,620px)] max-w-7xl flex-col justify-center px-5 py-14 md:min-h-[min(68vh,680px)] md:py-16 lg:py-20">
+      <div className="relative py-16 md:py-20 lg:py-24">
+        <div className="relative z-10 mx-auto max-w-7xl px-5">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10 xl:gap-14">
-            <div className="kanila-stats-copy lg:col-span-4 xl:col-span-4">
+            <div className="lg:col-span-4 xl:col-span-4">
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex -space-x-2.5" aria-hidden>
                   {['KA', 'YM', 'TR'].map((initials, i) => (
                     <span
                       key={initials}
-                      className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-white/30 bg-gold text-[10px] font-bold text-white md:h-10 md:w-10"
+                      className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-white bg-gold text-[10px] font-bold text-white md:h-10 md:w-10"
                       style={{ zIndex: 3 - i }}
                     >
                       {initials}

@@ -8,7 +8,6 @@ import {
   heroIntroHome3,
   initHeroCoverScroll,
   initPageBannerStickyCovers,
-  initPopularDestinationsScroll,
   initSiteScrollAnimations,
   initTravelTipsStickyScroll,
   whenLenisReady,
@@ -32,9 +31,6 @@ export function SiteScrollEffects() {
         if (document.querySelector('#hero')) {
           if (pathname === '/') heroIntroHome3()
           initHeroCoverScroll()
-        }
-        if (document.querySelector('#popular-destinations')) {
-          initPopularDestinationsScroll()
         }
         if (document.querySelector('#travel-tips')) {
           initTravelTipsStickyScroll()
